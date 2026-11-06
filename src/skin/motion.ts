@@ -14,8 +14,9 @@ class IslandMotion implements ReactiveController {
   private surface?: HTMLElement;
   private pointer?: number;
   private key?: string;
-  private press?: Animation;
-  private release?: Animation;
+  private press: Animation[] = [];
+  private release: Animation[] = [];
+  private visualTargets: HTMLElement[] = [];
   private ripples = new Map<HTMLElement, Animation>();
 
   constructor(private host: MotionHost, private kind: SurfaceKind) {
@@ -31,7 +32,8 @@ class IslandMotion implements ReactiveController {
     this.host.addEventListener("pointerdown", this.onPointerDown, options);
     this.host.addEventListener("keydown", this.onKeyDown, options);
     this.host.addEventListener("keyup", this.onKeyUp, options);
-    this.host.addEventListener("focusout", this.onCancel, options);
+    this.host.addEventListener("focusout", this.onFocusOut, options);
+    window.addEventListener("blur", this.onCancel, options);
   }
 
   hostDisconnected(): void {
@@ -46,14 +48,16 @@ class IslandMotion implements ReactiveController {
   }
 
   private isDisabled(surface: HTMLElement): boolean {
-    // Includes disabled native controls and disabled wrappers across shadow boundaries.
+    // Native disabled semantics and our host are authoritative. A third-party
+    // container's .disabled may disable sorting/editing, not its child controls.
+    if ((surface as HTMLButtonElement).disabled || surface.hasAttribute("disabled") || this.host.disabled || this.host.hasAttribute("disabled")) return true;
     let node: HTMLElement | null = surface;
     while (node) {
-      if ((node as HTMLButtonElement).disabled || node.hasAttribute("disabled") || node.getAttribute("aria-disabled") === "true" || node.hasAttribute("inert")) return true;
+      if (node.matches(":disabled") || node.getAttribute("aria-disabled") === "true" || node.hasAttribute("inert")) return true;
       const root = node.getRootNode();
       node = node.parentElement || (root instanceof ShadowRoot ? root.host as HTMLElement : null);
     }
-    return Boolean(this.host.disabled);
+    return false;
   }
 
   private getSurface(event: Event): HTMLElement | undefined {
@@ -64,15 +68,28 @@ class IslandMotion implements ReactiveController {
       (this.kind === "chip" ? surfaces[0] : undefined);
   }
 
+  private getVisualTargets(surface: HTMLElement): HTMLElement[] {
+    if (this.kind === "input-number") return Array.from(surface.querySelectorAll<HTMLElement>("ha-icon"));
+    if (this.kind === "chip") return Array.from(surface.querySelectorAll<HTMLElement>(".content, .avatar"));
+    // Animate the existing assigned icon/content, never the native button or slot box.
+    const slot = surface.querySelector("slot");
+    return (slot?.assignedElements({ flatten: true }) || []).filter((element): element is HTMLElement => element instanceof HTMLElement);
+  }
+
+  private cancelRelease(): void {
+    for (const animation of this.release) animation.cancel();
+    this.release = [];
+  }
+
   private start(surface: HTMLElement, x: number, y: number): void {
     this.surface = surface;
-    this.release?.cancel();
-    this.release = undefined;
-    this.press?.cancel();
+    this.cancelRelease();
+    for (const animation of this.press) animation.cancel();
+    this.visualTargets = this.getVisualTargets(surface);
     surface.setAttribute("data-island-pressed", "");
-    this.press = surface.animate([{ scale: "1" }, { scale: ".96" }], {
+    this.press = this.visualTargets.map(target => target.animate([{ scale: "1" }, { scale: ".96" }], {
       duration: 150, easing: "cubic-bezier(.4, 0, .2, 1)", fill: "forwards",
-    });
+    }));
 
     const box = surface.getBoundingClientRect();
     const width = box.width;
@@ -107,36 +124,46 @@ class IslandMotion implements ReactiveController {
     const surface = this.surface;
     this.surface = undefined;
     surface?.removeAttribute("data-island-pressed");
-    const currentScale = surface ? getComputedStyle(surface).scale : "1";
-    this.press?.cancel();
-    this.press = undefined;
+    const targets = this.visualTargets;
+    const scales = targets.map(target => getComputedStyle(target).scale);
+    this.visualTargets = [];
+    for (const animation of this.press) animation.cancel();
+    this.press = [];
     if (bounce && surface && !this.media?.matches && !this.isDisabled(surface)) {
-      this.release?.cancel();
-      this.release = surface.animate([
-        { scale: currentScale === "none" ? "1" : currentScale, offset: 0 },
-        { scale: "1.015", offset: .65 },
-        { scale: "1", offset: 1 },
-      ], { duration: 250, easing: "cubic-bezier(.4, 0, .2, 1)" });
+      this.cancelRelease();
+      this.release = targets.filter(target => target.isConnected).map(target => {
+        const currentScale = scales[targets.indexOf(target)];
+        return target.animate([
+          { scale: currentScale === "none" ? "1" : currentScale, offset: 0 },
+          { scale: "1.015", offset: .65 },
+          { scale: "1", offset: 1 },
+        ], { duration: 250, easing: "cubic-bezier(.4, 0, .2, 1)" });
+      });
     }
   }
 
   private reset(): void {
     this.finish(false);
-    this.release?.cancel();
-    this.release = undefined;
+    this.cancelRelease();
     for (const [layer, animation] of this.ripples) { animation.cancel(); layer.remove(); }
     this.ripples.clear();
   }
 
   private onPreference = (): void => { if (this.media?.matches) this.reset(); };
   private onCancel = (): void => { this.reset(); };
+  private onFocusOut = (event: FocusEvent): void => {
+    if (!this.surface) return;
+    const path = event.composedPath();
+    // When focus moves minus → plus, pointerdown on plus precedes minus focusout.
+    // The old button must not cancel the new button's visual press.
+    if (path.includes(this.surface) || (this.kind === "chip" && path[0] === this.host)) this.reset();
+  };
 
   private onPointerDown = (event: PointerEvent): void => {
     if (!event.isPrimary || event.button !== 0 || this.media?.matches || this.pointer !== undefined || this.key) return;
     const surface = this.getSurface(event);
     if (!surface || this.isDisabled(surface) || !event.composedPath().includes(surface)) return;
-    this.release?.cancel();
-    this.release = undefined;
+    this.cancelRelease();
     const box = surface.getBoundingClientRect();
     this.pointer = event.pointerId;
     this.start(surface, Math.max(0, Math.min(box.width, event.clientX - box.left)), Math.max(0, Math.min(box.height, event.clientY - box.top)));
@@ -145,7 +172,6 @@ class IslandMotion implements ReactiveController {
     // Document listeners observe release outside the control without pointer capture.
     this.host.ownerDocument.addEventListener("pointerup", this.onPointerUp, options);
     this.host.ownerDocument.addEventListener("pointercancel", this.onPointerCancel, options);
-    window.addEventListener("blur", this.onCancel, options);
   };
   private onPointerUp = (event: PointerEvent): void => {
     if (event.pointerId !== this.pointer) return;
