@@ -101,7 +101,7 @@ test('acceptance: mobile 390 and narrow 320 capture real layout without overflow
   await family.press('Escape');await expect(popup).toHaveCount(0);await expect(family).toBeFocused();
   await expect(family).toHaveCSS('outline-width','2px');
   const focusColor=await family.evaluate(node=>{const sample=document.createElement('span');sample.style.color='var(--animal-primary-color)';document.body.append(sample);const expected=getComputedStyle(sample).color;sample.remove();return {actual:getComputedStyle(node).outlineColor,expected};});
-  expect(focusColor.actual).toBe(focusColor.expected);
+  await expect(family).toHaveCSS('outline-color',focusColor.expected);
   await page.screenshot({path:testInfo.outputPath(`acceptance-mobile-${width}-all-23.png`),fullPage:true,animations:'disabled'});
  }
  verify();
