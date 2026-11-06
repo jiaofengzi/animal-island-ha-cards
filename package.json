@@ -11,6 +11,7 @@
     "test": "node --test tests/core.test.mjs",
     "test:browser": "playwright test",
     "dev": "node scripts/serve.mjs",
+    "preview": "node scripts/build-parity.mjs && node scripts/build-preview.mjs && node scripts/serve.mjs",
     "licenses": "node scripts/licenses.mjs",
     "check": "npm run build:parity && npm run test:ha",
     "build:showcase": "node scripts/run-legacy.mjs build:showcase",

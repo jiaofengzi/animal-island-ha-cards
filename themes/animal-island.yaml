@@ -1,0 +1,58 @@
+# Animal Island 主题：负责卡片以外的部分（页面背景、顶栏、字体、HA 自带控件的颜色）。
+# 安装：复制到 HA 的 config/themes/，configuration.yaml 里需要有
+#   frontend:
+#     themes: !include_dir_merge_named themes
+# 重启后在“个人资料 → 主题”里选 Animal Island。
+# 字体由 island-ha-cards.js 注入，所以要先加载卡片资源，字体名才可用。
+Animal Island:
+  island-font: '"Island Nunito", "Island Rounded", Nunito, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
+  ha-font-family-body: var(--island-font)
+  ha-font-family-heading: var(--island-font)
+  primary-font-family: var(--island-font)
+  paper-font-common-base_-_font-family: var(--island-font)
+  mdc-typography-font-family: var(--island-font)
+
+  ha-card-border-radius: 28px
+  ha-card-border-width: 0px
+  ha-badge-border-radius: 999px
+  ha-dialog-border-radius: 28px
+
+  modes:
+    light:
+      primary-color: "#3ec2ae"
+      accent-color: "#ff9a3c"
+      primary-text-color: "#5b4128"
+      secondary-text-color: "#8a7356"
+      disabled-text-color: "#b3a689"
+      divider-color: "rgba(91, 65, 40, 0.12)"
+      primary-background-color: "#c6ebc9"
+      secondary-background-color: "#f3ead4"
+      card-background-color: "#fffaf0"
+      ha-card-background: "#fffaf0"
+      app-header-background-color: "#3ec2ae"
+      app-header-text-color: "#ffffff"
+      sidebar-background-color: "#fffaf0"
+      sidebar-text-color: "#5b4128"
+      sidebar-icon-color: "#8a7356"
+      sidebar-selected-text-color: "#3ec2ae"
+      sidebar-selected-icon-color: "#3ec2ae"
+      state-icon-color: "#8a7356"
+      lovelace-background: "radial-gradient(rgba(255,255,255,.55) 3px, transparent 3.6px) 0 0 / 30px 30px, radial-gradient(rgba(255,255,255,.55) 3px, transparent 3.6px) 15px 15px / 30px 30px, #c6ebc9"
+    dark:
+      primary-color: "#3ec2ae"
+      accent-color: "#ff9a3c"
+      primary-text-color: "#f6ead0"
+      secondary-text-color: "#cdbb98"
+      disabled-text-color: "#8d7f66"
+      divider-color: "rgba(246, 234, 208, 0.12)"
+      primary-background-color: "#141b31"
+      secondary-background-color: "#222d4b"
+      card-background-color: "#2d3a5e"
+      ha-card-background: "#2d3a5e"
+      app-header-background-color: "#2a7f78"
+      app-header-text-color: "#ffffff"
+      sidebar-background-color: "#1b2440"
+      sidebar-text-color: "#f5eedb"
+      sidebar-icon-color: "#b8c1dc"
+      state-icon-color: "#b8c1dc"
+      lovelace-background: "radial-gradient(rgba(255,236,160,.55) 1.6px, transparent 2.2px) 0 0 / 52px 52px, radial-gradient(rgba(255,255,255,.25) 1.1px, transparent 1.7px) 26px 19px / 52px 52px, #141b31"

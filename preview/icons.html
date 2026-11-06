@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Island 图标一览</title>
+<link rel="icon" href="data:,">
+<style>
+  body { margin: 0; padding: 28px; font-family: "Island Nunito", "Island Rounded", sans-serif; color: #5b4128;
+    background: radial-gradient(rgba(255,255,255,.55) 3px, transparent 3.6px) 0 0 / 30px 30px, #c6ebc9; }
+  h1 { margin: 0 0 6px; font-weight: 900; }
+  p { margin: 0 0 22px; font-weight: 700; color: #8a7356; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 18px; }
+  figure { margin: 0; padding: 16px 8px 12px; border-radius: 24px; background: #fffaf0; box-shadow: 0 5px 0 #e5d7b5;
+    display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  island-state-icon { --island-icon-size: 84px; }
+  figure.off island-state-icon { --island-icon-size: 84px; }
+  figcaption { font-size: 13px; font-weight: 800; }
+  label { display: inline-flex; gap: 6px; align-items: center; font-weight: 800; margin-bottom: 18px; }
+</style>
+</head>
+<body>
+<h1>小岛插画图标</h1>
+<p>配置里写 <code>icon: island:名字</code> 可以直接指定其中一个。</p>
+<label><input type="checkbox" id="off"> 显示“关闭”状态</label>
+<div class="grid" id="grid"></div>
+<script type="module" src="/dist/island-ha-cards.js"></script>
+<script type="module">
+  await customElements.whenDefined("island-state-icon");
+  const grid = document.getElementById("grid");
+  const fake = (off) => ({ entity_id: "sensor.preview", state: off ? "off" : "on", attributes: {} });
+  const render = () => {
+    const off = document.getElementById("off").checked;
+    grid.innerHTML = "";
+    for (const name of window.islandIcons) {
+      const fig = document.createElement("figure");
+      const icon = document.createElement("island-state-icon");
+      icon.icon = "island:" + name;
+      icon.stateObj = fake(off);
+      fig.append(icon);
+      fig.insertAdjacentHTML("beforeend", `<figcaption>${name}</figcaption>`);
+      grid.append(fig);
+    }
+  };
+  document.getElementById("off").addEventListener("change", render);
+  render();
+</script>
+</body>
+</html>

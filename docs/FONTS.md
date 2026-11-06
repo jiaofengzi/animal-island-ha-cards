@@ -1,20 +1,20 @@
-# 可选字体：只保留说明，不随包分发
+# 字体：随包附带圆体子集
 
-当前包**不包含任何字体二进制**。卡片不注入 `@font-face`、不自动下载字体、不请求 CDN。
+自 Island UI 改版起，安装包在 `dist/fonts/` 里附带两款 SIL OFL 1.1 字体的 WOFF2 子集，由卡片脚本按自身地址注入同源 `@font-face`，不请求任何 CDN：
 
-## 推荐名称与字重
+| 文件 | 字体 | 字重 | 范围 |
+|---|---|---|---|
+| `island-rounded-500/700/900.woff2` | Resource Han Rounded CN | Medium / Bold / Heavy | GB2312 全部 6763 个汉字 + ASCII + 常用全角标点 |
+| `island-nunito.woff2` | Nunito（可变字重） | 200–1000 | Basic Latin + Latin-1 |
 
-| 字体 | 字重 | 用途 |
-|---|---|---|
-| Nunito | 500、700、900 | 拉丁字母、数字、强调文字 |
-| Noto Sans SC | 400、500、700 | 简体中文、辅助文字与标题 |
+CSS 字体栈为 `"Island Nunito", "Island Rounded", Nunito, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif`：拉丁字母和数字用 Nunito，中文用圆体，GB2312 以外的字回落到系统字体。
 
-这些是原 Animal Island UI 的字体偏好，不是运行必需依赖。若想接近原参考字形，可自行取得有合法许可的字体，在**实际查看仪表盘的电脑/设备操作系统**中安装对应字族与字重，然后重新打开浏览器。只在 Home Assistant 服务器安装字体不会让另一台客户端自动获得它。移动设备或浏览器若不能使用自装字体，就保持系统回退。
+## 安装
 
-默认 CSS 依次尝试 `Nunito`、`Noto Sans SC` 与系统字体（例如 PingFang SC、Microsoft YaHei、sans-serif）。未安装推荐字体时，卡片照常工作；字宽、换行和字重外观会随系统变化。无需添加资源链接，也不要为了本包加载外部字体服务。
+复制整个 `dist/` 目录（含 `fonts/`）到 `config/www/island-ha-cards/`。字体按 JS 文件所在目录解析，所以不需要额外的资源链接。
 
-## 升级与许可
+## 重新生成与许可
 
-安装只需 `dist/island-ha-cards.js`、`dist/licenses/`、`dist/THIRD_PARTY_NOTICES.md`；当前 dist 中没有 fonts 目录。若之前手动复制过旧字体文件，本版不会引用它们，用户可自行清理旧目录。构建脚本会清理工作副本的旧 `dist/fonts/`，不再复制字体。
+`python scripts/fonts/subset.py <RHR-CN-0.990.7z> <Nunito[wght].ttf>`，依赖 `fonttools brotli py7zr`。只裁剪字符集，不修改字形。许可文本 `src/fonts/ResourceHanRounded-LICENSE.md`、`src/fonts/Nunito-OFL.txt` 会随构建复制到 `dist/fonts/`。来源和版权见 `THIRD_PARTY_NOTICES.md`。
 
-Nunito 与 Noto Sans SC 的 SIL Open Font License 1.1 文本保留在 `licenses/nunito-OFL.txt` 与 `licenses/notosanssc-OFL.txt`，仅作可选安装参考；请核对自行取得字体的许可。Animal Island UI 与 Naive Icons 的 MIT 许可仍随安装包保留，因为 CSS 规则与实际 React 图标仍被使用。
+这改变了旧版“不随包分发字体”的策略，原因是系统字体回落时中文没有圆润感，破坏整体风格。
