@@ -1,6 +1,6 @@
 /**
  * Deterministic Mushroom 5.2.3 fork. Upstream bytes are never edited.
- * Fork modifications: namespace substitution, skin append, identifying banner.
+ * Fork modifications: namespace, skin, identifying metadata, theme attributes and passive presentation motion.
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -57,6 +57,21 @@ for (const file of files) {
     };
     visit(source);
     const styleAppends = edits.length;
+    const motionTarget = {
+      'src/shared/button.ts': { name: 'Button', kind: 'button' },
+      'src/shared/chip.ts': { name: 'Chip', kind: 'chip' },
+      'src/shared/input-number.ts': { name: 'InputNumber', kind: 'input-number' },
+    }[file.path];
+    if (motionTarget) {
+      const classes = source.statements.filter(node => ts.isClassDeclaration(node) && node.name?.text === motionTarget.name);
+      if (classes.length !== 1) throw new Error('Unexpected motion host class: ' + file.path);
+      const declaration = classes[0];
+      if (declaration.members.some(member => member.name?.getText(source) === '_islandMotion')) throw new Error('Motion field collision');
+      const start = declaration.members.pos;
+      edits.push({ start, end: start, value: '\n  // Island presentation controller; lifecycle cleanup is owned by Lit.\n  private readonly _islandMotion = installIslandMotion(this, ' + JSON.stringify(motionTarget.kind) + ');\n' });
+      transforms.push({ kind: 'install-presentation-motion-controller', class: motionTarget.name, surface: motionTarget.kind, lifecycle: 'Lit ReactiveController', inputHandlersChanged: false });
+    }
+
     // Change only human-facing metadata inside these registration calls.
     let pickerLabels = 0;
     const identifyPicker = (node) => {
@@ -100,6 +115,7 @@ for (const file of files) {
       transforms.push({ kind: 'reflect-ha-dark-mode-presentation', attribute: 'data-island-theme', lifecycle: themeLifecycle, values: ['dark', 'light'] });
     }
     for (const edit of edits.sort((a,b) => b.start-a.start)) output = output.slice(0,edit.start)+edit.value+output.slice(edit.end);
+    if (motionTarget) output = 'import { installIslandMotion } from "@island/motion";\n' + output;
     if (styleAppends) {
       output = 'import { islandSkin } from "@island/skin";\n' + output;
       transforms.push({ kind: 'append-static-styles', expressions: styleAppends });
@@ -121,22 +137,24 @@ const cards = files.filter(f => /^src\/cards\/([^/]+)\/\1\.ts$/.test(f.path)).ma
 const chips = files.filter(f => /^src\/cards\/chips-card\/chips\/[^/]+-chip\.ts$/.test(f.path)).map(f => f.path.split('/').at(-1).replace('.ts','')).sort();
 manifest.registrations = { currentCards: cards.filter(c => c !== 'legacy-template-card'), legacyCards: cards.filter(c => c === 'legacy-template-card'), chips, badges: ['template-badge'] };
 if (manifest.registrations.currentCards.length !== 18 || chips.length !== 11) throw new Error('Unexpected registration inventory: ' + JSON.stringify(manifest.registrations));
+const motionFiles = manifest.transforms.filter(f => f.operations.some(o => o.kind === 'install-presentation-motion-controller'));
+if (motionFiles.length !== 3) throw new Error('Expected only shared Button, Chip and InputNumber motion hosts');
 const pickerMetadataFiles = manifest.transforms.filter(f => f.operations.some(o => o.kind === 'identify-fork-picker-metadata'));
 if (pickerMetadataFiles.length !== 19) throw new Error('Expected 18 current card picker labels plus one badge');
 await fs.mkdir('_parity', { recursive: true });
 await fs.mkdir('dist', { recursive: true });
 const common = { bundle: true, format: 'esm', target: 'es2020', minify: false, sourcemap: false, legalComments: 'eof', tsconfig: 'tsconfig.parity.json', logLevel: 'warning', metafile: true };
 const original = await build({ ...common, entryPoints: [vendor + '/src/mushroom.ts'], outfile: '_parity/mushroom-original.js', banner: { js: '/*! Mushroom 5.2.3, unmodified source build. Apache-2.0. See vendor/mushroom-v5.2.3/LICENSE. */' } });
-const fork = await build({ ...common, entryPoints: [stage + '/src/mushroom.ts'], outfile: 'dist/island-ha-cards.js', alias: { '@island/skin': path.join(root, 'src/skin/styles.ts') }, banner: { js: '/*! Animal Island Mushroom fork. Modified namespace and visual styles only. Mushroom sources Apache-2.0; see THIRD_PARTY_NOTICES.md. */' } });
+const fork = await build({ ...common, entryPoints: [stage + '/src/mushroom.ts'], outfile: 'dist/island-ha-cards.js', alias: { '@island/skin': path.join(root, 'src/skin/styles.ts'), '@island/motion': path.join(root, 'src/skin/motion.ts') }, banner: { js: '/*! Animal Island Mushroom fork. Modified namespace, visual styles and passive presentation motion. Mushroom sources Apache-2.0; see THIRD_PARTY_NOTICES.md. */' } });
 await fs.copyFile('dist/island-ha-cards.js', '_parity/island-ha-cards.js');
-manifest.audit = { allVendoredGitBlobsMatch: true, upstreamSourceFiles: manifest.files.filter(x => x.path.startsWith('src/')).length, forkNamespaceIsolated: true, forkPickerMetadataFiles: pickerMetadataFiles.length, currentCards: 18, legacyCards: 1, badges: 1, chips: 11, duplicateDefineGuardsAdded: false, behaviorRewrites: false, skinAppends: manifest.transforms.reduce((n,f)=>n+f.operations.filter(o=>o.kind==='append-static-styles').reduce((a,o)=>a+o.expressions,0),0) };
+manifest.audit = { allVendoredGitBlobsMatch: true, upstreamSourceFiles: manifest.files.filter(x => x.path.startsWith('src/')).length, forkNamespaceIsolated: true, forkPickerMetadataFiles: pickerMetadataFiles.length, presentationMotionHosts: motionFiles.length, currentCards: 18, legacyCards: 1, badges: 1, chips: 11, duplicateDefineGuardsAdded: false, behaviorRewrites: false, upstreamActionHandlersChanged: false, presentationEventObserversAdded: motionFiles.length, skinAppends: manifest.transforms.reduce((n,f)=>n+f.operations.filter(o=>o.kind==='append-static-styles').reduce((a,o)=>a+o.expressions,0),0) };
 manifest.outputs = {};
 for (const f of ['_parity/mushroom-original.js', 'dist/island-ha-cards.js', '_parity/island-ha-cards.js']) {
  const b = await fs.readFile(f); manifest.outputs[f] = { bytes: b.length, sha256: sha(b) };
 }
 manifest.dependencies = { original: Object.keys(original.metafile.inputs).filter(x => x.includes('node_modules/')).sort(), fork: Object.keys(fork.metafile.inputs).filter(x => x.includes('node_modules/')).sort() };
 manifest.buildInputs = {};
-for (const file of ['scripts/build-parity.mjs', 'tsconfig.parity.json', 'package-lock.json', 'src/skin/styles.ts']) {
+for (const file of ['scripts/build-parity.mjs', 'tsconfig.parity.json', 'package-lock.json', 'src/skin/styles.ts', 'src/skin/motion.ts']) {
   manifest.buildInputs[file] = sha(await fs.readFile(file));
 }
 const packageNames = [...new Set(manifest.dependencies.original.map(file => {

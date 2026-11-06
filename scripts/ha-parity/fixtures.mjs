@@ -1,3 +1,4 @@
+import {motionView} from './motion-fixtures.mjs';
 export const HA_VERSION = '2026.9.0';
 export const states = {
   'sensor.parity': {state:'21',attributes:{friendly_name:'Island temperature',unit_of_measurement:'°C'}},
@@ -45,5 +46,5 @@ export const cardConfig=(card,prefix)=>({type:`custom:${prefix}${card.name}-card
 export function dashboard() {
  const badges=['mushroom-','island-'].map(p=>({type:`custom:${p}template-badge`,...badge.config}));
  const pairs=cards.map(c=>({type:'horizontal-stack',cards:['mushroom-','island-'].map(p=>cardConfig(c,p))}));
- return {title:'HA parity laboratory',views:[{title:'Sections',path:'sections',type:'sections',max_columns:2,badges,sections:[{type:'grid',cards:pairs}]},{title:'Grid sizing',path:'grid-sizing',type:'sections',max_columns:2,sections:['mushroom-','island-'].map(p=>({type:'grid',cards:[{columns:6,rows:1},{columns:6,rows:2},{columns:12,rows:'auto'}].map(grid_options=>({...cardConfig(cards.find(c=>c.name==='entity'),p),grid_options}))}))},{title:'Masonry',path:'masonry',type:'masonry',badges,cards:pairs}]};
+ return {title:'HA parity laboratory',views:[motionView(),{title:'Sections',path:'sections',type:'sections',max_columns:2,badges,sections:[{type:'grid',cards:pairs}]},{title:'Grid sizing',path:'grid-sizing',type:'sections',max_columns:2,sections:['mushroom-','island-'].map(p=>({type:'grid',cards:[{columns:6,rows:1},{columns:6,rows:2},{columns:12,rows:'auto'}].map(grid_options=>({...cardConfig(cards.find(c=>c.name==='entity'),p),grid_options}))}))},{title:'Masonry',path:'masonry',type:'masonry',badges,cards:pairs}]};
 }

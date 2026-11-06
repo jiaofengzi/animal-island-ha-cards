@@ -2,11 +2,9 @@
 
 ## Current evidence status
 
-Three real GitHub-hosted runs have completed on official HA 2026.9.0. Runs 42257254489 and 42259051527 passed 1/15 and 10/15 tests. Run 42260551826 passed 15/18: server templates, service actions, native more-info/hold/double-tap, 18 card editors/default lifecycle, all 18 cards at 220/320/480px, mobile, paired capture, all 128 sizing cases, direct Sections geometry, unavailable states, dark theme propagation and conditional-chip visibility.
+The latest baseline, run 42261250358 at commit `18f212f10b07e95272e91dc0b3b49288a56938b5`, passed all 18 real-HA aggregate tests. Earlier runs passed 1/15, 10/15 and 15/18 while test-harness issues were corrected. The baseline covers server templates, services, native more-info/hold/double-tap, card/Badge/chip editor contracts, all cards at 220/320/480px, mobile, paired capture, 128 sizing cases, direct Sections geometry, unavailable states, dark theme propagation and conditional-chip visibility. Spacer's absent editor is explicitly checked against upstream.
 
-The three remaining failures were two ambiguous nested ha-card selectors in smoke checks and the test incorrectly expecting Spacer to expose an editor. Test fixes are awaiting the next CI run. Spacer's absent editor is explicitly compared as an upstream contract; Badge and the other 10 chip editors must render. No all-green claim is made.
-
-The suite discovers 18 aggregate tests. Local lint and static discovery pass. Local browser tests were not run; real runtime results come from GitHub-hosted CI.
+The next suite discovers 22 aggregate tests, adding four motion scenarios. Those additions have only passed local lint and static discovery so far. Local browser tests were not run; real runtime results come from GitHub-hosted CI.
 
 The baseline is Mushroom v5.2.3. Both untouched original and namespaced island fork are loaded as actual Lovelace module resources in the same official HA frontend. The pinned container is `ghcr.io/home-assistant/home-assistant:2026.9.0`, corresponding to the [official September release](https://www.home-assistant.io/blog/2026/09/02/release-20269/). The pull must succeed; no fallback or floating version is used. CI records the pulled digest and checks `/api/config` reports exactly 2026.9.0.
 
@@ -34,3 +32,11 @@ This representative suite does **not** verify all 1,131 acceptance entries or al
 Run `npm ci`, `node scripts/build-parity.mjs`, and `node scripts/ha-parity/prepare.mjs`. Start the pinned official container with the generated `.ha-runtime` directory mounted at `/config`, port bound to loopback. Run `node scripts/ha-parity/bootstrap.mjs`, then `npx playwright test --config tests/ha-parity/playwright.config.ts` in a permitted browser environment. The workflow automates these steps and `node scripts/ha-parity/report.mjs`.
 
 Only `ha-evidence/` is uploaded: runtime version, image digest, sanitized test results, screenshots, coverage limitations and optional runtime-evidence manifest. Test artifacts must be reviewed before being presented as verified evidence. `runtime-evidence.json` captures what was rendered; it is not by itself a parity approval. Preview publishers can copy the manifest and `runtime/` images without including secrets.
+
+## Verified baseline and pending motion checks
+
+Run 42261250358 (commit `18f212f10b07e95272e91dc0b3b49288a56938b5`) passed all 18 real-HA aggregate tests. Its manifest contains all 30 modules, 56 screenshots for 28 visible pairs and exactly two expected blanks (Empty and Spacer). All 128 sizing cases passed. Actual computed styles confirm light backgrounds rgb(247,243,223), dark modern Template/Badge backgrounds rgb(53,47,37), 20px card and 50px badge radii. The preview's separate browser check failed afterward, so this run did not publish Pages.
+
+Four new motion scenarios bring the next suite to 22 aggregate tests; they have only been statically checked so far. They use a dedicated live HA view with real input_boolean/input_number integrations. They check one service call per pointer/keyboard/touch operation, pointer-origin ripple and 96% scale, disabled/reduced-motion behavior, disconnect cleanup, and actual slider label/fill/backend synchronization. They do not insert synthetic service handlers or animate fabricated device readings.
+
+The motion video is recorded from the real authenticated synthetic dashboard. A raw recording stays outside artifact directories; ffmpeg trims it to the verified dashboard-only time window. ffprobe validates geometry and duration. First/middle/last review frames are emitted for human inspection before publishing; the public video must be allowlisted separately. No login, trace, token, raw browser storage, or raw recording is included in public artifacts. Video illustrates interaction, while service correctness is established by tests rather than by appearance.

@@ -36,6 +36,8 @@ jobs:
           docker run -d --name parity-ha -p 127.0.0.1:8123:8123 -v "$PWD/.ha-runtime:/config" ghcr.io/home-assistant/home-assistant:${HA_VERSION}
       - run: node scripts/ha-parity/bootstrap.mjs
       - run: npx playwright install --with-deps chromium
+      - name: Check authenticated demonstration recording tools
+        run: command -v ffmpeg && command -v ffprobe
       - run: npx playwright test --config tests/ha-parity/playwright.config.ts
       - name: Summarize only observed evidence
         if: always()
@@ -70,7 +72,7 @@ jobs:
         if: always()
         run: |
           docker rm -f parity-ha || true
-          sudo rm -rf .ha-runtime .ha-secrets .ha-test-results
+          sudo rm -rf .ha-runtime .ha-secrets .ha-test-results .ha-motion-video
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: real-ha

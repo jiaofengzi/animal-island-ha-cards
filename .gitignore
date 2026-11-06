@@ -15,6 +15,7 @@ _parity-preview/
 .ha-runtime/
 .ha-secrets/
 .ha-test-results/
+.ha-motion-video/
 ha-evidence/
 **/ha-evidence/
 tests/parity-preview/artifacts/

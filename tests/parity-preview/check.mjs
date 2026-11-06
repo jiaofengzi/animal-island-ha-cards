@@ -1,5 +1,5 @@
 import {strict as assert} from 'node:assert';
-import {readFile,mkdir} from 'node:fs/promises';
+import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {createServer} from 'node:http';
 import {chromium,expect} from '@playwright/test';
 import {states,cards,chips,badge} from '../../scripts/ha-parity/fixtures.mjs';
@@ -14,7 +14,7 @@ assert.deepEqual(fixtures.states,states);
 for(const row of fixtures.cases){const config=row.kind==='chip'?{type:'custom:mushroom-chips-card',chips:[chips.find(c=>c.type===row.name)]}:row.kind==='badge'?{type:row.type,...badge.config}:{type:row.type,...cards.find(c=>c.name===row.name).config};assert.deepEqual(row.original_config,config);}
 const css=await readFile('_parity-preview/style.css','utf8');assert.ok(!/@font-face|\.woff2?|url\(["']?https?:\/\//.test(css));
 if(process.env.PARITY_STATIC_ONLY==='1'){console.log('PASS: exact 18+11+1, chip nesting, type mapping, no remote fonts. Browser checks not run.');process.exit(0);}
-const server=createServer(async(req,res)=>{try{const path=decodeURIComponent(req.url.split('?')[0]);const file=await readFile(`_parity-preview${path==='/'?'/index.html':path}`);res.setHeader('Content-Type',path.endsWith('.js')?'text/javascript':path.endsWith('.css')?'text/css':path.endsWith('.png')?'image/png':path.endsWith('.json')?'application/json':'text/html');res.end(file);}catch{res.statusCode=404;res.end('Missing');}});
+const server=createServer(async(req,res)=>{try{const path=decodeURIComponent(req.url.split('?')[0]);const file=await readFile(`_parity-preview${path==='/'?'/index.html':path}`);res.setHeader('Content-Type',path.endsWith('.js')?'text/javascript':path.endsWith('.css')?'text/css':path.endsWith('.png')?'image/png':path.endsWith('.webm')?'video/webm':path.endsWith('.json')?'application/json':'text/html');res.end(file);}catch{res.statusCode=404;res.end('Missing');}});
 await new Promise(resolve=>server.listen(4189,'127.0.0.1',resolve));
 const browser=await chromium.launch({headless:true,...(process.env.ISLAND_CHROMIUM_PATH?{executablePath:process.env.ISLAND_CHROMIUM_PATH}:{})});
 try{
@@ -26,9 +26,10 @@ try{
  for(const width of [1440,390,320]){
   await page.setViewportSize({width,height:width===1440?1050:844});await page.goto('http://127.0.0.1:4189');
   await expect(page.locator('[data-module]')).toHaveCount(30);await expect(page.locator('img')).toHaveCount(expectedImages);
-  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`overflow at ${width}`);
+  if(evidence.motion){const video=page.locator('video');await expect(video).toHaveAttribute('preload','none');await expect(video).toHaveAttribute('controls','');assert.equal(await video.evaluate(el=>el.autoplay||el.loop||!el.paused),false);await expect(video.locator('source')).toHaveAttribute('src','motion/island-motion.webm');}
+  const overflow=await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,elements:[...document.querySelectorAll('body *')].filter(el=>el.getBoundingClientRect().right>innerWidth+1).slice(0,40).map(el=>({tag:el.tagName,className:el.className,text:el.textContent?.slice(0,180),right:el.getBoundingClientRect().right,width:el.getBoundingClientRect().width}))}));if(overflow.scrollWidth>width){await page.screenshot({path:`${out}/${width}-overflow.png`,fullPage:true});await writeFile(`${out}/${width}-overflow.json`,JSON.stringify(overflow,null,2));}assert.equal(overflow.scrollWidth>width,false,`overflow at ${width}: ${JSON.stringify(overflow.elements.slice(0,5))}`);
   for(const row of fixtures.cases.filter(r=>['card:empty','chip:spacer'].includes(r.id))){const ev=evidence.cases[row.id];if(ev?.status==='expected-blank'&&ev.host&&Object.hasOwn(ev,'state')){const section=page.locator(`[data-module="${row.id}"]`);for(const side of ['original','island']){if(ev.dimensions&&side in ev.dimensions&&ev[side]===null){const article=section.locator('article').nth(side==='original'?0:1);await expect(article.locator('.expected-blank')).toBeVisible();await expect(article.locator('img')).toHaveCount(0);await expect(article).not.toContainText('证据：未验证');}}}}
-  for(const row of fixtures.cases){const section=page.locator(`[data-module="${row.id}"]`);await section.scrollIntoViewIfNeeded();for(const img of await section.locator('img').all()){await img.scrollIntoViewIfNeeded();await expect(img).toHaveJSProperty('complete',true);assert.ok(await img.evaluate(el=>el.naturalWidth>0));}await section.screenshot({path:`${out}/${width}-${row.id.replace(':','-')}.png`});}
+  for(const row of fixtures.cases){const section=page.locator(`[data-module="${row.id}"]`);const reserved=await section.boundingBox();await section.scrollIntoViewIfNeeded();for(const img of await section.locator('img').all()){await img.scrollIntoViewIfNeeded();await expect(img).toHaveJSProperty('complete',true);assert.ok(await img.evaluate(el=>el.naturalWidth>0));assert.ok(await img.getAttribute('width'));assert.ok(await img.getAttribute('height'));}const loaded=await section.boundingBox();assert.ok(Math.abs(loaded.height-reserved.height)<=1,`Image loading shifted ${row.id}`);await section.screenshot({path:`${out}/${width}-${row.id.replace(':','-')}.png`});}
   await page.screenshot({path:`${out}/${width}-full.png`,fullPage:true});
   const category=page.getByRole('combobox',{name:'组件类别',exact:true});
   await category.scrollIntoViewIfNeeded();await category.focus();await category.press('Enter');await expect(category).toHaveAttribute('aria-expanded','true');await category.press('Escape');await expect(category).toHaveAttribute('aria-expanded','false');

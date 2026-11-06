@@ -135,7 +135,7 @@ const saturatedStates: Record<string, string> = {
 const surfaces: Record<string, CSSResult> = {
   "src/shared/button.ts": css`
     :host { --bg-color: var(--animal-bg-color-secondary); --bg-color-disabled: var(--animal-bg-color-disabled); }
-    .button { border-radius: 50px; font-family: var(--animal-font-family); transition: background-color .25s var(--animal-motion-ease); box-shadow: none; }
+    .button { position: relative; border-radius: 50px; font-family: var(--animal-font-family); transition: background-color .25s var(--animal-motion-ease); box-shadow: none; }
     .button:not(:disabled):hover { filter: brightness(1.03); }
     .button:not(:disabled):active { filter: brightness(.96); }
     /* Opt-in visual primary only; upstream disabled/actions remain untouched. */
@@ -144,6 +144,7 @@ const surfaces: Record<string, CSSResult> = {
   "src/shared/input-number.ts": css`
     :host { --bg-color: var(--animal-bg-color-secondary); }
     .container, .button { border-radius: 50px; box-shadow: none; }
+    .button { position: relative; }
     .value { font-weight: 800; font-variant-numeric: tabular-nums; }
     .container:focus-within { outline: 2px solid var(--animal-warning-color); outline-offset: -2px; }
   `,
@@ -165,7 +166,7 @@ const surfaces: Record<string, CSSResult> = {
     .secondary { color: var(--card-secondary-color); }
   `,
   "src/shared/chip.ts": css`
-    ha-card { border-radius: 50px; box-shadow: none; }
+    ha-card { position: relative; border-radius: 50px; box-shadow: none; }
   `,
   "src/shared/shape-avatar.ts": css`
     img, .shape, .picture { border-radius: 50%; }
