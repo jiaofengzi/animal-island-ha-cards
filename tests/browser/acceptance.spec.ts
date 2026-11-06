@@ -78,7 +78,8 @@ test('acceptance: mobile 390 and narrow 320 capture real layout without overflow
  test.setTimeout(120_000);const verify=observe(page);
  for(const width of [390,320]){
   await page.setViewportSize({width,height:844});await openAcceptance(page);await decodedImages(page);
-  expect(await page.evaluate(()=>document.documentElement.scrollWidth),'document width').toBeLessThanOrEqual(width);
+  const overflow=await page.evaluate(()=>[...document.querySelectorAll('*')].filter(e=>e.getBoundingClientRect().right>innerWidth+1||e.getBoundingClientRect().left< -1).map(e=>({tag:e.tagName,class:e.className,left:e.getBoundingClientRect().left,right:e.getBoundingClientRect().right})));
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth),JSON.stringify(overflow)).toBeLessThanOrEqual(width);
   for(const row of mapping){
    const section=page.locator(`#module-${row.profile}`);
    const boxes=await section.locator('.pair > article').evaluateAll(nodes=>nodes.map(node=>{const r=node.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom};}));
@@ -86,6 +87,10 @@ test('acceptance: mobile 390 and narrow 320 capture real layout without overflow
    for(const box of boxes){expect(box.left).toBeGreaterThanOrEqual(0);expect(box.right).toBeLessThanOrEqual(width);}
   }
   await page.evaluate(()=>window.scrollTo(0,0));
+  const family=page.getByRole('combobox',{name:'模块家族'});await family.focus();await family.press('Enter');
+  const popup=page.getByRole('listbox',{name:'模块家族'});await expect(popup).toBeVisible();
+  const popupBox=await popup.boundingBox();expect(popupBox!.x).toBeGreaterThanOrEqual(0);expect(popupBox!.x+popupBox!.width).toBeLessThanOrEqual(width);
+  await family.press('Escape');await expect(popup).toHaveCount(0);await expect(family).toBeFocused();
   await page.screenshot({path:testInfo.outputPath(`acceptance-mobile-${width}-all-23.png`),fullPage:true,animations:'disabled'});
  }
  verify();

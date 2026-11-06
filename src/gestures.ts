@@ -5,7 +5,7 @@ export function bindGestures(node:HTMLElement,run:(key:Gesture)=>void,hasDouble:
   let start:{x:number;y:number;time:number;id:number}|undefined;
   let suppressClick=false;
   const abort=new AbortController(),options={signal:abort.signal};
-  const isControl=(event:Event)=>event.composedPath().some(n=>n instanceof Element&&n!==node&&n.matches('button,input,select,textarea,a,label,[data-no-gesture]'));
+  const isControl=(event:Event)=>event.composedPath().some(n=>n instanceof Element&&n!==node&&n.matches('button,input,select,textarea,a,label,[role="button"],[role="combobox"],[role="listbox"],[role="option"],[role="switch"],[role="slider"],[data-no-gesture]'));
   const clearTap=()=>{clearTimeout(tap);tap=undefined;};
   node.addEventListener('pointerdown',e=>{if(e.button!==0||!e.isPrimary||isControl(e))return;start={x:e.clientX,y:e.clientY,time:performance.now(),id:e.pointerId};suppressClick=false;},options);
   node.addEventListener('pointermove',e=>{if(start&&Math.hypot(e.clientX-start.x,e.clientY-start.y)>10){start=undefined;suppressClick=true;clearTap();}},options);

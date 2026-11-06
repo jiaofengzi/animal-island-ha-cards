@@ -10,7 +10,7 @@ test('static project subdirectory isolates assets across all 23 cases without ex
   page.on('pageerror', error => errors.push(error.message));
   page.on('response', response => { if (response.status() >= 400) failed.push(response.url()); });
   await page.goto('/_site/');
-  await expect(page).toHaveTitle('Island Cards · 小岛日常展示');
+  await expect(page).toHaveTitle('Island Cards · 测试夹具');
   await expect(page.locator('#cards > *')).toHaveCount(8);
   await expect(page.getByRole('link', { name: '日常一览' })).toHaveAttribute('aria-current', 'page');
   await expect(page.locator('island-light-card').getByRole('slider', { name: '亮度' })).toBeVisible();

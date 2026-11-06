@@ -29,3 +29,12 @@ test('a power label change during a pending operation preserves its stable focus
  await page.evaluate(()=>{const c=document.querySelector('island-light-card') as Card;const id='light.demo_lantern';c.hass={...c.hass,states:{...c.hass.states,[id]:{...c.hass.states[id]!,state:'off'}}};});
  await page.evaluate(()=>(window as unknown as {finish:()=>void}).finish());await expect(card.getByRole('switch',{name:'开启',exact:true})).toBeFocused();
 });
+
+test('pointer activation of an upstream chip never triggers the configured whole-row service',async({page})=>{
+ await page.evaluate(()=>{const c=document.querySelector('island-chips-card') as Card;document.body.dataset.serviceCount='0';document.body.dataset.infoCount='0';c.addEventListener('hass-more-info',()=>{document.body.dataset.infoCount=String(Number(document.body.dataset.infoCount)+1);});c.setConfig({type:'custom:island-chips-card',entities:[{entity:'light.demo_lantern',name:'灯光详情'}],tap_action:{action:'perform-action',perform_action:'light.turn_on',target:{entity_id:'light.demo_lantern'}}});c.hass={...c.hass,callService:async()=>{document.body.dataset.serviceCount=String(Number(document.body.dataset.serviceCount)+1);}};});
+ await page.locator('island-chips-card').getByRole('button',{name:/灯光详情/}).click();
+ await expect(page.locator('body')).toHaveAttribute('data-info-count','1');await expect(page.locator('body')).toHaveAttribute('data-service-count','0');
+ const row=page.locator('island-chips-card').getByRole('group');await row.focus();await row.press('Enter');await expect(page.locator('body')).toHaveAttribute('data-service-count','1');
+ await page.evaluate(()=>{const c=document.querySelector('island-chips-card') as Card;c.setConfig({type:'custom:island-chips-card',entities:[{entity:'light.missing',name:'不可用条目'}],tap_action:{action:'perform-action',perform_action:'light.turn_on',target:{entity_id:'light.demo_lantern'}}});});
+ await page.locator('island-chips-card').getByText('不可用条目',{exact:true}).click();await expect(page.locator('body')).toHaveAttribute('data-service-count','1');
+});

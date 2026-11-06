@@ -7,6 +7,7 @@ import {configs,profiles,mount,subscribe,model,setMode,reset,releasePending} fro
 declare const ACCEPTANCE_MAPPING: Array<{index:number;id:string;profile:string;family:string;use_case:string;baseline:string;mapping_kind:string;notes:string;documentation:string;official_image:string|null;source_url:string|null}>;
 declare const ACCEPTANCE_IMAGES:Record<string,string>;
 const mapping=ACCEPTANCE_MAPPING;
+const responsiveTitleSize=(): 'small'|'middle'|'large'=>innerWidth<=380?'small':innerWidth<=700?'middle':'large';
 function Module({profile}:{profile:string}){
  const host=useRef<HTMLDivElement>(null);
  useEffect(()=>{const index=profiles.indexOf(profile);const card=document.createElement(configs[index].type.slice(7));card.dataset.profile=profile;const unmount=mount(card,index);host.current?.append(card);return ()=>{unmount();card.remove();};},[profile]);
@@ -14,12 +15,14 @@ function Module({profile}:{profile:string}){
 }
 const states=[['normal','默认 / 运行'],['off','关闭 / 完成'],['paused','暂停'],['unavailable','不可用'],['readonly','只读'],['error','操作失败'],['pending','等待响应']].map(([key,label])=>({key,label}));
 function App(){
+ const [titleSize,setTitleSize]=useState(responsiveTitleSize);
+ useEffect(()=>{const resize=()=>setTitleSize(responsiveTitleSize());window.addEventListener('resize',resize);return()=>window.removeEventListener('resize',resize);},[]);
  const [family,setFamily]=useState('all');const [profile,setProfile]=useState('all');const [,refresh]=useState(0);
  useEffect(()=>subscribe(()=>refresh(v=>v+1)),[]);
  useEffect(()=>{document.documentElement.dataset.ready='true';const navigate=()=>{const id=location.hash.slice(1);if(!id.startsWith('module-'))return;setFamily('all');setProfile('all');requestAnimationFrame(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'}));};window.addEventListener('location-changed',navigate);return()=>window.removeEventListener('location-changed',navigate);},[]);
  const shown=mapping.filter(row=>(family==='all'||row.family===family)&&(profile==='all'||row.profile===profile));
  return <main>
-  <header><p className="eyebrow">23 个模块 · 独立原版对照</p><h1><Title size="large" variant="ribbon">小岛模块 · 逐项验收</Title></h1><p>以真实 Animal Island UI 3.0.0 组件重做。每个用例独立对照，先看清差别，再决定采用。</p></header>
+  <header><p className="eyebrow">23 个模块 · 独立原版对照</p><h1><Title size={titleSize} variant="ribbon">小岛模块 · 逐项验收</Title></h1><p>以真实 Animal Island UI 3.0.0 组件重做。每个用例独立对照，先看清差别，再决定采用。</p></header>
   <section className="section controls" aria-label="验收筛选与模拟状态">
    <div className="filter-grid"><label><span>模块家族</span><Select aria-label="模块家族" options={[{key:'all',label:'全部家族'},...[...new Set(mapping.map(r=>r.family))].map(f=>({key:f,label:f}))]} value={family} onChange={setFamily}/></label><label><span>独立模块</span><Select aria-label="独立模块" showSearch options={[{key:'all',label:'全部 23 个模块'},...mapping.map(r=>({key:r.profile,label:`${r.index}. ${r.use_case} · ${r.profile}`}))]} value={profile} onChange={setProfile}/></label><label><span>右侧模拟状态</span><Select aria-label="右侧模拟状态" options={states} value={model.mode} onChange={setMode}/></label></div>
    <div className="actions"><Button type="primary" onClick={reset}>重置模拟</Button><Button disabled={!model.pendingCount} onClick={releasePending}>释放待响应操作（{model.pendingCount}）</Button><a href="./offline.html" download>下载离线验收页</a></div>

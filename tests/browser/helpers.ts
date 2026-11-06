@@ -3,7 +3,8 @@ import {expect,type Locator} from '@playwright/test';
 export async function chooseOption(combobox:Locator,value:string){
  await combobox.click();
  const labels:Record<string,string>={one:'单曲循环',all:'全部循环',off:'关闭',normal:'标准',heat:'制热',on:'开启'};
- const popup=combobox.locator('..').getByRole('listbox');
+ const wrapper=await combobox.evaluate(node=>node.tagName==='INPUT')?combobox.locator('..').locator('..'):combobox.locator('..');
+ const popup=wrapper.getByRole('listbox');
  await expect(popup).toBeVisible();
  const exact=popup.getByRole('option',{name:value,exact:true});
  const option=await exact.count()?exact:popup.getByRole('option',{name:labels[value]??value,exact:true});

@@ -4,7 +4,7 @@ test('paper summary interactive rows retain rounded corners',async({page})=>{
  await page.goto('/?profile=summary&qa=1');
  const rows=page.locator('island-summary-card .destination');
  expect(await rows.count()).toBeGreaterThan(0);
- for(const row of await rows.all())expect(await row.evaluate(e=>parseFloat(getComputedStyle(e).borderRadius))).toBe(18);
+ for(const row of await rows.all()){const geometry=await row.evaluate(e=>({tag:e.tagName,radius:parseFloat(getComputedStyle(e).borderRadius)}));expect(geometry.radius).toBe(geometry.tag==='BUTTON'?50:18);}
 });
 
 test('collapsed paper disclosure keeps keyboard focus inside its clipped surface',async({page})=>{
