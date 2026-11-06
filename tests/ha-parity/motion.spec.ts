@@ -22,7 +22,7 @@ async function reset(request:APIRequestContext){
 async function open(page:Page){
  page.on('pageerror',()=>{runtimeErrors++;});
  await page.addInitScript(value=>{
-  localStorage.setItem('hassTokens',JSON.stringify(value));(window as any).__motionPointerHits=[];(window as any).__motionBlurCount=0;window.addEventListener('blur',()=>{(window as any).__motionBlurCount++;});
+  localStorage.setItem('hassTokens',JSON.stringify(value));(window as any).__motionPointerHits=[];(window as any).__motionBlurCount=0;(window as any).__motionTrustedBlurCount=0;window.addEventListener('blur',event=>{(window as any).__motionBlurCount++;if(event.isTrusted)(window as any).__motionTrustedBlurCount++;});
   document.addEventListener('pointerdown',event=>{(window as any).__motionPointerHits.push({x:event.clientX,y:event.clientY,primary:event.isPrimary,button:event.button,reduced:matchMedia('(prefers-reduced-motion: reduce)').matches,path:event.composedPath().filter(n=>n instanceof Element).map(n=>({tag:(n as Element).localName,disabled:Boolean((n as HTMLButtonElement).disabled),disabledType:typeof (n as HTMLButtonElement).disabled,disabledAttr:(n as Element).hasAttribute('disabled'),ariaDisabled:(n as Element).getAttribute('aria-disabled'),inert:(n as Element).hasAttribute('inert')}))});},{capture:true,passive:true});
  },auth);
  await page.goto('/lovelace/motion');
@@ -83,12 +83,26 @@ test('motion pointer origin, disabled, reduced-motion and disconnect cleanup',as
  await clearEvents(page);await surface.click();await settleOne(page);
  const plus=button(page);const minus=page.locator('island-number-card').nth(1).locator('island-input-number button.minus');
  await clearEvents(page);const beforeFocusChange=await numberState(page);await minus.focus();await expect(minus).toBeFocused();await plus.hover();await page.mouse.down();await expect(plus).toHaveAttribute('data-island-pressed','');await page.waitForTimeout(170);await expect(plus).toHaveAttribute('data-island-pressed','');await page.mouse.up();await expect.poll(()=>numberState(page)).toBe(beforeFocusChange+1);await settleOne(page);
- await plus.focus();await page.keyboard.down(' ');await expect(plus).toHaveAttribute('data-island-pressed','');
- // A real focus change between browser tabs dispatches window blur; no synthetic key/click is sent.
- const blurBefore=await page.evaluate(()=>(window as any).__motionBlurCount);const other=await page.context().newPage();await other.goto('about:blank');await other.bringToFront();
- const blurFacts=await page.evaluate(()=>({events:(window as any).__motionBlurCount,hasFocus:document.hasFocus()}));await writeFile('ha-evidence/motion-window-blur.json',JSON.stringify({...blurFacts,eventsBefore:blurBefore},null,2));expect(blurFacts.events,'Browser must produce actual window blur before checking cleanup').toBeGreaterThan(blurBefore);expect(blurFacts.hasFocus).toBe(false);
- await expect(plus).not.toHaveAttribute('data-island-pressed','');expect(await plus.evaluate(el=>el.getAnimations({subtree:true}).length)).toBe(0);
- await other.close();await page.bringToFront();await page.keyboard.up(' ');
+ // Playwright enables focus emulation by default, even in headed Chromium. Disable it
+ // before the gesture so actual browser focus, rather than forced focus, is observed.
+ const focusSession=await page.context().newCDPSession(page);let other:Page|undefined;
+ const focusFacts:any={focusEmulation:false,phase:'initial-focus',initialFocus:false};
+ try {
+  await focusSession.send('Emulation.setFocusEmulationEnabled',{enabled:false});await page.bringToFront();
+  await expect.poll(()=>page.evaluate(()=>document.hasFocus())).toBe(true);focusFacts.initialFocus=true;
+  await plus.focus();await page.keyboard.down(' ');await expect(plus).toHaveAttribute('data-island-pressed','');
+  focusFacts.phase='tab-switch';focusFacts.eventsBefore=await page.evaluate(()=>(window as any).__motionBlurCount);focusFacts.trustedEventsBefore=await page.evaluate(()=>(window as any).__motionTrustedBlurCount);
+  // Switch actual browser tabs; do not dispatch a synthetic blur event.
+  other=await page.context().newPage();await other.goto('about:blank');await other.bringToFront();
+  await expect.poll(()=>page.evaluate(()=>(window as any).__motionTrustedBlurCount)).toBeGreaterThan(focusFacts.trustedEventsBefore);
+  expect(await page.evaluate(()=>document.hasFocus())).toBe(false);
+  await expect(plus).not.toHaveAttribute('data-island-pressed','');expect(await plus.evaluate(el=>el.getAnimations({subtree:true}).length)).toBe(0);focusFacts.phase='cleanup-passed';
+ } finally {
+  Object.assign(focusFacts,await page.evaluate(()=>({events:(window as any).__motionBlurCount,trustedEvents:(window as any).__motionTrustedBlurCount,hasFocus:document.hasFocus()})));
+  await writeFile('ha-evidence/motion-window-blur.json',JSON.stringify(focusFacts,null,2));
+  await other?.close();await page.bringToFront();await page.keyboard.up(' ');
+  try {await focusSession.send('Emulation.setFocusEmulationEnabled',{enabled:true});} finally {await focusSession.detach();}
+ }
 });
 
 test('motion slider live label and fill match drag, commits exactly once on release',async({page,request})=>{
