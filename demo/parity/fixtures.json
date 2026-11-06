@@ -671,8 +671,8 @@
             "type": "action",
             "icon": "mdi:home",
             "tap_action": {
-              "action": "more-info",
-              "entity": "sensor.parity"
+              "action": "navigate",
+              "navigation_path": "/lovelace/masonry"
             }
           },
           {
@@ -733,8 +733,8 @@
             "type": "action",
             "icon": "mdi:home",
             "tap_action": {
-              "action": "more-info",
-              "entity": "sensor.parity"
+              "action": "navigate",
+              "navigation_path": "/lovelace/masonry"
             }
           },
           {
@@ -3750,8 +3750,8 @@
             "type": "action",
             "icon": "mdi:home",
             "tap_action": {
-              "action": "more-info",
-              "entity": "sensor.parity"
+              "action": "navigate",
+              "navigation_path": "/lovelace/masonry"
             }
           }
         ]
@@ -3763,8 +3763,8 @@
             "type": "action",
             "icon": "mdi:home",
             "tap_action": {
-              "action": "more-info",
-              "entity": "sensor.parity"
+              "action": "navigate",
+              "navigation_path": "/lovelace/masonry"
             }
           }
         ]

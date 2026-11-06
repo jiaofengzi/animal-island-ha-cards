@@ -40,7 +40,7 @@ Manifest example:
 }
 ```
 
-Both sides, host and state must be present to display a runtime pair. Relative local paths only; missing PNGs fail the build. Zero-size empty/spacer cases may retain null paths and status `zero-size-no-image`; they must not be replaced with fake images. Screenshots prove only appearance at the recorded state, not actions, services, editors, template lifecycles or full sizing parity.
+Each side must have a screenshot or a documented `expected-blank` result, and host/state must be present to display a runtime pair. The preview displays capture commit, date, full fixtureStates, per-side config and dimensions from the real-HA manifest. The manifest does not need a top-level status; absent status is labeled captured, with test results deferred to the CI report. Relative local paths only; missing PNGs fail the build. Zero-size Empty/Spacer cases use null paths, status `expected-blank`, and a per-side `dimensions` entry containing null or a box with width/height below 1px. These are presented as intentional blank layout results, not pending screenshots. A mixed image/blank pair is supported per side. Unexpected zero-size cases remain unresolved and must not be replaced with fake images. Screenshots prove only appearance at the recorded state, not actions, services, editors, template lifecycles or full sizing parity.
 
 When no paired evidence exists, the left side uses only a matching version-pinned official image if one is available. It explicitly identifies unknown source state/host and does not follow the state filter. The right side displays an honest pending-evidence placeholder. State filtering selects coverage requirements, not simulated runtime states.
 

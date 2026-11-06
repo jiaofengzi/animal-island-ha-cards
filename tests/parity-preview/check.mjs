@@ -20,13 +20,14 @@ const browser=await chromium.launch({headless:true,...(process.env.ISLAND_CHROMI
 try{
  const evidence=JSON.parse(await readFile('_parity-preview/runtime-evidence.json'));
  const sources=JSON.parse(await readFile('demo/reference/image-sources.json'));
- const expectedImages=fixtures.cases.reduce((sum,row)=>{const ev=evidence.cases[row.id];if(ev?.original&&ev?.island&&ev?.host&&ev?.state)return sum+2;const name=`${row.kind==='chip'?'chip-':''}${row.name}-light.png`;return sum+(row.kind!=='badge'&&sources.some(s=>s.name===name)?1:0);},0);
+ const expectedImages=fixtures.cases.reduce((sum,row)=>{const ev=evidence.cases[row.id];const blank=side=>Boolean(['card:empty','chip:spacer'].includes(row.id)&&ev?.status==='expected-blank'&&ev.dimensions&&side in ev.dimensions&&(!ev.dimensions[side]||ev.dimensions[side].width<1||ev.dimensions[side].height<1));if(ev?.host&&ev?.state&&['original','island'].every(side=>ev[side]||blank(side)))return sum+['original','island'].filter(side=>!blank(side)&&ev[side]).length;const name=`${row.kind==='chip'?'chip-':''}${row.name}-light.png`;return sum+(row.kind!=='badge'&&sources.some(s=>s.name===name)?1:0);},0);
  const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const out='tests/parity-preview/artifacts';await mkdir(out,{recursive:true});
  for(const width of [1440,390,320]){
   await page.setViewportSize({width,height:width===1440?1050:844});await page.goto('http://127.0.0.1:4189');
   await expect(page.locator('[data-module]')).toHaveCount(30);await expect(page.locator('img')).toHaveCount(expectedImages);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`overflow at ${width}`);
+  for(const row of fixtures.cases.filter(r=>['card:empty','chip:spacer'].includes(r.id))){const ev=evidence.cases[row.id];if(ev?.status==='expected-blank'&&ev.host&&ev.state){const section=page.locator(`[data-module="${row.id}"]`);for(const side of ['original','island']){const box=ev.dimensions?.[side];if(ev.dimensions&&side in ev.dimensions&&(!box||box.width<1||box.height<1)){const article=section.locator('article').nth(side==='original'?0:1);await expect(article.locator('.expected-blank')).toBeVisible();await expect(article.locator('img')).toHaveCount(0);await expect(article).not.toContainText('证据：未验证');}}}}
   for(const row of fixtures.cases){const section=page.locator(`[data-module="${row.id}"]`);await section.scrollIntoViewIfNeeded();for(const img of await section.locator('img').all()){await img.scrollIntoViewIfNeeded();await expect(img).toHaveJSProperty('complete',true);assert.ok(await img.evaluate(el=>el.naturalWidth>0));}await section.screenshot({path:`${out}/${width}-${row.id.replace(':','-')}.png`});}
   await page.screenshot({path:`${out}/${width}-full.png`,fullPage:true});
   const category=page.getByRole('combobox',{name:'组件类别',exact:true});

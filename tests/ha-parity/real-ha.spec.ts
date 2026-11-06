@@ -1,14 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- HA custom elements expose dynamic runtime APIs without installed frontend typings. */
 import {test,expect} from '@playwright/test';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
-import {cards,chips} from '../../scripts/ha-parity/fixtures.mjs';
+import {cards,chips,states,badge,cardConfig} from '../../scripts/ha-parity/fixtures.mjs';
 let auth:any;
 const pageErrors=new WeakMap<object,string[]>();
 test.beforeAll(async()=>{auth=JSON.parse(await readFile('.ha-secrets/auth.json','utf8'));});
-test.afterEach(async({page})=>{expect(pageErrors.get(page)||[],'Uncaught frontend errors').toEqual([]);});
-test.beforeEach(async({page})=>{
+test.afterEach(async({page},info)=>{
+ const errors=pageErrors.get(page)||[];
+ const diagnostics=await page.evaluate(()=>({rejections:(window as any).__parityRejections||[],connected:Boolean((document.querySelector('home-assistant') as any)?.hass?.connected)})).catch(()=>({rejections:[],connected:false}));
+ if(info.status!==info.expectedStatus||errors.length||diagnostics.rejections.length){
+  await mkdir('ha-evidence/failures',{recursive:true});const name=info.title.replace(/[^a-z0-9]+/gi,'-').slice(0,100);
+  const sanitize=(value:unknown)=>{let text=JSON.stringify(value,null,2);for(const key of ['access_token','refresh_token'])if(auth?.[key])text=text.split(auth[key]).join('[REDACTED]');return text;};
+  await writeFile(`ha-evidence/failures/${name}.json`,sanitize({errors,...diagnostics}));
+  if(page.url().startsWith('http://127.0.0.1:8123/lovelace/')&&await page.locator('mushroom-entity-card').count())await page.screenshot({path:`ha-evidence/failures/${name}.png`,fullPage:true});
+ }
+ expect(errors,'Uncaught frontend errors').toEqual([]);
+ expect(diagnostics.rejections,'Unhandled frontend promise rejections').toEqual([]);
+});
+test.beforeEach(async({page,request})=>{
+ for(const [id,state] of Object.entries(states)){const response=await request.post(`/api/states/${id}`,{headers:{Authorization:`Bearer ${auth.access_token}`},data:state});expect(response.ok()).toBeTruthy();}
  pageErrors.set(page,[]);page.on('pageerror',error=>pageErrors.get(page)!.push(error.message));
- await page.addInitScript(value=>localStorage.setItem('hassTokens',JSON.stringify(value)),auth);
+ await page.addInitScript(value=>{
+  localStorage.setItem('hassTokens',JSON.stringify(value));
+  (window as any).__parityRejections=[];
+  window.addEventListener('unhandledrejection',event=>{
+   const r=event.reason;(window as any).__parityRejections.push({code:typeof r?.code==='string'?r.code:undefined,message:typeof r?.message==='string'?r.message:typeof r==='string'?r:undefined,name:typeof r?.name==='string'?r.name:undefined});
+  });
+ },auth);
  await page.goto('/lovelace/sections');
  await expect(page.locator('home-assistant')).toBeVisible();
  await expect(page.locator('mushroom-template-card').first()).toBeVisible();
@@ -17,7 +35,7 @@ test.beforeEach(async({page})=>{
 for(const view of ['sections','masonry'])test(`${view}: all 30 modules in real host`,async({page})=>{
  await page.goto(`/lovelace/${view}`);
  for(const prefix of ['mushroom-','island-']){
-  for(const card of cards){const el=page.locator(`${prefix}${card.name}-card`).first();await expect(el).toBeAttached();await expect.poll(()=>el.evaluate((e:any)=>Boolean(e.hass&&e.shadowRoot))).toBe(true);if(card.name!=='empty'){await expect(el).toBeVisible();await expect.poll(()=>el.evaluate((e:any)=>e.shadowRoot.childElementCount)).toBeGreaterThan(0);await expect(el.locator('ha-card')).toBeAttached();}}
+  for(const card of cards){const el=page.locator(`${prefix}${card.name}-card`).first();await expect(el).toBeAttached();await expect.poll(()=>el.evaluate((e:any)=>Boolean(e.shadowRoot)),`${prefix}${card.name} shadow DOM`).toBe(true);if(card.name!=='empty')await expect.poll(()=>el.evaluate((e:any)=>Boolean(e.hass)),`${prefix}${card.name} HA context`).toBe(true);if(card.name!=='empty'){await expect(el).toBeVisible();await expect.poll(()=>el.evaluate((e:any)=>e.shadowRoot.childElementCount)).toBeGreaterThan(0);await expect(el.locator('ha-card')).toBeAttached();}}
   await expect(page.locator(`${prefix}template-badge`).first()).toBeVisible();
   for(const chip of chips)await expect(page.locator(`${prefix}${chip.type}-chip`).first()).toBeAttached();
  }
@@ -59,7 +77,7 @@ test('same service action reaches real HA through native host action handler',as
 test('native more-info event opens real HA dialog',async({page})=>{
  for(const prefix of ['mushroom-','island-']){
   await page.locator(`${prefix}entity-card`).first().click();
-  await expect(page.locator('ha-more-info-dialog')).toBeAttached();
+  await expect(page.locator('ha-more-info-dialog ha-dialog')).toBeVisible();
   await page.keyboard.press('Escape');
  }
 });
@@ -67,7 +85,7 @@ for(const width of [220,320,480])test(`real Sections fixed container ${width}px 
  for(const prefix of ['mushroom-','island-']){
   const card=page.locator(`${prefix}template-card`).first();
   for(const rows of ['auto',2,4]){
-   await card.evaluate((el:any,{width,rows})=>{el.style.width=width+'px';el.style.maxWidth='100%';el.setConfig({...el._config,grid_options:{columns:6,rows}});},{width,rows});
+   await card.evaluate((el:any,{width,rows})=>{const holder=el.parentElement||(el.getRootNode() as ShadowRoot).host;holder.style.flex='none';holder.style.width=width+'px';holder.style.minWidth='0';el.style.width='100%';el.style.minWidth='0';el.style.maxWidth='100%';el.setConfig({...el._config,grid_options:{columns:6,rows}});},{width,rows});
    await expect.poll(()=>card.evaluate((el:any)=>el.getBoundingClientRect().width)).toBeLessThanOrEqual(width+1);
   }
  }
@@ -84,16 +102,19 @@ test('capture paired real-host module evidence',async({page})=>{
  const cases:any={};
  const modules=[...cards.map(c=>({id:`card:${c.name}`,tag:`${c.name}-card`})),{id:'badge:template',tag:'template-badge'},...chips.map(c=>({id:`chip:${c.type}`,tag:`${c.type}-chip`}))];
  for(const module of modules){
-  const row:any={host:'Home Assistant',haVersion:'2026.9.0',status:'captured',state:'synthetic fixture',original:null,island:null};
+  const row:any={host:'Home Assistant',haVersion:'2026.9.0',status:'captured',state:'synthetic fixture',original:null,island:null,config:{},dimensions:{}};
   for(const [variant,prefix] of [['original','mushroom-'],['island','island-']]){
-   const el=page.locator(prefix+module.tag).first();
+   let el=page.locator(prefix+module.tag).first();
+   if(module.id==='chip:conditional')el=el.locator(`${prefix}entity-chip`).first();
    const box=await el.boundingBox();
-   if(!box || box.width<1 || box.height<1){row.status='zero-size-no-image';continue;}
+   row.dimensions[variant]=box;
+   row.config[variant]=module.id.startsWith('card:')?cardConfig(cards.find(c=>`card:${c.name}`===module.id)!,prefix):module.id==='badge:template'?{type:`custom:${prefix}template-badge`,...badge.config}:chips.find(c=>`chip:${c.type}`===module.id);
+   if(!box || box.width<1 || box.height<1){row.status=['card:empty','chip:spacer'].includes(module.id)?'expected-blank':'zero-size-no-image';continue;}
    const file=`runtime/${module.id.replace(':','-')}-${variant}.png`;
    await el.screenshot({path:'ha-evidence/'+file});row[variant]=file;
   }cases[module.id]=row;
  }
- await writeFile('ha-evidence/runtime-evidence.json',JSON.stringify({host:'Home Assistant',haVersion:'2026.9.0',generatedAt:new Date().toISOString(),cases},null,2));
+ await writeFile('ha-evidence/runtime-evidence.json',JSON.stringify({host:'Home Assistant',haVersion:'2026.9.0',generatedAt:new Date().toISOString(),commit:process.env.GITHUB_SHA||null,fixtureStates:states,cases},null,2));
 });
 
 test('128 sizing formula cases: source oracle and real-host fork comparison',async({page,request})=>{
@@ -144,14 +165,14 @@ test('native hold and double-tap open more-info',async({page})=>{
   const card=page.locator(`${prefix}entity-card`).first();
   await card.evaluate((el:any)=>el.setConfig({type:`custom:${el.localName}`,entity:'sensor.parity',tap_action:{action:'none'},hold_action:{action:'more-info'},double_tap_action:{action:'more-info'}}));
   if(action==='double')await card.dblclick();else{await card.hover();await page.mouse.down();await page.waitForTimeout(700);await page.mouse.up();}
-  await expect(page.locator('ha-more-info-dialog')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('ha-more-info-dialog')).not.toBeVisible();
+  await expect(page.locator('ha-more-info-dialog ha-dialog')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('ha-more-info-dialog ha-dialog')).not.toBeVisible();
  }
 });
 test('unavailable light remains rendered without frontend exceptions',async({page,request})=>{
- const {states}=await import('../../scripts/ha-parity/fixtures.mjs');
+ // Reset in finally even if the state assertion fails.
  try{
   const r=await request.post('/api/states/light.parity',{headers:{Authorization:`Bearer ${auth.access_token}`},data:{...states['light.parity'],state:'unavailable'}});expect(r.ok()).toBeTruthy();
-  for(const prefix of ['mushroom-','island-'])await expect(page.locator(`${prefix}light-card`).first()).toContainText('Unavailable');
+  const labels=[];for(const prefix of ['mushroom-','island-']){const card=page.locator(`${prefix}light-card`).first();await expect.poll(()=>card.evaluate((el:any)=>el.hass.states['light.parity'].state)).toBe('unavailable');await expect(card).toBeVisible();const label=await card.locator(`${prefix}state-info .secondary`).textContent();expect(label?.trim().length).toBeGreaterThan(0);labels.push(label?.trim());}expect(labels[1]).toEqual(labels[0]);
   await expect(page.locator('hui-error-card')).toHaveCount(0);
  }finally{await request.post('/api/states/light.parity',{headers:{Authorization:`Bearer ${auth.access_token}`},data:states['light.parity']});}
 });

@@ -17,7 +17,7 @@ export const states = {
   'weather.parity': {state:'sunny',attributes:{friendly_name:'Island weather',temperature:22,temperature_unit:'°C',humidity:40}}
 };
 export const chips = [
-  {type:'action',icon:'mdi:home',tap_action:{action:'more-info',entity:'sensor.parity'}},
+  {type:'action',icon:'mdi:home',tap_action:{action:'navigate',navigation_path:'/lovelace/masonry'}},
   {type:'alarm-control-panel',entity:'alarm_control_panel.parity'},
   {type:'back'}, {type:'conditional',conditions:[{entity:'sensor.parity',state:'21'}],chip:{type:'entity',entity:'sensor.parity'}},
   {type:'entity',entity:'sensor.parity'}, {type:'light',entity:'light.parity'}, {type:'menu'}, {type:'quickbar'}, {type:'spacer'},

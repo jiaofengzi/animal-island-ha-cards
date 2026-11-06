@@ -57,6 +57,30 @@ for (const file of files) {
     };
     visit(source);
     const styleAppends = edits.length;
+    // Change only human-facing metadata inside these registration calls.
+    let pickerLabels = 0;
+    const identifyPicker = (node) => {
+      if (ts.isCallExpression(node) && ts.isIdentifier(node.expression) &&
+          ['registerCustomCard', 'registerCustomBadge'].includes(node.expression.text)) {
+        const metadata = node.arguments[0];
+        if (!metadata || !ts.isObjectLiteralExpression(metadata)) throw new Error('Unexpected registration metadata: ' + file.path);
+        for (const property of metadata.properties) {
+          if (!ts.isPropertyAssignment(property) ||
+              !['name', 'description'].includes(property.name.getText(source).replaceAll('"', '').replaceAll("'", ''))) continue;
+          if (!ts.isStringLiteral(property.initializer)) throw new Error('Unexpected picker display expression: ' + file.path);
+          const from = property.initializer.text;
+          const to = from.replaceAll('Mushroom', 'Animal Island');
+          if (from !== to) {
+            edits.push({ start: property.initializer.getStart(source), end: property.initializer.end, value: JSON.stringify(to) });
+            pickerLabels++;
+          }
+        }
+      }
+      ts.forEachChild(node, identifyPicker);
+    };
+    identifyPicker(source);
+    if (pickerLabels) transforms.push({ kind: 'identify-fork-picker-metadata', strings: pickerLabels, from: 'Mushroom', to: 'Animal Island' });
+
     if (['src/cards/template-card/template-card.ts', 'src/badges/template/template-badge.ts'].includes(file.path)) {
       let hook = false;
       const findHook = (node) => {
@@ -93,13 +117,15 @@ const cards = files.filter(f => /^src\/cards\/([^/]+)\/\1\.ts$/.test(f.path)).ma
 const chips = files.filter(f => /^src\/cards\/chips-card\/chips\/[^/]+-chip\.ts$/.test(f.path)).map(f => f.path.split('/').at(-1).replace('.ts','')).sort();
 manifest.registrations = { currentCards: cards.filter(c => c !== 'legacy-template-card'), legacyCards: cards.filter(c => c === 'legacy-template-card'), chips, badges: ['template-badge'] };
 if (manifest.registrations.currentCards.length !== 18 || chips.length !== 11) throw new Error('Unexpected registration inventory: ' + JSON.stringify(manifest.registrations));
+const pickerMetadataFiles = manifest.transforms.filter(f => f.operations.some(o => o.kind === 'identify-fork-picker-metadata'));
+if (pickerMetadataFiles.length !== 19) throw new Error('Expected 18 current card picker labels plus one badge');
 await fs.mkdir('_parity', { recursive: true });
 await fs.mkdir('dist', { recursive: true });
 const common = { bundle: true, format: 'esm', target: 'es2020', minify: false, sourcemap: false, legalComments: 'eof', tsconfig: 'tsconfig.parity.json', logLevel: 'warning', metafile: true };
 const original = await build({ ...common, entryPoints: [vendor + '/src/mushroom.ts'], outfile: '_parity/mushroom-original.js', banner: { js: '/*! Mushroom 5.2.3, unmodified source build. Apache-2.0. See vendor/mushroom-v5.2.3/LICENSE. */' } });
 const fork = await build({ ...common, entryPoints: [stage + '/src/mushroom.ts'], outfile: 'dist/island-ha-cards.js', alias: { '@island/skin': path.join(root, 'src/skin/styles.ts') }, banner: { js: '/*! Animal Island Mushroom fork. Modified namespace and visual styles only. Mushroom sources Apache-2.0; see THIRD_PARTY_NOTICES.md. */' } });
 await fs.copyFile('dist/island-ha-cards.js', '_parity/island-ha-cards.js');
-manifest.audit = { allVendoredGitBlobsMatch: true, upstreamSourceFiles: manifest.files.filter(x => x.path.startsWith('src/')).length, forkNamespaceIsolated: true, currentCards: 18, legacyCards: 1, badges: 1, chips: 11, duplicateDefineGuardsAdded: false, behaviorRewrites: false, skinAppends: manifest.transforms.reduce((n,f)=>n+f.operations.filter(o=>o.kind==='append-static-styles').reduce((a,o)=>a+o.expressions,0),0) };
+manifest.audit = { allVendoredGitBlobsMatch: true, upstreamSourceFiles: manifest.files.filter(x => x.path.startsWith('src/')).length, forkNamespaceIsolated: true, forkPickerMetadataFiles: pickerMetadataFiles.length, currentCards: 18, legacyCards: 1, badges: 1, chips: 11, duplicateDefineGuardsAdded: false, behaviorRewrites: false, skinAppends: manifest.transforms.reduce((n,f)=>n+f.operations.filter(o=>o.kind==='append-static-styles').reduce((a,o)=>a+o.expressions,0),0) };
 manifest.outputs = {};
 for (const f of ['_parity/mushroom-original.js', 'dist/island-ha-cards.js', '_parity/island-ha-cards.js']) {
  const b = await fs.readFile(f); manifest.outputs[f] = { bytes: b.length, sha256: sha(b) };

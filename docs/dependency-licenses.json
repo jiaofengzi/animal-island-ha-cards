@@ -216,6 +216,24 @@
     "resolved": "https://registry.npmjs.org/@eslint/plugin-kit/-/plugin-kit-0.7.3.tgz"
   },
   {
+    "path": "node_modules/@formatjs/fast-memoize",
+    "version": "3.1.7",
+    "license": "MIT",
+    "resolved": "https://registry.npmjs.org/@formatjs/fast-memoize/-/fast-memoize-3.1.7.tgz"
+  },
+  {
+    "path": "node_modules/@formatjs/icu-messageformat-parser",
+    "version": "3.5.18",
+    "license": "MIT",
+    "resolved": "https://registry.npmjs.org/@formatjs/icu-messageformat-parser/-/icu-messageformat-parser-3.5.18.tgz"
+  },
+  {
+    "path": "node_modules/@formatjs/icu-skeleton-parser",
+    "version": "2.1.11",
+    "license": "MIT",
+    "resolved": "https://registry.npmjs.org/@formatjs/icu-skeleton-parser/-/icu-skeleton-parser-2.1.11.tgz"
+  },
+  {
     "path": "node_modules/@humanfs/core",
     "version": "0.19.2",
     "license": "Apache-2.0",
@@ -258,6 +276,24 @@
     "resolved": "https://registry.npmjs.org/@keyv/serialize/-/serialize-1.1.1.tgz"
   },
   {
+    "path": "node_modules/@lit-labs/ssr-dom-shim",
+    "version": "1.6.0",
+    "license": "BSD-3-Clause",
+    "resolved": "https://registry.npmjs.org/@lit-labs/ssr-dom-shim/-/ssr-dom-shim-1.6.0.tgz"
+  },
+  {
+    "path": "node_modules/@lit/reactive-element",
+    "version": "2.1.2",
+    "license": "BSD-3-Clause",
+    "resolved": "https://registry.npmjs.org/@lit/reactive-element/-/reactive-element-2.1.2.tgz"
+  },
+  {
+    "path": "node_modules/@mdi/js",
+    "version": "7.4.47",
+    "license": "Apache-2.0",
+    "resolved": "https://registry.npmjs.org/@mdi/js/-/js-7.4.47.tgz"
+  },
+  {
     "path": "node_modules/@playwright/test",
     "version": "1.64.1",
     "license": "Apache-2.0",
@@ -298,6 +334,12 @@
     "version": "18.3.7",
     "license": "MIT",
     "resolved": "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.3.7.tgz"
+  },
+  {
+    "path": "node_modules/@types/trusted-types",
+    "version": "2.0.7",
+    "license": "MIT",
+    "resolved": "https://registry.npmjs.org/@types/trusted-types/-/trusted-types-2.0.7.tgz"
   },
   {
     "path": "node_modules/@typescript-eslint/eslint-plugin",
@@ -390,6 +432,12 @@
     "resolved": "https://registry.npmjs.org/animal-island-ui/-/animal-island-ui-3.0.0.tgz"
   },
   {
+    "path": "node_modules/argparse",
+    "version": "2.0.1",
+    "license": "Python-2.0",
+    "resolved": "https://registry.npmjs.org/argparse/-/argparse-2.0.1.tgz"
+  },
+  {
     "path": "node_modules/balanced-match",
     "version": "4.0.4",
     "license": "MIT",
@@ -414,6 +462,12 @@
     "resolved": "https://registry.npmjs.org/classnames/-/classnames-2.5.1.tgz"
   },
   {
+    "path": "node_modules/color-name",
+    "version": "2.1.1",
+    "license": "MIT",
+    "resolved": "https://registry.npmjs.org/color-name/-/color-name-2.1.1.tgz"
+  },
+  {
     "path": "node_modules/cross-spawn",
     "version": "7.0.6",
     "license": "MIT",
@@ -424,6 +478,12 @@
     "version": "3.2.3",
     "license": "MIT",
     "resolved": "https://registry.npmjs.org/csstype/-/csstype-3.2.3.tgz"
+  },
+  {
+    "path": "node_modules/culori",
+    "version": "4.0.2",
+    "license": "MIT",
+    "resolved": "https://registry.npmjs.org/culori/-/culori-4.0.2.tgz"
   },
   {
     "path": "node_modules/dayjs",
@@ -558,10 +618,22 @@
     "resolved": "https://registry.npmjs.org/glob-parent/-/glob-parent-6.0.2.tgz"
   },
   {
+    "path": "node_modules/hammerjs",
+    "version": "2.0.8",
+    "license": "MIT",
+    "resolved": "https://registry.npmjs.org/hammerjs/-/hammerjs-2.0.8.tgz"
+  },
+  {
     "path": "node_modules/hashery",
     "version": "1.5.1",
     "license": "MIT",
     "resolved": "https://registry.npmjs.org/hashery/-/hashery-1.5.1.tgz"
+  },
+  {
+    "path": "node_modules/home-assistant-js-websocket",
+    "version": "9.8.1",
+    "license": "Apache-2.0",
+    "resolved": "https://registry.npmjs.org/home-assistant-js-websocket/-/home-assistant-js-websocket-9.8.1.tgz"
   },
   {
     "path": "node_modules/hookified",
@@ -580,6 +652,12 @@
     "version": "0.1.4",
     "license": "MIT",
     "resolved": "https://registry.npmjs.org/imurmurhash/-/imurmurhash-0.1.4.tgz"
+  },
+  {
+    "path": "node_modules/intl-messageformat",
+    "version": "11.2.15",
+    "license": "BSD-3-Clause",
+    "resolved": "https://registry.npmjs.org/intl-messageformat/-/intl-messageformat-11.2.15.tgz"
   },
   {
     "path": "node_modules/is-extglob",
@@ -606,6 +684,12 @@
     "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz"
   },
   {
+    "path": "node_modules/js-yaml",
+    "version": "4.3.2",
+    "license": "MIT",
+    "resolved": "https://registry.npmjs.org/js-yaml/-/js-yaml-4.3.2.tgz"
+  },
+  {
     "path": "node_modules/json-schema-traverse",
     "version": "0.4.1",
     "license": "MIT",
@@ -630,6 +714,24 @@
     "resolved": "https://registry.npmjs.org/levn/-/levn-0.4.1.tgz"
   },
   {
+    "path": "node_modules/lit",
+    "version": "3.3.3",
+    "license": "BSD-3-Clause",
+    "resolved": "https://registry.npmjs.org/lit/-/lit-3.3.3.tgz"
+  },
+  {
+    "path": "node_modules/lit-element",
+    "version": "4.2.2",
+    "license": "BSD-3-Clause",
+    "resolved": "https://registry.npmjs.org/lit-element/-/lit-element-4.2.2.tgz"
+  },
+  {
+    "path": "node_modules/lit-html",
+    "version": "3.3.3",
+    "license": "BSD-3-Clause",
+    "resolved": "https://registry.npmjs.org/lit-html/-/lit-html-3.3.3.tgz"
+  },
+  {
     "path": "node_modules/locate-path",
     "version": "6.0.0",
     "license": "MIT",
@@ -640,6 +742,12 @@
     "version": "1.4.0",
     "license": "MIT",
     "resolved": "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz"
+  },
+  {
+    "path": "node_modules/memoize-one",
+    "version": "6.0.0",
+    "license": "MIT",
+    "resolved": "https://registry.npmjs.org/memoize-one/-/memoize-one-6.0.0.tgz"
   },
   {
     "path": "node_modules/minimatch",
@@ -664,6 +772,12 @@
     "version": "1.4.0",
     "license": "MIT",
     "resolved": "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz"
+  },
+  {
+    "path": "node_modules/object-hash",
+    "version": "3.0.0",
+    "license": "MIT",
+    "resolved": "https://registry.npmjs.org/object-hash/-/object-hash-3.0.0.tgz"
   },
   {
     "path": "node_modules/optionator",
@@ -772,6 +886,18 @@
     "version": "3.0.0",
     "license": "MIT",
     "resolved": "https://registry.npmjs.org/shebang-regex/-/shebang-regex-3.0.0.tgz"
+  },
+  {
+    "path": "node_modules/sortablejs",
+    "version": "1.15.7",
+    "license": "MIT",
+    "resolved": "https://registry.npmjs.org/sortablejs/-/sortablejs-1.15.7.tgz"
+  },
+  {
+    "path": "node_modules/superstruct",
+    "version": "2.0.2",
+    "license": "MIT",
+    "resolved": "https://registry.npmjs.org/superstruct/-/superstruct-2.0.2.tgz"
   },
   {
     "path": "node_modules/tinyglobby",

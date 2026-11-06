@@ -28,3 +28,9 @@ Inventory is 18 current cards, the separately retained legacy Template Card, one
 The pinned repository's root LICENSE is Apache License 2.0 and is reproduced verbatim. Its package.json declares ISC, an upstream metadata inconsistency. We retain both original files and do not reinterpret the entire source as ISC. No upstream NOTICE file exists in the pinned tree. Copied Home Assistant helper files retain their inline notices, including Apache-2.0 references.
 
 See `THIRD_PARTY_NOTICES.md` for scope. The old MIT LICENSE remains applicable to the project's original files, not upstream vendored code. Generated fork sources are modified files; this document, the build script, manifest, and bundle banners explicitly identify those changes.
+
+### Distinct picker labels
+
+Only name/description string literals passed directly to registerCustomCard or registerCustomBadge have Mushroom replaced by Animal Island. Class identifiers, original files, descriptions without that word, and business logic remain unchanged. The build requires 19 transformed picker registrations (18 current cards plus one badge; upstream legacy Template is not listed in the picker). Upstream documentation/migration links remain upstream references.
+
+The copied HA action-handler helper intentionally shares HA's existing action-handler element and its upstream guards; it is not a Mushroom-owned tag. Conditional chip registration likewise retains its existing upstream guard, but its computed tag is independently namespaced. The fork adds no duplicate-definition guards.
