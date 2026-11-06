@@ -36,8 +36,12 @@ jobs:
           docker run -d --name parity-ha -p 127.0.0.1:8123:8123 -v "$PWD/.ha-runtime:/config" ghcr.io/home-assistant/home-assistant:${HA_VERSION}
       - run: node scripts/ha-parity/bootstrap.mjs
       - run: npx playwright install --with-deps chromium
-      - name: Check authenticated demonstration recording tools
-        run: command -v ffmpeg && command -v ffprobe
+      - name: Install recording tools from official Ubuntu packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y ffmpeg
+          command -v ffmpeg
+          command -v ffprobe
       - run: npx playwright test --config tests/ha-parity/playwright.config.ts
       - name: Summarize only observed evidence
         if: always()
