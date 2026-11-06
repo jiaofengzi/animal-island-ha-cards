@@ -1,11 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- Actual HA element and WebSocket interfaces are runtime APIs. */
 import {test,expect,type Page,type APIRequestContext} from '@playwright/test';
-import {readFile,writeFile} from 'node:fs/promises';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {disabledMotionState} from '../../scripts/ha-parity/motion-fixtures.mjs';
 let auth:any;
 let runtimeErrors=0;
 test.beforeEach(()=>{runtimeErrors=0;});
-test.afterEach(()=>{expect(runtimeErrors,'No uncaught frontend errors in motion scenarios').toBe(0);});
+test.afterEach(async({page},info)=>{
+ if(info.status!==info.expectedStatus&&page.url().startsWith('http://127.0.0.1:8123/lovelace/motion')){
+  await mkdir('ha-evidence/motion-failures',{recursive:true});const name=info.title.replace(/[^a-z0-9]+/gi,'-').slice(0,100);
+  await page.screenshot({path:`ha-evidence/motion-failures/${name}.png`,fullPage:true});
+  const hits=await page.evaluate(()=>(window as any).__motionPointerHits||[]);
+  await writeFile(`ha-evidence/motion-failures/${name}.json`,JSON.stringify({runtimeErrors,pointerHits:hits},null,2));
+ }
+ expect(runtimeErrors,'No uncaught frontend errors in motion scenarios').toBe(0);
+});
 test.beforeAll(async()=>{auth=JSON.parse(await readFile('.ha-secrets/auth.json','utf8'));});
 async function reset(request:APIRequestContext){
  const headers={Authorization:`Bearer ${auth.access_token}`};
@@ -13,7 +21,10 @@ async function reset(request:APIRequestContext){
 }
 async function open(page:Page){
  page.on('pageerror',()=>{runtimeErrors++;});
- await page.addInitScript(value=>localStorage.setItem('hassTokens',JSON.stringify(value)),auth);
+ await page.addInitScript(value=>{
+  localStorage.setItem('hassTokens',JSON.stringify(value));(window as any).__motionPointerHits=[];
+  document.addEventListener('pointerdown',event=>{(window as any).__motionPointerHits.push({x:event.clientX,y:event.clientY,path:event.composedPath().filter(n=>n instanceof Element).map(n=>(n as Element).localName)});},{capture:true,passive:true});
+ },auth);
  await page.goto('/lovelace/motion');
  await expect(page.locator('island-number-card').first()).toBeVisible();
  await expect(page.locator('island-action-chip')).toBeVisible();
@@ -38,7 +49,7 @@ test('motion preserves one service per pointer, keyboard and real touch activati
 });
 
 test('motion pointer origin, disabled, reduced-motion and disconnect cleanup',async({page,request})=>{
- await reset(request);await open(page);const surface=chipSurface(page);const box=(await surface.boundingBox())!;
+ await reset(request);await open(page);const surface=chipSurface(page);await surface.hover();await expect(surface).toBeInViewport();const box=(await surface.boundingBox())!;
  await page.mouse.move(box.x+8,box.y+10);await page.mouse.down();
  await expect(surface).toHaveAttribute('data-island-pressed','');
  const wave=surface.locator('.island-motion-ripple > span');await expect(wave).toHaveCount(1);
@@ -58,7 +69,7 @@ test('motion pointer origin, disabled, reduced-motion and disconnect cleanup',as
 });
 
 test('motion slider live label and fill match drag, commits exactly once on release',async({page,request})=>{
- await reset(request);await open(page);const card=page.locator('island-number-card').first();const slider=card.locator('island-slider');const target=slider.locator('#slider');const box=(await target.boundingBox())!;
+ await reset(request);await open(page);const card=page.locator('island-number-card').first();const slider=card.locator('island-slider');const target=slider.locator('#slider');await target.hover();await expect(target).toBeInViewport();await expect.poll(()=>slider.evaluate((el:any)=>Boolean(el._mc))).toBe(true);const box=(await target.boundingBox())!;
  await page.mouse.move(box.x+box.width*.3,box.y+box.height/2);await page.mouse.down();await page.mouse.move(box.x+box.width*.7,box.y+box.height/2,{steps:12});
  await expect.poll(()=>slider.evaluate((el:any)=>el.controlled)).toBe(true);
  // Observe the source component's actual values, not a generated display approximation.
