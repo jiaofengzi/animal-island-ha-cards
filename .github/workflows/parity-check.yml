@@ -3,9 +3,11 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['src/**', 'scripts/**', 'tests/ha-parity/**', 'package*.json', '.github/workflows/parity-check.yml']
 permissions:
   contents: read
+concurrency:
+  group: parity-pages-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   real-ha:
     runs-on: ubuntu-latest
@@ -23,6 +25,8 @@ jobs:
       - run: node scripts/build-parity.mjs
       - run: node scripts/build-parity-preview.mjs
       - run: PARITY_STATIC_ONLY=1 node tests/parity-preview/check.mjs
+      - name: Verify release rejection gates
+        run: node --test tests/parity-preview/assembly.test.mjs
       - run: node scripts/ha-parity/prepare.mjs
       - name: Start isolated official Home Assistant
         run: |
@@ -33,15 +37,29 @@ jobs:
       - run: node scripts/ha-parity/bootstrap.mjs
       - run: npx playwright install --with-deps chromium
       - run: npx playwright test --config tests/ha-parity/playwright.config.ts
+      - name: Summarize only observed evidence
+        if: always()
+        run: node scripts/ha-parity/report.mjs
+      - name: Assemble verified comparison preview
+        run: node scripts/assemble-parity-preview.mjs
+      - name: Check all comparison rows and mobile layouts
+        run: node tests/parity-preview/check.mjs
       - name: Upload verified install bundle
         uses: actions/upload-artifact@v4
         with:
           name: parity-ha-card-bundle
           path: dist/
           retention-days: 30
-      - name: Summarize only observed evidence
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _parity-preview/
+      - name: Upload comparison browser evidence
+        uses: actions/upload-artifact@v4
         if: always()
-        run: node scripts/ha-parity/report.mjs
+        with:
+          name: comparison-preview-evidence
+          path: tests/parity-preview/artifacts/
+          retention-days: 7
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -53,3 +71,16 @@ jobs:
         run: |
           docker rm -f parity-ha || true
           sudo rm -rf .ha-runtime .ha-secrets .ha-test-results
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: real-ha
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

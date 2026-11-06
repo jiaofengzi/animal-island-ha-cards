@@ -17,7 +17,7 @@ The build verifies every included upstream blob with Git's SHA-1 blob algorithm,
 1. Change all `mushroom-` identifiers, HTML tags, selectors, configuration/editor strings and private CSS custom properties to `island-`. Change `PREFIX_NAME` to `island`. Home Assistant's `ha-*` and `hui-*` tags remain untouched.
 2. Append `islandSkin(relativeSourcePath)` to static style getter return values and static style property initializers using the TypeScript AST. Original style expressions remain intact and execute before the new CSS.
 3. Identify the fork in its startup console banner.
-4. In only the modern Template Card and Template Badge, mirror Home Assistant's dark-mode flag into a presentation-only data-island-theme attribute at the start of the existing willUpdate method. This allows the scoped skin to follow HA theme changes; it changes no service, action, config, state or grid calculation.
+4. In only the modern Template Card and Template Badge, mirror the current Home Assistant dark-mode flag into a presentation-only data-island-theme attribute, explicitly dark or light, at the start of their existing willUpdate methods. Every original method body remains intact. Traditional BaseElement and ChipsCard lifecycle behavior remains unchanged. This allows the scoped skin to follow HA theme changes; it changes no service, action, config, state or grid calculation.
 
 Business logic, conditions, actions, features, template subscriptions, editors, config validation and grid sizing remain upstream code. No duplicate-definition guards are introduced; both modules own separate custom-element names. The build does not import external fonts or CDNs.
 

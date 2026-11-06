@@ -81,19 +81,23 @@ for (const file of files) {
     identifyPicker(source);
     if (pickerLabels) transforms.push({ kind: 'identify-fork-picker-metadata', strings: pickerLabels, from: 'Mushroom', to: 'Animal Island' });
 
-    if (['src/cards/template-card/template-card.ts', 'src/badges/template/template-badge.ts'].includes(file.path)) {
+    const themeLifecycle = {
+      'src/cards/template-card/template-card.ts': 'willUpdate',
+      'src/badges/template/template-badge.ts': 'willUpdate',
+    }[file.path];
+    if (themeLifecycle) {
       let hook = false;
       const findHook = (node) => {
-        if (ts.isMethodDeclaration(node) && node.name?.getText(source) === 'willUpdate' && node.body) {
+        if (ts.isMethodDeclaration(node) && node.name?.getText(source) === themeLifecycle && node.body) {
           const start = node.body.getStart(source) + 1;
-          edits.push({ start, end: start, value: '\n    // Island presentation only: mirror HA dark mode for scoped skin tokens.\n    if (this.hass?.themes?.darkMode) this.setAttribute("data-island-theme", "dark");\n    else this.removeAttribute("data-island-theme");\n' });
+          edits.push({ start, end: start, value: '\n    // Island presentation only: mirror HA dark mode for scoped skin tokens.\n    if (this.hass?.themes?.darkMode) this.setAttribute("data-island-theme", "dark");\n    else this.setAttribute("data-island-theme", "light");\n' });
           hook = true;
         }
         ts.forEachChild(node, findHook);
       };
       findHook(source);
       if (!hook) throw new Error('Missing expected theme lifecycle hook: ' + file.path);
-      transforms.push({ kind: 'reflect-ha-dark-mode-presentation', attribute: 'data-island-theme', lifecycle: 'willUpdate' });
+      transforms.push({ kind: 'reflect-ha-dark-mode-presentation', attribute: 'data-island-theme', lifecycle: themeLifecycle, values: ['dark', 'light'] });
     }
     for (const edit of edits.sort((a,b) => b.start-a.start)) output = output.slice(0,edit.start)+edit.value+output.slice(edit.end);
     if (styleAppends) {

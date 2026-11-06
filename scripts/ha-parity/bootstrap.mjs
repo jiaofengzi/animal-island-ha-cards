@@ -9,6 +9,8 @@ const {auth_code}=await post('/api/onboarding/users',{client_id:base+'/',name:'P
 const r=await fetch(`${base}/auth/token`,{method:'POST',body:new URLSearchParams({grant_type:'authorization_code',code:auth_code,client_id:base+'/'})});
 if(!r.ok)throw Error('Ephemeral token exchange failed');
 const tokens=await r.json();
+// GitHub runner consumes add-mask commands; never emit secret values outside CI.
+if(process.env.GITHUB_ACTIONS==='true')for(const secret of [tokens.access_token,tokens.refresh_token,password])if(secret)process.stdout.write(`::add-mask::${String(secret).replaceAll('%','%25').replaceAll('\r','%0D').replaceAll('\n','%0A')}\n`);
 for(const step of ['core_config','analytics','integration']){
  const body=step==='integration'?{client_id:base+'/',redirect_uri:base+'/?auth_callback=1'}:{};
  await post(`/api/onboarding/${step}`,body,tokens.access_token);

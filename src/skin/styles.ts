@@ -183,8 +183,38 @@ const surfaces: Record<string, CSSResult> = {
   `,
   "src/cards/title-card/title-card.ts": css`
     .header { background: none; border: none; box-shadow: none; }
-    .title { font-weight: var(--title-font-weight); }
-    /* Keep the upstream plain Title contract; do not invent a ribbon wrapper. */
+    :host {
+      /* Official Title color=app-yellow: front / back / fold / text. */
+      --animal-title-front: #f7cd67;
+      --animal-title-back: #d4a030;
+      --animal-title-fold: #8a6010;
+      --animal-title-text: #725d42;
+    }
+    .title {
+      position: relative;
+      isolation: isolate;
+      font-weight: var(--title-font-weight);
+      color: var(--mush-title-color, var(--animal-title-text));
+    }
+    /* Paint-only ribbon: original h1 box, line wrapping, alignment and actions remain. */
+    .title::before, .title::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .title::before {
+      inset: 5px -8px -5px;
+      background: var(--animal-title-back);
+      clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 50%, 100% 100%, 0 100%, 6px 50%);
+    }
+    .title::after {
+      inset: 0;
+      border-radius: .2em;
+      background: var(--animal-title-front);
+    }
+    .actionable { border-radius: 12px; }
+    /* Only standalone Title Card gets the ribbon, never ordinary entity names. */
   `,
   "src/cards/empty-card/empty-card.ts": css`
     ha-card { background: none; box-shadow: none; }

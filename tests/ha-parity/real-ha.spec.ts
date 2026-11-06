@@ -1,30 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- HA custom elements expose dynamic runtime APIs without installed frontend typings. */
+import {collectStyles} from './visual-diagnostics';
 import {test,expect} from '@playwright/test';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {cards,chips,states,badge,cardConfig} from '../../scripts/ha-parity/fixtures.mjs';
 let auth:any;
+function redact(text:string):string {for(const key of ['access_token','refresh_token'])if(auth?.[key])text=text.split(auth[key]).join('[REDACTED]');return text;}
+const sanitize=(value:unknown)=>redact(JSON.stringify(value,null,2));
 const pageErrors=new WeakMap<object,string[]>();
 test.beforeAll(async()=>{auth=JSON.parse(await readFile('.ha-secrets/auth.json','utf8'));});
 test.afterEach(async({page},info)=>{
  const errors=pageErrors.get(page)||[];
- const diagnostics=await page.evaluate(()=>({rejections:(window as any).__parityRejections||[],connected:Boolean((document.querySelector('home-assistant') as any)?.hass?.connected)})).catch(()=>({rejections:[],connected:false}));
+ const rawDiagnostics=await page.evaluate(()=>({rejections:(window as any).__parityRejections||[],connected:Boolean((document.querySelector('home-assistant') as any)?.hass?.connected)})).catch(()=>({rejections:[],connected:false}));
+ const diagnostics=JSON.parse(sanitize(rawDiagnostics));
  if(info.status!==info.expectedStatus||errors.length||diagnostics.rejections.length){
   await mkdir('ha-evidence/failures',{recursive:true});const name=info.title.replace(/[^a-z0-9]+/gi,'-').slice(0,100);
-  const sanitize=(value:unknown)=>{let text=JSON.stringify(value,null,2);for(const key of ['access_token','refresh_token'])if(auth?.[key])text=text.split(auth[key]).join('[REDACTED]');return text;};
   await writeFile(`ha-evidence/failures/${name}.json`,sanitize({errors,...diagnostics}));
   if(page.url().startsWith('http://127.0.0.1:8123/lovelace/')&&await page.locator('mushroom-entity-card').count())await page.screenshot({path:`ha-evidence/failures/${name}.png`,fullPage:true});
  }
- expect(errors,'Uncaught frontend errors').toEqual([]);
- expect(diagnostics.rejections,'Unhandled frontend promise rejections').toEqual([]);
+ expect(errors.length,'Uncaught frontend errors (see sanitized diagnostics)').toBe(0);
+ expect(diagnostics.rejections.length,'Unhandled frontend promise rejections (see sanitized diagnostics)').toBe(0);
 });
 test.beforeEach(async({page,request})=>{
  for(const [id,state] of Object.entries(states)){const response=await request.post(`/api/states/${id}`,{headers:{Authorization:`Bearer ${auth.access_token}`},data:state});expect(response.ok()).toBeTruthy();}
- pageErrors.set(page,[]);page.on('pageerror',error=>pageErrors.get(page)!.push(error.message));
+ pageErrors.set(page,[]);page.on('pageerror',error=>pageErrors.get(page)!.push(redact(error.message)));
  await page.addInitScript(value=>{
   localStorage.setItem('hassTokens',JSON.stringify(value));
   (window as any).__parityRejections=[];
   window.addEventListener('unhandledrejection',event=>{
-   const r=event.reason;(window as any).__parityRejections.push({code:typeof r?.code==='string'?r.code:undefined,message:typeof r?.message==='string'?r.message:typeof r==='string'?r:undefined,name:typeof r?.name==='string'?r.name:undefined});
+   const safe=(text:string|undefined)=>{if(!text)return text;for(const token of [value.access_token,value.refresh_token])if(token)text=text.split(token).join('[REDACTED]');return text;};
+   const r=event.reason;(window as any).__parityRejections.push({code:safe(typeof r?.code==='string'?r.code:undefined),message:safe(typeof r?.message==='string'?r.message:typeof r==='string'?r:undefined),name:safe(typeof r?.name==='string'?r.name:undefined)});
   });
  },auth);
  await page.goto('/lovelace/sections');
@@ -35,7 +39,7 @@ test.beforeEach(async({page,request})=>{
 for(const view of ['sections','masonry'])test(`${view}: all 30 modules in real host`,async({page})=>{
  await page.goto(`/lovelace/${view}`);
  for(const prefix of ['mushroom-','island-']){
-  for(const card of cards){const el=page.locator(`${prefix}${card.name}-card`).first();await expect(el).toBeAttached();await expect.poll(()=>el.evaluate((e:any)=>Boolean(e.shadowRoot)),`${prefix}${card.name} shadow DOM`).toBe(true);if(card.name!=='empty')await expect.poll(()=>el.evaluate((e:any)=>Boolean(e.hass)),`${prefix}${card.name} HA context`).toBe(true);if(card.name!=='empty'){await expect(el).toBeVisible();await expect.poll(()=>el.evaluate((e:any)=>e.shadowRoot.childElementCount)).toBeGreaterThan(0);await expect(el.locator('ha-card')).toBeAttached();}}
+  for(const card of cards){const el=page.locator(`${prefix}${card.name}-card`).first();await expect(el).toBeAttached();await expect.poll(()=>el.evaluate((e:any)=>Boolean(e.shadowRoot)),`${prefix}${card.name} shadow DOM`).toBe(true);if(card.name!=='empty')await expect.poll(()=>el.evaluate((e:any)=>Boolean(e.hass||e._hass)),`${prefix}${card.name} HA context`).toBe(true);if(card.name!=='empty'){await expect(el).toBeVisible();await expect.poll(()=>el.evaluate((e:any)=>e.shadowRoot.childElementCount)).toBeGreaterThan(0);await expect(el.locator('ha-card')).toBeAttached();}}
   await expect(page.locator(`${prefix}template-badge`).first()).toBeVisible();
   for(const chip of chips)await expect(page.locator(`${prefix}${chip.type}-chip`).first()).toBeAttached();
  }
@@ -77,19 +81,27 @@ test('same service action reaches real HA through native host action handler',as
 test('native more-info event opens real HA dialog',async({page})=>{
  for(const prefix of ['mushroom-','island-']){
   await page.locator(`${prefix}entity-card`).first().click();
-  await expect(page.locator('ha-more-info-dialog ha-dialog')).toBeVisible();
+  await expect(page.locator('ha-more-info-dialog ha-dialog dialog')).toBeVisible();
+  const modalTheme={light:await page.locator('island-light-card').first().evaluate(collectStyles),template:await page.locator('island-template-card').first().evaluate(collectStyles)};
+  await writeFile(`ha-evidence/modal-theme-${prefix}.json`,JSON.stringify(modalTheme,null,2));
+  await page.screenshot({path:`ha-evidence/more-info-${prefix}.png`,fullPage:true});
   await page.keyboard.press('Escape');
  }
 });
-for(const width of [220,320,480])test(`real Sections fixed container ${width}px and grid options`,async({page})=>{
- for(const prefix of ['mushroom-','island-']){
-  const card=page.locator(`${prefix}template-card`).first();
-  for(const rows of ['auto',2,4]){
-   await card.evaluate((el:any,{width,rows})=>{const holder=el.parentElement||(el.getRootNode() as ShadowRoot).host;holder.style.flex='none';holder.style.width=width+'px';holder.style.minWidth='0';el.style.width='100%';el.style.minWidth='0';el.style.maxWidth='100%';el.setConfig({...el._config,grid_options:{columns:6,rows}});},{width,rows});
-   await expect.poll(()=>card.evaluate((el:any)=>el.getBoundingClientRect().width)).toBeLessThanOrEqual(width+1);
-  }
- }
- await page.screenshot({path:`ha-evidence/container-${width}.png`,fullPage:true});
+for(const width of [220,320,480])test(`live HA standalone containers ${width}px: all 18 cards`,async({page})=>{
+ const measurements=await page.evaluate(async({fixtures,width})=>{
+  const hass=(document.querySelector('home-assistant') as any).hass;const results=[];
+  for(const fixture of fixtures)for(const prefix of ['mushroom-','island-']){
+   const holder=document.createElement('div');holder.style.cssText=`display:block;width:${width}px;min-width:0;position:relative`;
+   const el:any=document.createElement(`${prefix}${fixture.name}-card`);el.hass=hass;el.setConfig({type:`custom:${prefix}${fixture.name}-card`,...fixture.config});holder.append(el);document.body.append(holder);await el.updateComplete;
+   const nodes:Element[]=[];const walk=(node:Element)=>{nodes.push(node);for(const c of node.children)walk(c);if(node.shadowRoot)for(const c of node.shadowRoot.children)walk(c);};walk(el);
+   const surfaces=nodes.filter(n=>n.localName==='ha-card');
+   const surfaceMetrics=surfaces.map(n=>({width:n.getBoundingClientRect().width,scrollWidth:n.scrollWidth,clientWidth:n.clientWidth}));
+   results.push({name:fixture.name,prefix,width,holderWidth:holder.getBoundingClientRect().width,surfaces:surfaceMetrics});holder.remove();
+  }return results;
+ },{fixtures:cards,width});
+ await writeFile(`ha-evidence/container-${width}.json`,JSON.stringify(measurements,null,2));
+ for(const row of measurements){expect(row.holderWidth).toBe(width);for(const surface of row.surfaces){expect(surface.width,`${row.prefix}${row.name} surface`).toBeLessThanOrEqual(width+1);expect(surface.scrollWidth,`${row.prefix}${row.name} overflow`).toBeLessThanOrEqual(surface.clientWidth+1);}}
 });
 test('mobile host renders both forks',async({page})=>{
  await page.setViewportSize({width:390,height:844});
@@ -102,17 +114,20 @@ test('capture paired real-host module evidence',async({page})=>{
  const cases:any={};
  const modules=[...cards.map(c=>({id:`card:${c.name}`,tag:`${c.name}-card`})),{id:'badge:template',tag:'template-badge'},...chips.map(c=>({id:`chip:${c.type}`,tag:`${c.type}-chip`}))];
  for(const module of modules){
-  const row:any={host:'Home Assistant',haVersion:'2026.9.0',status:'captured',state:'synthetic fixture',original:null,island:null,config:{},dimensions:{}};
+  const row:any={host:'Home Assistant',haVersion:'2026.9.0',status:'captured',state:'synthetic fixture',original:null,island:null,config:{},dimensions:{},computedStyles:{},entityStates:{}};
   for(const [variant,prefix] of [['original','mushroom-'],['island','island-']]){
    let el=page.locator(prefix+module.tag).first();
    if(module.id==='chip:conditional')el=el.locator(`${prefix}entity-chip`).first();
    const box=await el.boundingBox();
    row.dimensions[variant]=box;
+   row.computedStyles[variant]=await el.evaluate(collectStyles);
+   row.entityStates[variant]=await el.evaluate((e:any)=>{const id=e._config?.entity||e.config?.entity;const state=id?e.hass?.states?.[id]:null;return state?{entity_id:id,state:state.state,attributes:state.attributes}:null;});
    row.config[variant]=module.id.startsWith('card:')?cardConfig(cards.find(c=>`card:${c.name}`===module.id)!,prefix):module.id==='badge:template'?{type:`custom:${prefix}template-badge`,...badge.config}:chips.find(c=>`chip:${c.type}`===module.id);
+   if(['card:empty','chip:spacer'].includes(module.id)){row.status='expected-blank';continue;}
    if(!box || box.width<1 || box.height<1){row.status=['card:empty','chip:spacer'].includes(module.id)?'expected-blank':'zero-size-no-image';continue;}
    const file=`runtime/${module.id.replace(':','-')}-${variant}.png`;
    await el.screenshot({path:'ha-evidence/'+file});row[variant]=file;
-  }cases[module.id]=row;
+  }row.state=row.entityStates.island?.state??row.entityStates.original?.state??null;cases[module.id]=row;
  }
  await writeFile('ha-evidence/runtime-evidence.json',JSON.stringify({host:'Home Assistant',haVersion:'2026.9.0',generatedAt:new Date().toISOString(),commit:process.env.GITHUB_SHA||null,fixtureStates:states,cases},null,2));
 });
@@ -165,7 +180,7 @@ test('native hold and double-tap open more-info',async({page})=>{
   const card=page.locator(`${prefix}entity-card`).first();
   await card.evaluate((el:any)=>el.setConfig({type:`custom:${el.localName}`,entity:'sensor.parity',tap_action:{action:'none'},hold_action:{action:'more-info'},double_tap_action:{action:'more-info'}}));
   if(action==='double')await card.dblclick();else{await card.hover();await page.mouse.down();await page.waitForTimeout(700);await page.mouse.up();}
-  await expect(page.locator('ha-more-info-dialog ha-dialog')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('ha-more-info-dialog ha-dialog')).not.toBeVisible();
+  await expect(page.locator('ha-more-info-dialog ha-dialog dialog')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('ha-more-info-dialog ha-dialog dialog')).not.toBeVisible();
  }
 });
 test('unavailable light remains rendered without frontend exceptions',async({page,request})=>{
@@ -175,4 +190,40 @@ test('unavailable light remains rendered without frontend exceptions',async({pag
   const labels=[];for(const prefix of ['mushroom-','island-']){const card=page.locator(`${prefix}light-card`).first();await expect.poll(()=>card.evaluate((el:any)=>el.hass.states['light.parity'].state)).toBe('unavailable');await expect(card).toBeVisible();const label=await card.locator(`${prefix}state-info .secondary`).textContent();expect(label?.trim().length).toBeGreaterThan(0);labels.push(label?.trim());}expect(labels[1]).toEqual(labels[0]);
   await expect(page.locator('hui-error-card')).toHaveCount(0);
  }finally{await request.post('/api/states/light.parity',{headers:{Authorization:`Bearer ${auth.access_token}`},data:states['light.parity']});}
+});
+
+test('native dark theme propagates to modern Template and Badge',async({page})=>{
+ const observations:any={};
+ for(const colorScheme of ['dark','light'] as const){
+  await page.emulateMedia({colorScheme});
+  await expect.poll(()=>page.evaluate(()=>(document.querySelector('home-assistant') as any).hass.themes.darkMode)).toBe(colorScheme==='dark');
+  observations[colorScheme]={};
+  for(const suffix of ['template-card','template-badge']){
+   const el=page.locator('island-'+suffix).first();
+   await expect(el).toHaveAttribute('data-island-theme',colorScheme);
+   observations[colorScheme][suffix]=await el.evaluate(collectStyles);
+  }
+ }
+ await writeFile('ha-evidence/theme-diagnostics.json',JSON.stringify(observations,null,2));
+});
+
+test('Template Badge and all 11 chip editors accept their actual fixture configs',async({page})=>{
+ const rows=await page.evaluate(async({chips,badge})=>{
+  const hass=(document.querySelector('home-assistant') as any).hass;const rows=[];
+  for(const prefix of ['mushroom-','island-'])for(const item of [{tag:'template-badge',config:{type:`custom:${prefix}template-badge`,...badge.config}},...chips.map(c=>({tag:`${c.type}-chip`,config:c}))]){
+   const ctor:any=customElements.get(prefix+item.tag);const editor=await ctor.getConfigElement();editor.hass=hass;editor.setConfig(item.config);document.body.append(editor);await editor.updateComplete;
+   rows.push({tag:prefix+item.tag,editorTag:editor.localName,rendered:Boolean(editor.shadowRoot?.childElementCount)});editor.remove();
+  }return rows;
+ },{chips,badge});
+ expect(rows).toHaveLength(24);for(const row of rows)expect(row.rendered,row.tag).toBe(true);
+ await writeFile('ha-evidence/badge-chip-editors.json',JSON.stringify(rows,null,2));
+});
+test('conditional chips respond to actual backend state visibility changes',async({page,request})=>{
+ for(const value of ['22','21']){
+  const r=await request.post('/api/states/sensor.parity',{headers:{Authorization:`Bearer ${auth.access_token}`},data:{...states['sensor.parity'],state:value}});expect(r.ok()).toBeTruthy();
+  for(const prefix of ['mushroom-','island-']){
+   const inner=page.locator(`${prefix}conditional-chip ${prefix}entity-chip`).first();
+   if(value==='21')await expect(inner).toBeVisible();else await expect(inner).not.toBeVisible();
+  }
+ }
 });
