@@ -78,7 +78,9 @@ test('acceptance: mobile 390 and narrow 320 capture real layout without overflow
  test.setTimeout(120_000);const verify=observe(page);
  for(const width of [390,320]){
   await page.setViewportSize({width,height:844});await openAcceptance(page);await decodedImages(page);
-  const overflow=await page.evaluate(()=>{const nodes:Element[]=[];const visit=(root:Document|ShadowRoot)=>{for(const e of root.querySelectorAll('*')){nodes.push(e);if(e.shadowRoot)visit(e.shadowRoot);}};visit(document);return nodes.filter(e=>e.getBoundingClientRect().right>innerWidth+1||e.getBoundingClientRect().left< -1).map(e=>({tag:e.tagName,class:e.className,left:e.getBoundingClientRect().left,right:e.getBoundingClientRect().right}));});
+  const overflow=await page.evaluate(limit=>{const nodes:Element[]=[];const visit=(root:Document|ShadowRoot)=>{for(const e of root.querySelectorAll('*')){nodes.push(e);if(e.shadowRoot)visit(e.shadowRoot);}};visit(document);return {inner:innerWidth,outer:outerWidth,visual:visualViewport?.width,scrollX,html:document.documentElement.getBoundingClientRect().toJSON(),body:document.body.getBoundingClientRect().toJSON(),entries:nodes.filter(e=>e.getBoundingClientRect().right>limit+1||e.getBoundingClientRect().left< -1||e.scrollWidth>e.clientWidth+1).map(e=>({tag:e.tagName,class:e.className,text:e.textContent?.slice(0,80),left:e.getBoundingClientRect().left,right:e.getBoundingClientRect().right,client:e.clientWidth,scroll:e.scrollWidth,host:(e.getRootNode() as ShadowRoot).host?.tagName}))};},width);
+  console.log('MOBILE_LAYOUT',JSON.stringify(overflow));
+  await page.screenshot({path:testInfo.outputPath(`diagnostic-mobile-${width}.png`),fullPage:true,animations:'disabled'});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth),JSON.stringify(overflow)).toBeLessThanOrEqual(width);
   for(const row of mapping){
    const section=page.locator(`#module-${row.profile}`);
