@@ -39,7 +39,7 @@ test.beforeEach(async({page,request})=>{
 for(const view of ['sections','masonry'])test(`${view}: all 30 modules in real host`,async({page})=>{
  await page.goto(`/lovelace/${view}`);
  for(const prefix of ['mushroom-','island-']){
-  for(const card of cards){const el=page.locator(`${prefix}${card.name}-card`).first();await expect(el).toBeAttached();await expect.poll(()=>el.evaluate((e:any)=>Boolean(e.shadowRoot)),`${prefix}${card.name} shadow DOM`).toBe(true);if(card.name!=='empty')await expect.poll(()=>el.evaluate((e:any)=>Boolean(e.hass||e._hass)),`${prefix}${card.name} HA context`).toBe(true);if(card.name!=='empty'){await expect(el).toBeVisible();await expect.poll(()=>el.evaluate((e:any)=>e.shadowRoot.childElementCount)).toBeGreaterThan(0);await expect(el.locator('ha-card')).toBeAttached();}}
+  for(const card of cards){const el=page.locator(`${prefix}${card.name}-card`).first();await expect(el).toBeAttached();await expect.poll(()=>el.evaluate((e:any)=>Boolean(e.shadowRoot)),`${prefix}${card.name} shadow DOM`).toBe(true);if(card.name!=='empty')await expect.poll(()=>el.evaluate((e:any)=>Boolean(e.hass||e._hass)),`${prefix}${card.name} HA context`).toBe(true);if(card.name!=='empty'){await expect(el).toBeVisible();await expect.poll(()=>el.evaluate((e:any)=>e.shadowRoot.childElementCount)).toBeGreaterThan(0);await expect(el.locator('ha-card').first()).toBeAttached();}}
   await expect(page.locator(`${prefix}template-badge`).first()).toBeVisible();
   for(const chip of chips)await expect(page.locator(`${prefix}${chip.type}-chip`).first()).toBeAttached();
  }
@@ -207,15 +207,15 @@ test('native dark theme propagates to modern Template and Badge',async({page})=>
  await writeFile('ha-evidence/theme-diagnostics.json',JSON.stringify(observations,null,2));
 });
 
-test('Template Badge and all 11 chip editors accept their actual fixture configs',async({page})=>{
+test('Template Badge and all 11 chip editor contracts match fixtures (Spacer has no editor)',async({page})=>{
  const rows=await page.evaluate(async({chips,badge})=>{
   const hass=(document.querySelector('home-assistant') as any).hass;const rows=[];
   for(const prefix of ['mushroom-','island-'])for(const item of [{tag:'template-badge',config:{type:`custom:${prefix}template-badge`,...badge.config}},...chips.map(c=>({tag:`${c.type}-chip`,config:c}))]){
-   const ctor:any=customElements.get(prefix+item.tag);const editor=await ctor.getConfigElement();editor.hass=hass;editor.setConfig(item.config);document.body.append(editor);await editor.updateComplete;
+   const ctor:any=customElements.get(prefix+item.tag);if(!ctor.getConfigElement){rows.push({tag:prefix+item.tag,editorTag:null,rendered:false});continue;}const editor=await ctor.getConfigElement();editor.hass=hass;editor.setConfig(item.config);document.body.append(editor);await editor.updateComplete;
    rows.push({tag:prefix+item.tag,editorTag:editor.localName,rendered:Boolean(editor.shadowRoot?.childElementCount)});editor.remove();
   }return rows;
  },{chips,badge});
- expect(rows).toHaveLength(24);for(const row of rows)expect(row.rendered,row.tag).toBe(true);
+ expect(rows).toHaveLength(24);for(const row of rows){if(row.tag.endsWith('-spacer-chip')){expect(row.editorTag,row.tag).toBeNull();expect(row.rendered,row.tag).toBe(false);}else{expect(row.editorTag,row.tag).not.toBeNull();expect(row.rendered,row.tag).toBe(true);}}
  await writeFile('ha-evidence/badge-chip-editors.json',JSON.stringify(rows,null,2));
 });
 test('conditional chips respond to actual backend state visibility changes',async({page,request})=>{

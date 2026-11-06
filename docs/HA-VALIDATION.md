@@ -2,9 +2,11 @@
 
 ## Current evidence status
 
-Two real GitHub-hosted runs have completed on official HA 2026.9.0. Run 42257254489 passed 1/15 tests; run 42259051527 passed 10/15. The second run passed server templates, service action, editor/default lifecycle comparison, paired capture, all 128 sizing cases, direct Sections geometry, mobile and unavailable-state checks. It failed two smoke getter checks, two dialog wrapper visibility checks and one incorrectly constrained 220px stack test. Those test-harness corrections are awaiting the next run; no all-green claim is made.
+Three real GitHub-hosted runs have completed on official HA 2026.9.0. Runs 42257254489 and 42259051527 passed 1/15 and 10/15 tests. Run 42260551826 passed 15/18: server templates, service actions, native more-info/hold/double-tap, 18 card editors/default lifecycle, all 18 cards at 220/320/480px, mobile, paired capture, all 128 sizing cases, direct Sections geometry, unavailable states, dark theme propagation and conditional-chip visibility.
 
-The next suite discovers 18 tests, including native dark theme propagation and all 18 cards in independently measured narrow containers. Local lint and static discovery pass. Local browser tests were not run; real runtime results come from GitHub-hosted CI.
+The three remaining failures were two ambiguous nested ha-card selectors in smoke checks and the test incorrectly expecting Spacer to expose an editor. Test fixes are awaiting the next CI run. Spacer's absent editor is explicitly compared as an upstream contract; Badge and the other 10 chip editors must render. No all-green claim is made.
+
+The suite discovers 18 aggregate tests. Local lint and static discovery pass. Local browser tests were not run; real runtime results come from GitHub-hosted CI.
 
 The baseline is Mushroom v5.2.3. Both untouched original and namespaced island fork are loaded as actual Lovelace module resources in the same official HA frontend. The pinned container is `ghcr.io/home-assistant/home-assistant:2026.9.0`, corresponding to the [official September release](https://www.home-assistant.io/blog/2026/09/02/release-20269/). The pull must succeed; no fallback or floating version is used. CI records the pulled digest and checks `/api/config` reports exactly 2026.9.0.
 
@@ -18,7 +20,7 @@ Synthetic entities are registered through the actual HA REST state API. They exe
 
 - Registration/render attachment of 18 cards, Template Badge and 11 chips in real Sections and Masonry dashboards.
 - Live server template state updates across both cards, badges and chips.
-- Default fixture config, sizing method return values, all 18 card editors and disconnect/reconnect comparison. The next run adds Template Badge and all 11 chip editor configuration checks, plus conditional-chip visibility transitions from actual backend states.
+- Default fixture config, sizing method return values, all 18 card editors and disconnect/reconnect comparison. Template Badge and 10 chip editors must accept their fixture configs; Spacer must expose no editor. Conditional-chip visibility transitions use actual backend states.
 - A real service action through the entity card, native more-info dialog, hold/double-tap, and unavailable light rendering.
 - Per-test uncaught frontend exception assertions, error-card checks, and visible content host checks. Rich showcase fixture options expose supported controls; default semantics are checked independently.
 - 128 sizing formula cases against the research oracle and original/fork runtime methods. Older-version branches are checked statically; live HA uses its actual >=2026.9 branch.
