@@ -5,3 +5,5 @@
 
 /* Long upstream option names must wrap without widening narrow comparison columns. */
 .mapping-note,figcaption,.enhancement,.source-links,footer{overflow-wrap:anywhere}
+
+.filter-grid [role=combobox]:focus-visible{outline:2px solid var(--animal-primary-color);outline-offset:3px}
