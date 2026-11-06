@@ -39,10 +39,12 @@ jobs:
       - name: Install recording tools from official Ubuntu packages
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends -y ffmpeg
+          sudo apt-get install --no-install-recommends -y ffmpeg xvfb xauth
           command -v ffmpeg
           command -v ffprobe
-      - run: npx playwright test --config tests/ha-parity/playwright.config.ts
+          command -v xvfb-run
+          command -v xauth
+      - run: HA_HEADED=1 xvfb-run -a npx playwright test --config tests/ha-parity/playwright.config.ts
       - name: Summarize only observed evidence
         if: always()
         run: node scripts/ha-parity/report.mjs

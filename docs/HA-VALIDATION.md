@@ -33,10 +33,12 @@ Run `npm ci`, `node scripts/build-parity.mjs`, and `node scripts/ha-parity/prepa
 
 Only `ha-evidence/` is uploaded: runtime version, image digest, sanitized test results, screenshots, coverage limitations and optional runtime-evidence manifest. Test artifacts must be reviewed before being presented as verified evidence. `runtime-evidence.json` captures what was rendered; it is not by itself a parity approval. Preview publishers can copy the manifest and `runtime/` images without including secrets.
 
-## Verified baseline and pending motion checks
+## Verified baseline and motion checks
 
 Run 42261250358 (commit `18f212f10b07e95272e91dc0b3b49288a56938b5`) passed all 18 real-HA aggregate tests. Its manifest contains all 30 modules, 56 screenshots for 28 visible pairs and exactly two expected blanks (Empty and Spacer). All 128 sizing cases passed. Actual computed styles confirm light backgrounds rgb(247,243,223), dark modern Template/Badge backgrounds rgb(53,47,37), 20px card and 50px badge radii. The preview's separate browser check failed afterward, so this run did not publish Pages.
 
 Four motion scenarios bring the suite to 22 aggregate tests. Their per-commit status is recorded by CI, rather than implied by this document. They use a dedicated live HA view with real input_boolean/input_number integrations. They check one service call per pointer/keyboard/touch operation, pointer-origin ripple and 96% scale, disabled/reduced-motion behavior, disconnect cleanup, and actual slider label/fill/backend synchronization. They do not insert synthetic service handlers or animate fabricated device readings.
 
 The motion video is recorded from the real authenticated synthetic dashboard. A raw recording stays outside artifact directories; ffmpeg trims it to the verified dashboard-only time window. ffprobe validates geometry and duration. First/middle/last review frames are emitted for human inspection before publishing; the public video must be allowlisted separately. No login, trace, token, raw browser storage, or raw recording is included in public artifacts. Video illustrates interaction, while service correctness is established by tests rather than by appearance.
+
+The HA suite runs headed Chromium on GitHub-hosted Ubuntu under Xvfb (`HA_HEADED=1`). The keyboard cleanup check requires an actual browser window blur and loss of document focus when another tab is brought forward. This is browser focus on a virtual display, not a physical desktop, and no synthetic blur event substitutes for it. Headless run 42273619629 passed 21/22 checks but did not emit that window blur; its focus prerequisite failed, so it was not published.
