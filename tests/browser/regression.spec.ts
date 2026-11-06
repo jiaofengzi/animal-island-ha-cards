@@ -36,5 +36,5 @@ test('pointer activation of an upstream chip never triggers the configured whole
  await expect(page.locator('body')).toHaveAttribute('data-info-count','1');await expect(page.locator('body')).toHaveAttribute('data-service-count','0');
  const row=page.locator('island-chips-card').getByRole('group');await row.focus();await row.press('Enter');await expect(page.locator('body')).toHaveAttribute('data-service-count','1');
  await page.evaluate(()=>{const c=document.querySelector('island-chips-card') as Card;c.setConfig({type:'custom:island-chips-card',entities:[{entity:'light.missing',name:'不可用条目'}],tap_action:{action:'perform-action',perform_action:'light.turn_on',target:{entity_id:'light.demo_lantern'}}});});
- await page.locator('island-chips-card').getByText('不可用条目',{exact:true}).click();await expect(page.locator('body')).toHaveAttribute('data-service-count','1');
+ const disabled=page.locator('island-chips-card').getByText('不可用条目',{exact:true});await disabled.scrollIntoViewIfNeeded();const bounds=await disabled.boundingBox();expect(bounds).not.toBeNull();await page.mouse.click(bounds!.x+bounds!.width/2,bounds!.y+bounds!.height/2);await expect(page.locator('body')).toHaveAttribute('data-service-count','1');
 });
