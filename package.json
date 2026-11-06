@@ -1,0 +1,35 @@
+{
+  "name": "animal-island-ha-cards",
+  "version": "0.1.0-preview.1",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src tests scripts demo playwright.config.ts",
+    "test": "node --test tests/core.test.mjs",
+    "test:browser": "playwright test",
+    "dev": "node scripts/serve.mjs",
+    "licenses": "node scripts/licenses.mjs",
+    "check": "npm run lint && npm run typecheck && npm run test && npm run build:showcase && npm run build:acceptance && npm run test:browser && npm run licenses",
+    "build:showcase": "npm run build && node scripts/build-showcase.mjs",
+    "build:acceptance": "npm run build && node scripts/build-acceptance.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "esbuild": "0.28.2",
+    "eslint": "10.14.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.72.1"
+  },
+  "dependencies": {
+    "animal-island-ui": "^3.0.0",
+    "classnames": "^2.5.1",
+    "naive-icons": "^1.14.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

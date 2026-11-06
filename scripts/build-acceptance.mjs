@@ -1,0 +1,28 @@
+import {build} from 'esbuild';
+import {readFile,writeFile,mkdir,cp,readdir} from 'node:fs/promises';
+const out='_acceptance';await mkdir(out,{recursive:true});
+const mapping=JSON.parse(await readFile('demo/acceptance-mapping.json','utf8'));
+const images={};for(const row of mapping)if(row.official_image&&!images[row.official_image])images[row.official_image]=`data:image/png;base64,${(await readFile(`demo/reference/${row.official_image}`)).toString('base64')}`;
+const result=await build({entryPoints:['src/showcase.tsx'],write:false,bundle:true,format:'iife',minify:true,target:'es2022',loader:{'.svg':'dataurl'},define:{'process.env.NODE_ENV':'"production"',ACCEPTANCE_MAPPING:JSON.stringify(mapping),ACCEPTANCE_IMAGES:JSON.stringify(images)},plugins:[{name:'single-official-stylesheet',setup(b){b.onResolve({filter:/^animal-island-ui\/style$/},()=>({path:'style',namespace:'skip-style'}));b.onLoad({filter:/.*/,namespace:'skip-style'},()=>({contents:'',loader:'js'}));b.onLoad({filter:/node_modules\/animal-island-ui\/.*\.css$/},()=>({contents:'',loader:'js'}));}}]});
+const js=result.outputFiles[0].text;
+const css=(await readFile('dist/animal-island.css','utf8'))+'\n'+await readFile('demo/acceptance.css','utf8');
+if(/@font-face|\.woff2?|url\(["\']?https?:\/\//.test(css))throw new Error('Acceptance CSS must not load fonts or remote resources');
+const cards=await readFile('dist/island-ha-cards.js','utf8');
+await writeFile(`${out}/showcase.js`,js);await writeFile(`${out}/style.css`,css);await writeFile(`${out}/island-ha-cards.js`,cards);
+const head='<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>小岛模块 · 23 项原版对照验收</title>';
+await writeFile(`${out}/index.html`,`<!doctype html><html lang="zh-CN"><head>${head}<link rel="stylesheet" href="./style.css"></head><body><div id="root"></div><script type="module">import './island-ha-cards.js';import './showcase.js';</script></body></html>`);
+// The HA card build contains only its exported class at the end. Bundle to IIFE for file:// execution.
+const local=await build({stdin:{contents:cards,resolveDir:process.cwd(),sourcefile:'local-cards.js'},write:false,bundle:true,format:'iife',minify:true,target:'es2022'});
+const escapeScript=s=>s.replace(/<\/script/gi,'<\\/script');
+const escapeHtml=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+const licenseTexts=[['Project MIT',await readFile('LICENSE','utf8')],['Third-party notices',await readFile('THIRD_PARTY_NOTICES.md','utf8')],['Mushroom Apache-2.0',await readFile('demo/reference/LICENSE','utf8')]];
+for(const name of (await readdir('licenses')).sort())licenseTexts.push([name,await readFile(`licenses/${name}`,'utf8')]);
+const inlineLicenses=`<section id="license-notices" class="section" style="max-width:1176px;margin:24px auto"><details><summary>开源许可与完整归属 / Open-source notices</summary>${licenseTexts.map(([name,value])=>`<h3>${escapeHtml(name)}</h3><pre style="white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px">${escapeHtml(value)}</pre>`).join('')}</details></section>`;
+await writeFile(`${out}/offline.html`,`<!doctype html><html lang="zh-CN"><head>${head}<style>${css}</style></head><body><div id="root"></div><script>${escapeScript(local.outputFiles[0].text)}</script><script>${escapeScript(js)}</script>${inlineLicenses}</body></html>`);
+await mkdir(`${out}/assets`,{recursive:true});await cp('demo/assets/local-landscape.svg',`${out}/assets/local-landscape.svg`);
+await cp('LICENSE',`${out}/LICENSE`);
+await cp('licenses',`${out}/licenses`,{recursive:true});await cp('THIRD_PARTY_NOTICES.md',`${out}/THIRD_PARTY_NOTICES.md`);
+await cp('demo/reference/LICENSE',`${out}/licenses/Mushroom-LICENSE`);
+await cp('demo/reference/image-sources.json',`${out}/image-sources.json`);
+await cp('demo/acceptance-mapping.json',`${out}/mapping-23.json`);
+console.log('Built isolated _acceptance/index.html and single-file offline.html. No deployment.');

@@ -1,0 +1,22 @@
+import { build } from 'esbuild';
+import { readFile, mkdir, copyFile, cp, rm, writeFile } from 'node:fs/promises';
+import {createRequire} from 'node:module';
+const require=createRequire(import.meta.url);
+await mkdir('dist',{recursive:true});
+const notice=await readFile('THIRD_PARTY_NOTICES.md','utf8');
+const {version}=JSON.parse(await readFile('package.json','utf8'));
+const css=(await readFile(require.resolve('animal-island-ui/style'),'utf8')).replace(/@font-face\s*\{[^}]*\}/g,'');
+if(/\.woff2?|@font-face/.test(css))throw new Error('Font assets may not be bundled');
+const shadowCss=css.replace(/:root\{/g,':host{');
+const plugins=[{name:'one-local-animal-stylesheet',setup(b){
+ b.onResolve({filter:/^animal-island-ui\/style$/},()=>({path:'animal-style',namespace:'animal-css'}));
+ b.onLoad({filter:/.*/,namespace:'animal-css'},()=>({contents:`globalThis.__islandAnimalStyle=${JSON.stringify(shadowCss)};`,loader:'js'}));
+ b.onLoad({filter:/node_modules\/animal-island-ui\/.*\.css$/},()=>({contents:'',loader:'css'}));
+}}];
+await build({entryPoints:['src/index.ts'],bundle:true,format:'esm',target:'es2022',outfile:'dist/island-ha-cards.js',minify:true,loader:{'.svg':'dataurl'},define:{'process.env.NODE_ENV':'"production"'},plugins,banner:{js:`/*! Island HA Cards ${version}\n${notice.replaceAll('*/','* /')}\n*/`}});
+await writeFile('dist/animal-island.css',css);
+await copyFile('THIRD_PARTY_NOTICES.md','dist/THIRD_PARTY_NOTICES.md');
+await copyFile('LICENSE','dist/LICENSE');
+await rm('dist/fonts',{recursive:true,force:true});
+await cp('licenses','dist/licenses',{recursive:true});
+console.log('Built actual upstream Animal Island UI components, with no fonts or CDN');

@@ -1,0 +1,107 @@
+[
+  {
+    "name": "light-light.png",
+    "encoding": "base64",
+    "sha": "3eb0fb402ec88344a764901d4c580bb80a35652c",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/light-light.png",
+    "display_title": "light-light.png"
+  },
+  {
+    "name": "climate-light.png",
+    "encoding": "base64",
+    "sha": "94ae8f7810e808501a90ad392f71c0c8f3221f47",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/climate-light.png",
+    "display_title": "climate-light.png"
+  },
+  {
+    "name": "cover-light.png",
+    "encoding": "base64",
+    "sha": "224d1e1a42400909cb55cdec4823023dc4496131",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/cover-light.png",
+    "display_title": "cover-light.png"
+  },
+  {
+    "name": "fan-light.png",
+    "encoding": "base64",
+    "sha": "c806240a37fbdce095f96020252cfd43db3a80ef",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/fan-light.png",
+    "display_title": "fan-light.png"
+  },
+  {
+    "name": "media-player-light.png",
+    "encoding": "base64",
+    "sha": "7524193318823e3917821d215d29678eb42c9bab",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/media-player-light.png",
+    "display_title": "media-player-light.png"
+  },
+  {
+    "name": "vacuum-light.png",
+    "encoding": "base64",
+    "sha": "17bff808b621769f31f2a0f520b1bf2f151128e3",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/vacuum-light.png",
+    "display_title": "vacuum-light.png"
+  },
+  {
+    "name": "entity-light.png",
+    "encoding": "base64",
+    "sha": "58eab42d64fdf186d2dca0c3ef1b3d746040d91d",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/entity-light.png",
+    "display_title": "entity-light.png"
+  },
+  {
+    "name": "number-light.png",
+    "encoding": "base64",
+    "sha": "61a8600a3f480c0bcc2f71ee4c3b9e2aeb193914",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/number-light.png",
+    "display_title": "number-light.png"
+  },
+  {
+    "name": "select-light.png",
+    "encoding": "base64",
+    "sha": "5362f80ec9f3806538e18fc3f2a06f2277bfe650",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/select-light.png",
+    "display_title": "select-light.png"
+  },
+  {
+    "name": "template-light.png",
+    "encoding": "base64",
+    "sha": "9a021f7cf5ac0311ad51af781748b8b324595329",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/template-light.png",
+    "display_title": "template-light.png"
+  },
+  {
+    "name": "legacy-template-light.png",
+    "encoding": "base64",
+    "sha": "1e05542c168feb59ba73b08bfaac689c838cccab",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/legacy-template-light.png",
+    "display_title": "legacy-template-light.png"
+  },
+  {
+    "name": "title-light.png",
+    "encoding": "base64",
+    "sha": "81856808863871f4d591c798cd3df956f96c5fdc",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/title-light.png",
+    "display_title": "title-light.png"
+  },
+  {
+    "name": "chip-entity-light.png",
+    "encoding": "base64",
+    "sha": "11e17dd4901c0f4484abeea4728edbb445885fb0",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/chip-entity-light.png",
+    "display_title": "chip-entity-light.png"
+  },
+  {
+    "name": "chip-action-light.png",
+    "encoding": "base64",
+    "sha": "ab226547c8f21ca1ecc7a0e96ffacceba1871428",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/chip-action-light.png",
+    "display_title": "chip-action-light.png"
+  },
+  {
+    "name": "chip-light-light.png",
+    "encoding": "base64",
+    "sha": "1f5d8e1b6303448b21c305dc0e8dafdf15eaa37d",
+    "display_url": "https://github.com/piitaya/lovelace-mushroom/blob/v5.2.3/docs/images/chip-light-light.png",
+    "display_title": "chip-light-light.png"
+  }
+]

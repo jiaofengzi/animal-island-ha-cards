@@ -1,0 +1,10 @@
+node_modules/
+dist/
+_acceptance/
+_site/
+test-results/
+playwright-report/
+.cache/
+*.log
+.env*
+!.env.example

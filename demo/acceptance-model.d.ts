@@ -1,0 +1,11 @@
+import type {Config,Hass} from '../src/types';
+export const configs: Config[];
+export const profiles: string[];
+export const familyOf: Record<string,string>;
+export const hass:Hass;
+export function subscribe(fn:()=>void):()=>void;
+export function mount(card:HTMLElement,index:number):()=>void;
+export function setMode(value:string):void;
+export function releasePending():void;
+export function reset():void;
+export const model:{mode:string;pendingCount:number;calls:{domain:string;service:string;data:unknown;target?:unknown}[]};

@@ -1,0 +1,307 @@
+[
+  {
+    "type": "custom:island-chips-card",
+    "entities": [
+      {
+        "entity": "light.demo_lantern",
+        "name": "灯光"
+      },
+      {
+        "entity": "climate.demo_room",
+        "attribute": "current_temperature",
+        "name": "室温",
+        "unit": "°C"
+      },
+      {
+        "entity": "sensor.demo_filter",
+        "name": "滤芯"
+      }
+    ]
+  },
+  {
+    "type": "custom:island-summary-card",
+    "name": "今天的小岛",
+    "entities": [
+      {
+        "entity": "light.demo_lantern",
+        "name": "灯光角落",
+        "path": "/lovelace/lights"
+      },
+      {
+        "entity": "sensor.demo_laundry_phase",
+        "name": "洗衣房",
+        "path": "/lovelace/laundry"
+      },
+      {
+        "entity": "sensor.demo_filter",
+        "name": "滤芯余量",
+        "severity": "warning"
+      }
+    ]
+  },
+  {
+    "type": "custom:island-light-card",
+    "entity": "light.demo_lantern"
+  },
+  {
+    "type": "custom:island-climate-card",
+    "entity": "climate.demo_room"
+  },
+  {
+    "type": "custom:island-cover-card",
+    "entity": "cover.demo_blinds"
+  },
+  {
+    "type": "custom:island-fan-card",
+    "entity": "fan.demo_breeze"
+  },
+  {
+    "type": "custom:island-media-card",
+    "entity": "media_player.demo_radio",
+    "use_media_info": true,
+    "show_volume_level": true
+  },
+  {
+    "type": "custom:island-vacuum-card",
+    "entity": "vacuum.demo_rover"
+  },
+  {
+    "type": "custom:island-entity-card",
+    "entity": "switch.demo_socket"
+  },
+  {
+    "type": "custom:island-scene-card",
+    "entity": "scene.demo_evening",
+    "description": "关闭客厅灯，留下门廊微光"
+  },
+  {
+    "type": "custom:island-number-card",
+    "entity": "number.demo_portion"
+  },
+  {
+    "type": "custom:island-select-card",
+    "entity": "select.demo_program"
+  },
+  {
+    "type": "custom:island-laundry-card",
+    "name": "洗衣房的小日常",
+    "entities": [
+      {
+        "entity": "sensor.demo_laundry_phase",
+        "role": "status"
+      },
+      {
+        "entity": "sensor.demo_laundry_progress",
+        "role": "progress"
+      },
+      {
+        "entity": "sensor.demo_laundry_remaining",
+        "role": "remaining"
+      },
+      {
+        "entity": "sensor.demo_laundry_program",
+        "role": "program"
+      }
+    ],
+    "actions": [
+      {
+        "label": "暂停洗衣",
+        "role": "primary",
+        "when_states": [
+          "漂洗",
+          "running"
+        ],
+        "service": "button.press",
+        "entity": "button.demo_laundry_pause"
+      },
+      {
+        "label": "继续洗衣",
+        "role": "primary",
+        "when_states": [
+          "已暂停"
+        ],
+        "service": "button.press",
+        "entity": "button.demo_laundry_resume"
+      }
+    ]
+  },
+  {
+    "type": "custom:island-fridge-card",
+    "name": "厨房的凉意",
+    "entities": [
+      {
+        "entity": "sensor.demo_temperature",
+        "role": "temperature"
+      },
+      {
+        "entity": "sensor.demo_freezer",
+        "role": "freezer"
+      },
+      {
+        "entity": "binary_sensor.demo_fridge_door",
+        "role": "door"
+      }
+    ]
+  },
+  {
+    "type": "custom:island-water-card",
+    "name": "饮水小站",
+    "entities": [
+      {
+        "entity": "sensor.demo_filter",
+        "role": "filter",
+        "severity": "warning"
+      },
+      {
+        "entity": "sensor.demo_tds",
+        "role": "tds"
+      }
+    ]
+  },
+  {
+    "type": "custom:island-feeder-card",
+    "name": "小碗开饭",
+    "entities": [
+      {
+        "entity": "sensor.demo_feed_portion",
+        "role": "portion"
+      },
+      {
+        "entity": "sensor.demo_last_feed",
+        "role": "last_feed"
+      },
+      {
+        "entity": "sensor.demo_food_remaining",
+        "role": "remaining"
+      }
+    ],
+    "actions": [
+      {
+        "label": "投喂 2 份",
+        "role": "primary",
+        "service": "button.press",
+        "entity": "button.demo_feed"
+      }
+    ]
+  },
+  {
+    "type": "custom:island-meal-card",
+    "name": "小碗的午餐记录",
+    "entities": [
+      {
+        "entity": "sensor.demo_meal",
+        "role": "record"
+      },
+      {
+        "entity": "sensor.demo_meal_time",
+        "role": "recorded_at"
+      },
+      {
+        "entity": "sensor.demo_meal_note",
+        "role": "note"
+      }
+    ]
+  },
+  {
+    "type": "custom:island-printer-card",
+    "name": "小岛模型工坊",
+    "entities": [
+      {
+        "entity": "sensor.demo_print_phase",
+        "role": "status"
+      },
+      {
+        "entity": "sensor.demo_print_progress",
+        "role": "progress"
+      },
+      {
+        "entity": "sensor.demo_print_remaining",
+        "role": "remaining"
+      },
+      {
+        "entity": "sensor.demo_nozzle",
+        "role": "nozzle"
+      },
+      {
+        "entity": "sensor.demo_bed",
+        "role": "bed"
+      }
+    ],
+    "actions": [
+      {
+        "label": "暂停打印",
+        "role": "primary",
+        "when_states": [
+          "打印中"
+        ],
+        "service": "button.press",
+        "entity": "button.demo_print_pause"
+      },
+      {
+        "label": "继续打印",
+        "role": "primary",
+        "when_states": [
+          "已暂停"
+        ],
+        "service": "button.press",
+        "entity": "button.demo_print_resume"
+      },
+      {
+        "label": "取消打印",
+        "role": "danger",
+        "when_states": [
+          "打印中",
+          "已暂停"
+        ],
+        "service": "button.press",
+        "entity": "button.demo_print_cancel"
+      }
+    ]
+  },
+  {
+    "type": "custom:island-consumable-card",
+    "name": "小巡游的滚刷",
+    "entities": [
+      {
+        "entity": "sensor.demo_consumable",
+        "role": "life"
+      }
+    ]
+  },
+  {
+    "type": "custom:island-camera-card",
+    "entity": "camera.demo_view"
+  },
+  {
+    "type": "custom:island-health-card",
+    "name": "小岛运行手记",
+    "entities": [
+      {
+        "entity": "sensor.demo_health",
+        "role": "status"
+      },
+      {
+        "entity": "sensor.demo_cpu",
+        "role": "cpu"
+      },
+      {
+        "entity": "sensor.demo_memory",
+        "role": "memory"
+      },
+      {
+        "entity": "sensor.demo_disk",
+        "role": "disk"
+      }
+    ]
+  },
+  {
+    "type": "custom:island-spacer-card",
+    "height": 28
+  },
+  {
+    "type": "custom:island-picture-card",
+    "name": "窗外的一角",
+    "image": "/local/island-ha-cards/demo.svg",
+    "alt": "本地演示图片：薄荷色山丘与暖黄太阳"
+  }
+]
