@@ -1,0 +1,46 @@
+{
+  "name": "mushroom-cards",
+  "version": "5.2.3",
+  "description": "Home Assistant Mushroom Cards",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently --kill-others --names build,serve \"vite build --watch\" \"vite preview\"",
+    "build": "vite build",
+    "format": "prettier --write .",
+    "start:hass-stable": "docker run --rm -p8123:8123 -v ./.hass_dev:/config homeassistant/home-assistant:stable",
+    "start:hass": "docker run --rm -p8123:8123 -v ./.hass_dev:/config homeassistant/home-assistant:beta",
+    "start:hass-dev": "docker run --rm -p8123:8123 -v ./.hass_dev:/config homeassistant/home-assistant:dev"
+  },
+  "author": "Paul Bottein",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/piitaya/lovelace-mushroom"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@mdi/js": "^7.4.47",
+    "color-name": "^2.1.0",
+    "culori": "^4.0.1",
+    "hammerjs": "^2.0.8",
+    "home-assistant-js-websocket": "^9.6.0",
+    "intl-messageformat": "^11.2.4",
+    "js-yaml": "^4.1.1",
+    "lit": "^3.3.2",
+    "memoize-one": "^6.0.0",
+    "object-hash": "^3.0.0",
+    "sortablejs": "^1.15.7",
+    "superstruct": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/culori": "^4.0.1",
+    "@types/hammerjs": "^2.0.46",
+    "@types/js-yaml": "^4.0.9",
+    "browserslist-to-esbuild": "^2.1.1",
+    "concurrently": "^10.0.3",
+    "eslint": "^10.3.0",
+    "prettier": "^3.8.3",
+    "terser": "^5.47.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.11"
+  }
+}

@@ -1,0 +1,55 @@
+name: Real Home Assistant parity
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['src/**', 'scripts/**', 'tests/ha-parity/**', 'package*.json', '.github/workflows/parity-check.yml']
+permissions:
+  contents: read
+jobs:
+  real-ha:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      HA_VERSION: '2026.9.0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run lint && npm run typecheck
+      - run: node scripts/build-parity.mjs
+      - run: node scripts/build-parity-preview.mjs
+      - run: PARITY_STATIC_ONLY=1 node tests/parity-preview/check.mjs
+      - run: node scripts/ha-parity/prepare.mjs
+      - name: Start isolated official Home Assistant
+        run: |
+          docker pull ghcr.io/home-assistant/home-assistant:${HA_VERSION}
+          mkdir -p ha-evidence
+          docker image inspect ghcr.io/home-assistant/home-assistant:${HA_VERSION} --format '{{json .RepoDigests}}' > ha-evidence/image-digest.json
+          docker run -d --name parity-ha -p 127.0.0.1:8123:8123 -v "$PWD/.ha-runtime:/config" ghcr.io/home-assistant/home-assistant:${HA_VERSION}
+      - run: node scripts/ha-parity/bootstrap.mjs
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --config tests/ha-parity/playwright.config.ts
+      - name: Upload verified install bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: parity-ha-card-bundle
+          path: dist/
+          retention-days: 30
+      - name: Summarize only observed evidence
+        if: always()
+        run: node scripts/ha-parity/report.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: real-ha-parity-evidence
+          path: ha-evidence/
+          retention-days: 7
+      - name: Destroy ephemeral runtime and credentials
+        if: always()
+        run: |
+          docker rm -f parity-ha || true
+          sudo rm -rf .ha-runtime .ha-secrets .ha-test-results

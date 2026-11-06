@@ -1,20 +1,25 @@
 {
   "name": "animal-island-ha-cards",
-  "version": "0.1.0-preview.1",
+  "version": "0.2.0-parity.1",
   "private": true,
   "type": "module",
-  "license": "MIT",
+  "license": "(Apache-2.0 AND MIT)",
   "scripts": {
-    "build": "node scripts/build.mjs",
+    "build": "node scripts/build-parity.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src tests scripts demo playwright.config.ts",
     "test": "node --test tests/core.test.mjs",
     "test:browser": "playwright test",
     "dev": "node scripts/serve.mjs",
     "licenses": "node scripts/licenses.mjs",
-    "check": "npm run lint && npm run typecheck && npm run test && npm run build:showcase && npm run build:acceptance && npm run test:browser && npm run licenses",
-    "build:showcase": "npm run build && node scripts/build-showcase.mjs",
-    "build:acceptance": "npm run build && node scripts/build-acceptance.mjs"
+    "check": "npm run build:parity && npm run test:ha",
+    "build:showcase": "node scripts/run-legacy.mjs build:showcase",
+    "build:acceptance": "node scripts/run-legacy.mjs build:acceptance",
+    "build:legacy": "node scripts/run-legacy.mjs build",
+    "build:parity": "node scripts/build-parity.mjs",
+    "check:legacy": "node scripts/run-legacy.mjs check",
+    "test:ha": "playwright test --config tests/ha-parity/playwright.config.ts",
+    "check:static": "npm run build:parity"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",
@@ -30,6 +35,18 @@
     "classnames": "^2.5.1",
     "naive-icons": "^1.14.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "@mdi/js": "^7.4.47",
+    "color-name": "^2.1.0",
+    "culori": "^4.0.1",
+    "hammerjs": "^2.0.8",
+    "home-assistant-js-websocket": "^9.6.0",
+    "intl-messageformat": "^11.2.4",
+    "js-yaml": "^4.1.1",
+    "lit": "^3.3.2",
+    "memoize-one": "^6.0.0",
+    "object-hash": "^3.0.0",
+    "sortablejs": "^1.15.7",
+    "superstruct": "^2.0.2"
   }
 }
