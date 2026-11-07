@@ -1,241 +1,521 @@
 import { css, CSSResult, unsafeCSS } from "lit";
+import { TONES } from "../island/art";
+import { ISLAND_FONT_STACK } from "../island/fonts";
 
-/** Presentation only. Appended after upstream styles by the fork build. */
+/**
+ * 小岛皮肤。构建时追加在每个 Mushroom 组件原有样式之后。
+ * 设计要点：
+ * - 每张卡按图标的颜色家族（tone）上色：开着的设备是带波点的彩色卡，关着的是素色米白卡。
+ * - 卡片、按钮、胶囊都有“游戏按钮”式的底部厚边；按下只改变阴影，图标动效由 motion 控制器负责。
+ * - 状态文字、胶囊、徽章用不规则的气泡形状。
+ */
+
 const tokens = css`
   :host {
-    --animal-primary-color: #19c8b9;
-    --animal-primary-color-hover: #3dd4c6;
-    --animal-primary-color-active: #50b9ab;
-    --animal-primary-color-bg: #e6f9f6;
-    --animal-warning-color: #f5c31c;
-    --animal-text-color: #725d42;
-    --animal-text-color-secondary: #84745e;
-    --animal-text-color-disabled: #a99b82;
-    --animal-border-color: #dcd8d1;
-    --animal-border-color-light: #e8e2d6;
-    --animal-bg-color: #f7f3df;
-    --animal-bg-color-secondary: #f0e8d8;
-    --animal-bg-color-disabled: #f0ece2;
-    --animal-card-pink: #f8a6b2;
-    --animal-card-purple: #b77dee;
-    --animal-card-blue: #889df0;
-    --animal-card-yellow: #f7cd67;
-    --animal-card-teal: #82d5bb;
-    --animal-card-green: #8ac68a;
-    --animal-font-family: Nunito, "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-    --animal-motion-duration-base: .25s;
-    --animal-motion-ease: cubic-bezier(.4, 0, .2, 1);
-    --primary-text-color: var(--animal-text-color);
-    --secondary-text-color: var(--animal-text-color-secondary);
-    --disabled-text-color: var(--animal-text-color-disabled);
-    --ha-card-background: var(--animal-bg-color);
-    --card-background-color: var(--animal-bg-color);
-    --ha-card-border-radius: 20px;
-    --ha-card-box-shadow: none;
+    --island-ink: #5b4128;
+    --island-ink-soft: #8a7356;
+    --island-paper: #fffaf0;
+    --island-paper-hi: #ffffff;
+    --island-well: #f3ead4;
+    --island-edge: #e5d7b5;
+    --island-tile-off: #ece4cf;
+    --island-tile-off-edge: #d6caae;
+    --island-tile-off-ink: #b3a689;
+    --island-accent: #3ec2ae;
+    --island-font: ${unsafeCSS(ISLAND_FONT_STACK)};
+
+    /* 兼容旧变量名，供外部主题覆盖 */
+    --animal-font-family: var(--island-font);
+    --animal-text-color: var(--island-ink);
+    --animal-text-color-secondary: var(--island-ink-soft);
+    --animal-bg-color: var(--island-paper);
+    --animal-primary-color: #3ec2ae;
+
+    --primary-text-color: var(--island-ink);
+    --secondary-text-color: var(--island-ink-soft);
+    --rgb-primary-text-color: 91, 65, 40;
+    --rgb-secondary-text-color: 138, 115, 86;
+    --rgb-disabled: 196, 187, 166;
+    --ha-card-background: var(--island-paper);
+    --card-background-color: var(--island-paper);
+    --ha-card-border-radius: 28px;
     --ha-card-border-width: 0px;
-    --ha-card-border-color: var(--animal-border-color-light);
-    --divider-color: var(--animal-border-color-light);
-    --primary-font-family: var(--animal-font-family);
-    --paper-font-common-base_-_font-family: var(--animal-font-family);
-    --mdc-typography-font-family: var(--animal-font-family);
-    --mdc-theme-primary: var(--animal-primary-color);
-    font-family: var(--animal-font-family);
-    color: var(--animal-text-color);
-    font-weight: 500;
+    --ha-card-box-shadow: none;
+    --primary-font-family: var(--island-font);
+    --mdc-typography-font-family: var(--island-font);
+    font-family: var(--island-font);
+    color: var(--island-ink);
+    -webkit-font-smoothing: antialiased;
   }
-  :host([dark-mode]), :host-context([dark-mode]), :host([data-island-theme="dark"]) {
-    --animal-text-color: #f4e8cc;
-    --animal-text-color-secondary: #c7b99e;
-    --animal-text-color-disabled: #9d907a;
-    --animal-bg-color: #352f25;
-    --animal-bg-color-secondary: #463d2f;
-    --animal-bg-color-disabled: #40392e;
-    --animal-border-color: #675a45;
-    --animal-border-color-light: #554a39;
-    --animal-primary-color-bg: #294c43;
+  /* 深色 = 夜里的小岛：卡片是夜空蓝，不再把彩色混进卡片底色（混进棕/蓝底会发脏），
+     颜色只出现在图标、卡片底边、状态气泡和控件上。 */
+  :host([dark-mode]), :host([data-island-theme="dark"]) {
+    --island-ink: #f5eedb;
+    --island-ink-soft: #b8c1dc;
+    --island-paper: #2d3a5e;
+    --island-paper-hi: #3d4c78;
+    --island-well: #222d4b;
+    --island-edge: #18203a;
+    --island-tile-off: #3d4a70;
+    --island-tile-off-edge: #2d3a5e;
+    --island-tile-off-ink: #7d88a8;
+    --rgb-primary-text-color: 245, 238, 219;
+    --rgb-secondary-text-color: 184, 193, 220;
+    --rgb-disabled: 110, 122, 156;
   }
 `;
+
 const theme = css`
   :host {
-    --spacing: var(--mush-spacing, 16px);
-    --control-border-radius: var(--mush-control-border-radius, 50px);
-    --control-height: var(--mush-control-height, 45px);
-    --control-spacing: var(--mush-control-spacing, 12px);
-    --icon-border-radius: var(--mush-icon-border-radius, 50px);
+    --spacing: var(--mush-spacing, 12px);
+    --icon-size: var(--mush-icon-size, 46px);
+    --icon-border-radius: var(--mush-icon-border-radius, 32%);
+    --icon-symbol-size: 0.6em;
+    --card-primary-font-size: var(--mush-card-primary-font-size, 15px);
+    --card-primary-line-height: var(--mush-card-primary-line-height, 20px);
     --card-primary-font-weight: var(--mush-card-primary-font-weight, 800);
-    --card-secondary-font-weight: var(--mush-card-secondary-font-weight, 500);
-    --card-primary-color: var(--mush-card-primary-color, var(--animal-text-color));
-    --card-secondary-color: var(--mush-card-secondary-color, var(--animal-text-color-secondary));
-    --chip-background: var(--mush-chip-background, var(--animal-bg-color));
-    --chip-border-radius: var(--mush-chip-border-radius, 50px);
-    --chip-border-width: var(--mush-chip-border-width, 0px);
+    --card-primary-letter-spacing: 0.2px;
+    --card-secondary-font-size: var(--mush-card-secondary-font-size, 12.5px);
+    --card-secondary-line-height: var(--mush-card-secondary-line-height, 16px);
+    --card-secondary-font-weight: var(--mush-card-secondary-font-weight, 700);
+    --card-secondary-letter-spacing: 0.3px;
+    --card-primary-color: var(--mush-card-primary-color, var(--island-ink));
+    --card-secondary-color: var(--mush-card-secondary-color, var(--island-ink));
+    --control-height: var(--mush-control-height, 40px);
+    --control-border-radius: var(--mush-control-border-radius, 999px);
+    --control-icon-size: 0.5em;
+    --control-spacing: var(--mush-control-spacing, 10px);
+    --chip-height: var(--mush-chip-height, 36px);
+    --chip-padding: 0 0.32em 0 0.16em;
+    --chip-border-radius: var(--mush-chip-border-radius, 999px);
+    --chip-border-width: 0px;
     --chip-box-shadow: none;
-    --chip-font-weight: var(--mush-chip-font-weight, 700);
-    --title-font-weight: var(--mush-title-font-weight, 900);
-    --subtitle-font-weight: var(--mush-subtitle-font-weight, 500);
-    --title-color: var(--mush-title-color, var(--animal-text-color));
-    --subtitle-color: var(--mush-subtitle-color, var(--animal-text-color-secondary));
-    --rgb-pink: var(--mush-rgb-pink, 248,166,178);
-    --rgb-red: var(--mush-rgb-red, 252,115,109);
-    --rgb-purple: var(--mush-rgb-purple, 183,125,238);
-    --rgb-deep-purple: var(--mush-rgb-deep-purple, 183,125,238);
-    --rgb-blue: var(--mush-rgb-blue, 136,157,240);
-    --rgb-indigo: var(--mush-rgb-indigo, 136,157,240);
-    --rgb-light-blue: var(--mush-rgb-light-blue, 136,157,240);
-    --rgb-teal: var(--mush-rgb-teal, 130,213,187);
-    --rgb-cyan: var(--mush-rgb-cyan, 130,213,187);
-    --rgb-green: var(--mush-rgb-green, 138,198,138);
-    --rgb-light-green: var(--mush-rgb-light-green, 138,198,138);
-    --rgb-yellow: var(--mush-rgb-yellow, 247,205,103);
-    --rgb-amber: var(--mush-rgb-amber, 247,205,103);
-    --rgb-orange: var(--mush-rgb-orange, 247,205,103);
-    --rgb-deep-orange: var(--mush-rgb-deep-orange, 229,146,102);
+    --chip-font-size: 0.34em;
+    --chip-font-weight: 800;
+    --chip-icon-size: 0.66em;
+    --chip-background: var(--island-paper);
+    --chip-spacing: 10px;
+    --badge-size: 18px;
+    --title-padding: var(--mush-title-padding, 4px 10px 2px);
+    --title-font-size: var(--mush-title-font-size, 19px);
+    --title-line-height: var(--mush-title-line-height, 26px);
+    --title-font-weight: 900;
+    --title-color: var(--island-ink);
+    --title-letter-spacing: 1px;
+    --subtitle-font-size: 13.5px;
+    --subtitle-line-height: 20px;
+    --subtitle-font-weight: 700;
+    --subtitle-color: var(--island-ink-soft);
+    --rgb-pink: var(--mush-rgb-pink, 255, 143, 171);
+    --rgb-red: var(--mush-rgb-red, 244, 105, 90);
+    --rgb-purple: var(--mush-rgb-purple, 180, 140, 242);
+    --rgb-deep-purple: var(--mush-rgb-deep-purple, 150, 115, 230);
+    --rgb-indigo: var(--mush-rgb-indigo, 120, 140, 240);
+    --rgb-blue: var(--mush-rgb-blue, 90, 167, 240);
+    --rgb-light-blue: var(--mush-rgb-light-blue, 92, 200, 232);
+    --rgb-cyan: var(--mush-rgb-cyan, 92, 200, 232);
+    --rgb-teal: var(--mush-rgb-teal, 62, 194, 174);
+    --rgb-green: var(--mush-rgb-green, 108, 201, 106);
+    --rgb-light-green: var(--mush-rgb-light-green, 150, 215, 100);
+    --rgb-lime: var(--mush-rgb-lime, 190, 220, 80);
+    --rgb-yellow: var(--mush-rgb-yellow, 255, 204, 61);
+    --rgb-amber: var(--mush-rgb-amber, 255, 184, 0);
+    --rgb-orange: var(--mush-rgb-orange, 255, 154, 60);
+    --rgb-deep-orange: var(--mush-rgb-deep-orange, 255, 122, 80);
+    --rgb-brown: var(--mush-rgb-brown, 211, 154, 92);
+    /* 让滑条、按钮的状态色和插画图标的颜色家族一致 */
+    --rgb-state-fan: var(--mush-rgb-state-fan, var(--rgb-teal));
+    --rgb-state-humidifier: var(--mush-rgb-state-humidifier, var(--rgb-light-blue));
+    --rgb-state-media-player: var(--mush-rgb-state-media-player, var(--rgb-purple));
+    --rgb-state-vacuum: var(--mush-rgb-state-vacuum, var(--rgb-orange));
+    --rgb-state-cover-open: var(--mush-rgb-state-cover-open, var(--rgb-green));
+    --rgb-state-number: var(--mush-rgb-state-number, var(--rgb-orange));
+    --rgb-state-entity: var(--mush-rgb-state-entity, var(--rgb-teal));
   }
-  /* A HA grid row remains 56px: 36px icon + 10px on either side. */
   :host([layout="grid"]) { --spacing: var(--mush-spacing, 10px); }
 `;
+
 const focus = css`
   :focus-visible, .button:focus-visible, [role="button"]:focus-visible {
-    outline: 2px solid var(--animal-primary-color, #19c8b9);
-    outline-offset: -2px;
+    outline: 3px solid #ffcc3d;
+    outline-offset: 2px;
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; }
   }
 `;
+
+const toneRules = Object.entries(TONES)
+  .map(([name, hex]) => `ha-card:has(island-state-icon[data-tone="${name}"]) { --island-accent: ${hex}; }`)
+  .join("\n");
+
 const card = css`
   ha-card {
-    border-radius: var(--ha-card-border-radius);
-    background: var(--ha-card-background);
-    box-shadow: none;
-    color: var(--animal-text-color);
-    font-family: var(--animal-font-family);
+    --island-tint: 26%;
+    --island-edge-mix: 55%;
+    background-color: color-mix(in srgb, var(--island-accent) var(--island-tint), var(--island-paper));
+    background-image: radial-gradient(color-mix(in srgb, var(--island-accent) 34%, transparent) 1.7px, transparent 2.3px);
+    background-size: 18px 18px;
+    background-position: 5px 5px;
+    border: none;
+    border-radius: var(--ha-card-border-radius, 24px);
+    box-shadow:
+      0 5px 0 color-mix(in srgb, var(--island-accent) var(--island-edge-mix), var(--island-edge)),
+      0 14px 22px -10px rgba(91, 65, 40, .32);
+    color: var(--island-ink);
+    font-family: var(--island-font);
+    transition: background-color .4s ease, box-shadow .4s ease;
   }
-  /* Preserve upstream flex, fill-container and section grid sizing. */
+  ${unsafeCSS(toneRules)}
+  ha-card {
+    --island-pill-bg: color-mix(in srgb, var(--island-accent) 34%, var(--island-paper));
+    --island-pill-ink: var(--island-ink);
+  }
+  ha-card:has(island-state-icon[data-inactive]) {
+    --island-tint: 0%;
+    --island-edge-mix: 0%;
+    --island-accent: #c4bba6;
+    background-image: none;
+  }
+  :host([dark-mode]) ha-card:not(.header):not(:has(> .chip-container)),
+  :host([data-island-theme="dark"]) ha-card:not(.header):not(:has(> .chip-container)) {
+    --island-tint: 0%;
+    --island-edge-mix: 100%;
+    --island-pill-bg: var(--island-accent);
+    --island-pill-ink: #2a2316;
+    background-image: radial-gradient(color-mix(in srgb, var(--island-accent) 22%, transparent) 1.7px, transparent 2.3px);
+    box-shadow: 0 6px 0 var(--island-accent), 0 14px 22px -10px rgba(0, 0, 0, .5);
+  }
+  :host([dark-mode]) ha-card:has(island-state-icon[data-inactive]),
+  :host([data-island-theme="dark"]) ha-card:has(island-state-icon[data-inactive]) {
+    --island-accent: var(--island-tile-off);
+    --island-pill-bg: var(--island-well);
+    --island-pill-ink: var(--island-ink-soft);
+    background-image: none;
+    box-shadow: 0 6px 0 var(--island-edge), 0 14px 22px -10px rgba(0, 0, 0, .5);
+  }
+  /* Keep cards and their controls stationary throughout hover and press.
+     The motion controller animates visual children, never hit areas or ancestors. */
   ha-card:has(.background:focus-visible) {
-    box-shadow: none;
-    outline: 2px solid var(--animal-primary-color);
-    outline-offset: -2px;
+    box-shadow: 0 6px 0 var(--island-edge);
+    outline: 3px solid #ffcc3d;
+    outline-offset: 2px;
+  }
+
+  /* 图标：彩色插画方块直接填满原来的圆形底座 */
+  island-shape-icon:has(> island-state-icon) {
+    --shape-color: transparent;
+    --shape-color-disabled: transparent;
+    --shape-outline-color: transparent;
+    --shape-animation: none;
+  }
+  island-shape-icon > island-state-icon {
+    --island-icon-size: var(--icon-size);
+    animation: none !important;
+  }
+  island-badge-icon { --main-color: var(--island-ink); }
+
+  /* 大图标：带控件（滑条、按钮）的卡片，图标占满左侧一整列。
+     卡片太窄（竖排小方块）时不启用，保持图标在上、文字在下。 */
+  ha-card { position: relative; container-type: inline-size; }
+  @container (min-width: 280px) {
+    island-card:has(> .actions) {
+      --island-hero-w: clamp(70px, 23cqi, 100px);
+      --island-icon-pos: static;
+      --island-si-pl: 0px;
+      --island-si-pt: 10px;
+      /* 右侧空间变窄，按钮略小、间距略紧，保持圆形 */
+      --control-height: 38px;
+      --control-spacing: 8px;
+      padding-left: calc(var(--island-hero-w) + 10px);
+    }
+    island-card:has(> .actions) island-shape-icon[slot="icon"] {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      bottom: 10px;
+      width: var(--island-hero-w);
+      --icon-size: 100%;
+    }
+    island-card:has(> .actions) island-shape-icon[slot="icon"] > island-state-icon {
+      --island-icon-size: var(--island-hero-w);
+      --island-icon-w: 100%;
+      --island-icon-h: 100%;
+      --island-art-scale: 76%;
+    }
+    island-card:has(> .actions) > .actions { padding: 0 12px 10px; }
+    island-card:has(> .actions) island-badge-icon[slot="badge"] {
+      position: absolute;
+      top: 6px;
+      left: calc(var(--island-hero-w) - 4px);
+      --badge-size: 24px;
+    }
   }
 `;
-const saturatedStates: Record<string, string> = {
-  "alarm-control-panel": "", // State-dependent armed/triggered colors remain upstream.
-  "climate": "", // Preserve current HVAC-mode colors.
-  "cover": "state-cover-open",
-  "entity": "state-entity",
-  "fan": "state-fan",
-  "humidifier": "state-humidifier",
-  "light": "state-light",
-  "lock": "", // Locked/unlocked/pending retains its safety meaning.
-  "media-player": "state-media-player",
-  "number": "state-number",
-  "select": "state-entity",
-  "vacuum": "state-vacuum",
-};
+
 const surfaces: Record<string, CSSResult> = {
   "src/shared/button.ts": css`
-    :host { --bg-color: var(--animal-bg-color-secondary); --bg-color-disabled: var(--animal-bg-color-disabled); }
-    .button { position: relative; border-radius: 50px; font-family: var(--animal-font-family); transition: background-color .25s var(--animal-motion-ease); box-shadow: none; }
-    .button:not(:disabled):hover { filter: brightness(1.03); }
-    .button:not(:disabled):active { filter: brightness(.96); }
-    /* Opt-in visual primary only; upstream disabled/actions remain untouched. */
-    :host([data-island-primary]) .button:not(:disabled) { background: var(--animal-primary-color); box-shadow: 0 3px 0 var(--animal-primary-color-active); }
+    :host {
+      --bg-color: color-mix(in srgb, var(--island-paper-hi) 70%, var(--island-paper));
+      --bg-color-disabled: var(--island-well);
+      --icon-color: var(--island-ink);
+      --icon-color-disabled: var(--island-tile-off-ink);
+    }
+    .button {
+      position: relative;
+      font-family: var(--island-font);
+      box-shadow: 0 4px 0 color-mix(in srgb, var(--island-accent, #3ec2ae) 50%, var(--island-edge));
+      transition: background-color .25s ease, box-shadow .12s ease;
+    }
+    .button:not(:disabled):hover { filter: brightness(1.04); }
+    .button:not(:disabled):active { box-shadow: 0 1px 0 color-mix(in srgb, var(--island-accent, #3ec2ae) 50%, var(--island-edge)); }
+    .button:disabled { box-shadow: none; }
+    :host([data-island-primary]) .button:not(:disabled) { background: #3ec2ae; --icon-color: #fff; }
   `,
   "src/shared/input-number.ts": css`
-    :host { --bg-color: var(--animal-bg-color-secondary); }
-    .container, .button { border-radius: 50px; box-shadow: none; }
-    .button { position: relative; }
-    .value { font-weight: 800; font-variant-numeric: tabular-nums; }
-    .container:focus-within { outline: 2px solid var(--animal-warning-color); outline-offset: -2px; }
+    :host { --bg-color: var(--island-well); --icon-color: var(--island-ink); --text-color: var(--island-ink); }
+    .container { border-radius: 999px; box-shadow: inset 0 3px 0 rgba(91, 65, 40, .08); padding: 5px; gap: 4px; }
+    .button {
+      position: relative;
+      height: 100%;
+      aspect-ratio: 1;
+      padding: 0 !important;
+      border-radius: 50%;
+      background: var(--island-paper-hi);
+      box-shadow: 0 3px 0 color-mix(in srgb, var(--island-accent, #3ec2ae) 50%, var(--island-edge));
+      transition: box-shadow .12s ease;
+    }
+    .button:not(:disabled):active { box-shadow: 0 1px 0 var(--island-edge); }
+    .button:disabled { box-shadow: none; opacity: .5; }
+    .value { font-family: var(--island-font); font-size: 18px; font-weight: 900; font-variant-numeric: tabular-nums; }
+    .container:focus-within { outline: 3px solid #ffcc3d; outline-offset: 2px; }
   `,
   "src/shared/slider.ts": css`
-    .slider { border-radius: 50px; }
-    .slider .slider-track-indicator { border-radius: 50px; box-shadow: none; }
-    .slider .slider-track-active, .slider .slider-track-indicator { transition-timing-function: var(--animal-motion-ease); }
-    .slider:focus-visible { outline: 2px solid var(--animal-warning-color); outline-offset: -2px; }
+    :host { --bg-color: var(--island-well); }
+    /* 不透明底，滑条空的部分不再透出卡片的波点 */
+    .slider { border-radius: 999px; background: var(--island-paper-hi); }
+    .slider::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 3px 0 rgba(91, 65, 40, .1);
+      pointer-events: none;
+    }
+    .slider .slider-track-active {
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, .38) 0 32%, transparent 32%);
+      transition-timing-function: cubic-bezier(.3, 1.3, .5, 1);
+    }
+    .slider .slider-track-indicator {
+      top: 6px;
+      bottom: 6px;
+      width: 12px;
+      border-radius: 999px;
+      left: calc(var(--value, 0) * (100% - 18px) + 3px);
+      box-shadow: 0 2px 0 rgba(91, 65, 40, .25);
+    }
+    .slider .slider-track-indicator:after { display: none; }
+    .slider:focus-visible { outline: 3px solid #ffcc3d; outline-offset: 2px; }
   `,
   "src/shared/shape-icon.ts": css`
-    :host { --shape-color: var(--animal-bg-color-secondary); --shape-color-disabled: var(--animal-bg-color-disabled); }
-    .shape { transition-timing-function: var(--animal-motion-ease); }
+    :host { --shape-color: var(--island-well); --shape-color-disabled: var(--island-well); }
+    .shape { border-radius: var(--icon-border-radius, 32%); }
+    ::slotted(island-state-icon) { --island-icon-size: var(--icon-size); }
   `,
   "src/shared/state-item.ts": css`
-    .container { padding-inline: calc(var(--spacing) * 1.5); }
+    .container { padding: var(--island-si-pt, 12px) 14px 10px; padding-left: var(--island-si-pl, 14px); gap: 12px; }
+    .icon { position: var(--island-icon-pos, relative); }
+    .container.vertical {
+      --icon-size: 54px;
+      --island-pill-align: center;
+      gap: 6px;
+      padding: 12px 8px 10px;
+    }
   `,
   "src/shared/state-info.ts": css`
-    .primary { font-weight: var(--card-primary-font-weight, 800); }
-    .secondary { color: var(--card-secondary-color); }
+    .primary { font-family: var(--island-font); color: var(--island-ink); }
+    .secondary {
+      align-self: var(--island-pill-align, flex-start);
+      max-width: 100%;
+      box-sizing: border-box;
+      margin-top: 3px;
+      padding: 1px 9px 2px;
+      border-radius: 12px 13px 13px 4px;
+      background: var(--island-pill-bg, color-mix(in srgb, var(--island-accent, #3ec2ae) 34%, var(--island-paper)));
+      color: var(--island-pill-ink, var(--island-ink));
+      font-family: var(--island-font);
+    }
+    .multiline_secondary { white-space: pre-wrap; }
   `,
   "src/shared/chip.ts": css`
-    ha-card { position: relative; border-radius: 50px; box-shadow: none; }
+    ha-card {
+      position: relative;
+      background: var(--island-paper);
+      border-radius: var(--island-blob, 999px);
+      box-shadow: 0 4px 0 var(--island-edge), 0 10px 16px -10px rgba(91, 65, 40, .35);
+      font-family: var(--island-font);
+    }
+    /* Press feedback lives on .content/.avatar through the motion controller. */
+    ::slotted(island-state-icon) { --island-icon-size: var(--chip-icon-size); display: flex; }
+    ::slotted(span) { color: var(--island-ink); }
+    ::slotted(*:not(:last-child)) { margin-right: 0.22em; }
   `,
   "src/shared/shape-avatar.ts": css`
-    img, .shape, .picture { border-radius: 50%; }
+    img, .shape, .picture { border-radius: 32%; }
   `,
   "src/shared/badge-icon.ts": css`
-    .badge { border-radius: 50px; }
+    .badge { border-radius: 50%; box-shadow: 0 0 0 2.5px var(--island-paper); }
   `,
   "src/cards/select-card/controls/select-option-control.ts": css`
     ha-control-select-menu {
-      --control-select-menu-border-radius: 50px;
-      --mdc-theme-primary: var(--animal-primary-color);
-      --mdc-text-field-fill-color: var(--animal-bg-color-secondary);
-      --mdc-text-field-ink-color: var(--animal-text-color);
+      border-radius: 999px;
+      box-shadow: 0 4px 0 color-mix(in srgb, var(--island-accent, #3ec2ae) 50%, var(--island-edge));
+      --control-select-menu-border-radius: 999px;
+      --control-select-menu-background-color: var(--island-paper-hi);
+      --control-select-menu-background-opacity: 1;
+      --control-select-menu-text-color: var(--island-ink);
+      --control-select-menu-font-weight: 800;
+      --mdc-theme-primary: var(--island-accent);
+      font-family: var(--island-font);
+      font-weight: 800;
     }
   `,
   "src/cards/title-card/title-card.ts": css`
-    .header { background: none; border: none; box-shadow: none; }
+    .header { background: none; border: none; box-shadow: none; padding: var(--title-padding); }
+    .header:hover { transform: none; }
     :host {
-      /* Official Title color=app-yellow: front / back / fold / text. */
-      --animal-title-front: #f7cd67;
-      --animal-title-back: #d4a030;
-      --animal-title-fold: #8a6010;
-      --animal-title-text: #725d42;
+      --island-ribbon: var(--island-title-color, #ffcc3d);
+      --island-ribbon-back: color-mix(in srgb, var(--island-ribbon) 62%, #5b4128);
     }
     .title {
       position: relative;
       isolation: isolate;
-      font-weight: var(--title-font-weight);
-      color: var(--mush-title-color, var(--animal-title-text));
+      display: inline-block;
+      margin: 0 12px !important;
+      padding: 3px 20px 5px;
+      color: #fff;
+      font-family: var(--island-font);
+      text-shadow: 0 2px 0 var(--island-ribbon-back), 0 -1px 0 var(--island-ribbon-back), 1px 0 0 var(--island-ribbon-back), -1px 0 0 var(--island-ribbon-back);
     }
-    /* Paint-only ribbon: original h1 box, line wrapping, alignment and actions remain. */
-    .title::before, .title::after {
-      content: "";
-      position: absolute;
-      pointer-events: none;
-      z-index: -1;
-    }
+    .title::before, .title::after { content: ""; position: absolute; pointer-events: none; z-index: -1; }
     .title::before {
-      inset: 5px -8px -5px;
-      background: var(--animal-title-back);
-      clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 50%, 100% 100%, 0 100%, 6px 50%);
+      inset: 8px -14px -7px;
+      background: var(--island-ribbon-back);
+      clip-path: polygon(0 0, 100% 0, calc(100% - 9px) 50%, 100% 100%, 0 100%, 9px 50%);
     }
     .title::after {
       inset: 0;
-      border-radius: .2em;
-      background: var(--animal-title-front);
+      border-radius: 10px;
+      background: linear-gradient(180deg, color-mix(in srgb, var(--island-ribbon) 70%, #fff) 0 30%, var(--island-ribbon) 30%);
+      box-shadow: 0 3px 0 color-mix(in srgb, var(--island-ribbon) 80%, #5b4128);
     }
+    .subtitle { margin: 4px 14px 0 !important; font-family: var(--island-font); }
     .actionable { border-radius: 12px; }
-    /* Only standalone Title Card gets the ribbon, never ordinary entity names. */
+  `,
+  /* 调色条：色相位置不变，只换成低饱和的糖果色，免得刺眼 */
+  "src/cards/light-card/controls/light-color-control.ts": css`
+    island-slider {
+      --gradient: linear-gradient(to right, #ffb0aa 0%, #ffe9a0 17%, #bfeab0 33%, #b3e8ee 50%, #b6c6fa 66%, #e9b8f2 83%, #ffb0aa 100%);
+    }
+  `,
+  /* 下拉框展开时，整张卡浮到相邻卡片上面，菜单不会被下一张卡盖住 */
+  "src/cards/select-card/select-card.ts": css`
+    ha-card:focus-within, ha-card:has(island-select-option-control:focus-within) { z-index: 5; }
+  `,
+  /* 播放器一排按钮多，卡片不够宽时不用大图标，免得按钮被挤扁 */
+  "src/cards/media-player-card/media-player-card.ts": css`
+    @container (max-width: 419px) {
+      island-card:has(> .actions) {
+        --island-icon-pos: relative;
+        --island-si-pl: 16px;
+        --island-si-pt: 12px;
+        --control-height: 40px;
+        --control-spacing: 10px;
+        padding-left: 0;
+      }
+      island-card:has(> .actions) island-shape-icon[slot="icon"] {
+        position: static;
+        width: auto;
+        --icon-size: 46px;
+      }
+      island-card:has(> .actions) island-shape-icon[slot="icon"] > island-state-icon {
+        --island-icon-size: 46px;
+        --island-icon-w: 1em;
+        --island-icon-h: 1em;
+        --island-art-scale: 84%;
+      }
+      island-card:has(> .actions) > .actions { padding-left: 12px; padding-right: 12px; }
+    }
   `,
   "src/cards/empty-card/empty-card.ts": css`
     ha-card { background: none; box-shadow: none; }
   `,
   "src/cards/chips-card/chips-card.ts": css`
     ha-card { background: none; border: none; border-radius: 0; box-shadow: none; }
+    ha-card:hover { transform: none; }
+    .chip-container { padding: 4px 2px 8px; }
+    .chip-container > *:nth-child(4n + 1) { --island-blob: 46% 54% 50% 44% / 58% 52% 48% 42%; --island-tilt: -2deg; }
+    .chip-container > *:nth-child(4n + 2) { --island-blob: 54% 46% 42% 56% / 48% 58% 42% 52%; --island-tilt: 2deg; }
+    .chip-container > *:nth-child(4n + 3) { --island-blob: 50% 50% 56% 44% / 54% 46% 54% 46%; --island-tilt: -1deg; }
+    .chip-container > *:nth-child(4n + 4) { --island-blob: 44% 56% 48% 52% / 46% 54% 46% 54%; --island-tilt: 1.5deg; }
   `,
   "src/cards/template-card/template-card.ts": css`
-    .content { padding-inline: 16px; gap: 12px; }
-    .vertical { padding: 10px 16px; }
-    ha-tile-icon { --tile-icon-border-radius: 50px; }
-    ha-tile-info { font-family: var(--animal-font-family); }
-    hui-card-features { --feature-border-radius: 50px; }
-    /* Leave the native feature height and all inline/below layout equations alone. */
+    .content { padding-inline: 16px; gap: 14px; }
+    .vertical { padding: 16px 10px; }
+    ha-tile-icon {
+      --tile-icon-size: 52px;
+      --tile-icon-border-radius: 32%;
+      --tile-icon-color: transparent;
+    }
+    island-state-icon[slot="icon"] { --island-icon-size: 52px; }
+    ha-tile-info {
+      font-family: var(--island-font);
+      --tile-info-primary-font-size: 16px;
+      --tile-info-primary-font-weight: 800;
+      --tile-info-primary-color: var(--island-ink);
+      --tile-info-secondary-font-size: 12.5px;
+      --tile-info-secondary-font-weight: 700;
+      --tile-info-secondary-color: var(--island-ink);
+    }
+    span[slot="secondary"] {
+      display: inline-block;
+      max-width: 100%;
+      box-sizing: border-box;
+      margin-top: 4px;
+      padding: 2px 10px 3px;
+      border-radius: 12px 13px 13px 4px;
+      background: var(--island-pill-bg, color-mix(in srgb, var(--island-accent) 34%, var(--island-paper)));
+      color: var(--island-pill-ink, var(--island-ink));
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: top;
+    }
+    hui-card-features { --feature-border-radius: 999px; }
   `,
   "src/badges/template/template-badge.ts": css`
-    .badge { background: var(--animal-bg-color); border-radius: 50px; border-color: var(--animal-border-color-light); box-shadow: none; }
-    .badge:focus-visible { box-shadow: none; outline: 2px solid var(--animal-primary-color); outline-offset: -2px; }
-    .content { font-weight: 800; }
-    .label { font-weight: 500; }
+    .badge {
+      overflow: visible;
+      background: var(--island-paper);
+      border: none;
+      border-radius: 52% 48% 50% 46% / 60% 56% 44% 40%;
+      box-shadow: 0 4px 0 var(--island-edge), 0 10px 16px -10px rgba(91, 65, 40, .35);
+      font-family: var(--island-font);
+    }
+    .badge::after {
+      content: "";
+      position: absolute;
+      left: 22px;
+      bottom: -9px;
+      width: 13px;
+      height: 11px;
+      background: var(--island-edge);
+      clip-path: polygon(0 0, 100% 0, 15% 100%);
+      pointer-events: none;
+    }
+    .badge:focus-visible { box-shadow: 0 4px 0 var(--island-edge); outline: 3px solid #ffcc3d; outline-offset: 2px; }
+    island-state-icon { --island-icon-size: 24px; }
+    .content { font-weight: 800; color: var(--island-ink); }
+    .label { font-weight: 700; color: var(--island-ink-soft); }
   `,
 };
 
@@ -244,18 +524,11 @@ export function islandSkin(sourcePath: string): CSSResult {
   if (path.includes("-editor") || path.includes("/ha/")) return css``;
   const isRoot = path === "src/utils/base-element.ts" || path === "src/cards/template-card/template-card.ts" || path === "src/badges/template/template-badge.ts";
   const isCard = /^src\/cards\/[^/]+\/[^/]+-card\.ts$/.test(path);
-  const kind = path.match(/^src\/cards\/([^/]+)-card\//)?.[1];
-  const state = kind ? saturatedStates[kind] : undefined;
-  // Inline configured icon colors and actual light RGB continue to win.
-  const stateSkin = isCard && state
-    ? `island-shape-icon { --shape-color: rgb(var(--rgb-${state})); --icon-color: var(--animal-text-color-on-accent, #574631); }`
-    : "";
-  // unsafeCSS only joins fixed, locally authored CSSResults. No user/config input.
+  // unsafeCSS 只拼接本文件里写死的样式，不含任何用户输入。
   return unsafeCSS([
     isRoot ? tokens.cssText : "",
-    path === "src/utils/base-element.ts" ? theme.cssText : "",
+    isRoot ? theme.cssText : "",
     isCard ? card.cssText : "",
-    stateSkin,
     surfaces[path]?.cssText || "",
     focus.cssText,
   ].join("\n"));

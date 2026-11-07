@@ -1,0 +1,11 @@
+// 小岛扩展：插画图标、随包字体、开屏动画、底部导航。由 build-parity.mjs 注入到卡片包入口。
+import { ART } from "./art";
+import { installIslandFonts } from "./fonts";
+import { islandWindow } from "./globals";
+import "./state-icon";
+import "./navbar";
+import { playIslandSplash } from "./splash";
+
+installIslandFonts();
+islandWindow().islandSplash = { play: playIslandSplash };
+islandWindow().islandIcons = Object.keys(ART);

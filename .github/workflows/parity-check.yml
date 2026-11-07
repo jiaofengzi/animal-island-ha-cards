@@ -2,7 +2,7 @@ name: Real Home Assistant parity
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, fix/pr1-three-way-review]
 permissions:
   contents: read
 concurrency:
@@ -11,18 +11,22 @@ concurrency:
 jobs:
   real-ha:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     env:
       HA_VERSION: '2026.9.0'
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: npm run lint && npm run typecheck
+      - run: npm run lint && npm run typecheck && npm test && node --test tests/island-ui/*.test.mjs
       - run: node scripts/build-parity.mjs
+      - run: node scripts/ha-parity/three-way-build.mjs
+      - run: node --test tests/three-way/*.test.mjs
       - run: node scripts/build-parity-preview.mjs
       - run: PARITY_STATIC_ONLY=1 node tests/parity-preview/check.mjs
       - name: Verify release rejection gates
@@ -52,6 +56,12 @@ jobs:
         run: node scripts/assemble-parity-preview.mjs
       - name: Check all comparison rows and mobile layouts
         run: node tests/parity-preview/check.mjs
+      - name: Build verified three-way comparison
+        run: node scripts/build-three-way.mjs
+      - name: Preserve published root and add three-way page
+        run: node scripts/assemble-three-way-site.mjs
+      - name: Verify three-way gallery and downloads
+        run: node tests/three-way/browser-check.mjs
       - name: Upload verified install bundle
         uses: actions/upload-artifact@v4
         with:
@@ -60,7 +70,7 @@ jobs:
           retention-days: 30
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _parity-preview/
+          path: _site/
       - name: Upload comparison browser evidence
         uses: actions/upload-artifact@v4
         if: always()

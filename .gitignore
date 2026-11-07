@@ -19,3 +19,7 @@ _parity-preview/
 ha-evidence/
 **/ha-evidence/
 tests/parity-preview/artifacts/
+
+# Local preview build output and screenshots
+preview/main.bundle.js
+preview/_*.png

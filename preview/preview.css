@@ -1,0 +1,90 @@
+/* 预览外壳：模拟套用了 themes/animal-island.yaml 主题的 HA 仪表盘页面。
+   卡片本身的样式在 src/skin/，这里只负责页面背景、顶栏和分区网格。 */
+:root {
+  --island-font: "Island Nunito", "Island Rounded", Nunito, "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --primary-color: #3ec2ae;
+  --primary-background-color: #c6ebc9;
+  --primary-text-color: #5b4128;
+  --secondary-text-color: #8a7356;
+  --card-background-color: #fffaf0;
+  --app-header-background-color: #3ec2ae;
+  --app-header-text-color: #fff;
+  --lovelace-background: radial-gradient(rgba(255, 255, 255, .55) 3px, transparent 3.6px) 0 0 / 30px 30px,
+    radial-gradient(rgba(255, 255, 255, .55) 3px, transparent 3.6px) 15px 15px / 30px 30px, #c6ebc9;
+}
+[data-theme="dark"] {
+  --primary-background-color: #141b31;
+  --primary-text-color: #f5eedb;
+  --card-background-color: #2d3a5e;
+  --app-header-background-color: #2a7f78;
+  --lovelace-background: radial-gradient(rgba(255, 236, 160, .55) 1.6px, transparent 2.2px) 0 0 / 52px 52px,
+    radial-gradient(rgba(255, 255, 255, .25) 1.1px, transparent 1.7px) 26px 19px / 52px 52px, #141b31;
+}
+[data-theme="dark"] .ha-title { background: #2d3a5e; color: #f5eedb; }
+[data-theme="dark"] .section-title, [data-theme="dark"] .ha-view { color: #f5eedb; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--island-font); background: #d9dde3; color: var(--primary-text-color); }
+
+.preview-bar {
+  position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 8px 16px; background: #2b2f36; color: #eee; font: 14px/1.4 system-ui, "Microsoft YaHei", sans-serif;
+}
+.preview-bar .hint { opacity: .6; }
+.preview-bar .spacer { flex: 1; }
+.preview-bar button, .preview-bar .dark { font: inherit; color: inherit; background: #3c414a; border: 0; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.preview-bar .seg { display: flex; gap: 2px; }
+.preview-bar .seg button[aria-pressed="true"] { background: #5b8def; }
+
+/* 预览框：固定高度、内部滚动，transform 让底部导航栏固定在“手机屏幕”底部而不是浏览器窗口底部 */
+#frame { margin: 0 auto; height: calc(100vh - 44px); transform: translateZ(0); overflow: hidden; }
+#frame[data-width="phone"] { max-width: 390px; height: min(844px, calc(100vh - 76px)); margin-top: 16px; border-radius: 28px; box-shadow: 0 0 0 8px #2b2f36; }
+#frame[data-width="tablet"] { max-width: 820px; height: min(1180px, calc(100vh - 76px)); margin-top: 16px; border-radius: 22px; box-shadow: 0 0 0 8px #2b2f36; }
+.ha-shell { height: 100%; overflow: auto; background: var(--lovelace-background); scrollbar-width: none; }
+.ha-shell::-webkit-scrollbar { display: none; }
+
+/* 顶栏：海水色，底边是一排波浪 */
+/* 顶栏吸顶：页面上下滑动时固定在最上面（真实 HA 的顶栏本来就是固定的） */
+.ha-toolbar {
+  position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 14px; height: 56px; padding: 0 16px;
+  background: var(--app-header-background-color); color: var(--app-header-text-color);
+}
+.ha-toolbar::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -11px; height: 12px;
+  background: radial-gradient(circle at 12px 0, var(--app-header-background-color) 11.5px, transparent 12px) 0 0 / 24px 12px repeat-x;
+}
+.ha-menu { display: grid; gap: 4px; width: 22px; }
+.ha-menu i { display: block; height: 3.5px; border-radius: 3px; background: currentColor; }
+.ha-title {
+  display: inline-flex; align-items: center; gap: 6px; padding: 5px 16px 6px 10px; border-radius: 999px 999px 999px 8px;
+  background: #fffaf0; color: #5b4128; font-size: 19px; font-weight: 900; letter-spacing: 1px; box-shadow: 0 4px 0 rgba(0, 0, 0, .12);
+  white-space: nowrap; flex-shrink: 0;
+}
+/* 手机上页面切换交给底部导航栏，顶栏不再放页签 */
+#frame[data-width="phone"] .ha-tabs { display: none; }
+#frame[data-width="phone"] .ha-toolbar { gap: 10px; }
+.ha-title svg { width: 26px; height: 26px; }
+.ha-tabs { display: flex; gap: 6px; margin-left: 4px; overflow: auto; }
+.ha-tabs a { padding: 6px 14px; border-radius: 999px; font-size: 15px; font-weight: 800; white-space: nowrap; }
+.ha-tabs a[aria-current] { background: rgba(255, 255, 255, .28); box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .08); }
+
+.ha-view { padding: 20px 14px 18px; }
+.sections {
+  display: grid; gap: 16px 20px; align-items: start; max-width: 1680px; margin: 0 auto;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 310px), 1fr));
+}
+/* 每个分区是 12 列网格，和 HA 分区视图一致 */
+.section { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px 10px; align-items: stretch; }
+.cell { min-width: 0; display: flex; flex-direction: column; }
+.cell > * { flex: 1; }
+.cell[data-card-type="island-splash-card"] { display: none; }
+.section.full { grid-column: 1 / -1; }
+.ha-tabs a { cursor: pointer; }
+.cell[data-card-type="island-title-card"] { margin-bottom: -4px; }
+.cell[data-card-type="island-navbar-card"] { margin-top: -12px; }
+
+#toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; z-index: 60;
+  padding: 10px 20px 11px; border-radius: 999px 999px 999px 10px; background: #fffaf0; color: #5b4128;
+  font-size: 15px; font-weight: 800; box-shadow: 0 5px 0 #e5d7b5, 0 12px 24px -8px rgba(0, 0, 0, .3); transition: all .25s cubic-bezier(.3, 1.5, .5, 1);
+}
+#toast.show { opacity: 1; transform: translate(-50%, 0); }

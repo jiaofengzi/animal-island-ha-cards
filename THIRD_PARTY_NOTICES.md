@@ -22,7 +22,16 @@ Dependency versions and license metadata are retained in package-lock.json and i
 
 The comparison website and the superseded 23-case concept implementation bundle animal-island-ui 3.0.0 React components from https://github.com/guokaigdg/animal-island-ui (MIT; copyright 2026 guokaigdg), Naive Icons 1.14.0, React 18.3.1, React DOM 18.3.1, Scheduler, classnames and production dependencies under their licenses. The actual current HA fork is Lit, not React. Full original notices remain in licenses/.
 
-Only visual design tokens/styles are translated into the Lit fork. No font files, @font-face declarations or font CDN requests are included by this project. Nunito and Noto Sans SC are optional system-installed preferences with system fallbacks. HA-hosted user/entity icons retain HA semantics.
+Only visual design tokens/styles are translated into the Lit fork. HA-hosted user/entity icons retain HA semantics; the Island illustrated icons in src/island/art.ts are original drawings made for this project and replace only icons they recognise.
+
+## Bundled fonts (since the Island UI redesign)
+
+The card bundle now ships subsetted WOFF2 fonts in dist/fonts/, loaded by a same-origin @font-face rule (no CDN):
+
+- Resource Han Rounded CN, weights Medium/Bold/Heavy, subset to GB2312 + ASCII. Copyright © 2018—2022 Cyano Hao; portions © 2014-2021 Adobe, with Reserved Font Name 'Source'. SIL Open Font License 1.1. Source: https://github.com/CyanoHao/Resource-Han-Rounded (release v0.990). License: src/fonts/ResourceHanRounded-LICENSE.md.
+- Nunito (variable), subset to Basic Latin + Latin-1. Copyright 2014 The Nunito Project Authors. SIL Open Font License 1.1. Source: https://github.com/google/fonts/tree/main/ofl/nunito. License: src/fonts/Nunito-OFL.txt.
+
+Subsets are produced by scripts/fonts/subset.py (fontTools); glyph outlines are not altered. Both license files are copied into dist/fonts/ next to the font files.
 
 The comparison preview may include unmodified official Mushroom v5.2.3 screenshot assets under Apache-2.0; fixed URLs/blob SHAs are recorded in demo/reference/image-sources.json, and its license is retained in demo/reference/LICENSE. Runtime comparison screenshots, when present, are generated in an isolated Home Assistant instance with synthetic entities. The current production HA bundle does contain modified Mushroom code; screenshots are preview assets, not runtime card dependencies.
 

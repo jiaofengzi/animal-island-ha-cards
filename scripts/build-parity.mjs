@@ -36,6 +36,12 @@ for (const file of files) {
     const count = (output.match(/mushroom-/g) || []).length;
     output = output.replaceAll('mushroom-', 'island-');
     if (count) transforms.push({ kind: 'namespace-prefix', occurrences: count });
+    // 实体图标换成小岛插画图标；认不出的图标在 island-state-icon 内部仍交给 ha-state-icon。
+    const iconCount = (output.match(/ha-state-icon/g) || []).length;
+    if (iconCount) {
+      output = output.replaceAll('ha-state-icon', 'island-state-icon');
+      transforms.push({ kind: 'island-illustrated-icons', occurrences: iconCount });
+    }
     if (file.path === 'src/const.ts') {
       output = output.replace('PREFIX_NAME = "mushroom"', 'PREFIX_NAME = "island"');
       transforms.push({ kind: 'factory-prefix', from: 'mushroom', to: 'island' });
@@ -121,6 +127,7 @@ for (const file of files) {
       transforms.push({ kind: 'append-static-styles', expressions: styleAppends });
     }
     if (file.path === 'src/mushroom.ts') {
+      output = 'import "@island/extras";\n' + output;
       output = output.replace('🍄 Mushroom 🍄', 'Animal Island (Mushroom fork)');
       transforms.push({ kind: 'identify-fork-console' });
     }
@@ -145,8 +152,11 @@ await fs.mkdir('_parity', { recursive: true });
 await fs.mkdir('dist', { recursive: true });
 const common = { bundle: true, format: 'esm', target: 'es2020', minify: false, sourcemap: false, legalComments: 'eof', tsconfig: 'tsconfig.parity.json', logLevel: 'warning', metafile: true };
 const original = await build({ ...common, entryPoints: [vendor + '/src/mushroom.ts'], outfile: '_parity/mushroom-original.js', banner: { js: '/*! Mushroom 5.2.3, unmodified source build. Apache-2.0. See vendor/mushroom-v5.2.3/LICENSE. */' } });
-const fork = await build({ ...common, entryPoints: [stage + '/src/mushroom.ts'], outfile: 'dist/island-ha-cards.js', alias: { '@island/skin': path.join(root, 'src/skin/styles.ts'), '@island/motion': path.join(root, 'src/skin/motion.ts') }, banner: { js: '/*! Animal Island Mushroom fork. Modified namespace, visual styles and passive presentation motion. Mushroom sources Apache-2.0; see THIRD_PARTY_NOTICES.md. */' } });
+const fork = await build({ ...common, entryPoints: [stage + '/src/mushroom.ts'], outfile: 'dist/island-ha-cards.js', alias: { '@island/skin': path.join(root, 'src/skin/styles.ts'), '@island/motion': path.join(root, 'src/skin/motion.ts'), '@island/extras': path.join(root, 'src/island/index.ts') }, banner: { js: '/*! Animal Island Mushroom fork. Modified namespace, visual styles and passive presentation motion. Mushroom sources Apache-2.0; see THIRD_PARTY_NOTICES.md. */' } });
 await fs.copyFile('dist/island-ha-cards.js', '_parity/island-ha-cards.js');
+// 随包字体：和 JS 放在同一目录的 fonts/ 下。
+await fs.mkdir('dist/fonts', { recursive: true });
+for (const f of await fs.readdir('src/fonts')) await fs.copyFile('src/fonts/' + f, 'dist/fonts/' + f);
 manifest.audit = { allVendoredGitBlobsMatch: true, upstreamSourceFiles: manifest.files.filter(x => x.path.startsWith('src/')).length, forkNamespaceIsolated: true, forkPickerMetadataFiles: pickerMetadataFiles.length, presentationMotionHosts: motionFiles.length, currentCards: 18, legacyCards: 1, badges: 1, chips: 11, duplicateDefineGuardsAdded: false, behaviorRewrites: false, upstreamActionHandlersChanged: false, presentationEventObserversAdded: motionFiles.length, skinAppends: manifest.transforms.reduce((n,f)=>n+f.operations.filter(o=>o.kind==='append-static-styles').reduce((a,o)=>a+o.expressions,0),0) };
 manifest.outputs = {};
 for (const f of ['_parity/mushroom-original.js', 'dist/island-ha-cards.js', '_parity/island-ha-cards.js']) {
@@ -154,8 +164,15 @@ for (const f of ['_parity/mushroom-original.js', 'dist/island-ha-cards.js', '_pa
 }
 manifest.dependencies = { original: Object.keys(original.metafile.inputs).filter(x => x.includes('node_modules/')).sort(), fork: Object.keys(fork.metafile.inputs).filter(x => x.includes('node_modules/')).sort() };
 manifest.buildInputs = {};
-for (const file of ['scripts/build-parity.mjs', 'tsconfig.parity.json', 'package-lock.json', 'src/skin/styles.ts', 'src/skin/motion.ts']) {
+const islandInputs = (await fs.readdir('src/island')).filter(file => file.endsWith('.ts')).map(file => 'src/island/' + file);
+const fontInputs = (await fs.readdir('src/fonts')).map(file => 'src/fonts/' + file);
+for (const file of ['scripts/build-parity.mjs', 'tsconfig.parity.json', 'package-lock.json', 'src/skin/styles.ts', 'src/skin/motion.ts', ...islandInputs, ...fontInputs]) {
   manifest.buildInputs[file] = sha(await fs.readFile(file));
+}
+for (const source of fontInputs) {
+  const file = source.replace('src/', 'dist/');
+  const bytes = await fs.readFile(file);
+  manifest.outputs[file] = { bytes: bytes.length, sha256: sha(bytes) };
 }
 const packageNames = [...new Set(manifest.dependencies.original.map(file => {
   const parts = file.split('node_modules/').at(-1).split('/');
