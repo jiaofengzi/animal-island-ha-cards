@@ -6,7 +6,7 @@ import { ISLAND_FONT_STACK } from "../island/fonts";
  * 小岛皮肤。构建时追加在每个 Mushroom 组件原有样式之后。
  * 设计要点：
  * - 每张卡按图标的颜色家族（tone）上色：开着的设备是带波点的彩色卡，关着的是素色米白卡。
- * - 卡片、按钮、胶囊都有“游戏按钮”式的底部厚边，按下会沉下去。
+ * - 卡片、按钮、胶囊都有“游戏按钮”式的底部厚边；按下只改变阴影，图标动效由 motion 控制器负责。
  * - 状态文字、胶囊、徽章用不规则的气泡形状。
  */
 
@@ -164,7 +164,7 @@ const card = css`
       0 14px 22px -10px rgba(91, 65, 40, .32);
     color: var(--island-ink);
     font-family: var(--island-font);
-    transition: background-color .4s ease, box-shadow .4s ease, transform .25s cubic-bezier(.3, 1.5, .5, 1);
+    transition: background-color .4s ease, box-shadow .4s ease;
   }
   ${unsafeCSS(toneRules)}
   ha-card {
@@ -194,7 +194,8 @@ const card = css`
     background-image: none;
     box-shadow: 0 6px 0 var(--island-edge), 0 14px 22px -10px rgba(0, 0, 0, .5);
   }
-  ha-card:hover { transform: translateY(-2px); }
+  /* Keep cards and their controls stationary throughout hover and press.
+     The motion controller animates visual children, never hit areas or ancestors. */
   ha-card:has(.background:focus-visible) {
     box-shadow: 0 6px 0 var(--island-edge);
     outline: 3px solid #ffcc3d;
@@ -264,10 +265,10 @@ const surfaces: Record<string, CSSResult> = {
       position: relative;
       font-family: var(--island-font);
       box-shadow: 0 4px 0 color-mix(in srgb, var(--island-accent, #3ec2ae) 50%, var(--island-edge));
-      transition: background-color .25s ease, transform .12s ease, box-shadow .12s ease;
+      transition: background-color .25s ease, box-shadow .12s ease;
     }
     .button:not(:disabled):hover { filter: brightness(1.04); }
-    .button:not(:disabled):active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--island-accent, #3ec2ae) 50%, var(--island-edge)); }
+    .button:not(:disabled):active { box-shadow: 0 1px 0 color-mix(in srgb, var(--island-accent, #3ec2ae) 50%, var(--island-edge)); }
     .button:disabled { box-shadow: none; }
     :host([data-island-primary]) .button:not(:disabled) { background: #3ec2ae; --icon-color: #fff; }
   `,
@@ -282,9 +283,9 @@ const surfaces: Record<string, CSSResult> = {
       border-radius: 50%;
       background: var(--island-paper-hi);
       box-shadow: 0 3px 0 color-mix(in srgb, var(--island-accent, #3ec2ae) 50%, var(--island-edge));
-      transition: transform .12s ease, box-shadow .12s ease;
+      transition: box-shadow .12s ease;
     }
-    .button:not(:disabled):active { transform: translateY(2px); box-shadow: 0 1px 0 var(--island-edge); }
+    .button:not(:disabled):active { box-shadow: 0 1px 0 var(--island-edge); }
     .button:disabled { box-shadow: none; opacity: .5; }
     .value { font-family: var(--island-font); font-size: 18px; font-weight: 900; font-variant-numeric: tabular-nums; }
     .container:focus-within { outline: 3px solid #ffcc3d; outline-offset: 2px; }
@@ -352,10 +353,9 @@ const surfaces: Record<string, CSSResult> = {
       background: var(--island-paper);
       border-radius: var(--island-blob, 999px);
       box-shadow: 0 4px 0 var(--island-edge), 0 10px 16px -10px rgba(91, 65, 40, .35);
-      transition: transform .2s cubic-bezier(.3, 1.5, .5, 1);
       font-family: var(--island-font);
     }
-    ha-card:hover { transform: translateY(-2px) rotate(var(--island-tilt, 0deg)); }
+    /* Press feedback lives on .content/.avatar through the motion controller. */
     ::slotted(island-state-icon) { --island-icon-size: var(--chip-icon-size); display: flex; }
     ::slotted(span) { color: var(--island-ink); }
     ::slotted(*:not(:last-child)) { margin-right: 0.22em; }
