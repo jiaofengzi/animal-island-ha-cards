@@ -49,13 +49,10 @@ export class IslandStateIcon extends LitElement {
   }
 
   private _tileColor(): string {
-    const s = this.stateObj;
-    // 灯开着并且有颜色时，方块跟着灯的真实颜色走。
-    if (s?.entity_id.startsWith("light.") && s.state === "on" && Array.isArray(s.attributes.rgb_color)) {
-      const [r, g, b] = s.attributes.rgb_color;
-      return `color-mix(in srgb, rgb(${r} ${g} ${b}) 70%, ${TONES.orange})`;
-    }
-    return TONES[this.dataset.tone as keyof typeof TONES] ?? TONES.teal;
+    // Upstream resolves icon_color, use_light_color and theme/state colors.
+    // Inherit that result instead of reading RGB attributes independently.
+    const fallback = TONES[this.dataset.tone as keyof typeof TONES] ?? TONES.teal;
+    return `var(--icon-color, ${fallback})`;
   }
 
   protected render() {

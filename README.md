@@ -6,6 +6,12 @@
 
 这是独立维护的预览项目，与 Mushroom、Animal Island UI、任天堂或其他游戏厂商无隶属关系。它采用 Animal Island 的设计规范转换到 Lit，**不是直接使用 React 同一组件库**。网页壳可以使用 React；卡片运行时是上游 Lit fork。网页版本与测试状态以页内证据为准。
 
+## 三个版本的真实 HA 对照
+
+[官方 Mushroom × 此前版本 × 修复后新版](https://jiaofengzi.github.io/animal-island-ha-cards/three-way/) 在同一 Home Assistant 2026.9.0 测试环境里使用相同合成实体和配置，逐项显示 18 种卡片、11 种 Chip 和 1 种 Badge 的真实截图。页面标注每个版本的提交与构建来源、桌面和手机容器尺寸，以及空白组件。它是截图对照，不是连接家庭设备的实时控制面板。
+
+原有公开验收页与旧安装包保持原地址和原内容；新版安装包位于三方对照页的下载链接。
+
 ## 完整目标范围
 
 18 种现行卡片：Alarm Control Panel、Chips、Climate、Cover、Empty、Entity、Fan、Humidifier、Light、Lock、Media Player、Number、Person、Select、Template、Title、Update、Vacuum。

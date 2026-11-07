@@ -33,13 +33,13 @@ class IslandNavbarCard extends LitElement {
   declare forceMobile: boolean;
   set hass(h: HassThemeLike | undefined) { this.toggleAttribute("data-dark", Boolean(h?.themes?.darkMode)); }
   private _mq = typeof window !== "undefined" ? window.matchMedia(NARROW) : undefined;
-  private _onLocation = () => { this._path = location.pathname + location.search; };
+  private _onLocation = () => { this._path = location.pathname + location.search + location.hash; };
   private _onMq = () => { this._narrow = Boolean(this._mq?.matches); };
 
   constructor() {
     super();
     this._config = {};
-    this._path = typeof location !== "undefined" ? location.pathname + location.search : "";
+    this._path = typeof location !== "undefined" ? location.pathname + location.search + location.hash : "";
     this._narrow = Boolean(this._mq?.matches);
     this.forceMobile = false;
   }
@@ -67,26 +67,34 @@ class IslandNavbarCard extends LitElement {
 
   private _visible() { return this._config.show === "always" || this.forceMobile || this._narrow; }
 
-  private _isActive(item: NavItem, index: number) {
-    const items = this._config.items ?? [];
-    const target = (p: string) => { const u = new URL(p, location.href); return u.pathname + u.search; };
-    const matches = items.map((it) => { const t = target(it.path); return this._path === t || this._path.startsWith(t + "/"); });
-    if (!matches.some(Boolean)) return index === 0;
-    return matches[index];
+  private _target(path: string) {
+    const url = new URL(path, location.href);
+    return url.pathname + url.search + url.hash;
+  }
+
+  private _activeIndex() {
+    const targets = (this._config.items ?? []).map((item) => this._target(item.path));
+    const exact = targets.indexOf(this._path);
+    if (exact !== -1) return exact;
+    // Prefer the nearest configured parent, never an arbitrary first item.
+    return targets.reduce((best, target, index) =>
+      this._path.startsWith(target.endsWith("/") ? target : target + "/") &&
+      (best === -1 || target.length > targets[best].length) ? index : best, -1);
   }
 
   protected render() {
     this.toggleAttribute("data-visible", this._visible());
     if (!this._visible()) return nothing;
     const items = this._config.items ?? [];
+    const activeIndex = this._activeIndex();
     return html`
       <div class="spacer"></div>
       <nav class="bar" aria-label="页面">
         ${items.map((item, i) => {
-          const active = this._isActive(item, i);
+          const active = i === activeIndex;
           return html`
             <a class="item ${active ? "active" : ""}" href=${item.path} aria-current=${active ? "page" : "false"}
-               @click=${(e: MouseEvent) => { e.preventDefault(); if (!active) islandNavigate(item.path); }}>
+               @click=${(e: MouseEvent) => { e.preventDefault(); if (this._path !== this._target(item.path)) islandNavigate(item.path); }}>
               <span class="bump"></span>
               <island-state-icon bare .icon=${item.icon ?? "island:house"}></island-state-icon>
               <span class="label">${item.name}</span>

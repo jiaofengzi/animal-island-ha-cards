@@ -20,7 +20,8 @@
     "build:parity": "node scripts/build-parity.mjs",
     "check:legacy": "node scripts/run-legacy.mjs check",
     "test:ha": "playwright test --config tests/ha-parity/playwright.config.ts",
-    "check:static": "npm run build:parity"
+    "check:static": "npm run build:parity",
+    "test:island-ui": "node --test tests/island-ui/*.test.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

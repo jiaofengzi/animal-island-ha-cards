@@ -164,8 +164,15 @@ for (const f of ['_parity/mushroom-original.js', 'dist/island-ha-cards.js', '_pa
 }
 manifest.dependencies = { original: Object.keys(original.metafile.inputs).filter(x => x.includes('node_modules/')).sort(), fork: Object.keys(fork.metafile.inputs).filter(x => x.includes('node_modules/')).sort() };
 manifest.buildInputs = {};
-for (const file of ['scripts/build-parity.mjs', 'tsconfig.parity.json', 'package-lock.json', 'src/skin/styles.ts', 'src/skin/motion.ts']) {
+const islandInputs = (await fs.readdir('src/island')).filter(file => file.endsWith('.ts')).map(file => 'src/island/' + file);
+const fontInputs = (await fs.readdir('src/fonts')).map(file => 'src/fonts/' + file);
+for (const file of ['scripts/build-parity.mjs', 'tsconfig.parity.json', 'package-lock.json', 'src/skin/styles.ts', 'src/skin/motion.ts', ...islandInputs, ...fontInputs]) {
   manifest.buildInputs[file] = sha(await fs.readFile(file));
+}
+for (const source of fontInputs) {
+  const file = source.replace('src/', 'dist/');
+  const bytes = await fs.readFile(file);
+  manifest.outputs[file] = { bytes: bytes.length, sha256: sha(bytes) };
 }
 const packageNames = [...new Set(manifest.dependencies.original.map(file => {
   const parts = file.split('node_modules/').at(-1).split('/');
