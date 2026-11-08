@@ -1,0 +1,4873 @@
+{
+  "upstream": {
+    "repository": "https://github.com/piitaya/lovelace-mushroom",
+    "version": "5.2.3",
+    "tree": "d8a90ffff1b217fbbf9cb8210ee672be99596231"
+  },
+  "files": [
+    {
+      "path": "LICENSE",
+      "gitBlob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bytes": 11357
+    },
+    {
+      "path": "README.md",
+      "gitBlob": "770c2df8275254461e0c04bd28b72ba719036676",
+      "sha256": "45b5cc70fc00b3998e70ef689be388263d872b0e91620caed50154908109b4d7",
+      "bytes": 7932
+    },
+    {
+      "path": "docs/badges/template.md",
+      "gitBlob": "151256fc4f54ebc2c3f531d12171915b9e55138c",
+      "sha256": "24331f8838af03250baa342a6fcbf7277192284dde6613848c5e6c8f603ca059",
+      "bytes": 4797
+    },
+    {
+      "path": "docs/cards/alarm-control-panel.md",
+      "gitBlob": "3a35838fcd7da8c6e1e10b48a6c1d7651932088e",
+      "sha256": "10edb272b87346141c33609b55eb9a35a7a6a1ea8624b0a2c634491e9cdd53c0",
+      "bytes": 3132
+    },
+    {
+      "path": "docs/cards/chips.md",
+      "gitBlob": "64e92522138fd267eac47cc5ed2cb818c8321947",
+      "sha256": "aa231ba8f980796c9c0069bc03cd94dcbc99d6a7306d0f93755cddcd3f853296",
+      "bytes": 3370
+    },
+    {
+      "path": "docs/cards/climate.md",
+      "gitBlob": "fe4390292d8c38da6537ecca65087f166312ac0a",
+      "sha256": "f1113bc08b48085ee9ca24750c9c3ef7e29c2214003ef60e9cb76a5a5211c8e2",
+      "bytes": 3449
+    },
+    {
+      "path": "docs/cards/cover.md",
+      "gitBlob": "07dca6e97d8035e6e6fbde044abccab26ca154af",
+      "sha256": "f52ca05c7a1e06e954563efafefbb16665207debf47ff61cff506fb7b0187bfd",
+      "bytes": 3275
+    },
+    {
+      "path": "docs/cards/empty.md",
+      "gitBlob": "4ced9b13e5fb2f13b6af374d6f4c25648072f416",
+      "sha256": "a848e8081058c345da78a645f43f60b99b1fca9828682ce7f9e55594c4cc0ec9",
+      "bytes": 166
+    },
+    {
+      "path": "docs/cards/entity.md",
+      "gitBlob": "9d296f311833df79f2c7fbf94c1e893ca8cd74c6",
+      "sha256": "bd13ede260178cb5d0c8180aef01bc044a45f50d94bb09666201eaf3dbccdfd7",
+      "bytes": 2776
+    },
+    {
+      "path": "docs/cards/fan.md",
+      "gitBlob": "270c61ca8331e6ec54bd7a8ae0ca57dcbcfc1e89",
+      "sha256": "4b20ecaee1c6d34fca7f68b66f28e6cbae29da6700b544b56cfad37a94c888eb",
+      "bytes": 3797
+    },
+    {
+      "path": "docs/cards/humidifier.md",
+      "gitBlob": "8b8e0b1e3ef4bc76af575178b3aa8359253e8fba",
+      "sha256": "76abdc725451b55906bf073ab1737258423e65d08bd56adb0474dee3bcb84477",
+      "bytes": 3333
+    },
+    {
+      "path": "docs/cards/legacy-template.md",
+      "gitBlob": "5c57361300885ed8bb588609dc161f38cb5b82b7",
+      "sha256": "94737c1d530521fd2ccc7e524f6703569cbc5a746ab08b74e406e678e9fba923",
+      "bytes": 5115
+    },
+    {
+      "path": "docs/cards/light.md",
+      "gitBlob": "23a7ee1af1393fbc03e82fdacdc80ae318ee9ca4",
+      "sha256": "05ebae2f8dd0f09d1c86c40de6a7b010a0d3522dfe373dc0ec4bef199c3454b9",
+      "bytes": 4007
+    },
+    {
+      "path": "docs/cards/lock.md",
+      "gitBlob": "e607b11b870a5d0d2871b842d21a970903bb7a22",
+      "sha256": "9f62acdcaa37faa45fec96e0813104ad4f85b08712b47bd5eafb044d574d8f43",
+      "bytes": 3085
+    },
+    {
+      "path": "docs/cards/media-player.md",
+      "gitBlob": "d1e1e6dc4324746bff4f69e9b67bdae77f91b072",
+      "sha256": "dd8fee7b20cd6e953d9f03e26b91961d1c04e35b1766dfbd63dde6d40013496a",
+      "bytes": 3806
+    },
+    {
+      "path": "docs/cards/number.md",
+      "gitBlob": "22d6242ad364de8bf0c10abb8c2569b445af9b00",
+      "sha256": "bd8fcb4d7245730ed22d8858bc19459c56baddf57b9fefcb8f0b535ac41adb9c",
+      "bytes": 2972
+    },
+    {
+      "path": "docs/cards/person.md",
+      "gitBlob": "3925306ebce9ecb0df72be16badccdc5cd3cba2e",
+      "sha256": "ae439acf94efecb98f520d7c90c9603d60a33c33d31a6c1fc6c4b22cb590c33d",
+      "bytes": 2604
+    },
+    {
+      "path": "docs/cards/select.md",
+      "gitBlob": "3de2639566d2939031c0a807c88486643cda1bf3",
+      "sha256": "fdbc3df6d549956a0e3ee022f62cff633dc167cb5ba3dad3eaab924bbef6b9b6",
+      "bytes": 2814
+    },
+    {
+      "path": "docs/cards/template.md",
+      "gitBlob": "fb2aebfcf1c4be59dbdbcdaa947d23aadaf5c66c",
+      "sha256": "81a06639955a3056139398b28de13d7a6d8f016813bbd5bf7f1d6eee2d93d58a",
+      "bytes": 7733
+    },
+    {
+      "path": "docs/cards/title.md",
+      "gitBlob": "acbe24d51a6d2d06fd233addd3017b232bd83f2d",
+      "sha256": "d6f135c9154f6ff2c4b13e29260de748740bac206024db3e7d3a464a4f852f8a",
+      "bytes": 1599
+    },
+    {
+      "path": "docs/cards/update.md",
+      "gitBlob": "13ff3ed6584b69c928efe5cfb526ea3ef170e797",
+      "sha256": "99293acbc7b0abb03f3505a1229ea944f0045f96c54d0136c44ca914c4d2111c",
+      "bytes": 3187
+    },
+    {
+      "path": "docs/cards/vacuum.md",
+      "gitBlob": "2b04a26f3d1329fdd6f4dfda273c6f54aa6433f9",
+      "sha256": "6d02fb486e1476dc9374f35204d73fd062c3b0d0ce59b9eb3c2ff1045478798a",
+      "bytes": 2960
+    },
+    {
+      "path": "package.json",
+      "gitBlob": "f162dfa9348a3f47715c8d3704599c7932294b4e",
+      "sha256": "4e86e6cce4c8adedae575b7e05ebebc63c1728862bce69bb21ca93f466649d55",
+      "bytes": 1483
+    },
+    {
+      "path": "src/badges/template/template-badge-config.ts",
+      "gitBlob": "399c3debed6de00483d6681ebf6629f9bce0b5c8",
+      "sha256": "fe435f889737cba045ca50ce9672e0f1606a2b4b78645ed613bcae7f9caf1100",
+      "bytes": 993
+    },
+    {
+      "path": "src/badges/template/template-badge-editor.ts",
+      "gitBlob": "2a60032378a696e660ee361c685296a98e867c30",
+      "sha256": "3affd49f9285487d6885466d3e6fc5652d818e5fdc7c6166ec0305a3ef5b8f56",
+      "bytes": 4177
+    },
+    {
+      "path": "src/badges/template/template-badge.ts",
+      "gitBlob": "33510613dc6c20e761ff199fcbca9b49ed8246d4",
+      "sha256": "41429c9a12583f17e4847229831d0940d3b01db1633ad30969afb95601a42891",
+      "bytes": 11514
+    },
+    {
+      "path": "src/cards/alarm-control-panel-card/alarm-control-panel-card-config.ts",
+      "gitBlob": "51a21c8fc8c7b56426184adf72e80fa6ba8d7b13",
+      "sha256": "76eb47e505f49f382f165851f71d2c99ad2b4ede6ed04ae2b3cb08d5311f5107",
+      "bytes": 1002
+    },
+    {
+      "path": "src/cards/alarm-control-panel-card/alarm-control-panel-card-editor.ts",
+      "gitBlob": "b81dfafeefe64bade7c2008dfd143882b0abe6a7",
+      "sha256": "ee87754934b89262b1eff20037a66429ca7a7f1253e03d8a929c2d0f44ae8d35",
+      "bytes": 3606
+    },
+    {
+      "path": "src/cards/alarm-control-panel-card/alarm-control-panel-card.ts",
+      "gitBlob": "feb38f51c3419269f7f93f809b375a26a41d8b79",
+      "sha256": "9212654058aa8aad58953e72fe877cc7d2b87ec893338252b554694cf1d6c547",
+      "bytes": 6551
+    },
+    {
+      "path": "src/cards/alarm-control-panel-card/const.ts",
+      "gitBlob": "0f05fe37ff232d8f3ccf3e31992e6ff67e3e450d",
+      "sha256": "c67fd7d61b893345f32281adb6680f93c3ccd4372fe6eb7085bff9ee8e76dfc4",
+      "bytes": 890
+    },
+    {
+      "path": "src/cards/alarm-control-panel-card/utils.ts",
+      "gitBlob": "f6723d5417780a6d52a157abbbf27fcd8925b7e7",
+      "sha256": "d8ee36dfe92feb51c9a7cb3ff8b67348ea7030557f9705f13f24f27a837daf5a",
+      "bytes": 1068
+    },
+    {
+      "path": "src/cards/chips-card/chips-card-chips-editor.ts",
+      "gitBlob": "78b96763ec4a0a4a03d6bd6f85ce1d9130e6f69f",
+      "sha256": "e5576e2315e3f1542e86e556685d35be2b581ea99e5d8b3bbec8ecc8f2d1a3f0",
+      "bytes": 9538
+    },
+    {
+      "path": "src/cards/chips-card/chips-card-editor.ts",
+      "gitBlob": "a2c904793a01949917fa93d283438f5065fba85e",
+      "sha256": "47bddf9428124ddbc055534018a073139c48a5fdb8472631523a2d9defab5bee",
+      "bytes": 9326
+    },
+    {
+      "path": "src/cards/chips-card/chips-card.ts",
+      "gitBlob": "e6a7e6be38155b36d347b3a581620a5d26859357",
+      "sha256": "a5a3ad724e7d8332627b51c11c0757e526138edab311834b78622c41598d1444",
+      "bytes": 3958
+    },
+    {
+      "path": "src/cards/chips-card/chips/action-chip-editor.ts",
+      "gitBlob": "7ce27ab16d421562e10e576dee743e8e99d4d802",
+      "sha256": "7a5b8c39b6e539f9750e620edb0f35c1bfd1ab54884d2cd6c0f92dff6b197325",
+      "bytes": 2408
+    },
+    {
+      "path": "src/cards/chips-card/chips/action-chip.ts",
+      "gitBlob": "0403e7671a6a163cc838499aeb84c2a45b322459",
+      "sha256": "d6f13aa9f6fede4a9032a61f86cb2178128f1db94b30aea4a21765cec0c0a136",
+      "bytes": 2567
+    },
+    {
+      "path": "src/cards/chips-card/chips/alarm-control-panel-chip-editor.ts",
+      "gitBlob": "3778e557a03dd62bb5f8b6f379b0ea47398cc2b2",
+      "sha256": "7267615af1ced430aaa63ba6b2204540431ec405d34a6549afa288a21636cd11",
+      "bytes": 3063
+    },
+    {
+      "path": "src/cards/chips-card/chips/alarm-control-panel-chip.ts",
+      "gitBlob": "c10d88bb4c9ebc3f87709ce02d056c31a65063bb",
+      "sha256": "db2ad8878b3ee69a3bbb055dc3ed2b82e9b828c29553f56715fd64277da71e80",
+      "bytes": 4233
+    },
+    {
+      "path": "src/cards/chips-card/chips/back-chip-editor.ts",
+      "gitBlob": "5afae55aa7db7f2613703a89adeedcf8295199a2",
+      "sha256": "f5ea6723ec8c7a9219fc455f7a40717a9f3c055535cae137fd6a127481e5a5a6",
+      "bytes": 1566
+    },
+    {
+      "path": "src/cards/chips-card/chips/back-chip.ts",
+      "gitBlob": "5f00e427a8e5951f7dc0192dda87267368e6e748",
+      "sha256": "a695b6ada83d3d448400e125e33996b16bd1fd4061cbef5453b0cd4393a7655d",
+      "bytes": 1842
+    },
+    {
+      "path": "src/cards/chips-card/chips/conditional-chip-editor.ts",
+      "gitBlob": "847db77d5b310072ac205cb24764953d6e0f1649",
+      "sha256": "456cb3bc8da01a6426142459af8e1aeea360345eee5ae290d7b5cabfc08ebed0",
+      "bytes": 7667
+    },
+    {
+      "path": "src/cards/chips-card/chips/conditional-chip.ts",
+      "gitBlob": "50a8fb0bab974206ced988c7ef6306d427f91879",
+      "sha256": "1417bd0337c50e1e7508d38a650fffcb8b6c421548850d04a55ef5d2350ba562",
+      "bytes": 1835
+    },
+    {
+      "path": "src/cards/chips-card/chips/entity-chip-editor.ts",
+      "gitBlob": "219d3de4bae3964d1e65ff40a19510a9258b8079",
+      "sha256": "76862819722ed9c6672ae91be99f43ad02473695a0e27e6008ab4c9479659992",
+      "bytes": 2850
+    },
+    {
+      "path": "src/cards/chips-card/chips/entity-chip.ts",
+      "gitBlob": "453cbd11500af7cd79b1c0839348dc7eff2a328b",
+      "sha256": "07ea81f9159247d7831dce3ce96fc4a05c932dafa86c615a6491dde6652b37cf",
+      "bytes": 4033
+    },
+    {
+      "path": "src/cards/chips-card/chips/index.ts",
+      "gitBlob": "194defbbf3cd1624b1c203ef05ec2d2824a27c51",
+      "sha256": "8e954ea2ab3b218417e4f381de221e2e940169d93cfb2932e8e153591aa8ba11",
+      "bytes": 282
+    },
+    {
+      "path": "src/cards/chips-card/chips/light-chip-editor.ts",
+      "gitBlob": "4e72cd68ca75f5c8b01ee604b366f60677ede934",
+      "sha256": "f3f653b658301b23f7806ea092cd0a95712d28416e0eadc759e3fb3490b2a288",
+      "bytes": 3080
+    },
+    {
+      "path": "src/cards/chips-card/chips/light-chip.ts",
+      "gitBlob": "ce6d64ec161a55cba351e76c3805ff2d03283035",
+      "sha256": "6177eb28468aa7ec8eab29a475391cc90f2a10431c7f397230137797e3f48a2c",
+      "bytes": 3775
+    },
+    {
+      "path": "src/cards/chips-card/chips/menu-chip-editor.ts",
+      "gitBlob": "d3c29b864df82783d385641413a005b7820cd718",
+      "sha256": "ad957fadcc22b85ccf44e809d3964b28c463027130a63ec01a310705715cfddd",
+      "bytes": 1566
+    },
+    {
+      "path": "src/cards/chips-card/chips/menu-chip.ts",
+      "gitBlob": "e754bdaa6cd22c8372e52e2c0e19cc97fcdf2f78",
+      "sha256": "3873021fe65ae3356d1be25229740af9a33b55d25852d91ac810655cab78d257",
+      "bytes": 1906
+    },
+    {
+      "path": "src/cards/chips-card/chips/quickbar-chip-editor.ts",
+      "gitBlob": "5d335a3bc6c141ed362caeb57a20caedc4bbcb3e",
+      "sha256": "d599c18433bfd04f0fd0a9ec6b9a49c722e404f30b1311d16d2acb7d016acb84",
+      "bytes": 1916
+    },
+    {
+      "path": "src/cards/chips-card/chips/quickbar-chip.ts",
+      "gitBlob": "18a8de277da06ab427e0164a5917b56e69ba5c5f",
+      "sha256": "a28e6f3757204712b4d7e806d9d75c3be346520b2274cae7e5338e1269230036",
+      "bytes": 2493
+    },
+    {
+      "path": "src/cards/chips-card/chips/spacer-chip.ts",
+      "gitBlob": "5bfea8eee687ac3e397d812beb05c066adfea08e",
+      "sha256": "1d2c113a3ab4f6464f6206cc93c0027f002f603878a338e64d9b526977a4663c",
+      "bytes": 524
+    },
+    {
+      "path": "src/cards/chips-card/chips/template-chip-editor.ts",
+      "gitBlob": "86b64f76113a6a8f522ad140814bad8173b0f66f",
+      "sha256": "1a6cca3672f23972478ed5ceb2f0705c094ee411ccb8285ce151b9de306410a3",
+      "bytes": 2584
+    },
+    {
+      "path": "src/cards/chips-card/chips/template-chip.ts",
+      "gitBlob": "2ba744b194347c787753a78b96005d75b68bae80",
+      "sha256": "d967246cad17aead3ea664cd2ea19c635b4edfabda4aef5538ff2fd12e732c49",
+      "bytes": 7838
+    },
+    {
+      "path": "src/cards/chips-card/chips/weather-chip-editor.ts",
+      "gitBlob": "5535d521821e9ae767d1dd836ffe304edd030d06",
+      "sha256": "b301277562f003f0d3596258ff27d6cfabe207253ab1c8c2382ee1bc90c05123",
+      "bytes": 2651
+    },
+    {
+      "path": "src/cards/chips-card/chips/weather-chip.ts",
+      "gitBlob": "f4174d0d59b6e9152b614120c4fcb79effe60d4d",
+      "sha256": "f317fd7849f61c4acf0effb3c2a1b42bb099f25176eee0688bd442194e61d293",
+      "bytes": 3102
+    },
+    {
+      "path": "src/cards/chips-card/const.ts",
+      "gitBlob": "03dbbbfe5713d7ca6916c202f59380bc870751c0",
+      "sha256": "1eca897d87e4cfb2518f5b1b4369113989d3dee1b28b0f0be44f1fd04028a31f",
+      "bytes": 171
+    },
+    {
+      "path": "src/cards/climate-card/climate-card-config.ts",
+      "gitBlob": "9f5a92df1c089c38a5ca7cd21bca7cd9e8cd53c4",
+      "sha256": "7e6c8c96fd367b275c70709dff69d52fc4fb31fa91507dd32840094803b3f078",
+      "bytes": 1250
+    },
+    {
+      "path": "src/cards/climate-card/climate-card-editor.ts",
+      "gitBlob": "b2360150b5fe4ba0e76a4854f71394693b07646d",
+      "sha256": "661e2e3de6c3efb312db1a7a0bbbba73b6bbe7b43d46d80dc3fefa691aeede03",
+      "bytes": 3622
+    },
+    {
+      "path": "src/cards/climate-card/climate-card.ts",
+      "gitBlob": "f5feea715c820b1ef783c9624e7759ffbaa3b383",
+      "sha256": "b40c30bb6184d183020c0dc6d8266c792f1efd464429fdef554002f0e74cc34e",
+      "bytes": 9175
+    },
+    {
+      "path": "src/cards/climate-card/const.ts",
+      "gitBlob": "6a7567e7bbb77681af4f714d8efa8c54bb4d0036",
+      "sha256": "e1ab656801584eae2146eb16e103003276ee78115dc47d05396f4b67fadb307b",
+      "bytes": 230
+    },
+    {
+      "path": "src/cards/climate-card/controls/climate-hvac-modes-control.ts",
+      "gitBlob": "f12235e517bfd4b98945daee223aaa13eadc48f2",
+      "sha256": "412e325bc16f9f622f706d33081a00e7b17b364f6d389390e9c8c44fdfa36897",
+      "bytes": 2213
+    },
+    {
+      "path": "src/cards/climate-card/controls/climate-temperature-control.ts",
+      "gitBlob": "2199e0a16ec6b3bf5a008cc881eca4917a54c99a",
+      "sha256": "986872c3f1b3f7041e9e530ba41a672da2878aee9289c17a1014448a187439aa",
+      "bytes": 5344
+    },
+    {
+      "path": "src/cards/climate-card/utils.ts",
+      "gitBlob": "061b7eddac194036c71a76f887a3ec9683d54af6",
+      "sha256": "416cbf154639f08a3023d96299040e975d59da44d4ca50fba7776443f0b2a90e",
+      "bytes": 1748
+    },
+    {
+      "path": "src/cards/cover-card/const.ts",
+      "gitBlob": "50df1e206d5570b4f8de2eb3884acc12e0b182bd",
+      "sha256": "59192ab111ad9b19ffc86aec95b7af7a6dfbe4063b47a3611eec1807418550be",
+      "bytes": 218
+    },
+    {
+      "path": "src/cards/cover-card/controls/cover-buttons-control.ts",
+      "gitBlob": "22ce45c2240e7bf7e6b5a2d9e24bce908d9e55e4",
+      "sha256": "f02abaafd4c5ff6afa568dfa77c8cbb271faf9f1cf9d380f3223db59ee862dcc",
+      "bytes": 3064
+    },
+    {
+      "path": "src/cards/cover-card/controls/cover-position-control.ts",
+      "gitBlob": "c113116f0a03a86f9d7b6d3adda9bb9d11216c36",
+      "sha256": "df56e6aad2c84c792be9a66244941bc9dd7e8d459bcbd2e875485206bf9e78cd",
+      "bytes": 1513
+    },
+    {
+      "path": "src/cards/cover-card/controls/cover-tilt-position-control.ts",
+      "gitBlob": "716e6f163460130e1f96e5a48da75fbe20193465",
+      "sha256": "b5bae567d1ed5f8f60b6fd4c70c17a3a997eba35710df22fe9991a53ea1c886e",
+      "bytes": 2429
+    },
+    {
+      "path": "src/cards/cover-card/cover-card-config.ts",
+      "gitBlob": "dcfff3a30187c7c3248194695ed7560cbbca5ddb",
+      "sha256": "2f1fc13fd25b060e10fd4321198ebcb07ab993b5123c74aedca464d10a624f15",
+      "bytes": 1113
+    },
+    {
+      "path": "src/cards/cover-card/cover-card-editor.ts",
+      "gitBlob": "e9434f4ae2b02f68cae8dd40d07b47b8009aceea",
+      "sha256": "8d93998f4746e617c9e843ed758e904871a4d65244df372a241bab38f3b0eeb1",
+      "bytes": 3159
+    },
+    {
+      "path": "src/cards/cover-card/cover-card.ts",
+      "gitBlob": "b56b837044f5519a07b4be570099589e8a3b26f5",
+      "sha256": "1b4442b28406896060d5fd6058d51f9090ffdebacc6bc373f6c0808900114df4",
+      "bytes": 9652
+    },
+    {
+      "path": "src/cards/cover-card/utils.ts",
+      "gitBlob": "21325bf1a664c62e5d127cfc331fe58e67946772",
+      "sha256": "2a8dcc311b9fdc9b9b415d9098dd1d7a67eb6c13d456f2f0b9d25b5a77d53764",
+      "bytes": 718
+    },
+    {
+      "path": "src/cards/empty-card/const.ts",
+      "gitBlob": "a11fbde6bfbf978cafea6baff0573f22ea808f5e",
+      "sha256": "081592a57a26097b370c629c35efcce2ce09c818ccf33565fbd061009bebcbba",
+      "bytes": 171
+    },
+    {
+      "path": "src/cards/empty-card/empty-card-config.ts",
+      "gitBlob": "58a9a71e1497addda8fc9fff237c6bb41ad3a51b",
+      "sha256": "2b5aecd3d939a0056e4c3fe2d267f784d4f3c2a0fe95b0f21a7894a0fd379ad2",
+      "bytes": 247
+    },
+    {
+      "path": "src/cards/empty-card/empty-card-editor.ts",
+      "gitBlob": "8d95cf592627a2b465029441a13c9e7e22f85924",
+      "sha256": "11ea4e60276dfc919180e998234ddfbf65f790f971c1649041903c3dcb07d425",
+      "bytes": 927
+    },
+    {
+      "path": "src/cards/empty-card/empty-card.ts",
+      "gitBlob": "d74fa40bd22755847c0acf0ff39871ff65354931",
+      "sha256": "4f0db4efa4e6a1c047fa9e56f0f91b2022de94ae7d6c55c174534231c0040c31",
+      "bytes": 1847
+    },
+    {
+      "path": "src/cards/entity-card/const.ts",
+      "gitBlob": "94e18f162f86fff96d163d029d83c10925049115",
+      "sha256": "6918a3bbec972d7083e5aae7dcac00dcebab98da4174b97791c20e80a71e08bb",
+      "bytes": 175
+    },
+    {
+      "path": "src/cards/entity-card/entity-card-config.ts",
+      "gitBlob": "ede0dc42d6b5e11ffa52317d47cbe0cdb5458104",
+      "sha256": "4d98d1feeca5400c6f4fa48ca06dedcaeb016a8075bb01234b441f0d9908ccd3",
+      "bytes": 927
+    },
+    {
+      "path": "src/cards/entity-card/entity-card-editor.ts",
+      "gitBlob": "3c19cbd8eedb667b569f5e5ceae114c7af9e317a",
+      "sha256": "affd945b253b02991901ae6bc0b83307a1882e85b008ddcccb9a9fe971b0ae8f",
+      "bytes": 2753
+    },
+    {
+      "path": "src/cards/entity-card/entity-card.ts",
+      "gitBlob": "5e2ada77f4c4ccec7db3832a2f003adad6b7a2e0",
+      "sha256": "dcc5b5090c507e23f1547bf0d29339e1481aa0bb6248025c2bf543afb8e45578",
+      "bytes": 4424
+    },
+    {
+      "path": "src/cards/fan-card/const.ts",
+      "gitBlob": "6becaf0997359dd087f3402136255b5b69f320fc",
+      "sha256": "2b696cfa2cb957589e1f8e5ad5a34a68b7b1d57305c1a327b87388c8fe13e7a0",
+      "bytes": 206
+    },
+    {
+      "path": "src/cards/fan-card/controls/fan-direction-control.ts",
+      "gitBlob": "6723e3b9d42ef8c6e39ddeb017ca5ae1ca89268c",
+      "sha256": "6a588c63304b7f74910a7dfa73a9dc9d4113b55ac74aed85e80d7bb7016a322c",
+      "bytes": 1492
+    },
+    {
+      "path": "src/cards/fan-card/controls/fan-oscillate-control.ts",
+      "gitBlob": "79dc5b083fbf4642fe1eef85730b68d0d8844c0d",
+      "sha256": "4ee7b1d062e77f9e1541a0e4bafd388b235185b11a440b5462df38d3786c28be",
+      "bytes": 1598
+    },
+    {
+      "path": "src/cards/fan-card/controls/fan-percentage-control.ts",
+      "gitBlob": "d82e1320d6b55cc7f08611f820d905f8cac6864b",
+      "sha256": "6a5b23c0af876d0285d10b804ae2689ad63e567b0a691cc8ccf9a5eca3548f6d",
+      "bytes": 1695
+    },
+    {
+      "path": "src/cards/fan-card/fan-card-config.ts",
+      "gitBlob": "e641a4ae5e5d8051e845d4a59e6afc17812bed01",
+      "sha256": "579687e116955455ad17b25e7a210ab86a20e9af320d5d927b729ca9eafae9ef",
+      "bytes": 1269
+    },
+    {
+      "path": "src/cards/fan-card/fan-card-editor.ts",
+      "gitBlob": "3f7d56164288b9823a9d1487551c3ed99df2a671",
+      "sha256": "06ee24e1835e2df74d0848ef90017153374eafe2b915c392f3cf1b2d4ab1a892",
+      "bytes": 3377
+    },
+    {
+      "path": "src/cards/fan-card/fan-card.ts",
+      "gitBlob": "b9d407f8ba4f8e2d2c8533b87e870eb797f2ffb1",
+      "sha256": "1065e0b1ba97d9ed9005c93a704ddceb783566603da3ba0371a75f8a3a025f4b",
+      "bytes": 7996
+    },
+    {
+      "path": "src/cards/fan-card/utils.ts",
+      "gitBlob": "8891ee9a25d559a2951877e70d3a47fc4074204a",
+      "sha256": "d09648970007cd79c8d651bd74dcbe858c08d6e6d91bb136c41a07d58263a18f",
+      "bytes": 569
+    },
+    {
+      "path": "src/cards/humidifier-card/const.ts",
+      "gitBlob": "73605bbdf321969ceead4ee99e9cf3d5a43fc8f5",
+      "sha256": "64437970e0069f1a7cce6e146415e363f13301af5f57bde2a3a20b340e6eb540",
+      "bytes": 248
+    },
+    {
+      "path": "src/cards/humidifier-card/controls/humidifier-humidity-control.ts",
+      "gitBlob": "e7b7ff9df2cf0f88f52519c4356c2bcf89a557b7",
+      "sha256": "8b9a8ca99809e6f39ed15d5f9052d829705518a1cbf5e560556e460ac39ff783",
+      "bytes": 1732
+    },
+    {
+      "path": "src/cards/humidifier-card/humidifier-card-config.ts",
+      "gitBlob": "309f90c30b431aad79f52114a93efb048d373835",
+      "sha256": "c52cac2eb885a3fda019712ad66d122f53161d8071900ee91dc4aac5e79f358a",
+      "bytes": 1048
+    },
+    {
+      "path": "src/cards/humidifier-card/humidifier-card-editor.ts",
+      "gitBlob": "27bfdca86b24eb414a6a7bb7b8d506dc69c51c82",
+      "sha256": "bdc56baedce4b07e317cf39960b5890d0cba39c96639d2b7086533c94bc9ea45",
+      "bytes": 3132
+    },
+    {
+      "path": "src/cards/humidifier-card/humidifier-card.ts",
+      "gitBlob": "798633f9e39bdcf4e06d4c6a8dca744855ab5776",
+      "sha256": "8568b8e85b6ecbd5bb4969789e03416e17b5487c2af630cbe08f34723e2eae1f",
+      "bytes": 5877
+    },
+    {
+      "path": "src/cards/legacy-template-card/const.ts",
+      "gitBlob": "6f9c6086a4793f5fc8a9cf5ff4a206b807193c7c",
+      "sha256": "f4d2a1bf83c1635ed2ef7f9e2fdcf36735497268eda2196e3166e76f43109c0a",
+      "bytes": 211
+    },
+    {
+      "path": "src/cards/legacy-template-card/legacy-template-card-config.ts",
+      "gitBlob": "3d32c3764dddc86434af1c3f63485dd1d944db45",
+      "sha256": "2ef611023dc6ac378b9c90066aed0de0b54d1ee975f88d316e04a2c7234e7ac8",
+      "bytes": 1376
+    },
+    {
+      "path": "src/cards/legacy-template-card/legacy-template-card-editor.ts",
+      "gitBlob": "965e29129525c6987af0d42b43514d668bab4b7e",
+      "sha256": "8279eb44e9bcd4483025abb907d2dc445996a96298f03a9f4b2ddb51bc306cf2",
+      "bytes": 3884
+    },
+    {
+      "path": "src/cards/legacy-template-card/legacy-template-card.ts",
+      "gitBlob": "80a75a3636509d8e3c65a5c456f0fc87214b3d81",
+      "sha256": "85ab7a70fe2f5d9ffc24cc5418e2fec868af3a0ddb09eb6ffde0699e96936dc6",
+      "bytes": 11760
+    },
+    {
+      "path": "src/cards/light-card/const.ts",
+      "gitBlob": "184309ea80f7b389c9a3a2b0c802f051a89d2f93",
+      "sha256": "ad0e77032eb2fb2a17f6b74f6e26ff5b7e7ff63f72f8616516bc3562f656f292",
+      "bytes": 218
+    },
+    {
+      "path": "src/cards/light-card/controls/light-brightness-control.ts",
+      "gitBlob": "95cfd0e83f2d2d7b992dd8da4c9c78ab4ee33974",
+      "sha256": "18b7ed7a06e4b936a811f00f154be75d92b577bfee9360c93a9aacf7c279543b",
+      "bytes": 1822
+    },
+    {
+      "path": "src/cards/light-card/controls/light-color-control.ts",
+      "gitBlob": "4aa180a5e05a2c3e4669cd7732a182acc06a423b",
+      "sha256": "95b428286b1c70cbf2e4f8ea9c74cec6a5ed978f986f60c65915a99e4b92ac3f",
+      "bytes": 2381
+    },
+    {
+      "path": "src/cards/light-card/controls/light-color-temp-control.ts",
+      "gitBlob": "44e8ffa1a0112c3e33fcd795f4b8db7cdb19e9c0",
+      "sha256": "b833e407b5ed3ab2aaec042e97e945a05c887bc49e309f925260e9690253dd4a",
+      "bytes": 2701
+    },
+    {
+      "path": "src/cards/light-card/light-card-config.ts",
+      "gitBlob": "87ca77ff800b8d3d3d746d36b80e2f664d42227f",
+      "sha256": "a412d51a6ddb47456092fbee4d2ed433fbbf2b242c86a5f9c6ff647fffa20bd3",
+      "bytes": 1338
+    },
+    {
+      "path": "src/cards/light-card/light-card-editor.ts",
+      "gitBlob": "f5400d4521bb761f5a8563a7e4bcaf8c84a01dc3",
+      "sha256": "179ef57d5ba9cab37fd4aa5a5904633b7bbe02dfd3fd61d906c085f0fe06909c",
+      "bytes": 3468
+    },
+    {
+      "path": "src/cards/light-card/light-card.ts",
+      "gitBlob": "30ee6a75628c3e61a16f43d435209f1f7fc96555",
+      "sha256": "991f9d9771d345103161ee99c0e277899e73b178d52d5f393dd6e609ca05d47c",
+      "bytes": 10230
+    },
+    {
+      "path": "src/cards/light-card/utils.ts",
+      "gitBlob": "1336a49a854122feffb7b2f0f1293271ce2a2726",
+      "sha256": "1fbfc36c2246b886654767a5e4bd9c0849974f2acf1d5ffd5e99035b864e3755",
+      "bytes": 1488
+    },
+    {
+      "path": "src/cards/lock-card/const.ts",
+      "gitBlob": "dd5cafab15931fd82514495c6dc4ea472ab8d9d2",
+      "sha256": "c8cddd919f4291602c506373045b3ff12bc463e066635aae046cab4f5b89aa39",
+      "bytes": 212
+    },
+    {
+      "path": "src/cards/lock-card/controls/lock-buttons-control.ts",
+      "gitBlob": "2135a502f72e5d3998798b398d2b4f8b81d8ba9d",
+      "sha256": "2dfc018fdd1bae09087aa2a463cc0b5f9841a9b37fa5abb3111baf065c124cf6",
+      "bytes": 2577
+    },
+    {
+      "path": "src/cards/lock-card/lock-card-config.ts",
+      "gitBlob": "685e8da08205b514599c4f634c084500d2fb4a90",
+      "sha256": "61c636ab476a97f459c1d70133a297e22a76fde79ab0d6020f89902db1968fb0",
+      "bytes": 829
+    },
+    {
+      "path": "src/cards/lock-card/lock-card-editor.ts",
+      "gitBlob": "3664ae84b65d6e5cf2b9d899b1c51f347c53dc8e",
+      "sha256": "ee1aa5742a7033f254fe23ee03f183b4afa80c5547cdb244cec8ad45ef827895",
+      "bytes": 2631
+    },
+    {
+      "path": "src/cards/lock-card/lock-card.ts",
+      "gitBlob": "620af08c96d6de89ede49a1dd9a85b04b7a83ea2",
+      "sha256": "8e0ec7cabeb35d0a52c4d2afee5eb70db8586a0f42d4cf03493b0a222dc5db0b",
+      "bytes": 5266
+    },
+    {
+      "path": "src/cards/lock-card/utils.ts",
+      "gitBlob": "4a74fbf5dc4cf438555fff5d1f09eadca921b2d2",
+      "sha256": "b959a1da6f74af19ed2493b69286f3171d961dc44d925392f5e043dc5947e0ba",
+      "bytes": 525
+    },
+    {
+      "path": "src/cards/media-player-card/const.ts",
+      "gitBlob": "9bb4d8de4ece99f56ba8a80927d03a9c6a327715",
+      "sha256": "ddb87ac840580d0f56cf9ffe3f39a6c1ba40014ff772bb8d456726fff515d085",
+      "bytes": 260
+    },
+    {
+      "path": "src/cards/media-player-card/controls/media-player-media-control.ts",
+      "gitBlob": "fb6226272f55abf312e72218c87b3d6dfeba0e21",
+      "sha256": "c4642c5076a97c07366f6f130dce15e04a95d52d9b407407159ab4236331d671",
+      "bytes": 1653
+    },
+    {
+      "path": "src/cards/media-player-card/controls/media-player-volume-control.ts",
+      "gitBlob": "4116d0b355b07dc529272bb22b06f1cfa2b2dea7",
+      "sha256": "fc5e257ec41292da3952cd962fb790532764c8b2ee2dd10b27155407998a434d",
+      "bytes": 4777
+    },
+    {
+      "path": "src/cards/media-player-card/media-player-card-config.ts",
+      "gitBlob": "b6f04863ce5af42d1b2be6ff27d1b12ef33432a2",
+      "sha256": "9eabd1213d99d8e82744954ac9b5ef1e8ad52d618be0fdb24bb6061c8cfa02c2",
+      "bytes": 1784
+    },
+    {
+      "path": "src/cards/media-player-card/media-player-card-editor.ts",
+      "gitBlob": "31c2d70b9bb475d659ca18e97763ad6ec1ee221c",
+      "sha256": "c1e699ba7710790e77d2a12676a3b5de0244bc620b2069227023c3f36ec21869",
+      "bytes": 4280
+    },
+    {
+      "path": "src/cards/media-player-card/media-player-card.ts",
+      "gitBlob": "8992aeb1d96e8f0fd60defb47adad4be93d93647",
+      "sha256": "b8f59204ff8531aebf7f90f71fa8487c4ecf065821175d1bc48a51645dcebeb0",
+      "bytes": 8575
+    },
+    {
+      "path": "src/cards/media-player-card/utils.ts",
+      "gitBlob": "83cbda9b2baa74dd61796ed8fe3821e7205cc2e5",
+      "sha256": "593eeef9e88aab2e6928170c4083173914f0ca9330efa1083311b17cde0515e6",
+      "bytes": 8177
+    },
+    {
+      "path": "src/cards/number-card/const.ts",
+      "gitBlob": "e893e8d7953253d1e0a60aba734e76d2e88217fc",
+      "sha256": "2d1ba677e280d52351c1a6351f5000058905d5dce45b505e9239b9db2aa7f755",
+      "bytes": 240
+    },
+    {
+      "path": "src/cards/number-card/controls/number-value-control.ts",
+      "gitBlob": "54427371e24cc96b1d601f5a878f4819eb7c91a9",
+      "sha256": "562f1c98a3d510da29a66aa37601fbe9bd4451540ee8b3218503d992aef567a1",
+      "bytes": 2856
+    },
+    {
+      "path": "src/cards/number-card/number-card-config.ts",
+      "gitBlob": "d305aff6bb792ef270b6eea4d2e3ab6dfb9f8569",
+      "sha256": "cb09c88db02fd1a5edb578cfe78080bdf14456082bc57b977a9f04b5936a01b7",
+      "bytes": 1152
+    },
+    {
+      "path": "src/cards/number-card/number-card-editor.ts",
+      "gitBlob": "2b2a04f3a78c621333f2f466bf63d1e80d08cf1c",
+      "sha256": "2a5fdc193e2c75caa26e53f267b28f898642c9b1ecfeeb53d86d7a9f605ee755",
+      "bytes": 3540
+    },
+    {
+      "path": "src/cards/number-card/number-card.ts",
+      "gitBlob": "db7af41ce4f64641ee0362e6c3d24f08553f2277",
+      "sha256": "130b2484029c3827ad43866176969433cdcd3839966fe1ce0fd9eb04fafff9fd",
+      "bytes": 6275
+    },
+    {
+      "path": "src/cards/person-card/const.ts",
+      "gitBlob": "6c43f1b7c9aaa5a3919a5a4fe7fdf9658fca3d3a",
+      "sha256": "fa23c891101860b8108151656635530cdccdf2b7d13d2c1befd20324470ffb0a",
+      "bytes": 242
+    },
+    {
+      "path": "src/cards/person-card/person-card-config.ts",
+      "gitBlob": "490ffe735ab325d089f42e80f86575cf01da9353",
+      "sha256": "9a9f21e11136f59faf6a39e8722e743db7ebdcdb68791b4dc06df3ebba3a831e",
+      "bytes": 833
+    },
+    {
+      "path": "src/cards/person-card/person-card-editor.ts",
+      "gitBlob": "da8e7495f8b41d3ec85c638172c09df123b5e63c",
+      "sha256": "e2fed0fe0b3eb27ea675829678bb8aaf2ee389db83b08ae59be0e1544e8cb124",
+      "bytes": 2833
+    },
+    {
+      "path": "src/cards/person-card/person-card.ts",
+      "gitBlob": "956bc84004baa5a5a1bb8f77920116147f94725f",
+      "sha256": "6ae08dc72db2469ff638569c5b7c61bdf8c6159883b09a0c2e4f753c935a00e6",
+      "bytes": 4386
+    },
+    {
+      "path": "src/cards/person-card/utils.ts",
+      "gitBlob": "27502fed566056eaa3a67b9616808e80e88914fb",
+      "sha256": "58d2c584d02b4c2c2b0a7fe176c6b5233973fa81adfd9bb6aad3df977046dc3f",
+      "bytes": 1087
+    },
+    {
+      "path": "src/cards/select-card/const.ts",
+      "gitBlob": "a54a14e904e31a671dc231e15754c00943828187",
+      "sha256": "12c428c14b596f396729950cffdf983de2c5b80ae6fbf75a113d0e0a8e4dab68",
+      "bytes": 240
+    },
+    {
+      "path": "src/cards/select-card/controls/select-option-control.ts",
+      "gitBlob": "b2b38fb10cb3270fbcf1bf4bb6fa823e8af1a8d5",
+      "sha256": "5268f48600bd9cf3228829e9014bc55357e693fa82797f012b7c09d4e4b3b316",
+      "bytes": 2604
+    },
+    {
+      "path": "src/cards/select-card/select-card-config.ts",
+      "gitBlob": "38d7ea03fd90624d0e3cade57fb2b94b6246d312",
+      "sha256": "a1103a56f05c96c74c02fdea63bbcd555b04e08f45b4e213b7ffa5e4feb44892",
+      "bytes": 927
+    },
+    {
+      "path": "src/cards/select-card/select-card-editor.ts",
+      "gitBlob": "6ebfcb71b095b2dccec6c2e5549e6832d6e507aa",
+      "sha256": "c2b660c6741940e9e31cb87ce332b49a08c4ccf554a521f519d56a144dde647e",
+      "bytes": 2987
+    },
+    {
+      "path": "src/cards/select-card/select-card.ts",
+      "gitBlob": "bde4c2c5870cac6d7eb12d654c96e5a0a0f93d73",
+      "sha256": "3964eb158fc2f8511e179dfc7cda904c794f71d5426699687a6a30a9cb192a76",
+      "bytes": 5525
+    },
+    {
+      "path": "src/cards/select-card/utils.ts",
+      "gitBlob": "8dc6573182164ffaa31f49b33e365b3772945976",
+      "sha256": "147385f17d47275c69eb72aeda1e127c5d6a86c229f920774e5ff87e88f93f0b",
+      "bytes": 272
+    },
+    {
+      "path": "src/cards/template-card/const.ts",
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "src/cards/template-card/template-card-config.ts",
+      "gitBlob": "5afac639d309747dc5e138b2d32d110272a6bb85",
+      "sha256": "46d60ee447ca1456e6c6cd9cba49d3b6c4fc9416c1da3cbd20e7a538d69f1d65",
+      "bytes": 3383
+    },
+    {
+      "path": "src/cards/template-card/template-card-editor.ts",
+      "gitBlob": "0f6b8a68a3d97a7438fe16f82173b6a2b1adea61",
+      "sha256": "f6a6768b389d00574d422152000a318aed4ee0d392447986e431ffe0456e4dfd",
+      "bytes": 14710
+    },
+    {
+      "path": "src/cards/template-card/template-card.ts",
+      "gitBlob": "2295879e06e8e68cbc381b91328c80e4add88ee4",
+      "sha256": "724960a302a3c5ddfb602a9e7f1e77d97e3e83ca2c89244352e52e99bc5cf071",
+      "bytes": 24256
+    },
+    {
+      "path": "src/cards/title-card/const.ts",
+      "gitBlob": "08f9652246448ded7550c42567748f77fabfa18f",
+      "sha256": "d59e1065c67e9a87472a5364a44e7ab2cee28917f3b63b9bb88ff04c7b32a869",
+      "bytes": 171
+    },
+    {
+      "path": "src/cards/title-card/title-card-config.ts",
+      "gitBlob": "7139f9f1330ad7d4e194069f974cb72961afdcad",
+      "sha256": "ee3fbe67c4f361c7d1fc4cb593eccde597af3fcea182028c7084e8c2c3e397c6",
+      "bytes": 729
+    },
+    {
+      "path": "src/cards/title-card/title-card-editor.ts",
+      "gitBlob": "e007f501a33fd88325d969f551678dce90e218f5",
+      "sha256": "62f161c152e59ccab7ad48de5e31ecb8e0aa4f6e2291fcf2fb19c0cdb05e9880",
+      "bytes": 2746
+    },
+    {
+      "path": "src/cards/title-card/title-card.ts",
+      "gitBlob": "b778efcbd66d9ec2ca0bc87c8ffcf7940781bb7f",
+      "sha256": "d260342328975f26f27251ecc22dcb7ce70d28bf51b38fb3ba728ff26b258317",
+      "bytes": 10340
+    },
+    {
+      "path": "src/cards/update-card/const.ts",
+      "gitBlob": "b21594bd17d25b146f2c7fd8dd5ad81d0008180b",
+      "sha256": "3003b315e716c6773c856b30dc7320fc2e38851818203eb5b83ea6650320d558",
+      "bytes": 462
+    },
+    {
+      "path": "src/cards/update-card/controls/update-buttons-control.ts",
+      "gitBlob": "fb255c62463c8685e44ffd10c1d1bd8b3df948d4",
+      "sha256": "d4d99504ced77712ff638662f1e4cfbc7cfba2985cf818a6254739e6a387519d",
+      "bytes": 2270
+    },
+    {
+      "path": "src/cards/update-card/update-card-config.ts",
+      "gitBlob": "bec3597ae1f1c46e648880d21421f22796545314",
+      "sha256": "be79acf80726deec57989f1027d65b321c9db73d1cc2b279d21bad8d9bfdc54c",
+      "bytes": 1024
+    },
+    {
+      "path": "src/cards/update-card/update-card-editor.ts",
+      "gitBlob": "e17de26a61c3a6e4c5e37b619afcb82fd0a22534",
+      "sha256": "b235b63c04485d942067d3b116212adbabfbc766fe6df6d877fba65ef9e40768",
+      "bytes": 3213
+    },
+    {
+      "path": "src/cards/update-card/update-card.ts",
+      "gitBlob": "94405f325cda07e83c8822bde47e04661f9c93ae",
+      "sha256": "b473223178265b3b63313ccbe4c11bab29d70162d95c7c1171275f84327412c0",
+      "bytes": 5646
+    },
+    {
+      "path": "src/cards/update-card/utils.ts",
+      "gitBlob": "a9eeb8c93872370cefcd8a8574cb39f2da55f278",
+      "sha256": "1e39227df94a507e4591298bf502f4da2aa74e87f3a0ae93d1113e7863acba16",
+      "bytes": 335
+    },
+    {
+      "path": "src/cards/vacuum-card/const.ts",
+      "gitBlob": "d804c827f900d198c9275ff56f32f3a7e78b4bc4",
+      "sha256": "e84e0adef10705e061b33c1caaa65f29b72ef5483bf541a41373d883b7b27f23",
+      "bytes": 224
+    },
+    {
+      "path": "src/cards/vacuum-card/controls/vacuum-commands-control.ts",
+      "gitBlob": "efd44ad64acdb4e46ae0aedb2abfb879e76b8155",
+      "sha256": "3326d62ad5c2d9e01049b3d2d476a5afc10c65891e61078ec9b5145a877fe04d",
+      "bytes": 5151
+    },
+    {
+      "path": "src/cards/vacuum-card/utils.ts",
+      "gitBlob": "2e5fd2d1fdb99eb6f8fc527bf0a07eb0acfc7e50",
+      "sha256": "89d062eacd8b751aa64ebca8b12971dbaadacbf409258874fd9f0d3bccd188d0",
+      "bytes": 783
+    },
+    {
+      "path": "src/cards/vacuum-card/vacuum-card-config.ts",
+      "gitBlob": "e79be18cc592596c236711204d84c2262defd624",
+      "sha256": "8d1e5089680873f6bdad99eb5b67e16300b38bd56142b6ee862e24bcd69cbf19",
+      "bytes": 1210
+    },
+    {
+      "path": "src/cards/vacuum-card/vacuum-card-editor.ts",
+      "gitBlob": "22edcce5e020bb34401bf57df7c1676de095a273",
+      "sha256": "3c4bb63a2e075f51b2a6e02fc128fc4f97072b0e696d615704d113ba587b3b11",
+      "bytes": 3542
+    },
+    {
+      "path": "src/cards/vacuum-card/vacuum-card.ts",
+      "gitBlob": "acea9991e39927427dec6358741291eb17d8821c",
+      "sha256": "94cd79b83aba603bfa56b0c4375187a32c9cf5a41cab9a89b8916a12a6119730",
+      "bytes": 5656
+    },
+    {
+      "path": "src/const.ts",
+      "gitBlob": "f0e5c10142cb4291f51e2c21a8ec9f1246f3ad9c",
+      "sha256": "7dedc1d012880c963d81a35bf9ecd3f67bb710141d4f1325532fcd1f718d73bc",
+      "bytes": 39
+    },
+    {
+      "path": "src/ha/common/color/compute-color.ts",
+      "gitBlob": "93688f9358f43cfa90db4fbe1cb43b25b7bf8515",
+      "sha256": "89728444750f1619ca79dfcd7e0ecc7f0fd65cc1a760568f075f0278c389b9e5",
+      "bytes": 899
+    },
+    {
+      "path": "src/ha/common/color/convert-color.ts",
+      "gitBlob": "f6bbcd2c24d3e81117d41eaf5cad540daaa3ff5a",
+      "sha256": "e473a42cd1e90709931fa2ffdbd3d6ff6a0a9bef6e0248d4ba6b2c3d9c98fc03",
+      "bytes": 4670
+    },
+    {
+      "path": "src/ha/common/color/convert-light-color.ts",
+      "gitBlob": "db4bf38f67dd25ac4d90c81a6350a574ec1728b5",
+      "sha256": "6bc4bf5a3f48c796787ff558ba05e510579d378b7bee18f59bcb7b27c87bfbef",
+      "bytes": 3198
+    },
+    {
+      "path": "src/ha/common/color/hex.ts",
+      "gitBlob": "ad5e6e64aeaeeb6c595aac6fd6aa3056372f1e67",
+      "sha256": "2b246b0286254d26daeac99b71a11d55de08d45fc351c379487956884ae2f8c9",
+      "bytes": 1215
+    },
+    {
+      "path": "src/ha/common/config/version.ts",
+      "gitBlob": "1355449af216e09286e3ca64f42b914cdef3d703",
+      "sha256": "3b4e380ebb7df92ac8c5acd94d7e38e66acf5df96937e18bf6aebf91e97369ab",
+      "bytes": 431
+    },
+    {
+      "path": "src/ha/common/const.ts",
+      "gitBlob": "56edde57f6435d12ce631eedfef32723df62a3fb",
+      "sha256": "d75b87ee8d177eb0ed04f0d78b7737d6dcbc06f9232b9a8d05d7eb21ef8f4d18",
+      "bytes": 476
+    },
+    {
+      "path": "src/ha/common/dom/fire_event.ts",
+      "gitBlob": "a72bb67ea529fa5dbe0c482d961a48e1ae53fa2f",
+      "sha256": "26dd194f0b9a65e84c1864c234d07a34b57b321ce543a8c3ae7d167d4de82e77",
+      "bytes": 3102
+    },
+    {
+      "path": "src/ha/common/dom/get_main_window.ts",
+      "gitBlob": "a2a5cca7b147ed5621306b99a9aa22724d965d98",
+      "sha256": "995597f0f6c23e27006156b0ddc367e1dd7db30fcfb2b9851144188625c00282",
+      "bytes": 202
+    },
+    {
+      "path": "src/ha/common/entity/compute_domain.ts",
+      "gitBlob": "29e56888598a01d224c4b0466efdb9430948db76",
+      "sha256": "6efb2508b8d1f6a20a814716ae0414b8069ea7f279e78ab2565d35fec278343f",
+      "bytes": 104
+    },
+    {
+      "path": "src/ha/common/entity/compute_object_id.ts",
+      "gitBlob": "eb3030643985e239096f67d6d5428b176f79790c",
+      "sha256": "caceddfb5a855e88d1d2e0025ecaf34e3fb33932a5895d9ab2e7e6a5985e9566",
+      "bytes": 148
+    },
+    {
+      "path": "src/ha/common/entity/compute_state_display.ts",
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "src/ha/common/entity/compute_state_domain.ts",
+      "gitBlob": "1b972ea22f84b60ca8df882d0dbd073a1a21842e",
+      "sha256": "c1a57cae5fd475c85e7fa84c34ccfb4d885667fe0f8eb5b879c39be909a99f90",
+      "bytes": 211
+    },
+    {
+      "path": "src/ha/common/entity/compute_state_name.ts",
+      "gitBlob": "2311830a9c1126db5bfc8b975a5900d2e4ba3398",
+      "sha256": "eaeddb684def1d02727246dd39dcf1af8d53cae2e57efb4bc0620ac4c2c50f11",
+      "bytes": 516
+    },
+    {
+      "path": "src/ha/common/entity/supports-feature.ts",
+      "gitBlob": "18bf3cd891ce9edef9b0f6f077f0fc20a05e71a9",
+      "sha256": "3e46c8e79da901a04bd93834c7d79a8e4671611f0ee543dd7fc25e00c0dd10f4",
+      "bytes": 427
+    },
+    {
+      "path": "src/ha/common/number/clamp.ts",
+      "gitBlob": "5591885f2ebba20eeacd8e017c7fab2236a852b6",
+      "sha256": "c13f2f1f30b3ccc031d853bd826d5d6f6ab8514c73f6eb603ac554fd4186a34a",
+      "bytes": 404
+    },
+    {
+      "path": "src/ha/common/number/format_number.ts",
+      "gitBlob": "cd8e26328f6c4c63832607131aedcd2b0cc8f9f2",
+      "sha256": "ed4085d68d0bd2096fffb24af67bcd27f55079290e9778523292a0c2e5d13a68",
+      "bytes": 4809
+    },
+    {
+      "path": "src/ha/common/number/round.ts",
+      "gitBlob": "d0da48ca0ee44e36b7edf4b31e07a8cd4ede4dd8",
+      "sha256": "f70940cfdaaf324984787d3a2e9e0513cc3501970d64ead8edaaf9e19c47e91a",
+      "bytes": 120
+    },
+    {
+      "path": "src/ha/common/string/compare.ts",
+      "gitBlob": "a14e087ccbf74ad7c071d2bcab1a246584f7f63c",
+      "sha256": "f79811cfc15a8abbd8ddfd93ed171cbcd2556fbd499303245e037a707ad3f276",
+      "bytes": 956
+    },
+    {
+      "path": "src/ha/common/string/has-template.ts",
+      "gitBlob": "189f10f6350084d3bfa93fc4360951dfd20eb078",
+      "sha256": "c8b42066ebfef757620ea4b75b15c17dada67146b422cee8fe3e861731e65ae7",
+      "bytes": 474
+    },
+    {
+      "path": "src/ha/common/structs/handle-errors.ts",
+      "gitBlob": "96c82081c565523df42f27ec15dab415eb657567",
+      "sha256": "60685592d67da1733a0248af5add79d752f1b1e2a09508b2f502f350c59baa15",
+      "bytes": 1588
+    },
+    {
+      "path": "src/ha/common/translations/localize.ts",
+      "gitBlob": "f68bfae50e34dfff6573371405a5596973625e23",
+      "sha256": "f5cd564b78a512a3c37aa802108394315b8ff3046b3f99879e02b7091b978f5e",
+      "bytes": 68
+    },
+    {
+      "path": "src/ha/common/util/compute_rtl.ts",
+      "gitBlob": "7e71b1b15bd0b1a78f40576567cd54a107ec6faf",
+      "sha256": "88e84807e8acba0e9b29404e82fdb055f9edb8099b9ac67920ca81eeead4a52f",
+      "bytes": 1047
+    },
+    {
+      "path": "src/ha/common/util/debounce.ts",
+      "gitBlob": "cd61f072b95dfa28931b73f45b13616be18bdae4",
+      "sha256": "817245e78aa5b8e28740f3ca3127145dd30442c20e5ee09143e76e67a46eb4a9",
+      "bytes": 906
+    },
+    {
+      "path": "src/ha/common/util/deep-equal.ts",
+      "gitBlob": "780aef69520a5b80d82d286a72a2fd2a8ea9bc93",
+      "sha256": "812dc0d09139f2b3101031bb89e00c7aba2e5af18aec7e2812859e4c974d5425",
+      "bytes": 2414
+    },
+    {
+      "path": "src/ha/common/util/render-status.ts",
+      "gitBlob": "958d65fc8edcb00750cd9fdc4f37bc0a2668295f",
+      "sha256": "c400bbf85718239e170931a7af1349da7d7d350a26492a061663aa3bd0ccddd1",
+      "bytes": 224
+    },
+    {
+      "path": "src/ha/data/alarm_control_panel.ts",
+      "gitBlob": "fb8109277f23168fcdbea2ce9d8ec66fdeba6f55",
+      "sha256": "218a995051074df9bf1766cc178b4e93a7dfe2848e81d51ffa626a3a2841de5e",
+      "bytes": 3055
+    },
+    {
+      "path": "src/ha/data/climate.ts",
+      "gitBlob": "8f21c0624b573ce00046787b9fdd9f846ccdc7d4",
+      "sha256": "bf925d3cae8ee77a8bbe88be5ffd1966df147e96a110a4346fd247c96d199cca",
+      "bytes": 1943
+    },
+    {
+      "path": "src/ha/data/cover.ts",
+      "gitBlob": "a418a1ea25d37c5cded2856fee2d6d224afdf7da",
+      "sha256": "aaadc657aaa4df33d18c6db2460a2979415bc924e48910ab167ba9c1d76ac7cc",
+      "bytes": 2053
+    },
+    {
+      "path": "src/ha/data/entity.ts",
+      "gitBlob": "bcd91d480b591bd6134f499ad72b60351def6e80",
+      "sha256": "5e40d39403a399f5c268a7eba5e6bf366ed65723226afa7f05bb7b2ec3251418",
+      "bytes": 1486
+    },
+    {
+      "path": "src/ha/data/entity_name.ts",
+      "gitBlob": "1cd5266103dee518f69a4aee9554565de631bd29",
+      "sha256": "bb99b6934d28a909213f9523b10cd24cabd75758d365750fd3b9f2ba53b84e7d",
+      "bytes": 365
+    },
+    {
+      "path": "src/ha/data/entity_registry.ts",
+      "gitBlob": "1883e66d3c02906ba64edbceb189512f5b5d05d3",
+      "sha256": "d5c58b5e99cf4f2189f4f8ffee7d8f648b0c73a094408c1649b5bf62ebfd4b98",
+      "bytes": 8118
+    },
+    {
+      "path": "src/ha/data/fan.ts",
+      "gitBlob": "dcff552f1278eca704bab5d85442bd3fb4f2c642",
+      "sha256": "9fd73882ddd5898df79157d6ee5c4afcc5f61c10476807a489d7cadede58a61d",
+      "bytes": 162
+    },
+    {
+      "path": "src/ha/data/humidifier.ts",
+      "gitBlob": "a1a4671b00bf46ee17390e7a8706bc17ab9607a2",
+      "sha256": "a1c30a9c9596d125373e459f4b0ca4f03bc8f7698138b98c9ec7281762c80357",
+      "bytes": 726
+    },
+    {
+      "path": "src/ha/data/light.ts",
+      "gitBlob": "661d703d1de997e32e5cc27dc9db69ef38950c21",
+      "sha256": "8951a228fa0698743fc8b4f9069b8b7be5a1135edf4bd017dffa785b28ae4fbf",
+      "bytes": 2874
+    },
+    {
+      "path": "src/ha/data/lock.ts",
+      "gitBlob": "e4c3c75d476b54420bbf3d03679b2efe186a0e7c",
+      "sha256": "10ff093b9b349b42fc37ea78afc3772f40d7e6a7e622e94bcc6867c1ba213320",
+      "bytes": 1128
+    },
+    {
+      "path": "src/ha/data/lovelace.ts",
+      "gitBlob": "3aaa7fed4b125e2a17645b65d9299e4c6ce9d687",
+      "sha256": "c2287efad6603e2323a8c9938239425a94f3fd117abb837fcdcc65630c71e0d0",
+      "bytes": 8431
+    },
+    {
+      "path": "src/ha/data/main_window.ts",
+      "gitBlob": "2a6a6d3e3000e151c726ba9a75a1ef17775a0fe4",
+      "sha256": "bf5cc0ffae612b5ea99b744b46a12597859e64960f79b7bb3eab56ae16e96b3f",
+      "bytes": 50
+    },
+    {
+      "path": "src/ha/data/media-player.ts",
+      "gitBlob": "776a87d56581f4298115e99b13a8ad61164b8305",
+      "sha256": "58dbc1da44ca2625003a1495eb28662473020aae1e85476f3542822f1877768e",
+      "bytes": 4241
+    },
+    {
+      "path": "src/ha/data/translation.ts",
+      "gitBlob": "4adf40f8b2a3aaadbae814f766ffec3e90bfc6d8",
+      "sha256": "388b713ab31c20a19f5dc82b5b7304417d31659fcc0225f1de72c3b9ed494846",
+      "bytes": 1276
+    },
+    {
+      "path": "src/ha/data/update.ts",
+      "gitBlob": "e347dc57f8d60dff7f426a2e944628f517d7be5f",
+      "sha256": "89ceedb9abab20e06ad70cf4fe453ced18a5c5e1a2fa30b8eb4df727feb75a79",
+      "bytes": 3339
+    },
+    {
+      "path": "src/ha/data/vacuum.ts",
+      "gitBlob": "603728a37c1670d8dcc2b42ace896df09b01ae29",
+      "sha256": "6bf13b9772c28c949aef96e56e813609b1a456985d4956043dccdd8101d9ce86",
+      "bytes": 1080
+    },
+    {
+      "path": "src/ha/data/ws-templates.ts",
+      "gitBlob": "57bfde655b415470d6d2ac5f5ed73ee1f7ddbdb8",
+      "sha256": "8be78a629a1331a665e4c997cd59612fb872cf0eb464d78f25919a6810763f5d",
+      "bytes": 703
+    },
+    {
+      "path": "src/ha/data/ws-themes.ts",
+      "gitBlob": "b14581a9c4652176d9ab1f92af27a3ec3a4cdeb7",
+      "sha256": "b825cdb26596686f8cf08d709885c2c83761924c3b4c075a3986c5288a69d4f5",
+      "bytes": 721
+    },
+    {
+      "path": "src/ha/index.ts",
+      "gitBlob": "d9c67be4e6051f6be9844104583e6c71c280ab5f",
+      "sha256": "04cd4ab3fa1bce5ce5c01d8d0c582f8edefe271312ee9a70103b75da41c6008c",
+      "bytes": 1873
+    },
+    {
+      "path": "src/ha/panels/lovelace/card-features/types.ts",
+      "gitBlob": "0c3a91149a7a1e79f406fb253002a384fb0ed49e",
+      "sha256": "d2af9329789e461875e502e80cf2244988066f90335a3727d0df2725515ee631",
+      "bytes": 174
+    },
+    {
+      "path": "src/ha/panels/lovelace/common/directives/action-handler-directive.ts",
+      "gitBlob": "6a5ab4c674861e593e20dc54cede3aa7c68df9c4",
+      "sha256": "ec279c7dc104285923dfbca26be454964e372c9075dbebba6ddd17404578a4ef",
+      "bytes": 7348
+    },
+    {
+      "path": "src/ha/panels/lovelace/common/entity/turn-on-off-entities.ts",
+      "gitBlob": "82301043d475fa9b0235eae625916584d7d66b79",
+      "sha256": "c858e5b065bfa0921de46fef51fc6f4ab6fe6ff0ef9045847c129a492e14ec82",
+      "bytes": 1252
+    },
+    {
+      "path": "src/ha/panels/lovelace/common/entity/turn-on-off-entity.ts",
+      "gitBlob": "701c2c4996abfb119d2b5cd15bee7bdcdbe97a85",
+      "sha256": "ea8f5bc1d0ce495968a57614a4bfd1bb08c108fe4c7127ff2e760087542f5dd9",
+      "bytes": 891
+    },
+    {
+      "path": "src/ha/panels/lovelace/common/handle-actions.ts",
+      "gitBlob": "157dd81f0a2814b39c13b37116fc96eeb8f1e617",
+      "sha256": "4060eac1ea295928593e361c62954105256a31ecf04b0bc04326d9961306000c",
+      "bytes": 703
+    },
+    {
+      "path": "src/ha/panels/lovelace/common/has-action.ts",
+      "gitBlob": "caf973c77bbe14642e271fe21f727bf49c05ec3a",
+      "sha256": "c68e0f586d9c09570a9a7bd2e166636474d9c4d94a657676454f0a00659f6e99",
+      "bytes": 177
+    },
+    {
+      "path": "src/ha/panels/lovelace/common/validate-condition.ts",
+      "gitBlob": "2ae5df10abf5fda2a7fcb43c31c096f6e4f82dec",
+      "sha256": "0708fc6c57188f21f3b391c8ad494758d47b0257972fd1e6ccd40debe269aec8",
+      "bytes": 681
+    },
+    {
+      "path": "src/ha/panels/lovelace/editor/structs/action-struct.ts",
+      "gitBlob": "8724fcf3dfef0f976720ff0b91a591ad88c7a80b",
+      "sha256": "4a0d92caf803dcea05e4aa214899ad7300522065ea94157bceb76c572eac0eb9",
+      "bytes": 2561
+    },
+    {
+      "path": "src/ha/panels/lovelace/types.ts",
+      "gitBlob": "2f7d32c77d01047f162aaec0ec5c22ff15db61b1",
+      "sha256": "19485f01365b0d6c9309435857762240c2ff15fa79cabdfd29303988a3d4121b",
+      "bytes": 1881
+    },
+    {
+      "path": "src/ha/resources/ha-sortable-styles.ts",
+      "gitBlob": "8c7a5ded7c7bac9d9f708f7112ee37551a06ce75",
+      "sha256": "5ffd44073ea671a18c126cb5c1d7f34a739ffeb8aa261ea9be9afd7bd7d1d2dd",
+      "bytes": 1923
+    },
+    {
+      "path": "src/ha/types.ts",
+      "gitBlob": "ffcb2bb3edf180d0fb929a4200bcdcd63770ebd0",
+      "sha256": "56e02b2416b4b4859049b977f007e91c5eae6da52fd35f04d0aa6709241e50df",
+      "bytes": 6013
+    },
+    {
+      "path": "src/ha/util.ts",
+      "gitBlob": "a884ecd768a53c49d95afff8986f9fd86ed04fa0",
+      "sha256": "22a092c74fbff58ca867896c16862b9514e9735355d4db471dc40deef88feeb9",
+      "bytes": 497
+    },
+    {
+      "path": "src/localize.ts",
+      "gitBlob": "160c308834c123cd0bd1b74f9bbf640d72935ce0",
+      "sha256": "4de743364cee29ca70bce4a411db4a79c6f9cfc0f7b9d1d2bfa386c1f3203972",
+      "bytes": 2843
+    },
+    {
+      "path": "src/mushroom.ts",
+      "gitBlob": "e53405bd7addfc763124d52a47f1cb976ed01732",
+      "sha256": "8e3907231f898f5db95e23caad6d81dfc636ce474ab99349b04ed2b1dde27a8a",
+      "bytes": 1031
+    },
+    {
+      "path": "src/shared/badge-icon.ts",
+      "gitBlob": "cb5f84921f164ff03a266713c2f7b24627c50762",
+      "sha256": "a3dca98aa777a24d445a4491f3218180ecac841d446052e1de2f1160bb72cfd5",
+      "bytes": 1101
+    },
+    {
+      "path": "src/shared/button-group.ts",
+      "gitBlob": "88f7c6643ebfea64b493d9f24e8fee80a316c6aa",
+      "sha256": "20ef776bf07ab73fbd2d28334f9d834065a2013d28750f0a3b7643ba6898f27c",
+      "bytes": 1694
+    },
+    {
+      "path": "src/shared/button.ts",
+      "gitBlob": "1268b06c78ca13e9c8a14b20d008ea17eee9d785",
+      "sha256": "5c4ab38b38d1482e1bed2c89cc465f4692f91552093b2a8e4690e87212e7c1e2",
+      "bytes": 1856
+    },
+    {
+      "path": "src/shared/card.ts",
+      "gitBlob": "4fd7768f26b47c0843fb92229bd51dca915c9237",
+      "sha256": "c91881209789d177f67fcd82d8915a7bb848c25af633625ae39a93465c9b5bb9",
+      "bytes": 2275
+    },
+    {
+      "path": "src/shared/chip.ts",
+      "gitBlob": "4d1f67016db563011fda64847933cc2a32f92534",
+      "sha256": "123dc88dc5952977253df74340697fcd459fac698c33ebe7180e53fef9ff55a3",
+      "bytes": 3193
+    },
+    {
+      "path": "src/shared/config/actions-config.ts",
+      "gitBlob": "dd6a2ede6869a21984562f732b2d291f5fa83d04",
+      "sha256": "9110a75c0321d13f4d9d02afbf02c6d5846b1a8a8be1f2a4f2c6501a814b147f",
+      "bytes": 918
+    },
+    {
+      "path": "src/shared/config/appearance-config.ts",
+      "gitBlob": "d77bccdd264e4e435026b352bfb7ff137c98db19",
+      "sha256": "b269bc16d016f01a59e0c505088c8d82bfc98c6ee7b1d87feff203bd6b0909ab",
+      "bytes": 3176
+    },
+    {
+      "path": "src/shared/config/entity-config.ts",
+      "gitBlob": "40bec2ec33574f42e757722191dca04b5b1b411b",
+      "sha256": "18b4a5649a1969328ec6de927e06a374ddb8774e815e101bf95b113f61c205b6",
+      "bytes": 727
+    },
+    {
+      "path": "src/shared/config/lovelace-badge-config.ts",
+      "gitBlob": "956a0e4db374b9f01eebf4e7fa25c09c8af94889",
+      "sha256": "544a17a7afd5ac97448e500442f57f53e07a8244e874aabca301abfedf35a1ad",
+      "bytes": 145
+    },
+    {
+      "path": "src/shared/config/lovelace-card-config.ts",
+      "gitBlob": "0425756e72cebfae8df52f451604fc46f2c54c4d",
+      "sha256": "35f73b8fb35af0dd311316bafeb4e4f6a49114e82307078a57868205b736ecb3",
+      "bytes": 295
+    },
+    {
+      "path": "src/shared/input-number.ts",
+      "gitBlob": "8bfd9bd6c2c49e38489272d047ef5398e8e3bed9",
+      "sha256": "d0f584f4473d3b72dcf7517ed829f381f3055c20b90924229ee11c6aab504d9b",
+      "bytes": 5677
+    },
+    {
+      "path": "src/shared/shape-avatar.ts",
+      "gitBlob": "a4dd6018294ab27b106211a2bb0e4da450d94d19",
+      "sha256": "a4fb73695a56d3791a0a84f9d84499a516c461f4e041bfe9ce863f6e7ca7a4ed",
+      "bytes": 1210
+    },
+    {
+      "path": "src/shared/shape-icon.ts",
+      "gitBlob": "4f3974dc40449767c3260d258db84d3d3107fb91",
+      "sha256": "63e4359a31d7d728895ee13936eb7aea6a3f978465901b808dd12cdd3712568d",
+      "bytes": 2271
+    },
+    {
+      "path": "src/shared/slider.ts",
+      "gitBlob": "5a7221c2f498bbb5064949dcd5aff6125c15dec7",
+      "sha256": "cdcc405c4c0569a61128bedc088e61823217d0af08c5bc9d059aec349c684cc8",
+      "bytes": 7897
+    },
+    {
+      "path": "src/shared/state-info.ts",
+      "gitBlob": "552e17e188b55710467acef2ea1a0222363ab9f1",
+      "sha256": "4e4d09f774fe33f9f18376fdd0734ddf53656c9d47160b56c0e87c2f3bdcf7b0",
+      "bytes": 1913
+    },
+    {
+      "path": "src/shared/state-item.ts",
+      "gitBlob": "17a9a1a29f257535a5cef5e426464df424eb17e5",
+      "sha256": "0d4a90d8c92101ba6f9c38b23f72d3d9a3ab70ba247de8a872f77ce70ff5e9fc",
+      "bytes": 2071
+    },
+    {
+      "path": "src/translations/ar.json",
+      "gitBlob": "100371fdc1b8ae3770da9c044361e7402c989b7d",
+      "sha256": "5be615500b6226d61b4f4c5e3c5c9be0dcdf1a3bbe3829690b41fa96bb705759",
+      "bytes": 6513
+    },
+    {
+      "path": "src/translations/bg.json",
+      "gitBlob": "af3316aec41db6f819e0dad22314c782a170e0fe",
+      "sha256": "df06ddba302cb9880c8a477c502d89969a5a59bf4dc29b6817d315adb082d0af",
+      "bytes": 6185
+    },
+    {
+      "path": "src/translations/ca.json",
+      "gitBlob": "00a90fb19d2076a69f9f9d28c6aed5daf3e7c12f",
+      "sha256": "4da50bc1614a3855a9778aa36fdbd636ef79e8a7f9982cc33c61b79080e87871",
+      "bytes": 5470
+    },
+    {
+      "path": "src/translations/cs.json",
+      "gitBlob": "f6cbd2a26e62556c9b99da38a200ae09502064f6",
+      "sha256": "ac658a8ccb5bf1374359333291394d489dcf6dd71799e2db47c85e69da23fc73",
+      "bytes": 5490
+    },
+    {
+      "path": "src/translations/da.json",
+      "gitBlob": "e0c4a300bbaed396f20a486d5f48e26cc304bd42",
+      "sha256": "f7bf6b05da424a775907acabe2d205e8f8ea14e5dd7d6f8b4e74c0c14b6f9857",
+      "bytes": 5193
+    },
+    {
+      "path": "src/translations/de.json",
+      "gitBlob": "823fc47805692b124532359fb36dff1901c0850e",
+      "sha256": "3b9ed4ff512c4c2f11d5a48cf7538eaf293255a2da7aa82d5face20a9712483f",
+      "bytes": 5556
+    },
+    {
+      "path": "src/translations/el.json",
+      "gitBlob": "cf8fc2b6db975e02a649415918a17678e0385245",
+      "sha256": "21662a093a083d6a82767ed0f0b8021456df3d4f2daa4185ddfe60b1dc284e43",
+      "bytes": 5189
+    },
+    {
+      "path": "src/translations/en.json",
+      "gitBlob": "e3f278b994d0fb0ff15d267af54bfc27aa08c6ed",
+      "sha256": "b2deb2d890c4b90393d35130dce9d0413333cbaf039d7b94a30ae7e33749b874",
+      "bytes": 6576
+    },
+    {
+      "path": "src/translations/es.json",
+      "gitBlob": "be4dabc87d63690dafbf35af268503268bc39913",
+      "sha256": "c730bd6baae1a671badac77c3c47c1736eb9037331c545972849d6cad6eee42b",
+      "bytes": 5713
+    },
+    {
+      "path": "src/translations/fi.json",
+      "gitBlob": "6373048ee65a3322e8e156f63e57519edba059cd",
+      "sha256": "8842425bed0ea4439a0ed6354537831cc9c73766eee68a77ef378a2fecb43aa7",
+      "bytes": 5391
+    },
+    {
+      "path": "src/translations/fr.json",
+      "gitBlob": "5a0aaaf261b3b0f8efc7467b563cd20c22e3567d",
+      "sha256": "6a3f52324c6906c6aaffcb1ed4db498f3067607f2150982f143dd1d45ecf419e",
+      "bytes": 7430
+    },
+    {
+      "path": "src/translations/he.json",
+      "gitBlob": "25e68847036b0de4fb67a1750add6e19341cc4d3",
+      "sha256": "d279d59707657798df64911841b1dc6c33fc549e2d25e8f6dbd23046f2bdaf3c",
+      "bytes": 6101
+    },
+    {
+      "path": "src/translations/hu.json",
+      "gitBlob": "1e11091631eecd0fc8a5ea06dc698b968c83b97b",
+      "sha256": "cf220ed4bd1adf2fc569f07c00e550e44bd7ebb72e434220f42af6aaec6b97c4",
+      "bytes": 5490
+    },
+    {
+      "path": "src/translations/id.json",
+      "gitBlob": "ee479285086fcf3c538eda36bae8f785422bd96c",
+      "sha256": "60ae29574211107b5285849c562379697182fd4c01ee9b54aca8b83414e664d1",
+      "bytes": 5217
+    },
+    {
+      "path": "src/translations/it.json",
+      "gitBlob": "66d5466b316bb0ab94254cdd092cdf1c8f0f1a2b",
+      "sha256": "d2211041147987c9d76aa850968d11f234a8ac0d08f350a65f993873cc98718d",
+      "bytes": 5526
+    },
+    {
+      "path": "src/translations/ko-KR.json",
+      "gitBlob": "316ebdf57ac4820e3a64222b22d34d622c2a0e53",
+      "sha256": "2084fd5deb6870848120e70bd7e706749af942f1d46c1f578460f87510b81317",
+      "bytes": 5013
+    },
+    {
+      "path": "src/translations/nb.json",
+      "gitBlob": "7c4d6f2579c71eb42aa122a38a71e94e12ef91fa",
+      "sha256": "9a0a795e7bdc8ce3ac7154638537cad4bfb2c4cb9582f3d25151253e721472b2",
+      "bytes": 5166
+    },
+    {
+      "path": "src/translations/nl.json",
+      "gitBlob": "3883496e65d43b780fd76d6f35bc99e65133c557",
+      "sha256": "973a5a07344848125f724627b428e57373b6f89bc22752c88575d4ddbd0a0aa5",
+      "bytes": 5558
+    },
+    {
+      "path": "src/translations/pl.json",
+      "gitBlob": "ab3996c60d3c9c90eb7e0ddb909658cae4c46c00",
+      "sha256": "0327ebf86cac7e3b2ce68e2b719c111923b528704c8e8fb82d9e9b2feb6cf559",
+      "bytes": 5503
+    },
+    {
+      "path": "src/translations/pt-BR.json",
+      "gitBlob": "9366fa0e8dfc23abccbbae64e1a00386f456ea0b",
+      "sha256": "426dc962b05e9b3c061f541699fb88edb27b7405f0c257fa4032cec52c9bb044",
+      "bytes": 7029
+    },
+    {
+      "path": "src/translations/pt-PT.json",
+      "gitBlob": "f0d68b85b059e59bdb4920d035d9048ca5e0c492",
+      "sha256": "b7f86f316ac149075dcbf555e1f3aaea42a92198cc9de5ff84c7fb3aad7c84b3",
+      "bytes": 5423
+    },
+    {
+      "path": "src/translations/ro.json",
+      "gitBlob": "629ec79a3ad2db90e80ab7177ece996c8b429b8f",
+      "sha256": "b90af4e34db019a6d21f77fed9bb23e21a961266d452a340a1c5be5a1fb59dca",
+      "bytes": 4853
+    },
+    {
+      "path": "src/translations/ru.json",
+      "gitBlob": "828731cdbc2649a7e1e972dfb5c476a6ef7634bd",
+      "sha256": "65431cfa3b4f3bc2678519a097468e018ccfd27300714c4b59b7c1548ef4666d",
+      "bytes": 7619
+    },
+    {
+      "path": "src/translations/sk.json",
+      "gitBlob": "3307338e3c4d402c395abc1774f2850c0064672c",
+      "sha256": "5b33378022a53e5547c7ef2f669ff90beaf6a292af42b782019bf2ec47d2ace6",
+      "bytes": 7083
+    },
+    {
+      "path": "src/translations/sl.json",
+      "gitBlob": "b44d48f1b1319a9a3d2c5410befc85432ea39dbf",
+      "sha256": "917983a88d0a8d8c8004cf93d4fbea71a25e79e3761737bbea533379f66be7ef",
+      "bytes": 5307
+    },
+    {
+      "path": "src/translations/sv.json",
+      "gitBlob": "2f201e4dd005b41860419e7ecc1538c9f27aef35",
+      "sha256": "667eb275730f20a59f111b9555ff22f6cc7ec40dc243452881a46820d41bef0f",
+      "bytes": 5414
+    },
+    {
+      "path": "src/translations/tr.json",
+      "gitBlob": "864f88a8a00b7d4a89586d656a5324c393fc86e9",
+      "sha256": "41588790c80e991710402bf3a668b9f0d91ca1b3e53c06945c63a0443bd9d8e6",
+      "bytes": 5496
+    },
+    {
+      "path": "src/translations/uk.json",
+      "gitBlob": "aaee6099f580f0835a459adea9b3bb8251f8df5a",
+      "sha256": "aeead257d7a55ec3e6ac61acd7ba36ac5590092d1978daa8a5e23747bfde6d65",
+      "bytes": 7056
+    },
+    {
+      "path": "src/translations/vi.json",
+      "gitBlob": "5e1cc37aa5a75de026de69664a07d6f9cb362dd8",
+      "sha256": "a7254373a3c0af0d413972cb9a3796aa8b2f17faa5a54e7bb19d5e2bfa80f305",
+      "bytes": 7500
+    },
+    {
+      "path": "src/translations/zh-Hans.json",
+      "gitBlob": "440cab1dbb70b7089ab7af81c26942416dc48e31",
+      "sha256": "0ae6adbab9771134c3eec8403b7f2540b38582b8d558a0fc99b2d5f403c2bf46",
+      "bytes": 5211
+    },
+    {
+      "path": "src/translations/zh-Hant.json",
+      "gitBlob": "f693c357ee108497525b8e4893a980992b29bc39",
+      "sha256": "3d67972cd04147c3865c5fc9103618a548a584b6370caa2e4c6d395219319b35",
+      "bytes": 5073
+    },
+    {
+      "path": "src/utils/appearance.ts",
+      "gitBlob": "4007bafa83d3963a71de5200310808db2582c44b",
+      "sha256": "eef63dcb48a808d9c1be628186121c98d445a114956e26337ea55fe15f3b47af",
+      "bytes": 1301
+    },
+    {
+      "path": "src/utils/base-card.ts",
+      "gitBlob": "f86e2b3ce41a0dabca31db777ef5f9120ac5fda6",
+      "sha256": "4f9bed3c081260b690830769ea0665cdbaa2b6d8db8a5908d51c6b02388380d7",
+      "bytes": 8166
+    },
+    {
+      "path": "src/utils/base-element.ts",
+      "gitBlob": "2b469a14298b8cb62167e3973981c0cbfec96219",
+      "sha256": "b66bacf212b4fda53484fe0dbbf125d09a9a139f5497224e15057728dfe6be35",
+      "bytes": 1476
+    },
+    {
+      "path": "src/utils/cache-manager.ts",
+      "gitBlob": "e9a11ca31ad2078231c3b598f6bdaa8f1f67aa43",
+      "sha256": "2e542acdbf31ee5cc45d842ddce35d44a731fded930ce3833f4e5e21ac6cfccb",
+      "bytes": 530
+    },
+    {
+      "path": "src/utils/card-styles.ts",
+      "gitBlob": "b497f9f9637ef34276303ec2bde3cafd3fb2a956",
+      "sha256": "8ec6c1dea5dc81cea6a47e989f7694a56b3115599a688cc9079174c105ad1e5d",
+      "bytes": 1025
+    },
+    {
+      "path": "src/utils/colors.ts",
+      "gitBlob": "bbf4c9c872ffb6fd28635933b3f991552343eb4c",
+      "sha256": "fb1a335e26752eeaf0731a41ef83279a2e0d927ba638ef4ce0fa0fdcb000233c",
+      "bytes": 2155
+    },
+    {
+      "path": "src/utils/compute-entity-name.ts",
+      "gitBlob": "16e6ce45b94610240951fe59276c48cae3363321",
+      "sha256": "95dffa15b1d7b0d5a405e42424d1d2b8d161ea2e9c2dd6982b624477e8447e2e",
+      "bytes": 503
+    },
+    {
+      "path": "src/utils/custom-badges.ts",
+      "gitBlob": "0595d166b4a126bc51546791844bbfa32004ef1c",
+      "sha256": "192d35cbcfaed2d7c4e08672cbc1169252de2e2c4eda4d523300f2c0db46a964",
+      "bytes": 613
+    },
+    {
+      "path": "src/utils/custom-cards.ts",
+      "gitBlob": "78890ff0c2d786185e7977cfb9068551f2ed7e6b",
+      "sha256": "cf69d1bca12294e60905fb8329da2351c53bcf32ff5edf0dcc6e3ffd78414900",
+      "bytes": 598
+    },
+    {
+      "path": "src/utils/entity-styles.ts",
+      "gitBlob": "4b4dcc39f0f9fbb4b1b6dc7484ad8cf5c71426e4",
+      "sha256": "c335f68419578a7e9786fc1cc6bf7af2cf398051a0081e321ad643667b4155cc",
+      "bytes": 2282
+    },
+    {
+      "path": "src/utils/form/generic-fields.ts",
+      "gitBlob": "205ed972627756baf9e6432bad028b8d5410d1f8",
+      "sha256": "eede7713bd55b8b239615909e487240520bd5b046052ac4c4382683a9350b47d",
+      "bytes": 293
+    },
+    {
+      "path": "src/utils/form/ha-form.ts",
+      "gitBlob": "26346b908d451740ac26445fb84196964227a05b",
+      "sha256": "db68c454ab5fe03e19fbb40a6c772a4d63f854443d0d1b11878c6c7dc1b9b01c",
+      "bytes": 3619
+    },
+    {
+      "path": "src/utils/form/ha-selector.ts",
+      "gitBlob": "43bcf7ff224d8e1a57a29509f91468912ca90701",
+      "sha256": "baec085eb2adf2731f9c6c1c67ead41a8a24b143ca244445ad3e46f0640712eb",
+      "bytes": 9388
+    },
+    {
+      "path": "src/utils/form/name-schema.ts",
+      "gitBlob": "190fda002e5ccad50a49fcd1dfa4faef733f10b1",
+      "sha256": "002749c8abd1560947177b39707d8bc3edea686d357bb8d6f1c95ed9c2c89abc",
+      "bytes": 353
+    },
+    {
+      "path": "src/utils/icons/cover-icon.ts",
+      "gitBlob": "43655d42c3c600207fcb7d0fa6bcbe5118142246",
+      "sha256": "f7599f38d6a9c5a47ac043490d82ac0f7efe31490b98c77d2b85c18b76d9f90f",
+      "bytes": 623
+    },
+    {
+      "path": "src/utils/icons/weather-icon.ts",
+      "gitBlob": "fd6206b8f99f948c47d4d20c2063c1aa3309b1bf",
+      "sha256": "e9e2703e4b539d1105ed0250292ddd3b3da741e38b6bf392aba6ca3cd82b6bca",
+      "bytes": 569
+    },
+    {
+      "path": "src/utils/info.ts",
+      "gitBlob": "f0b884985edd1c0e151d07571e23236697c80482",
+      "sha256": "e72104b97d409de1b199d3e4ef082b99b6e33a5db501738506324c75a4ed69d8",
+      "bytes": 1800
+    },
+    {
+      "path": "src/utils/layout.ts",
+      "gitBlob": "a05edd1f3f1505706c92367f8977c5685d742675",
+      "sha256": "626d7b8bbcb86a7704983c558612c5d6496d9ec002ba2928e96e80945f8bf99d",
+      "bytes": 277
+    },
+    {
+      "path": "src/utils/loader.ts",
+      "gitBlob": "19b9c6aabcca9fa0aea5e8220ce423bd0018e0a9",
+      "sha256": "a421ffcec3030f781a4fee9d6c5fe3ea39105cbe04425ad9a2a378d8ca506e39",
+      "bytes": 782
+    },
+    {
+      "path": "src/utils/lovelace/chip-element-editor.ts",
+      "gitBlob": "89e0acabf18146cb8c4a8ed74710848ebafe0726",
+      "sha256": "ab1945dcd9677f0a1e3fdd039d48b5f5826b84003031e82ea84b8e8158fd60da",
+      "bytes": 930
+    },
+    {
+      "path": "src/utils/lovelace/chip/chip-element.ts",
+      "gitBlob": "b20eb841d1ffafcb51b517bafda5d1b349471b54",
+      "sha256": "e11f25746a66bcd238d7a03c95f239b7bfe31de38e487b2dd9ed7e160b927190",
+      "bytes": 1063
+    },
+    {
+      "path": "src/utils/lovelace/chip/types.ts",
+      "gitBlob": "5ad490e7704538f4f3d00f707e0540cc5186fa2f",
+      "sha256": "02cba7413f5f0552c757a62d82c28e46e02c7da8b7e359ff6dee1745a1685d40",
+      "bytes": 2862
+    },
+    {
+      "path": "src/utils/lovelace/editor/types.ts",
+      "gitBlob": "ad2925dea2a09879e04614d327ad2890307adb51",
+      "sha256": "5c723a466a47c6764f399818fb9bb1f015bef2a7ed10efd847345d5ba7abafa3",
+      "bytes": 2453
+    },
+    {
+      "path": "src/utils/lovelace/element-editor.ts",
+      "gitBlob": "ba88918e956285a61f0e82dfb6e4e0db9917ba6b",
+      "sha256": "cae7a5c00e2ead6caee4f3176c2c95fe38b94698bd385ef01b11ff2b2ca56221",
+      "bytes": 10180
+    },
+    {
+      "path": "src/utils/lovelace/gui-support-error.ts",
+      "gitBlob": "7d1b3253458e36822c186891fae079b872058ce0",
+      "sha256": "140d7db6c43509f2f4f66c4ef9a593fe89f564e936a452274066726e91b7a8fa",
+      "bytes": 295
+    },
+    {
+      "path": "src/utils/lovelace/sub-element-editor.ts",
+      "gitBlob": "e27b99d661723b8be40736484423ed3e0469c835",
+      "sha256": "c13011a1fa448cb3b4e68880c9f5ed3d54c560554ef90be2b2255728ec587e56",
+      "bytes": 3293
+    },
+    {
+      "path": "src/utils/lovelace/types.ts",
+      "gitBlob": "5e1799eeb4175abaee0e965ce15f2e9c07af3b62",
+      "sha256": "2d0d5d2d60a709078d665029e5ed706f6fe44750861f87f80daa3fb2b75621b2",
+      "bytes": 588
+    },
+    {
+      "path": "src/utils/theme.ts",
+      "gitBlob": "2e067b5d0c898d20f42c25e36802c73bf779315e",
+      "sha256": "23f2cbf98c6c604ec91ddbe43bac8eff77f6b3567ae6327ab4328005dbbd4955",
+      "bytes": 8352
+    },
+    {
+      "path": "src/utils/weather.ts",
+      "gitBlob": "8a8617117305f7d648b35fc4b188a1a0639de198",
+      "sha256": "8437dad672eb9b4ec7de9f082893679fa5f4ce4c7f9ee942012c065b40ca5eb3",
+      "bytes": 9466
+    },
+    {
+      "path": "tsconfig.json",
+      "gitBlob": "352380492f8ddff310003cf70043df159d3b5944",
+      "sha256": "21c7ad1b0159308ac5150a63087846b00ede712ee50b2c55ff41a9a522ad8841",
+      "bytes": 547
+    },
+    {
+      "path": "vite.config.ts",
+      "gitBlob": "e863dfeeebf883bd2d94a29de30b33e86aeff043",
+      "sha256": "4644f26b3547c4670616d0b4c47a49445dc408aba47f1017833a7c607b4fe505",
+      "bytes": 711
+    }
+  ],
+  "transforms": [
+    {
+      "path": "package.json",
+      "sourceSha256": "4e86e6cce4c8adedae575b7e05ebebc63c1728862bce69bb21ca93f466649d55",
+      "outputSha256": "4e86e6cce4c8adedae575b7e05ebebc63c1728862bce69bb21ca93f466649d55",
+      "operations": []
+    },
+    {
+      "path": "src/badges/template/template-badge-config.ts",
+      "sourceSha256": "fe435f889737cba045ca50ce9672e0f1606a2b4b78645ed613bcae7f9caf1100",
+      "outputSha256": "fe435f889737cba045ca50ce9672e0f1606a2b4b78645ed613bcae7f9caf1100",
+      "operations": []
+    },
+    {
+      "path": "src/badges/template/template-badge-editor.ts",
+      "sourceSha256": "3affd49f9285487d6885466d3e6fc5652d818e5fdc7c6166ec0305a3ef5b8f56",
+      "outputSha256": "971232a02ffca91e3b46b6583102f56ba2b97e44ef10e0d72083ec5bdf6237ec",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 2
+        }
+      ]
+    },
+    {
+      "path": "src/badges/template/template-badge.ts",
+      "sourceSha256": "41429c9a12583f17e4847229831d0940d3b01db1633ad30969afb95601a42891",
+      "outputSha256": "ba589dd5a1dc010bd3edf9c5eafeed4ded4e315fd088bdd7bb074384287c01f1",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 5
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 3
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "reflect-ha-dark-mode-presentation",
+          "attribute": "data-island-theme",
+          "lifecycle": "willUpdate",
+          "values": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/alarm-control-panel-card/alarm-control-panel-card-config.ts",
+      "sourceSha256": "76eb47e505f49f382f165851f71d2c99ad2b4ede6ed04ae2b3cb08d5311f5107",
+      "outputSha256": "76eb47e505f49f382f165851f71d2c99ad2b4ede6ed04ae2b3cb08d5311f5107",
+      "operations": []
+    },
+    {
+      "path": "src/cards/alarm-control-panel-card/alarm-control-panel-card-editor.ts",
+      "sourceSha256": "ee87754934b89262b1eff20037a66429ca7a7f1253e03d8a929c2d0f44ae8d35",
+      "outputSha256": "ee87754934b89262b1eff20037a66429ca7a7f1253e03d8a929c2d0f44ae8d35",
+      "operations": []
+    },
+    {
+      "path": "src/cards/alarm-control-panel-card/alarm-control-panel-card.ts",
+      "sourceSha256": "9212654058aa8aad58953e72fe877cc7d2b87ec893338252b554694cf1d6c547",
+      "outputSha256": "554c61e5107956224f31adb82386271cc4265dad3852cfd6b204616aaa51ef84",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 12
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/alarm-control-panel-card/const.ts",
+      "sourceSha256": "c67fd7d61b893345f32281adb6680f93c3ccd4372fe6eb7085bff9ee8e76dfc4",
+      "outputSha256": "c67fd7d61b893345f32281adb6680f93c3ccd4372fe6eb7085bff9ee8e76dfc4",
+      "operations": []
+    },
+    {
+      "path": "src/cards/alarm-control-panel-card/utils.ts",
+      "sourceSha256": "d8ee36dfe92feb51c9a7cb3ff8b67348ea7030557f9705f13f24f27a837daf5a",
+      "outputSha256": "d8ee36dfe92feb51c9a7cb3ff8b67348ea7030557f9705f13f24f27a837daf5a",
+      "operations": []
+    },
+    {
+      "path": "src/cards/chips-card/chips-card-chips-editor.ts",
+      "sourceSha256": "e5576e2315e3f1542e86e556685d35be2b581ea99e5d8b3bbec8ecc8f2d1a3f0",
+      "outputSha256": "cb0c03b551da0dc27d76be0a5fb283b02c966d5a72418041f332613dfa6c39a7",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/chips-card-editor.ts",
+      "sourceSha256": "47bddf9428124ddbc055534018a073139c48a5fdb8472631523a2d9defab5bee",
+      "outputSha256": "b72f5b581d06a34654c2d70e60e626a17b305550408c441d387f110d3198b4ee",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 4
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/chips-card.ts",
+      "sourceSha256": "a5a3ad724e7d8332627b51c11c0757e526138edab311834b78622c41598d1444",
+      "outputSha256": "4ecebb6e2caeb6f9d14e905869f5476605222a922db493820403f7a4f726de43",
+      "operations": [
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/chips/action-chip-editor.ts",
+      "sourceSha256": "7a5b8c39b6e539f9750e620edb0f35c1bfd1ab54884d2cd6c0f92dff6b197325",
+      "outputSha256": "7a5b8c39b6e539f9750e620edb0f35c1bfd1ab54884d2cd6c0f92dff6b197325",
+      "operations": []
+    },
+    {
+      "path": "src/cards/chips-card/chips/action-chip.ts",
+      "sourceSha256": "d6f13aa9f6fede4a9032a61f86cb2178128f1db94b30aea4a21765cec0c0a136",
+      "outputSha256": "766711e19a7c90624ca28864d93d932ca1bfc70b06737e87ca33c97535cbaee3",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 3
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/chips/alarm-control-panel-chip-editor.ts",
+      "sourceSha256": "7267615af1ced430aaa63ba6b2204540431ec405d34a6549afa288a21636cd11",
+      "outputSha256": "7267615af1ced430aaa63ba6b2204540431ec405d34a6549afa288a21636cd11",
+      "operations": []
+    },
+    {
+      "path": "src/cards/chips-card/chips/alarm-control-panel-chip.ts",
+      "sourceSha256": "db2ad8878b3ee69a3bbb055dc3ed2b82e9b828c29553f56715fd64277da71e80",
+      "outputSha256": "fa92f05e1e45a6127369298fa6d0722e7301638a8600e7f0219d667df0aee82a",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 4
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/chips/back-chip-editor.ts",
+      "sourceSha256": "f5ea6723ec8c7a9219fc455f7a40717a9f3c055535cae137fd6a127481e5a5a6",
+      "outputSha256": "f5ea6723ec8c7a9219fc455f7a40717a9f3c055535cae137fd6a127481e5a5a6",
+      "operations": []
+    },
+    {
+      "path": "src/cards/chips-card/chips/back-chip.ts",
+      "sourceSha256": "a695b6ada83d3d448400e125e33996b16bd1fd4061cbef5453b0cd4393a7655d",
+      "outputSha256": "5acabd655d94a98f7572c161ba6d0c201bd783b00dc392d14fbc40ad88d59342",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/chips/conditional-chip-editor.ts",
+      "sourceSha256": "456cb3bc8da01a6426142459af8e1aeea360345eee5ae290d7b5cabfc08ebed0",
+      "outputSha256": "cff74679a4e299cbd94ae594b8fa68d5fa8b26a70bbec466c188dd5075dcd212",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/chips/conditional-chip.ts",
+      "sourceSha256": "1417bd0337c50e1e7508d38a650fffcb8b6c421548850d04a55ef5d2350ba562",
+      "outputSha256": "1417bd0337c50e1e7508d38a650fffcb8b6c421548850d04a55ef5d2350ba562",
+      "operations": []
+    },
+    {
+      "path": "src/cards/chips-card/chips/entity-chip-editor.ts",
+      "sourceSha256": "76862819722ed9c6672ae91be99f43ad02473695a0e27e6008ab4c9479659992",
+      "outputSha256": "76862819722ed9c6672ae91be99f43ad02473695a0e27e6008ab4c9479659992",
+      "operations": []
+    },
+    {
+      "path": "src/cards/chips-card/chips/entity-chip.ts",
+      "sourceSha256": "07ea81f9159247d7831dce3ce96fc4a05c932dafa86c615a6491dde6652b37cf",
+      "outputSha256": "f4f6b1092f898bda3682b83775f23ca3bdc0cd0f5a55c62ff0ea2aeee410a9f4",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 3
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/chips/index.ts",
+      "sourceSha256": "8e954ea2ab3b218417e4f381de221e2e940169d93cfb2932e8e153591aa8ba11",
+      "outputSha256": "8e954ea2ab3b218417e4f381de221e2e940169d93cfb2932e8e153591aa8ba11",
+      "operations": []
+    },
+    {
+      "path": "src/cards/chips-card/chips/light-chip-editor.ts",
+      "sourceSha256": "f3f653b658301b23f7806ea092cd0a95712d28416e0eadc759e3fb3490b2a288",
+      "outputSha256": "f3f653b658301b23f7806ea092cd0a95712d28416e0eadc759e3fb3490b2a288",
+      "operations": []
+    },
+    {
+      "path": "src/cards/chips-card/chips/light-chip.ts",
+      "sourceSha256": "6177eb28468aa7ec8eab29a475391cc90f2a10431c7f397230137797e3f48a2c",
+      "outputSha256": "b32d006535a37250e7068343246cfcf09db9f43dfc11a2a86438160d62ce6cea",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 3
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/chips/menu-chip-editor.ts",
+      "sourceSha256": "ad957fadcc22b85ccf44e809d3964b28c463027130a63ec01a310705715cfddd",
+      "outputSha256": "ad957fadcc22b85ccf44e809d3964b28c463027130a63ec01a310705715cfddd",
+      "operations": []
+    },
+    {
+      "path": "src/cards/chips-card/chips/menu-chip.ts",
+      "sourceSha256": "3873021fe65ae3356d1be25229740af9a33b55d25852d91ac810655cab78d257",
+      "outputSha256": "886b542d7bdc564c25562e77f10e99259ea0ed299550600b96708b4ecb79d75b",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/chips/quickbar-chip-editor.ts",
+      "sourceSha256": "d599c18433bfd04f0fd0a9ec6b9a49c722e404f30b1311d16d2acb7d016acb84",
+      "outputSha256": "d599c18433bfd04f0fd0a9ec6b9a49c722e404f30b1311d16d2acb7d016acb84",
+      "operations": []
+    },
+    {
+      "path": "src/cards/chips-card/chips/quickbar-chip.ts",
+      "sourceSha256": "a28e6f3757204712b4d7e806d9d75c3be346520b2274cae7e5338e1269230036",
+      "outputSha256": "09d4807ff667b6dcc0ca6707574000bf46bf7556035210047a029714c7daed2e",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/chips/spacer-chip.ts",
+      "sourceSha256": "1d2c113a3ab4f6464f6206cc93c0027f002f603878a338e64d9b526977a4663c",
+      "outputSha256": "8741a4278d19da645c42c33af192369b48caef3af2d94931f287af371c2a2ce2",
+      "operations": [
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/chips/template-chip-editor.ts",
+      "sourceSha256": "1a6cca3672f23972478ed5ceb2f0705c094ee411ccb8285ce151b9de306410a3",
+      "outputSha256": "1a6cca3672f23972478ed5ceb2f0705c094ee411ccb8285ce151b9de306410a3",
+      "operations": []
+    },
+    {
+      "path": "src/cards/chips-card/chips/template-chip.ts",
+      "sourceSha256": "d967246cad17aead3ea664cd2ea19c635b4edfabda4aef5538ff2fd12e732c49",
+      "outputSha256": "464fdc36b7caeac2fcd5a458e2fcc1ff7211a1812df22980ac43431b945c085e",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 3
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/chips/weather-chip-editor.ts",
+      "sourceSha256": "b301277562f003f0d3596258ff27d6cfabe207253ab1c8c2382ee1bc90c05123",
+      "outputSha256": "b301277562f003f0d3596258ff27d6cfabe207253ab1c8c2382ee1bc90c05123",
+      "operations": []
+    },
+    {
+      "path": "src/cards/chips-card/chips/weather-chip.ts",
+      "sourceSha256": "f317fd7849f61c4acf0effb3c2a1b42bb099f25176eee0688bd442194e61d293",
+      "outputSha256": "b830ad5d5348c6ba394fa9faab3e390c5e375d4ebd00b2306ee6e8b3118e4e96",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/chips-card/const.ts",
+      "sourceSha256": "1eca897d87e4cfb2518f5b1b4369113989d3dee1b28b0f0be44f1fd04028a31f",
+      "outputSha256": "1eca897d87e4cfb2518f5b1b4369113989d3dee1b28b0f0be44f1fd04028a31f",
+      "operations": []
+    },
+    {
+      "path": "src/cards/climate-card/climate-card-config.ts",
+      "sourceSha256": "7e6c8c96fd367b275c70709dff69d52fc4fb31fa91507dd32840094803b3f078",
+      "outputSha256": "7e6c8c96fd367b275c70709dff69d52fc4fb31fa91507dd32840094803b3f078",
+      "operations": []
+    },
+    {
+      "path": "src/cards/climate-card/climate-card-editor.ts",
+      "sourceSha256": "661e2e3de6c3efb312db1a7a0bbbba73b6bbe7b43d46d80dc3fefa691aeede03",
+      "outputSha256": "661e2e3de6c3efb312db1a7a0bbbba73b6bbe7b43d46d80dc3fefa691aeede03",
+      "operations": []
+    },
+    {
+      "path": "src/cards/climate-card/climate-card.ts",
+      "sourceSha256": "b40c30bb6184d183020c0dc6d8266c792f1efd464429fdef554002f0e74cc34e",
+      "outputSha256": "be8d4ee5d844348b50ad11a93682725183ebc400902033dbd4d1cb373a7188f6",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 17
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/climate-card/const.ts",
+      "sourceSha256": "e1ab656801584eae2146eb16e103003276ee78115dc47d05396f4b67fadb307b",
+      "outputSha256": "e1ab656801584eae2146eb16e103003276ee78115dc47d05396f4b67fadb307b",
+      "operations": []
+    },
+    {
+      "path": "src/cards/climate-card/controls/climate-hvac-modes-control.ts",
+      "sourceSha256": "412e325bc16f9f622f706d33081a00e7b17b364f6d389390e9c8c44fdfa36897",
+      "outputSha256": "3ff8dc8b26faaa6fcd6841e6789105bc794fe6a8e2bcfa1378d5120172bf2962",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 5
+        }
+      ]
+    },
+    {
+      "path": "src/cards/climate-card/controls/climate-temperature-control.ts",
+      "sourceSha256": "986872c3f1b3f7041e9e530ba41a672da2878aee9289c17a1014448a187439aa",
+      "outputSha256": "13856d069f223ccb68e10c201221040f3792b25489e6ca1ff6d986979ca4789e",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 9
+        }
+      ]
+    },
+    {
+      "path": "src/cards/climate-card/utils.ts",
+      "sourceSha256": "416cbf154639f08a3023d96299040e975d59da44d4ca50fba7776443f0b2a90e",
+      "outputSha256": "416cbf154639f08a3023d96299040e975d59da44d4ca50fba7776443f0b2a90e",
+      "operations": []
+    },
+    {
+      "path": "src/cards/cover-card/const.ts",
+      "sourceSha256": "59192ab111ad9b19ffc86aec95b7af7a6dfbe4063b47a3611eec1807418550be",
+      "outputSha256": "59192ab111ad9b19ffc86aec95b7af7a6dfbe4063b47a3611eec1807418550be",
+      "operations": []
+    },
+    {
+      "path": "src/cards/cover-card/controls/cover-buttons-control.ts",
+      "sourceSha256": "f02abaafd4c5ff6afa568dfa77c8cbb271faf9f1cf9d380f3223db59ee862dcc",
+      "outputSha256": "764a7c0e579d7054fd507c5f60a1d9dadee2292be446461ebf94033a76d3b086",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 9
+        }
+      ]
+    },
+    {
+      "path": "src/cards/cover-card/controls/cover-position-control.ts",
+      "sourceSha256": "df56e6aad2c84c792be9a66244941bc9dd7e8d459bcbd2e875485206bf9e78cd",
+      "outputSha256": "b3509d166bf3ee1a5bab5427dfaa78acea29abfe091ba2471df53a133d4c11f8",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 4
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/cover-card/controls/cover-tilt-position-control.ts",
+      "sourceSha256": "b5bae567d1ed5f8f60b6fd4c70c17a3a997eba35710df22fe9991a53ea1c886e",
+      "outputSha256": "2eaeefa56f4333dc1f867372e11aabcf03d34d67b35d3f4794fd614b7af1fe8b",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 4
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/cover-card/cover-card-config.ts",
+      "sourceSha256": "2f1fc13fd25b060e10fd4321198ebcb07ab993b5123c74aedca464d10a624f15",
+      "outputSha256": "2f1fc13fd25b060e10fd4321198ebcb07ab993b5123c74aedca464d10a624f15",
+      "operations": []
+    },
+    {
+      "path": "src/cards/cover-card/cover-card-editor.ts",
+      "sourceSha256": "8d93998f4746e617c9e843ed758e904871a4d65244df372a241bab38f3b0eeb1",
+      "outputSha256": "8d93998f4746e617c9e843ed758e904871a4d65244df372a241bab38f3b0eeb1",
+      "operations": []
+    },
+    {
+      "path": "src/cards/cover-card/cover-card.ts",
+      "sourceSha256": "1b4442b28406896060d5fd6058d51f9090ffdebacc6bc373f6c0808900114df4",
+      "outputSha256": "944a8cf7947e83c422d759089dd1f875d34af166f984ce3b09189c60d35883e8",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 19
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/cover-card/utils.ts",
+      "sourceSha256": "2a8dcc311b9fdc9b9b415d9098dd1d7a67eb6c13d456f2f0b9d25b5a77d53764",
+      "outputSha256": "2a8dcc311b9fdc9b9b415d9098dd1d7a67eb6c13d456f2f0b9d25b5a77d53764",
+      "operations": []
+    },
+    {
+      "path": "src/cards/empty-card/const.ts",
+      "sourceSha256": "081592a57a26097b370c629c35efcce2ce09c818ccf33565fbd061009bebcbba",
+      "outputSha256": "081592a57a26097b370c629c35efcce2ce09c818ccf33565fbd061009bebcbba",
+      "operations": []
+    },
+    {
+      "path": "src/cards/empty-card/empty-card-config.ts",
+      "sourceSha256": "2b5aecd3d939a0056e4c3fe2d267f784d4f3c2a0fe95b0f21a7894a0fd379ad2",
+      "outputSha256": "2b5aecd3d939a0056e4c3fe2d267f784d4f3c2a0fe95b0f21a7894a0fd379ad2",
+      "operations": []
+    },
+    {
+      "path": "src/cards/empty-card/empty-card-editor.ts",
+      "sourceSha256": "11ea4e60276dfc919180e998234ddfbf65f790f971c1649041903c3dcb07d425",
+      "outputSha256": "11ea4e60276dfc919180e998234ddfbf65f790f971c1649041903c3dcb07d425",
+      "operations": []
+    },
+    {
+      "path": "src/cards/empty-card/empty-card.ts",
+      "sourceSha256": "4f0db4efa4e6a1c047fa9e56f0f91b2022de94ae7d6c55c174534231c0040c31",
+      "outputSha256": "6869ec41479957140d4c988608a0690ee614bc1553098b26b49c9124ec7248f0",
+      "operations": [
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/entity-card/const.ts",
+      "sourceSha256": "6918a3bbec972d7083e5aae7dcac00dcebab98da4174b97791c20e80a71e08bb",
+      "outputSha256": "6918a3bbec972d7083e5aae7dcac00dcebab98da4174b97791c20e80a71e08bb",
+      "operations": []
+    },
+    {
+      "path": "src/cards/entity-card/entity-card-config.ts",
+      "sourceSha256": "4d98d1feeca5400c6f4fa48ca06dedcaeb016a8075bb01234b441f0d9908ccd3",
+      "outputSha256": "4d98d1feeca5400c6f4fa48ca06dedcaeb016a8075bb01234b441f0d9908ccd3",
+      "operations": []
+    },
+    {
+      "path": "src/cards/entity-card/entity-card-editor.ts",
+      "sourceSha256": "affd945b253b02991901ae6bc0b83307a1882e85b008ddcccb9a9fe971b0ae8f",
+      "outputSha256": "affd945b253b02991901ae6bc0b83307a1882e85b008ddcccb9a9fe971b0ae8f",
+      "operations": []
+    },
+    {
+      "path": "src/cards/entity-card/entity-card.ts",
+      "sourceSha256": "dcc5b5090c507e23f1547bf0d29339e1481aa0bb6248025c2bf543afb8e45578",
+      "outputSha256": "7efdfaeff9b9ed113358cc6149ff48bb3b5dfaf3481b10db4041d506951ad6f9",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 8
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/fan-card/const.ts",
+      "sourceSha256": "2b696cfa2cb957589e1f8e5ad5a34a68b7b1d57305c1a327b87388c8fe13e7a0",
+      "outputSha256": "2b696cfa2cb957589e1f8e5ad5a34a68b7b1d57305c1a327b87388c8fe13e7a0",
+      "operations": []
+    },
+    {
+      "path": "src/cards/fan-card/controls/fan-direction-control.ts",
+      "sourceSha256": "6a588c63304b7f74910a7dfa73a9dc9d4113b55ac74aed85e80d7bb7016a322c",
+      "outputSha256": "5e2926b5fd1ff841978e3dcea10e7c37c4a3e676849702eec98c440709c0c0a8",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/fan-card/controls/fan-oscillate-control.ts",
+      "sourceSha256": "4ee7b1d062e77f9e1541a0e4bafd388b235185b11a440b5462df38d3786c28be",
+      "outputSha256": "59ee7289f47064e1801973325c8aa49a774f5769f8f23c2f6c9633f3b102ed11",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 4
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/fan-card/controls/fan-percentage-control.ts",
+      "sourceSha256": "6a5b23c0af876d0285d10b804ae2689ad63e567b0a691cc8ccf9a5eca3548f6d",
+      "outputSha256": "c0d2b526634f996e91f9dbab03493ae43e601768d806cec0277083b3faa72721",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 4
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/fan-card/fan-card-config.ts",
+      "sourceSha256": "579687e116955455ad17b25e7a210ab86a20e9af320d5d927b729ca9eafae9ef",
+      "outputSha256": "579687e116955455ad17b25e7a210ab86a20e9af320d5d927b729ca9eafae9ef",
+      "operations": []
+    },
+    {
+      "path": "src/cards/fan-card/fan-card-editor.ts",
+      "sourceSha256": "06ee24e1835e2df74d0848ef90017153374eafe2b915c392f3cf1b2d4ab1a892",
+      "outputSha256": "06ee24e1835e2df74d0848ef90017153374eafe2b915c392f3cf1b2d4ab1a892",
+      "operations": []
+    },
+    {
+      "path": "src/cards/fan-card/fan-card.ts",
+      "sourceSha256": "1065e0b1ba97d9ed9005c93a704ddceb783566603da3ba0371a75f8a3a025f4b",
+      "outputSha256": "b17e591d36dbff7fdf08844868657946cb7f1b033f7d81da117de3f05a1b2da7",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 15
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 4
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/fan-card/utils.ts",
+      "sourceSha256": "d09648970007cd79c8d651bd74dcbe858c08d6e6d91bb136c41a07d58263a18f",
+      "outputSha256": "d09648970007cd79c8d651bd74dcbe858c08d6e6d91bb136c41a07d58263a18f",
+      "operations": []
+    },
+    {
+      "path": "src/cards/humidifier-card/const.ts",
+      "sourceSha256": "64437970e0069f1a7cce6e146415e363f13301af5f57bde2a3a20b340e6eb540",
+      "outputSha256": "64437970e0069f1a7cce6e146415e363f13301af5f57bde2a3a20b340e6eb540",
+      "operations": []
+    },
+    {
+      "path": "src/cards/humidifier-card/controls/humidifier-humidity-control.ts",
+      "sourceSha256": "8b9a8ca99809e6f39ed15d5f9052d829705518a1cbf5e560556e460ac39ff783",
+      "outputSha256": "0c233dadf8365d2ffcb3ae0980059cc8886d2906744aa641ff16d99ba343c83a",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/humidifier-card/humidifier-card-config.ts",
+      "sourceSha256": "c52cac2eb885a3fda019712ad66d122f53161d8071900ee91dc4aac5e79f358a",
+      "outputSha256": "c52cac2eb885a3fda019712ad66d122f53161d8071900ee91dc4aac5e79f358a",
+      "operations": []
+    },
+    {
+      "path": "src/cards/humidifier-card/humidifier-card-editor.ts",
+      "sourceSha256": "bdc56baedce4b07e317cf39960b5890d0cba39c96639d2b7086533c94bc9ea45",
+      "outputSha256": "bdc56baedce4b07e317cf39960b5890d0cba39c96639d2b7086533c94bc9ea45",
+      "operations": []
+    },
+    {
+      "path": "src/cards/humidifier-card/humidifier-card.ts",
+      "sourceSha256": "8568b8e85b6ecbd5bb4969789e03416e17b5487c2af630cbe08f34723e2eae1f",
+      "outputSha256": "35b9ccf6313a6d4f11021c209c60099fc0fcf833004b141fe631467ac0bd354f",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 11
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/legacy-template-card/const.ts",
+      "sourceSha256": "f4d2a1bf83c1635ed2ef7f9e2fdcf36735497268eda2196e3166e76f43109c0a",
+      "outputSha256": "f4d2a1bf83c1635ed2ef7f9e2fdcf36735497268eda2196e3166e76f43109c0a",
+      "operations": []
+    },
+    {
+      "path": "src/cards/legacy-template-card/legacy-template-card-config.ts",
+      "sourceSha256": "2ef611023dc6ac378b9c90066aed0de0b54d1ee975f88d316e04a2c7234e7ac8",
+      "outputSha256": "2ef611023dc6ac378b9c90066aed0de0b54d1ee975f88d316e04a2c7234e7ac8",
+      "operations": []
+    },
+    {
+      "path": "src/cards/legacy-template-card/legacy-template-card-editor.ts",
+      "sourceSha256": "8279eb44e9bcd4483025abb907d2dc445996a96298f03a9f4b2ddb51bc306cf2",
+      "outputSha256": "8279eb44e9bcd4483025abb907d2dc445996a96298f03a9f4b2ddb51bc306cf2",
+      "operations": []
+    },
+    {
+      "path": "src/cards/legacy-template-card/legacy-template-card.ts",
+      "sourceSha256": "85ab7a70fe2f5d9ffc24cc5418e2fec868af3a0ddb09eb6ffde0699e96936dc6",
+      "outputSha256": "0e88a5631633b217b07c52f95e695ace3520602f069371457c2016f4fe0c10bb",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 14
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/light-card/const.ts",
+      "sourceSha256": "ad0e77032eb2fb2a17f6b74f6e26ff5b7e7ff63f72f8616516bc3562f656f292",
+      "outputSha256": "ad0e77032eb2fb2a17f6b74f6e26ff5b7e7ff63f72f8616516bc3562f656f292",
+      "operations": []
+    },
+    {
+      "path": "src/cards/light-card/controls/light-brightness-control.ts",
+      "sourceSha256": "18b7ed7a06e4b936a811f00f154be75d92b577bfee9360c93a9aacf7c279543b",
+      "outputSha256": "132a080ba2bd2aaeffb1ec33914acb05485ac3e709491f39d02fe8a45db210be",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 4
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/light-card/controls/light-color-control.ts",
+      "sourceSha256": "95b428286b1c70cbf2e4f8ea9c74cec6a5ed978f986f60c65915a99e4b92ac3f",
+      "outputSha256": "ff1ac0b54bbaf0f7fdc1057d07c0c936c20db3c76211a0f09b488740ebf4dd10",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 4
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/light-card/controls/light-color-temp-control.ts",
+      "sourceSha256": "b833e407b5ed3ab2aaec042e97e945a05c887bc49e309f925260e9690253dd4a",
+      "outputSha256": "728352414ff2c1dac18b809982c43abaa6dfa12e2b89f262dc8ceefa08ddd6c8",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 4
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/light-card/light-card-config.ts",
+      "sourceSha256": "a412d51a6ddb47456092fbee4d2ed433fbbf2b242c86a5f9c6ff647fffa20bd3",
+      "outputSha256": "a412d51a6ddb47456092fbee4d2ed433fbbf2b242c86a5f9c6ff647fffa20bd3",
+      "operations": []
+    },
+    {
+      "path": "src/cards/light-card/light-card-editor.ts",
+      "sourceSha256": "179ef57d5ba9cab37fd4aa5a5904633b7bbe02dfd3fd61d906c085f0fe06909c",
+      "outputSha256": "179ef57d5ba9cab37fd4aa5a5904633b7bbe02dfd3fd61d906c085f0fe06909c",
+      "operations": []
+    },
+    {
+      "path": "src/cards/light-card/light-card.ts",
+      "sourceSha256": "991f9d9771d345103161ee99c0e277899e73b178d52d5f393dd6e609ca05d47c",
+      "outputSha256": "3b418fb3702e1d62f3c19d5d4dd54e3e775e552d02bcaddd676a4c9331c62ba8",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 19
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/light-card/utils.ts",
+      "sourceSha256": "1fbfc36c2246b886654767a5e4bd9c0849974f2acf1d5ffd5e99035b864e3755",
+      "outputSha256": "1fbfc36c2246b886654767a5e4bd9c0849974f2acf1d5ffd5e99035b864e3755",
+      "operations": []
+    },
+    {
+      "path": "src/cards/lock-card/const.ts",
+      "sourceSha256": "c8cddd919f4291602c506373045b3ff12bc463e066635aae046cab4f5b89aa39",
+      "outputSha256": "c8cddd919f4291602c506373045b3ff12bc463e066635aae046cab4f5b89aa39",
+      "operations": []
+    },
+    {
+      "path": "src/cards/lock-card/controls/lock-buttons-control.ts",
+      "sourceSha256": "2dfc018fdd1bae09087aa2a463cc0b5f9841a9b37fa5abb3111baf065c124cf6",
+      "outputSha256": "087555f64c564cd5bb82360f1d3be0724cd308c277885d859277f2416ad19402",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 5
+        }
+      ]
+    },
+    {
+      "path": "src/cards/lock-card/lock-card-config.ts",
+      "sourceSha256": "61c636ab476a97f459c1d70133a297e22a76fde79ab0d6020f89902db1968fb0",
+      "outputSha256": "61c636ab476a97f459c1d70133a297e22a76fde79ab0d6020f89902db1968fb0",
+      "operations": []
+    },
+    {
+      "path": "src/cards/lock-card/lock-card-editor.ts",
+      "sourceSha256": "ee1aa5742a7033f254fe23ee03f183b4afa80c5547cdb244cec8ad45ef827895",
+      "outputSha256": "ee1aa5742a7033f254fe23ee03f183b4afa80c5547cdb244cec8ad45ef827895",
+      "operations": []
+    },
+    {
+      "path": "src/cards/lock-card/lock-card.ts",
+      "sourceSha256": "8e0ec7cabeb35d0a52c4d2afee5eb70db8586a0f42d4cf03493b0a222dc5db0b",
+      "outputSha256": "172f91fe3d14b2c17c40a830feb53a4ff227437b1f7445b7533d6cd0e38fc130",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 10
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/lock-card/utils.ts",
+      "sourceSha256": "b959a1da6f74af19ed2493b69286f3171d961dc44d925392f5e043dc5947e0ba",
+      "outputSha256": "b959a1da6f74af19ed2493b69286f3171d961dc44d925392f5e043dc5947e0ba",
+      "operations": []
+    },
+    {
+      "path": "src/cards/media-player-card/const.ts",
+      "sourceSha256": "ddb87ac840580d0f56cf9ffe3f39a6c1ba40014ff772bb8d456726fff515d085",
+      "outputSha256": "ddb87ac840580d0f56cf9ffe3f39a6c1ba40014ff772bb8d456726fff515d085",
+      "operations": []
+    },
+    {
+      "path": "src/cards/media-player-card/controls/media-player-media-control.ts",
+      "sourceSha256": "c4642c5076a97c07366f6f130dce15e04a95d52d9b407407159ab4236331d671",
+      "outputSha256": "3424c446f80d1f28bd7e901ad6512d67b4eefc20109e4585b67fa8660071b24c",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 5
+        }
+      ]
+    },
+    {
+      "path": "src/cards/media-player-card/controls/media-player-volume-control.ts",
+      "sourceSha256": "fc5e257ec41292da3952cd962fb790532764c8b2ee2dd10b27155407998a434d",
+      "outputSha256": "b764ce0d79af262f4c91eb77ac950fee1d97f029c901466a930e467333da2a2a",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 11
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/media-player-card/media-player-card-config.ts",
+      "sourceSha256": "9eabd1213d99d8e82744954ac9b5ef1e8ad52d618be0fdb24bb6061c8cfa02c2",
+      "outputSha256": "9eabd1213d99d8e82744954ac9b5ef1e8ad52d618be0fdb24bb6061c8cfa02c2",
+      "operations": []
+    },
+    {
+      "path": "src/cards/media-player-card/media-player-card-editor.ts",
+      "sourceSha256": "c1e699ba7710790e77d2a12676a3b5de0244bc620b2069227023c3f36ec21869",
+      "outputSha256": "c1e699ba7710790e77d2a12676a3b5de0244bc620b2069227023c3f36ec21869",
+      "operations": []
+    },
+    {
+      "path": "src/cards/media-player-card/media-player-card.ts",
+      "sourceSha256": "b8f59204ff8531aebf7f90f71fa8487c4ecf065821175d1bc48a51645dcebeb0",
+      "outputSha256": "2ad029d40cfe0199652239d2afa21425002eab07b1c1abe2ccf6c72438e27563",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 14
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/media-player-card/utils.ts",
+      "sourceSha256": "593eeef9e88aab2e6928170c4083173914f0ca9330efa1083311b17cde0515e6",
+      "outputSha256": "593eeef9e88aab2e6928170c4083173914f0ca9330efa1083311b17cde0515e6",
+      "operations": []
+    },
+    {
+      "path": "src/cards/number-card/const.ts",
+      "sourceSha256": "2d1ba677e280d52351c1a6351f5000058905d5dce45b505e9239b9db2aa7f755",
+      "outputSha256": "2d1ba677e280d52351c1a6351f5000058905d5dce45b505e9239b9db2aa7f755",
+      "operations": []
+    },
+    {
+      "path": "src/cards/number-card/controls/number-value-control.ts",
+      "sourceSha256": "562f1c98a3d510da29a66aa37601fbe9bd4451540ee8b3218503d992aef567a1",
+      "outputSha256": "20bcf99717c6162952c361cf0847a84b0458877a77c76c4303595aff1fac4b5c",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 6
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/number-card/number-card-config.ts",
+      "sourceSha256": "cb09c88db02fd1a5edb578cfe78080bdf14456082bc57b977a9f04b5936a01b7",
+      "outputSha256": "cb09c88db02fd1a5edb578cfe78080bdf14456082bc57b977a9f04b5936a01b7",
+      "operations": []
+    },
+    {
+      "path": "src/cards/number-card/number-card-editor.ts",
+      "sourceSha256": "2a5fdc193e2c75caa26e53f267b28f898642c9b1ecfeeb53d86d7a9f605ee755",
+      "outputSha256": "2a5fdc193e2c75caa26e53f267b28f898642c9b1ecfeeb53d86d7a9f605ee755",
+      "operations": []
+    },
+    {
+      "path": "src/cards/number-card/number-card.ts",
+      "sourceSha256": "130b2484029c3827ad43866176969433cdcd3839966fe1ce0fd9eb04fafff9fd",
+      "outputSha256": "ff6936a98a0ef1fca08261896c7c09d3bb7e5bb45d18639eb96731289dc9e7d6",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 11
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/person-card/const.ts",
+      "sourceSha256": "fa23c891101860b8108151656635530cdccdf2b7d13d2c1befd20324470ffb0a",
+      "outputSha256": "fa23c891101860b8108151656635530cdccdf2b7d13d2c1befd20324470ffb0a",
+      "operations": []
+    },
+    {
+      "path": "src/cards/person-card/person-card-config.ts",
+      "sourceSha256": "9a9f21e11136f59faf6a39e8722e743db7ebdcdb68791b4dc06df3ebba3a831e",
+      "outputSha256": "9a9f21e11136f59faf6a39e8722e743db7ebdcdb68791b4dc06df3ebba3a831e",
+      "operations": []
+    },
+    {
+      "path": "src/cards/person-card/person-card-editor.ts",
+      "sourceSha256": "e2fed0fe0b3eb27ea675829678bb8aaf2ee389db83b08ae59be0e1544e8cb124",
+      "outputSha256": "e2fed0fe0b3eb27ea675829678bb8aaf2ee389db83b08ae59be0e1544e8cb124",
+      "operations": []
+    },
+    {
+      "path": "src/cards/person-card/person-card.ts",
+      "sourceSha256": "6ae08dc72db2469ff638569c5b7c61bdf8c6159883b09a0c2e4f753c935a00e6",
+      "outputSha256": "201b866e871238b4ebb49a7c2c41f275a72caf27a94320ebfb8eaeca2f6bbc01",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 7
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/person-card/utils.ts",
+      "sourceSha256": "58d2c584d02b4c2c2b0a7fe176c6b5233973fa81adfd9bb6aad3df977046dc3f",
+      "outputSha256": "58d2c584d02b4c2c2b0a7fe176c6b5233973fa81adfd9bb6aad3df977046dc3f",
+      "operations": []
+    },
+    {
+      "path": "src/cards/select-card/const.ts",
+      "sourceSha256": "12c428c14b596f396729950cffdf983de2c5b80ae6fbf75a113d0e0a8e4dab68",
+      "outputSha256": "12c428c14b596f396729950cffdf983de2c5b80ae6fbf75a113d0e0a8e4dab68",
+      "operations": []
+    },
+    {
+      "path": "src/cards/select-card/controls/select-option-control.ts",
+      "sourceSha256": "5268f48600bd9cf3228829e9014bc55357e693fa82797f012b7c09d4e4b3b316",
+      "outputSha256": "36ad7676ac96f8382702c810fc5ee5630a61e4103071ba83443f1662ed18f8fa",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/select-card/select-card-config.ts",
+      "sourceSha256": "a1103a56f05c96c74c02fdea63bbcd555b04e08f45b4e213b7ffa5e4feb44892",
+      "outputSha256": "a1103a56f05c96c74c02fdea63bbcd555b04e08f45b4e213b7ffa5e4feb44892",
+      "operations": []
+    },
+    {
+      "path": "src/cards/select-card/select-card-editor.ts",
+      "sourceSha256": "c2b660c6741940e9e31cb87ce332b49a08c4ccf554a521f519d56a144dde647e",
+      "outputSha256": "c2b660c6741940e9e31cb87ce332b49a08c4ccf554a521f519d56a144dde647e",
+      "operations": []
+    },
+    {
+      "path": "src/cards/select-card/select-card.ts",
+      "sourceSha256": "3964eb158fc2f8511e179dfc7cda904c794f71d5426699687a6a30a9cb192a76",
+      "outputSha256": "081f6c1c93f75762c2a87e795494121916294090d7a18c61fb9bf5d4495081a9",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 11
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/select-card/utils.ts",
+      "sourceSha256": "147385f17d47275c69eb72aeda1e127c5d6a86c229f920774e5ff87e88f93f0b",
+      "outputSha256": "147385f17d47275c69eb72aeda1e127c5d6a86c229f920774e5ff87e88f93f0b",
+      "operations": []
+    },
+    {
+      "path": "src/cards/template-card/const.ts",
+      "sourceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "operations": []
+    },
+    {
+      "path": "src/cards/template-card/template-card-config.ts",
+      "sourceSha256": "46d60ee447ca1456e6c6cd9cba49d3b6c4fc9416c1da3cbd20e7a538d69f1d65",
+      "outputSha256": "46d60ee447ca1456e6c6cd9cba49d3b6c4fc9416c1da3cbd20e7a538d69f1d65",
+      "operations": []
+    },
+    {
+      "path": "src/cards/template-card/template-card-editor.ts",
+      "sourceSha256": "f6a6768b389d00574d422152000a318aed4ee0d392447986e431ffe0456e4dfd",
+      "outputSha256": "d06ba244ad81f45debe5672a73a850ac76a3372903145f8c31e67974e91865de",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/template-card/template-card.ts",
+      "sourceSha256": "724960a302a3c5ddfb602a9e7f1e77d97e3e83ca2c89244352e52e99bc5cf071",
+      "outputSha256": "fdab2251c3b3b9c3309a142db66b011bac31e4cae0403a87c7eda153582023be",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 5
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 2,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "reflect-ha-dark-mode-presentation",
+          "attribute": "data-island-theme",
+          "lifecycle": "willUpdate",
+          "values": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/title-card/const.ts",
+      "sourceSha256": "d59e1065c67e9a87472a5364a44e7ab2cee28917f3b63b9bb88ff04c7b32a869",
+      "outputSha256": "d59e1065c67e9a87472a5364a44e7ab2cee28917f3b63b9bb88ff04c7b32a869",
+      "operations": []
+    },
+    {
+      "path": "src/cards/title-card/title-card-config.ts",
+      "sourceSha256": "ee3fbe67c4f361c7d1fc4cb593eccde597af3fcea182028c7084e8c2c3e397c6",
+      "outputSha256": "ee3fbe67c4f361c7d1fc4cb593eccde597af3fcea182028c7084e8c2c3e397c6",
+      "operations": []
+    },
+    {
+      "path": "src/cards/title-card/title-card-editor.ts",
+      "sourceSha256": "62f161c152e59ccab7ad48de5e31ecb8e0aa4f6e2291fcf2fb19c0cdb05e9880",
+      "outputSha256": "62f161c152e59ccab7ad48de5e31ecb8e0aa4f6e2291fcf2fb19c0cdb05e9880",
+      "operations": []
+    },
+    {
+      "path": "src/cards/title-card/title-card.ts",
+      "sourceSha256": "d260342328975f26f27251ecc22dcb7ce70d28bf51b38fb3ba728ff26b258317",
+      "outputSha256": "8b4054ea290b8b99cfacceb657fbd85a265da64f672106b5274ac97f94f98bbc",
+      "operations": [
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/update-card/const.ts",
+      "sourceSha256": "3003b315e716c6773c856b30dc7320fc2e38851818203eb5b83ea6650320d558",
+      "outputSha256": "3003b315e716c6773c856b30dc7320fc2e38851818203eb5b83ea6650320d558",
+      "operations": []
+    },
+    {
+      "path": "src/cards/update-card/controls/update-buttons-control.ts",
+      "sourceSha256": "d4d99504ced77712ff638662f1e4cfbc7cfba2985cf818a6254739e6a387519d",
+      "outputSha256": "d43f8025c14d61aae2313759a096a32cbe132eecd16aa1226bc73bc26a85fd07",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 7
+        }
+      ]
+    },
+    {
+      "path": "src/cards/update-card/update-card-config.ts",
+      "sourceSha256": "be79acf80726deec57989f1027d65b321c9db73d1cc2b279d21bad8d9bfdc54c",
+      "outputSha256": "be79acf80726deec57989f1027d65b321c9db73d1cc2b279d21bad8d9bfdc54c",
+      "operations": []
+    },
+    {
+      "path": "src/cards/update-card/update-card-editor.ts",
+      "sourceSha256": "b235b63c04485d942067d3b116212adbabfbc766fe6df6d877fba65ef9e40768",
+      "outputSha256": "b235b63c04485d942067d3b116212adbabfbc766fe6df6d877fba65ef9e40768",
+      "operations": []
+    },
+    {
+      "path": "src/cards/update-card/update-card.ts",
+      "sourceSha256": "b473223178265b3b63313ccbe4c11bab29d70162d95c7c1171275f84327412c0",
+      "outputSha256": "174202a634738df93a03d77948535a2f47b0cc208c2eb3d536b516cd0b206360",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 12
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/cards/update-card/utils.ts",
+      "sourceSha256": "1e39227df94a507e4591298bf502f4da2aa74e87f3a0ae93d1113e7863acba16",
+      "outputSha256": "1e39227df94a507e4591298bf502f4da2aa74e87f3a0ae93d1113e7863acba16",
+      "operations": []
+    },
+    {
+      "path": "src/cards/vacuum-card/const.ts",
+      "sourceSha256": "e84e0adef10705e061b33c1caaa65f29b72ef5483bf541a41373d883b7b27f23",
+      "outputSha256": "e84e0adef10705e061b33c1caaa65f29b72ef5483bf541a41373d883b7b27f23",
+      "operations": []
+    },
+    {
+      "path": "src/cards/vacuum-card/controls/vacuum-commands-control.ts",
+      "sourceSha256": "3326d62ad5c2d9e01049b3d2d476a5afc10c65891e61078ec9b5145a877fe04d",
+      "outputSha256": "093adceb7d08ef5a5ee9073760e5540f5b7ae33b57da85287e98a2a476835b49",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 5
+        }
+      ]
+    },
+    {
+      "path": "src/cards/vacuum-card/utils.ts",
+      "sourceSha256": "89d062eacd8b751aa64ebca8b12971dbaadacbf409258874fd9f0d3bccd188d0",
+      "outputSha256": "89d062eacd8b751aa64ebca8b12971dbaadacbf409258874fd9f0d3bccd188d0",
+      "operations": []
+    },
+    {
+      "path": "src/cards/vacuum-card/vacuum-card-config.ts",
+      "sourceSha256": "8d1e5089680873f6bdad99eb5b67e16300b38bd56142b6ee862e24bcd69cbf19",
+      "outputSha256": "8d1e5089680873f6bdad99eb5b67e16300b38bd56142b6ee862e24bcd69cbf19",
+      "operations": []
+    },
+    {
+      "path": "src/cards/vacuum-card/vacuum-card-editor.ts",
+      "sourceSha256": "3c4bb63a2e075f51b2a6e02fc128fc4f97072b0e696d615704d113ba587b3b11",
+      "outputSha256": "3c4bb63a2e075f51b2a6e02fc128fc4f97072b0e696d615704d113ba587b3b11",
+      "operations": []
+    },
+    {
+      "path": "src/cards/vacuum-card/vacuum-card.ts",
+      "sourceSha256": "94cd79b83aba603bfa56b0c4375187a32c9cf5a41cab9a89b8916a12a6119730",
+      "outputSha256": "cf1d22afdb8a5a6565bece7d720d6e3b2390b46b862aa0446281d31880b4e74c",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 11
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 4
+        },
+        {
+          "kind": "identify-fork-picker-metadata",
+          "strings": 1,
+          "from": "Mushroom",
+          "to": "Animal Island"
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/const.ts",
+      "sourceSha256": "7dedc1d012880c963d81a35bf9ecd3f67bb710141d4f1325532fcd1f718d73bc",
+      "outputSha256": "16933bed9ce6ea38c974482f5008b30270d495cf6dd0353783686cf94743a706",
+      "operations": [
+        {
+          "kind": "factory-prefix",
+          "from": "mushroom",
+          "to": "island"
+        }
+      ]
+    },
+    {
+      "path": "src/ha/common/color/compute-color.ts",
+      "sourceSha256": "89728444750f1619ca79dfcd7e0ecc7f0fd65cc1a760568f075f0278c389b9e5",
+      "outputSha256": "89728444750f1619ca79dfcd7e0ecc7f0fd65cc1a760568f075f0278c389b9e5",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/color/convert-color.ts",
+      "sourceSha256": "e473a42cd1e90709931fa2ffdbd3d6ff6a0a9bef6e0248d4ba6b2c3d9c98fc03",
+      "outputSha256": "e473a42cd1e90709931fa2ffdbd3d6ff6a0a9bef6e0248d4ba6b2c3d9c98fc03",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/color/convert-light-color.ts",
+      "sourceSha256": "6bc4bf5a3f48c796787ff558ba05e510579d378b7bee18f59bcb7b27c87bfbef",
+      "outputSha256": "6bc4bf5a3f48c796787ff558ba05e510579d378b7bee18f59bcb7b27c87bfbef",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/color/hex.ts",
+      "sourceSha256": "2b246b0286254d26daeac99b71a11d55de08d45fc351c379487956884ae2f8c9",
+      "outputSha256": "2b246b0286254d26daeac99b71a11d55de08d45fc351c379487956884ae2f8c9",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/config/version.ts",
+      "sourceSha256": "3b4e380ebb7df92ac8c5acd94d7e38e66acf5df96937e18bf6aebf91e97369ab",
+      "outputSha256": "3b4e380ebb7df92ac8c5acd94d7e38e66acf5df96937e18bf6aebf91e97369ab",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/const.ts",
+      "sourceSha256": "d75b87ee8d177eb0ed04f0d78b7737d6dcbc06f9232b9a8d05d7eb21ef8f4d18",
+      "outputSha256": "d75b87ee8d177eb0ed04f0d78b7737d6dcbc06f9232b9a8d05d7eb21ef8f4d18",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/dom/fire_event.ts",
+      "sourceSha256": "26dd194f0b9a65e84c1864c234d07a34b57b321ce543a8c3ae7d167d4de82e77",
+      "outputSha256": "26dd194f0b9a65e84c1864c234d07a34b57b321ce543a8c3ae7d167d4de82e77",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/dom/get_main_window.ts",
+      "sourceSha256": "995597f0f6c23e27006156b0ddc367e1dd7db30fcfb2b9851144188625c00282",
+      "outputSha256": "995597f0f6c23e27006156b0ddc367e1dd7db30fcfb2b9851144188625c00282",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/entity/compute_domain.ts",
+      "sourceSha256": "6efb2508b8d1f6a20a814716ae0414b8069ea7f279e78ab2565d35fec278343f",
+      "outputSha256": "6efb2508b8d1f6a20a814716ae0414b8069ea7f279e78ab2565d35fec278343f",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/entity/compute_object_id.ts",
+      "sourceSha256": "caceddfb5a855e88d1d2e0025ecaf34e3fb33932a5895d9ab2e7e6a5985e9566",
+      "outputSha256": "caceddfb5a855e88d1d2e0025ecaf34e3fb33932a5895d9ab2e7e6a5985e9566",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/entity/compute_state_display.ts",
+      "sourceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/entity/compute_state_domain.ts",
+      "sourceSha256": "c1a57cae5fd475c85e7fa84c34ccfb4d885667fe0f8eb5b879c39be909a99f90",
+      "outputSha256": "c1a57cae5fd475c85e7fa84c34ccfb4d885667fe0f8eb5b879c39be909a99f90",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/entity/compute_state_name.ts",
+      "sourceSha256": "eaeddb684def1d02727246dd39dcf1af8d53cae2e57efb4bc0620ac4c2c50f11",
+      "outputSha256": "eaeddb684def1d02727246dd39dcf1af8d53cae2e57efb4bc0620ac4c2c50f11",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/entity/supports-feature.ts",
+      "sourceSha256": "3e46c8e79da901a04bd93834c7d79a8e4671611f0ee543dd7fc25e00c0dd10f4",
+      "outputSha256": "3e46c8e79da901a04bd93834c7d79a8e4671611f0ee543dd7fc25e00c0dd10f4",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/number/clamp.ts",
+      "sourceSha256": "c13f2f1f30b3ccc031d853bd826d5d6f6ab8514c73f6eb603ac554fd4186a34a",
+      "outputSha256": "c13f2f1f30b3ccc031d853bd826d5d6f6ab8514c73f6eb603ac554fd4186a34a",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/number/format_number.ts",
+      "sourceSha256": "ed4085d68d0bd2096fffb24af67bcd27f55079290e9778523292a0c2e5d13a68",
+      "outputSha256": "ed4085d68d0bd2096fffb24af67bcd27f55079290e9778523292a0c2e5d13a68",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/number/round.ts",
+      "sourceSha256": "f70940cfdaaf324984787d3a2e9e0513cc3501970d64ead8edaaf9e19c47e91a",
+      "outputSha256": "f70940cfdaaf324984787d3a2e9e0513cc3501970d64ead8edaaf9e19c47e91a",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/string/compare.ts",
+      "sourceSha256": "f79811cfc15a8abbd8ddfd93ed171cbcd2556fbd499303245e037a707ad3f276",
+      "outputSha256": "f79811cfc15a8abbd8ddfd93ed171cbcd2556fbd499303245e037a707ad3f276",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/string/has-template.ts",
+      "sourceSha256": "c8b42066ebfef757620ea4b75b15c17dada67146b422cee8fe3e861731e65ae7",
+      "outputSha256": "c8b42066ebfef757620ea4b75b15c17dada67146b422cee8fe3e861731e65ae7",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/structs/handle-errors.ts",
+      "sourceSha256": "60685592d67da1733a0248af5add79d752f1b1e2a09508b2f502f350c59baa15",
+      "outputSha256": "60685592d67da1733a0248af5add79d752f1b1e2a09508b2f502f350c59baa15",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/translations/localize.ts",
+      "sourceSha256": "f5cd564b78a512a3c37aa802108394315b8ff3046b3f99879e02b7091b978f5e",
+      "outputSha256": "f5cd564b78a512a3c37aa802108394315b8ff3046b3f99879e02b7091b978f5e",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/util/compute_rtl.ts",
+      "sourceSha256": "88e84807e8acba0e9b29404e82fdb055f9edb8099b9ac67920ca81eeead4a52f",
+      "outputSha256": "88e84807e8acba0e9b29404e82fdb055f9edb8099b9ac67920ca81eeead4a52f",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/util/debounce.ts",
+      "sourceSha256": "817245e78aa5b8e28740f3ca3127145dd30442c20e5ee09143e76e67a46eb4a9",
+      "outputSha256": "817245e78aa5b8e28740f3ca3127145dd30442c20e5ee09143e76e67a46eb4a9",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/util/deep-equal.ts",
+      "sourceSha256": "812dc0d09139f2b3101031bb89e00c7aba2e5af18aec7e2812859e4c974d5425",
+      "outputSha256": "812dc0d09139f2b3101031bb89e00c7aba2e5af18aec7e2812859e4c974d5425",
+      "operations": []
+    },
+    {
+      "path": "src/ha/common/util/render-status.ts",
+      "sourceSha256": "c400bbf85718239e170931a7af1349da7d7d350a26492a061663aa3bd0ccddd1",
+      "outputSha256": "c400bbf85718239e170931a7af1349da7d7d350a26492a061663aa3bd0ccddd1",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/alarm_control_panel.ts",
+      "sourceSha256": "218a995051074df9bf1766cc178b4e93a7dfe2848e81d51ffa626a3a2841de5e",
+      "outputSha256": "218a995051074df9bf1766cc178b4e93a7dfe2848e81d51ffa626a3a2841de5e",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/climate.ts",
+      "sourceSha256": "bf925d3cae8ee77a8bbe88be5ffd1966df147e96a110a4346fd247c96d199cca",
+      "outputSha256": "bf925d3cae8ee77a8bbe88be5ffd1966df147e96a110a4346fd247c96d199cca",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/cover.ts",
+      "sourceSha256": "aaadc657aaa4df33d18c6db2460a2979415bc924e48910ab167ba9c1d76ac7cc",
+      "outputSha256": "aaadc657aaa4df33d18c6db2460a2979415bc924e48910ab167ba9c1d76ac7cc",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/entity.ts",
+      "sourceSha256": "5e40d39403a399f5c268a7eba5e6bf366ed65723226afa7f05bb7b2ec3251418",
+      "outputSha256": "5e40d39403a399f5c268a7eba5e6bf366ed65723226afa7f05bb7b2ec3251418",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/entity_name.ts",
+      "sourceSha256": "bb99b6934d28a909213f9523b10cd24cabd75758d365750fd3b9f2ba53b84e7d",
+      "outputSha256": "bb99b6934d28a909213f9523b10cd24cabd75758d365750fd3b9f2ba53b84e7d",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/entity_registry.ts",
+      "sourceSha256": "d5c58b5e99cf4f2189f4f8ffee7d8f648b0c73a094408c1649b5bf62ebfd4b98",
+      "outputSha256": "d5c58b5e99cf4f2189f4f8ffee7d8f648b0c73a094408c1649b5bf62ebfd4b98",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/fan.ts",
+      "sourceSha256": "9fd73882ddd5898df79157d6ee5c4afcc5f61c10476807a489d7cadede58a61d",
+      "outputSha256": "9fd73882ddd5898df79157d6ee5c4afcc5f61c10476807a489d7cadede58a61d",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/humidifier.ts",
+      "sourceSha256": "a1c30a9c9596d125373e459f4b0ca4f03bc8f7698138b98c9ec7281762c80357",
+      "outputSha256": "a1c30a9c9596d125373e459f4b0ca4f03bc8f7698138b98c9ec7281762c80357",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/light.ts",
+      "sourceSha256": "8951a228fa0698743fc8b4f9069b8b7be5a1135edf4bd017dffa785b28ae4fbf",
+      "outputSha256": "8951a228fa0698743fc8b4f9069b8b7be5a1135edf4bd017dffa785b28ae4fbf",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/lock.ts",
+      "sourceSha256": "10ff093b9b349b42fc37ea78afc3772f40d7e6a7e622e94bcc6867c1ba213320",
+      "outputSha256": "10ff093b9b349b42fc37ea78afc3772f40d7e6a7e622e94bcc6867c1ba213320",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/lovelace.ts",
+      "sourceSha256": "c2287efad6603e2323a8c9938239425a94f3fd117abb837fcdcc65630c71e0d0",
+      "outputSha256": "c2287efad6603e2323a8c9938239425a94f3fd117abb837fcdcc65630c71e0d0",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/main_window.ts",
+      "sourceSha256": "bf5cc0ffae612b5ea99b744b46a12597859e64960f79b7bb3eab56ae16e96b3f",
+      "outputSha256": "bf5cc0ffae612b5ea99b744b46a12597859e64960f79b7bb3eab56ae16e96b3f",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/media-player.ts",
+      "sourceSha256": "58dbc1da44ca2625003a1495eb28662473020aae1e85476f3542822f1877768e",
+      "outputSha256": "58dbc1da44ca2625003a1495eb28662473020aae1e85476f3542822f1877768e",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/translation.ts",
+      "sourceSha256": "388b713ab31c20a19f5dc82b5b7304417d31659fcc0225f1de72c3b9ed494846",
+      "outputSha256": "388b713ab31c20a19f5dc82b5b7304417d31659fcc0225f1de72c3b9ed494846",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/update.ts",
+      "sourceSha256": "89ceedb9abab20e06ad70cf4fe453ced18a5c5e1a2fa30b8eb4df727feb75a79",
+      "outputSha256": "89ceedb9abab20e06ad70cf4fe453ced18a5c5e1a2fa30b8eb4df727feb75a79",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/vacuum.ts",
+      "sourceSha256": "6bf13b9772c28c949aef96e56e813609b1a456985d4956043dccdd8101d9ce86",
+      "outputSha256": "6bf13b9772c28c949aef96e56e813609b1a456985d4956043dccdd8101d9ce86",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/ws-templates.ts",
+      "sourceSha256": "8be78a629a1331a665e4c997cd59612fb872cf0eb464d78f25919a6810763f5d",
+      "outputSha256": "8be78a629a1331a665e4c997cd59612fb872cf0eb464d78f25919a6810763f5d",
+      "operations": []
+    },
+    {
+      "path": "src/ha/data/ws-themes.ts",
+      "sourceSha256": "b825cdb26596686f8cf08d709885c2c83761924c3b4c075a3986c5288a69d4f5",
+      "outputSha256": "b825cdb26596686f8cf08d709885c2c83761924c3b4c075a3986c5288a69d4f5",
+      "operations": []
+    },
+    {
+      "path": "src/ha/index.ts",
+      "sourceSha256": "04cd4ab3fa1bce5ce5c01d8d0c582f8edefe271312ee9a70103b75da41c6008c",
+      "outputSha256": "04cd4ab3fa1bce5ce5c01d8d0c582f8edefe271312ee9a70103b75da41c6008c",
+      "operations": []
+    },
+    {
+      "path": "src/ha/panels/lovelace/card-features/types.ts",
+      "sourceSha256": "d2af9329789e461875e502e80cf2244988066f90335a3727d0df2725515ee631",
+      "outputSha256": "d2af9329789e461875e502e80cf2244988066f90335a3727d0df2725515ee631",
+      "operations": []
+    },
+    {
+      "path": "src/ha/panels/lovelace/common/directives/action-handler-directive.ts",
+      "sourceSha256": "ec279c7dc104285923dfbca26be454964e372c9075dbebba6ddd17404578a4ef",
+      "outputSha256": "ec279c7dc104285923dfbca26be454964e372c9075dbebba6ddd17404578a4ef",
+      "operations": []
+    },
+    {
+      "path": "src/ha/panels/lovelace/common/entity/turn-on-off-entities.ts",
+      "sourceSha256": "c858e5b065bfa0921de46fef51fc6f4ab6fe6ff0ef9045847c129a492e14ec82",
+      "outputSha256": "c858e5b065bfa0921de46fef51fc6f4ab6fe6ff0ef9045847c129a492e14ec82",
+      "operations": []
+    },
+    {
+      "path": "src/ha/panels/lovelace/common/entity/turn-on-off-entity.ts",
+      "sourceSha256": "ea8f5bc1d0ce495968a57614a4bfd1bb08c108fe4c7127ff2e760087542f5dd9",
+      "outputSha256": "ea8f5bc1d0ce495968a57614a4bfd1bb08c108fe4c7127ff2e760087542f5dd9",
+      "operations": []
+    },
+    {
+      "path": "src/ha/panels/lovelace/common/handle-actions.ts",
+      "sourceSha256": "4060eac1ea295928593e361c62954105256a31ecf04b0bc04326d9961306000c",
+      "outputSha256": "4060eac1ea295928593e361c62954105256a31ecf04b0bc04326d9961306000c",
+      "operations": []
+    },
+    {
+      "path": "src/ha/panels/lovelace/common/has-action.ts",
+      "sourceSha256": "c68e0f586d9c09570a9a7bd2e166636474d9c4d94a657676454f0a00659f6e99",
+      "outputSha256": "c68e0f586d9c09570a9a7bd2e166636474d9c4d94a657676454f0a00659f6e99",
+      "operations": []
+    },
+    {
+      "path": "src/ha/panels/lovelace/common/validate-condition.ts",
+      "sourceSha256": "0708fc6c57188f21f3b391c8ad494758d47b0257972fd1e6ccd40debe269aec8",
+      "outputSha256": "0708fc6c57188f21f3b391c8ad494758d47b0257972fd1e6ccd40debe269aec8",
+      "operations": []
+    },
+    {
+      "path": "src/ha/panels/lovelace/editor/structs/action-struct.ts",
+      "sourceSha256": "4a0d92caf803dcea05e4aa214899ad7300522065ea94157bceb76c572eac0eb9",
+      "outputSha256": "4a0d92caf803dcea05e4aa214899ad7300522065ea94157bceb76c572eac0eb9",
+      "operations": []
+    },
+    {
+      "path": "src/ha/panels/lovelace/types.ts",
+      "sourceSha256": "19485f01365b0d6c9309435857762240c2ff15fa79cabdfd29303988a3d4121b",
+      "outputSha256": "19485f01365b0d6c9309435857762240c2ff15fa79cabdfd29303988a3d4121b",
+      "operations": []
+    },
+    {
+      "path": "src/ha/resources/ha-sortable-styles.ts",
+      "sourceSha256": "5ffd44073ea671a18c126cb5c1d7f34a739ffeb8aa261ea9be9afd7bd7d1d2dd",
+      "outputSha256": "5ffd44073ea671a18c126cb5c1d7f34a739ffeb8aa261ea9be9afd7bd7d1d2dd",
+      "operations": []
+    },
+    {
+      "path": "src/ha/types.ts",
+      "sourceSha256": "56e02b2416b4b4859049b977f007e91c5eae6da52fd35f04d0aa6709241e50df",
+      "outputSha256": "56e02b2416b4b4859049b977f007e91c5eae6da52fd35f04d0aa6709241e50df",
+      "operations": []
+    },
+    {
+      "path": "src/ha/util.ts",
+      "sourceSha256": "22a092c74fbff58ca867896c16862b9514e9735355d4db471dc40deef88feeb9",
+      "outputSha256": "22a092c74fbff58ca867896c16862b9514e9735355d4db471dc40deef88feeb9",
+      "operations": []
+    },
+    {
+      "path": "src/localize.ts",
+      "sourceSha256": "4de743364cee29ca70bce4a411db4a79c6f9cfc0f7b9d1d2bfa386c1f3203972",
+      "outputSha256": "4de743364cee29ca70bce4a411db4a79c6f9cfc0f7b9d1d2bfa386c1f3203972",
+      "operations": []
+    },
+    {
+      "path": "src/mushroom.ts",
+      "sourceSha256": "8e3907231f898f5db95e23caad6d81dfc636ce474ab99349b04ed2b1dde27a8a",
+      "outputSha256": "346a078c1d91729f461a2856293515142157fb69079506f0dabadabecfdd004f",
+      "operations": [
+        {
+          "kind": "identify-fork-console"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/badge-icon.ts",
+      "sourceSha256": "a3dca98aa777a24d445a4491f3218180ecac841d446052e1de2f1160bb72cfd5",
+      "outputSha256": "e9b225d5878fab94d3450d1c7b14ad9dcd7046fce0a3f792cd3223b3ae2523df",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/shared/button-group.ts",
+      "sourceSha256": "20ef776bf07ab73fbd2d28334f9d834065a2013d28750f0a3b7643ba6898f27c",
+      "outputSha256": "331b42efe60eeb93b5ac28360c5f9b5e00f3bbb69e9351842c1369ce3463cbcc",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 5
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/shared/button.ts",
+      "sourceSha256": "5c4ab38b38d1482e1bed2c89cc465f4692f91552093b2a8e4690e87212e7c1e2",
+      "outputSha256": "39d1babe6017747cc278569b647284f24f72029549144cd12fa103d5a1892d6a",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        },
+        {
+          "kind": "install-presentation-motion-controller",
+          "class": "Button",
+          "surface": "button",
+          "lifecycle": "Lit ReactiveController",
+          "inputHandlersChanged": false
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/shared/card.ts",
+      "sourceSha256": "c91881209789d177f67fcd82d8915a7bb848c25af633625ae39a93465c9b5bb9",
+      "outputSha256": "1fe694baa3073e0bc7066f339952e9ddca98e3bf1b6fda903742e97aebbcf625",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 4
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/shared/chip.ts",
+      "sourceSha256": "123dc88dc5952977253df74340697fcd459fac698c33ebe7180e53fef9ff55a3",
+      "outputSha256": "203515b8ee560271c3813920cdb3bdc9e01692aa5288b0f15200dea1f527e84c",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 1
+        },
+        {
+          "kind": "install-presentation-motion-controller",
+          "class": "Chip",
+          "surface": "chip",
+          "lifecycle": "Lit ReactiveController",
+          "inputHandlersChanged": false
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/shared/config/actions-config.ts",
+      "sourceSha256": "9110a75c0321d13f4d9d02afbf02c6d5846b1a8a8be1f2a4f2c6501a814b147f",
+      "outputSha256": "9110a75c0321d13f4d9d02afbf02c6d5846b1a8a8be1f2a4f2c6501a814b147f",
+      "operations": []
+    },
+    {
+      "path": "src/shared/config/appearance-config.ts",
+      "sourceSha256": "b269bc16d016f01a59e0c505088c8d82bfc98c6ee7b1d87feff203bd6b0909ab",
+      "outputSha256": "b269bc16d016f01a59e0c505088c8d82bfc98c6ee7b1d87feff203bd6b0909ab",
+      "operations": []
+    },
+    {
+      "path": "src/shared/config/entity-config.ts",
+      "sourceSha256": "18b4a5649a1969328ec6de927e06a374ddb8774e815e101bf95b113f61c205b6",
+      "outputSha256": "18b4a5649a1969328ec6de927e06a374ddb8774e815e101bf95b113f61c205b6",
+      "operations": []
+    },
+    {
+      "path": "src/shared/config/lovelace-badge-config.ts",
+      "sourceSha256": "544a17a7afd5ac97448e500442f57f53e07a8244e874aabca301abfedf35a1ad",
+      "outputSha256": "544a17a7afd5ac97448e500442f57f53e07a8244e874aabca301abfedf35a1ad",
+      "operations": []
+    },
+    {
+      "path": "src/shared/config/lovelace-card-config.ts",
+      "sourceSha256": "35f73b8fb35af0dd311316bafeb4e4f6a49114e82307078a57868205b736ecb3",
+      "outputSha256": "35f73b8fb35af0dd311316bafeb4e4f6a49114e82307078a57868205b736ecb3",
+      "operations": []
+    },
+    {
+      "path": "src/shared/input-number.ts",
+      "sourceSha256": "d0f584f4473d3b72dcf7517ed829f381f3055c20b90924229ee11c6aab504d9b",
+      "outputSha256": "b940f3786b1111dff52dd8cda9f7cdaaa3aef6289670092201795c66cbe8b8ff",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        },
+        {
+          "kind": "install-presentation-motion-controller",
+          "class": "InputNumber",
+          "surface": "input-number",
+          "lifecycle": "Lit ReactiveController",
+          "inputHandlersChanged": false
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/shared/shape-avatar.ts",
+      "sourceSha256": "a4fb73695a56d3791a0a84f9d84499a516c461f4e041bfe9ce863f6e7ca7a4ed",
+      "outputSha256": "78ff9c7d73bdcba9149dfc293baed65082623f7e240c490760c49e91bdfa6014",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/shared/shape-icon.ts",
+      "sourceSha256": "63e4359a31d7d728895ee13936eb7aea6a3f978465901b808dd12cdd3712568d",
+      "outputSha256": "76e3b4ab421c61e1f33a218c984882e2c7679fc64ad2a8fdf525d5fcd6479459",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 1
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/shared/slider.ts",
+      "sourceSha256": "cdcc405c4c0569a61128bedc088e61823217d0af08c5bc9d059aec349c684cc8",
+      "outputSha256": "1d1d7e72c79a9de831ef6713f665b6b931ea0e308ff806a67a5823d7cb1001e7",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/shared/state-info.ts",
+      "sourceSha256": "4e4d09f774fe33f9f18376fdd0734ddf53656c9d47160b56c0e87c2f3bdcf7b0",
+      "outputSha256": "a2bac369e67735f4450c4699e0c2127bd546348d6837083f42e57e9c3509c1bb",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/shared/state-item.ts",
+      "sourceSha256": "0d4a90d8c92101ba6f9c38b23f72d3d9a3ab70ba247de8a872f77ce70ff5e9fc",
+      "outputSha256": "380c2d61b81e015d486a7a5c4832c0e8385c89a37bec3933c65ba714aab5e236",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/translations/ar.json",
+      "sourceSha256": "5be615500b6226d61b4f4c5e3c5c9be0dcdf1a3bbe3829690b41fa96bb705759",
+      "outputSha256": "5be615500b6226d61b4f4c5e3c5c9be0dcdf1a3bbe3829690b41fa96bb705759",
+      "operations": []
+    },
+    {
+      "path": "src/translations/bg.json",
+      "sourceSha256": "df06ddba302cb9880c8a477c502d89969a5a59bf4dc29b6817d315adb082d0af",
+      "outputSha256": "df06ddba302cb9880c8a477c502d89969a5a59bf4dc29b6817d315adb082d0af",
+      "operations": []
+    },
+    {
+      "path": "src/translations/ca.json",
+      "sourceSha256": "4da50bc1614a3855a9778aa36fdbd636ef79e8a7f9982cc33c61b79080e87871",
+      "outputSha256": "4da50bc1614a3855a9778aa36fdbd636ef79e8a7f9982cc33c61b79080e87871",
+      "operations": []
+    },
+    {
+      "path": "src/translations/cs.json",
+      "sourceSha256": "ac658a8ccb5bf1374359333291394d489dcf6dd71799e2db47c85e69da23fc73",
+      "outputSha256": "ac658a8ccb5bf1374359333291394d489dcf6dd71799e2db47c85e69da23fc73",
+      "operations": []
+    },
+    {
+      "path": "src/translations/da.json",
+      "sourceSha256": "f7bf6b05da424a775907acabe2d205e8f8ea14e5dd7d6f8b4e74c0c14b6f9857",
+      "outputSha256": "f7bf6b05da424a775907acabe2d205e8f8ea14e5dd7d6f8b4e74c0c14b6f9857",
+      "operations": []
+    },
+    {
+      "path": "src/translations/de.json",
+      "sourceSha256": "3b9ed4ff512c4c2f11d5a48cf7538eaf293255a2da7aa82d5face20a9712483f",
+      "outputSha256": "3b9ed4ff512c4c2f11d5a48cf7538eaf293255a2da7aa82d5face20a9712483f",
+      "operations": []
+    },
+    {
+      "path": "src/translations/el.json",
+      "sourceSha256": "21662a093a083d6a82767ed0f0b8021456df3d4f2daa4185ddfe60b1dc284e43",
+      "outputSha256": "21662a093a083d6a82767ed0f0b8021456df3d4f2daa4185ddfe60b1dc284e43",
+      "operations": []
+    },
+    {
+      "path": "src/translations/en.json",
+      "sourceSha256": "b2deb2d890c4b90393d35130dce9d0413333cbaf039d7b94a30ae7e33749b874",
+      "outputSha256": "b2deb2d890c4b90393d35130dce9d0413333cbaf039d7b94a30ae7e33749b874",
+      "operations": []
+    },
+    {
+      "path": "src/translations/es.json",
+      "sourceSha256": "c730bd6baae1a671badac77c3c47c1736eb9037331c545972849d6cad6eee42b",
+      "outputSha256": "c730bd6baae1a671badac77c3c47c1736eb9037331c545972849d6cad6eee42b",
+      "operations": []
+    },
+    {
+      "path": "src/translations/fi.json",
+      "sourceSha256": "8842425bed0ea4439a0ed6354537831cc9c73766eee68a77ef378a2fecb43aa7",
+      "outputSha256": "8842425bed0ea4439a0ed6354537831cc9c73766eee68a77ef378a2fecb43aa7",
+      "operations": []
+    },
+    {
+      "path": "src/translations/fr.json",
+      "sourceSha256": "6a3f52324c6906c6aaffcb1ed4db498f3067607f2150982f143dd1d45ecf419e",
+      "outputSha256": "6a3f52324c6906c6aaffcb1ed4db498f3067607f2150982f143dd1d45ecf419e",
+      "operations": []
+    },
+    {
+      "path": "src/translations/he.json",
+      "sourceSha256": "d279d59707657798df64911841b1dc6c33fc549e2d25e8f6dbd23046f2bdaf3c",
+      "outputSha256": "d279d59707657798df64911841b1dc6c33fc549e2d25e8f6dbd23046f2bdaf3c",
+      "operations": []
+    },
+    {
+      "path": "src/translations/hu.json",
+      "sourceSha256": "cf220ed4bd1adf2fc569f07c00e550e44bd7ebb72e434220f42af6aaec6b97c4",
+      "outputSha256": "cf220ed4bd1adf2fc569f07c00e550e44bd7ebb72e434220f42af6aaec6b97c4",
+      "operations": []
+    },
+    {
+      "path": "src/translations/id.json",
+      "sourceSha256": "60ae29574211107b5285849c562379697182fd4c01ee9b54aca8b83414e664d1",
+      "outputSha256": "60ae29574211107b5285849c562379697182fd4c01ee9b54aca8b83414e664d1",
+      "operations": []
+    },
+    {
+      "path": "src/translations/it.json",
+      "sourceSha256": "d2211041147987c9d76aa850968d11f234a8ac0d08f350a65f993873cc98718d",
+      "outputSha256": "d2211041147987c9d76aa850968d11f234a8ac0d08f350a65f993873cc98718d",
+      "operations": []
+    },
+    {
+      "path": "src/translations/ko-KR.json",
+      "sourceSha256": "2084fd5deb6870848120e70bd7e706749af942f1d46c1f578460f87510b81317",
+      "outputSha256": "2084fd5deb6870848120e70bd7e706749af942f1d46c1f578460f87510b81317",
+      "operations": []
+    },
+    {
+      "path": "src/translations/nb.json",
+      "sourceSha256": "9a0a795e7bdc8ce3ac7154638537cad4bfb2c4cb9582f3d25151253e721472b2",
+      "outputSha256": "9a0a795e7bdc8ce3ac7154638537cad4bfb2c4cb9582f3d25151253e721472b2",
+      "operations": []
+    },
+    {
+      "path": "src/translations/nl.json",
+      "sourceSha256": "973a5a07344848125f724627b428e57373b6f89bc22752c88575d4ddbd0a0aa5",
+      "outputSha256": "973a5a07344848125f724627b428e57373b6f89bc22752c88575d4ddbd0a0aa5",
+      "operations": []
+    },
+    {
+      "path": "src/translations/pl.json",
+      "sourceSha256": "0327ebf86cac7e3b2ce68e2b719c111923b528704c8e8fb82d9e9b2feb6cf559",
+      "outputSha256": "0327ebf86cac7e3b2ce68e2b719c111923b528704c8e8fb82d9e9b2feb6cf559",
+      "operations": []
+    },
+    {
+      "path": "src/translations/pt-BR.json",
+      "sourceSha256": "426dc962b05e9b3c061f541699fb88edb27b7405f0c257fa4032cec52c9bb044",
+      "outputSha256": "426dc962b05e9b3c061f541699fb88edb27b7405f0c257fa4032cec52c9bb044",
+      "operations": []
+    },
+    {
+      "path": "src/translations/pt-PT.json",
+      "sourceSha256": "b7f86f316ac149075dcbf555e1f3aaea42a92198cc9de5ff84c7fb3aad7c84b3",
+      "outputSha256": "b7f86f316ac149075dcbf555e1f3aaea42a92198cc9de5ff84c7fb3aad7c84b3",
+      "operations": []
+    },
+    {
+      "path": "src/translations/ro.json",
+      "sourceSha256": "b90af4e34db019a6d21f77fed9bb23e21a961266d452a340a1c5be5a1fb59dca",
+      "outputSha256": "b90af4e34db019a6d21f77fed9bb23e21a961266d452a340a1c5be5a1fb59dca",
+      "operations": []
+    },
+    {
+      "path": "src/translations/ru.json",
+      "sourceSha256": "65431cfa3b4f3bc2678519a097468e018ccfd27300714c4b59b7c1548ef4666d",
+      "outputSha256": "65431cfa3b4f3bc2678519a097468e018ccfd27300714c4b59b7c1548ef4666d",
+      "operations": []
+    },
+    {
+      "path": "src/translations/sk.json",
+      "sourceSha256": "5b33378022a53e5547c7ef2f669ff90beaf6a292af42b782019bf2ec47d2ace6",
+      "outputSha256": "5b33378022a53e5547c7ef2f669ff90beaf6a292af42b782019bf2ec47d2ace6",
+      "operations": []
+    },
+    {
+      "path": "src/translations/sl.json",
+      "sourceSha256": "917983a88d0a8d8c8004cf93d4fbea71a25e79e3761737bbea533379f66be7ef",
+      "outputSha256": "917983a88d0a8d8c8004cf93d4fbea71a25e79e3761737bbea533379f66be7ef",
+      "operations": []
+    },
+    {
+      "path": "src/translations/sv.json",
+      "sourceSha256": "667eb275730f20a59f111b9555ff22f6cc7ec40dc243452881a46820d41bef0f",
+      "outputSha256": "667eb275730f20a59f111b9555ff22f6cc7ec40dc243452881a46820d41bef0f",
+      "operations": []
+    },
+    {
+      "path": "src/translations/tr.json",
+      "sourceSha256": "41588790c80e991710402bf3a668b9f0d91ca1b3e53c06945c63a0443bd9d8e6",
+      "outputSha256": "41588790c80e991710402bf3a668b9f0d91ca1b3e53c06945c63a0443bd9d8e6",
+      "operations": []
+    },
+    {
+      "path": "src/translations/uk.json",
+      "sourceSha256": "aeead257d7a55ec3e6ac61acd7ba36ac5590092d1978daa8a5e23747bfde6d65",
+      "outputSha256": "aeead257d7a55ec3e6ac61acd7ba36ac5590092d1978daa8a5e23747bfde6d65",
+      "operations": []
+    },
+    {
+      "path": "src/translations/vi.json",
+      "sourceSha256": "a7254373a3c0af0d413972cb9a3796aa8b2f17faa5a54e7bb19d5e2bfa80f305",
+      "outputSha256": "a7254373a3c0af0d413972cb9a3796aa8b2f17faa5a54e7bb19d5e2bfa80f305",
+      "operations": []
+    },
+    {
+      "path": "src/translations/zh-Hans.json",
+      "sourceSha256": "0ae6adbab9771134c3eec8403b7f2540b38582b8d558a0fc99b2d5f403c2bf46",
+      "outputSha256": "0ae6adbab9771134c3eec8403b7f2540b38582b8d558a0fc99b2d5f403c2bf46",
+      "operations": []
+    },
+    {
+      "path": "src/translations/zh-Hant.json",
+      "sourceSha256": "3d67972cd04147c3865c5fc9103618a548a584b6370caa2e4c6d395219319b35",
+      "outputSha256": "3d67972cd04147c3865c5fc9103618a548a584b6370caa2e4c6d395219319b35",
+      "operations": []
+    },
+    {
+      "path": "src/utils/appearance.ts",
+      "sourceSha256": "eef63dcb48a808d9c1be628186121c98d445a114956e26337ea55fe15f3b47af",
+      "outputSha256": "eef63dcb48a808d9c1be628186121c98d445a114956e26337ea55fe15f3b47af",
+      "operations": []
+    },
+    {
+      "path": "src/utils/base-card.ts",
+      "sourceSha256": "4f9bed3c081260b690830769ea0665cdbaa2b6d8db8a5908d51c6b02388380d7",
+      "outputSha256": "2097decee933c07d5327a88b5808463725753e02e2c62f5e6ef4f46ed5a83135",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 18
+        },
+        {
+          "kind": "island-illustrated-icons",
+          "occurrences": 2
+        }
+      ]
+    },
+    {
+      "path": "src/utils/base-element.ts",
+      "sourceSha256": "b66bacf212b4fda53484fe0dbbf125d09a9a139f5497224e15057728dfe6be35",
+      "outputSha256": "0d85a37d2335df5dc08561ed05e5031f2decca8c6134ff80a933fd267e24ae09",
+      "operations": [
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/utils/cache-manager.ts",
+      "sourceSha256": "2e542acdbf31ee5cc45d842ddce35d44a731fded930ce3833f4e5e21ac6cfccb",
+      "outputSha256": "2e542acdbf31ee5cc45d842ddce35d44a731fded930ce3833f4e5e21ac6cfccb",
+      "operations": []
+    },
+    {
+      "path": "src/utils/card-styles.ts",
+      "sourceSha256": "8ec6c1dea5dc81cea6a47e989f7694a56b3115599a688cc9079174c105ad1e5d",
+      "outputSha256": "636c8fcb42f2641fd70a82924a0d495b4c9c655f58e5de81fe47e9e1f56c688c",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "path": "src/utils/colors.ts",
+      "sourceSha256": "fb1a335e26752eeaf0731a41ef83279a2e0d927ba638ef4ce0fa0fdcb000233c",
+      "outputSha256": "fb1a335e26752eeaf0731a41ef83279a2e0d927ba638ef4ce0fa0fdcb000233c",
+      "operations": []
+    },
+    {
+      "path": "src/utils/compute-entity-name.ts",
+      "sourceSha256": "95dffa15b1d7b0d5a405e42424d1d2b8d161ea2e9c2dd6982b624477e8447e2e",
+      "outputSha256": "95dffa15b1d7b0d5a405e42424d1d2b8d161ea2e9c2dd6982b624477e8447e2e",
+      "operations": []
+    },
+    {
+      "path": "src/utils/custom-badges.ts",
+      "sourceSha256": "192d35cbcfaed2d7c4e08672cbc1169252de2e2c4eda4d523300f2c0db46a964",
+      "outputSha256": "edc8b1653410f0701fc496b42af776be8aeefedc3c827382a145ac46c585255d",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "path": "src/utils/custom-cards.ts",
+      "sourceSha256": "cf69d1bca12294e60905fb8329da2351c53bcf32ff5edf0dcc6e3ffd78414900",
+      "outputSha256": "3715ac5e6b1175f1e172ba03146c6619b75c74f32eff9af645e0baf2cae28290",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "path": "src/utils/entity-styles.ts",
+      "sourceSha256": "c335f68419578a7e9786fc1cc6bf7af2cf398051a0081e321ad643667b4155cc",
+      "outputSha256": "c335f68419578a7e9786fc1cc6bf7af2cf398051a0081e321ad643667b4155cc",
+      "operations": []
+    },
+    {
+      "path": "src/utils/form/generic-fields.ts",
+      "sourceSha256": "eede7713bd55b8b239615909e487240520bd5b046052ac4c4382683a9350b47d",
+      "outputSha256": "eede7713bd55b8b239615909e487240520bd5b046052ac4c4382683a9350b47d",
+      "operations": []
+    },
+    {
+      "path": "src/utils/form/ha-form.ts",
+      "sourceSha256": "db68c454ab5fe03e19fbb40a6c772a4d63f854443d0d1b11878c6c7dc1b9b01c",
+      "outputSha256": "db68c454ab5fe03e19fbb40a6c772a4d63f854443d0d1b11878c6c7dc1b9b01c",
+      "operations": []
+    },
+    {
+      "path": "src/utils/form/ha-selector.ts",
+      "sourceSha256": "baec085eb2adf2731f9c6c1c67ead41a8a24b143ca244445ad3e46f0640712eb",
+      "outputSha256": "baec085eb2adf2731f9c6c1c67ead41a8a24b143ca244445ad3e46f0640712eb",
+      "operations": []
+    },
+    {
+      "path": "src/utils/form/name-schema.ts",
+      "sourceSha256": "002749c8abd1560947177b39707d8bc3edea686d357bb8d6f1c95ed9c2c89abc",
+      "outputSha256": "002749c8abd1560947177b39707d8bc3edea686d357bb8d6f1c95ed9c2c89abc",
+      "operations": []
+    },
+    {
+      "path": "src/utils/icons/cover-icon.ts",
+      "sourceSha256": "f7599f38d6a9c5a47ac043490d82ac0f7efe31490b98c77d2b85c18b76d9f90f",
+      "outputSha256": "f7599f38d6a9c5a47ac043490d82ac0f7efe31490b98c77d2b85c18b76d9f90f",
+      "operations": []
+    },
+    {
+      "path": "src/utils/icons/weather-icon.ts",
+      "sourceSha256": "e9e2703e4b539d1105ed0250292ddd3b3da741e38b6bf392aba6ca3cd82b6bca",
+      "outputSha256": "e9e2703e4b539d1105ed0250292ddd3b3da741e38b6bf392aba6ca3cd82b6bca",
+      "operations": []
+    },
+    {
+      "path": "src/utils/info.ts",
+      "sourceSha256": "e72104b97d409de1b199d3e4ef082b99b6e33a5db501738506324c75a4ed69d8",
+      "outputSha256": "e72104b97d409de1b199d3e4ef082b99b6e33a5db501738506324c75a4ed69d8",
+      "operations": []
+    },
+    {
+      "path": "src/utils/layout.ts",
+      "sourceSha256": "626d7b8bbcb86a7704983c558612c5d6496d9ec002ba2928e96e80945f8bf99d",
+      "outputSha256": "626d7b8bbcb86a7704983c558612c5d6496d9ec002ba2928e96e80945f8bf99d",
+      "operations": []
+    },
+    {
+      "path": "src/utils/loader.ts",
+      "sourceSha256": "a421ffcec3030f781a4fee9d6c5fe3ea39105cbe04425ad9a2a378d8ca506e39",
+      "outputSha256": "a421ffcec3030f781a4fee9d6c5fe3ea39105cbe04425ad9a2a378d8ca506e39",
+      "operations": []
+    },
+    {
+      "path": "src/utils/lovelace/chip-element-editor.ts",
+      "sourceSha256": "ab1945dcd9677f0a1e3fdd039d48b5f5826b84003031e82ea84b8e8158fd60da",
+      "outputSha256": "8fb6c64d7f3e50113690ba306c661268e604c19f275aad18912ec29f4936b1a2",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "path": "src/utils/lovelace/chip/chip-element.ts",
+      "sourceSha256": "e11f25746a66bcd238d7a03c95f239b7bfe31de38e487b2dd9ed7e160b927190",
+      "outputSha256": "e11f25746a66bcd238d7a03c95f239b7bfe31de38e487b2dd9ed7e160b927190",
+      "operations": []
+    },
+    {
+      "path": "src/utils/lovelace/chip/types.ts",
+      "sourceSha256": "02cba7413f5f0552c757a62d82c28e46e02c7da8b7e359ff6dee1745a1685d40",
+      "outputSha256": "02cba7413f5f0552c757a62d82c28e46e02c7da8b7e359ff6dee1745a1685d40",
+      "operations": []
+    },
+    {
+      "path": "src/utils/lovelace/editor/types.ts",
+      "sourceSha256": "5c723a466a47c6764f399818fb9bb1f015bef2a7ed10efd847345d5ba7abafa3",
+      "outputSha256": "5c723a466a47c6764f399818fb9bb1f015bef2a7ed10efd847345d5ba7abafa3",
+      "operations": []
+    },
+    {
+      "path": "src/utils/lovelace/element-editor.ts",
+      "sourceSha256": "cae7a5c00e2ead6caee4f3176c2c95fe38b94698bd385ef01b11ff2b2ca56221",
+      "outputSha256": "929306a555a4400a96def37c0c92fd55fb2c6446ec6268018caa0883b90b2722",
+      "operations": [
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/utils/lovelace/gui-support-error.ts",
+      "sourceSha256": "140d7db6c43509f2f4f66c4ef9a593fe89f564e936a452274066726e91b7a8fa",
+      "outputSha256": "140d7db6c43509f2f4f66c4ef9a593fe89f564e936a452274066726e91b7a8fa",
+      "operations": []
+    },
+    {
+      "path": "src/utils/lovelace/sub-element-editor.ts",
+      "sourceSha256": "c13011a1fa448cb3b4e68880c9f5ed3d54c560554ef90be2b2255728ec587e56",
+      "outputSha256": "e81ca4b849932186e7d4a96c6b70939154d0a36d27e50d83d7a5dc7c7e95fcc1",
+      "operations": [
+        {
+          "kind": "namespace-prefix",
+          "occurrences": 3
+        },
+        {
+          "kind": "append-static-styles",
+          "expressions": 1
+        }
+      ]
+    },
+    {
+      "path": "src/utils/lovelace/types.ts",
+      "sourceSha256": "2d0d5d2d60a709078d665029e5ed706f6fe44750861f87f80daa3fb2b75621b2",
+      "outputSha256": "2d0d5d2d60a709078d665029e5ed706f6fe44750861f87f80daa3fb2b75621b2",
+      "operations": []
+    },
+    {
+      "path": "src/utils/theme.ts",
+      "sourceSha256": "23f2cbf98c6c604ec91ddbe43bac8eff77f6b3567ae6327ab4328005dbbd4955",
+      "outputSha256": "23f2cbf98c6c604ec91ddbe43bac8eff77f6b3567ae6327ab4328005dbbd4955",
+      "operations": []
+    },
+    {
+      "path": "src/utils/weather.ts",
+      "sourceSha256": "8437dad672eb9b4ec7de9f082893679fa5f4ce4c7f9ee942012c065b40ca5eb3",
+      "outputSha256": "8437dad672eb9b4ec7de9f082893679fa5f4ce4c7f9ee942012c065b40ca5eb3",
+      "operations": []
+    }
+  ],
+  "registrations": {
+    "currentCards": [
+      "alarm-control-panel-card",
+      "chips-card",
+      "climate-card",
+      "cover-card",
+      "empty-card",
+      "entity-card",
+      "fan-card",
+      "humidifier-card",
+      "light-card",
+      "lock-card",
+      "media-player-card",
+      "number-card",
+      "person-card",
+      "select-card",
+      "template-card",
+      "title-card",
+      "update-card",
+      "vacuum-card"
+    ],
+    "legacyCards": [
+      "legacy-template-card"
+    ],
+    "chips": [
+      "action-chip",
+      "alarm-control-panel-chip",
+      "back-chip",
+      "conditional-chip",
+      "entity-chip",
+      "light-chip",
+      "menu-chip",
+      "quickbar-chip",
+      "spacer-chip",
+      "template-chip",
+      "weather-chip"
+    ],
+    "badges": [
+      "template-badge"
+    ]
+  },
+  "audit": {
+    "allVendoredGitBlobsMatch": true,
+    "upstreamSourceFiles": 266,
+    "forkNamespaceIsolated": true,
+    "forkPickerMetadataFiles": 19,
+    "presentationMotionHosts": 3,
+    "currentCards": 18,
+    "legacyCards": 1,
+    "badges": 1,
+    "chips": 11,
+    "duplicateDefineGuardsAdded": false,
+    "behaviorRewrites": false,
+    "upstreamActionHandlersChanged": false,
+    "presentationEventObserversAdded": 3,
+    "skinAppends": 59
+  },
+  "outputs": {
+    "_parity/mushroom-original.js": {
+      "bytes": 1331174,
+      "sha256": "b38790baea40d15de6c19f6b12ecc52d72dcfd38c0ed8e280a67d5e2f5e97f18"
+    },
+    "dist/island-ha-cards.js": {
+      "bytes": 1419266,
+      "sha256": "dadb0c9b2031ceec6de5d1c87ed6c5e9384ed709073c85329efc0239e45dfaa5"
+    },
+    "_parity/island-ha-cards.js": {
+      "bytes": 1419266,
+      "sha256": "dadb0c9b2031ceec6de5d1c87ed6c5e9384ed709073c85329efc0239e45dfaa5"
+    },
+    "dist/fonts/Nunito-OFL.txt": {
+      "bytes": 4385,
+      "sha256": "580df76c95a1ec5ab878ceb25bb3d85c6a076804e9c970c8c6972aea775fdf65"
+    },
+    "dist/fonts/ResourceHanRounded-LICENSE.md": {
+      "bytes": 5780,
+      "sha256": "826ce32afdadc640a6210231598e3428deb784ccd2cb484064d79a0ea1dd7968"
+    },
+    "dist/fonts/island-nunito.woff2": {
+      "bytes": 36884,
+      "sha256": "5c3c58d2c133d9e888b9664b0ae35f8715a2983629a9536511d1c3299aaf4bd7"
+    },
+    "dist/fonts/island-rounded-500.woff2": {
+      "bytes": 1204536,
+      "sha256": "212f9393acd9c659f511150691090a07a7921b22eae8876513d1fd994a4d9fcf"
+    },
+    "dist/fonts/island-rounded-700.woff2": {
+      "bytes": 1225212,
+      "sha256": "19a6bcfb2e3c937c6809097124c4e0fa589b6f9a7e96d47bb8cbee37027b8586"
+    },
+    "dist/fonts/island-rounded-900.woff2": {
+      "bytes": 1187224,
+      "sha256": "bfc63d7e6b23ed69de88f0c60b206b57338852941bdfeac37bb35a8a0b5d7f60"
+    }
+  },
+  "dependencies": {
+    "original": [
+      "node_modules/@formatjs/fast-memoize/index.js",
+      "node_modules/@formatjs/icu-messageformat-parser/index.js",
+      "node_modules/@formatjs/icu-skeleton-parser/index.js",
+      "node_modules/@lit/reactive-element/css-tag.js",
+      "node_modules/@lit/reactive-element/decorators/base.js",
+      "node_modules/@lit/reactive-element/decorators/custom-element.js",
+      "node_modules/@lit/reactive-element/decorators/event-options.js",
+      "node_modules/@lit/reactive-element/decorators/property.js",
+      "node_modules/@lit/reactive-element/decorators/query-all.js",
+      "node_modules/@lit/reactive-element/decorators/query-assigned-elements.js",
+      "node_modules/@lit/reactive-element/decorators/query-assigned-nodes.js",
+      "node_modules/@lit/reactive-element/decorators/query-async.js",
+      "node_modules/@lit/reactive-element/decorators/query.js",
+      "node_modules/@lit/reactive-element/decorators/state.js",
+      "node_modules/@lit/reactive-element/reactive-element.js",
+      "node_modules/color-name/index.js",
+      "node_modules/culori/src/_prepare.js",
+      "node_modules/culori/src/a98/convertA98ToXyz65.js",
+      "node_modules/culori/src/a98/convertXyz65ToA98.js",
+      "node_modules/culori/src/a98/definition.js",
+      "node_modules/culori/src/average.js",
+      "node_modules/culori/src/blend.js",
+      "node_modules/culori/src/clamp.js",
+      "node_modules/culori/src/colors/named.js",
+      "node_modules/culori/src/constants.js",
+      "node_modules/culori/src/converter.js",
+      "node_modules/culori/src/cubehelix/constants.js",
+      "node_modules/culori/src/cubehelix/convertCubehelixToRgb.js",
+      "node_modules/culori/src/cubehelix/convertRgbToCubehelix.js",
+      "node_modules/culori/src/cubehelix/definition.js",
+      "node_modules/culori/src/deficiency.js",
+      "node_modules/culori/src/difference.js",
+      "node_modules/culori/src/dlab/definition.js",
+      "node_modules/culori/src/dlch/constants.js",
+      "node_modules/culori/src/dlch/convertDlchToLab65.js",
+      "node_modules/culori/src/dlch/convertLab65ToDlch.js",
+      "node_modules/culori/src/dlch/definition.js",
+      "node_modules/culori/src/easing/gamma.js",
+      "node_modules/culori/src/easing/inOutSine.js",
+      "node_modules/culori/src/easing/midpoint.js",
+      "node_modules/culori/src/easing/smootherstep.js",
+      "node_modules/culori/src/easing/smoothstep.js",
+      "node_modules/culori/src/filter.js",
+      "node_modules/culori/src/fixup/alpha.js",
+      "node_modules/culori/src/fixup/hue.js",
+      "node_modules/culori/src/formatter.js",
+      "node_modules/culori/src/hdr/constants.js",
+      "node_modules/culori/src/hdr/transfer.js",
+      "node_modules/culori/src/hsi/convertHsiToRgb.js",
+      "node_modules/culori/src/hsi/convertRgbToHsi.js",
+      "node_modules/culori/src/hsi/definition.js",
+      "node_modules/culori/src/hsl/convertHslToRgb.js",
+      "node_modules/culori/src/hsl/convertRgbToHsl.js",
+      "node_modules/culori/src/hsl/definition.js",
+      "node_modules/culori/src/hsl/parseHsl.js",
+      "node_modules/culori/src/hsl/parseHslLegacy.js",
+      "node_modules/culori/src/hsv/convertHsvToRgb.js",
+      "node_modules/culori/src/hsv/convertRgbToHsv.js",
+      "node_modules/culori/src/hsv/definition.js",
+      "node_modules/culori/src/hwb/convertHwbToRgb.js",
+      "node_modules/culori/src/hwb/convertRgbToHwb.js",
+      "node_modules/culori/src/hwb/definition.js",
+      "node_modules/culori/src/hwb/parseHwb.js",
+      "node_modules/culori/src/index.js",
+      "node_modules/culori/src/interpolate/interpolate.js",
+      "node_modules/culori/src/interpolate/lerp.js",
+      "node_modules/culori/src/interpolate/linear.js",
+      "node_modules/culori/src/interpolate/piecewise.js",
+      "node_modules/culori/src/interpolate/splineBasis.js",
+      "node_modules/culori/src/interpolate/splineMonotone.js",
+      "node_modules/culori/src/interpolate/splineNatural.js",
+      "node_modules/culori/src/itp/convertItpToXyz65.js",
+      "node_modules/culori/src/itp/convertXyz65ToItp.js",
+      "node_modules/culori/src/itp/definition.js",
+      "node_modules/culori/src/jab/convertJabToRgb.js",
+      "node_modules/culori/src/jab/convertJabToXyz65.js",
+      "node_modules/culori/src/jab/convertRgbToJab.js",
+      "node_modules/culori/src/jab/convertXyz65ToJab.js",
+      "node_modules/culori/src/jab/definition.js",
+      "node_modules/culori/src/jch/convertJabToJch.js",
+      "node_modules/culori/src/jch/convertJchToJab.js",
+      "node_modules/culori/src/jch/definition.js",
+      "node_modules/culori/src/lab/convertLabToRgb.js",
+      "node_modules/culori/src/lab/convertLabToXyz50.js",
+      "node_modules/culori/src/lab/convertRgbToLab.js",
+      "node_modules/culori/src/lab/convertXyz50ToLab.js",
+      "node_modules/culori/src/lab/definition.js",
+      "node_modules/culori/src/lab/parseLab.js",
+      "node_modules/culori/src/lab65/convertLab65ToRgb.js",
+      "node_modules/culori/src/lab65/convertLab65ToXyz65.js",
+      "node_modules/culori/src/lab65/convertRgbToLab65.js",
+      "node_modules/culori/src/lab65/convertXyz65ToLab65.js",
+      "node_modules/culori/src/lab65/definition.js",
+      "node_modules/culori/src/lch/convertLabToLch.js",
+      "node_modules/culori/src/lch/convertLchToLab.js",
+      "node_modules/culori/src/lch/definition.js",
+      "node_modules/culori/src/lch/parseLch.js",
+      "node_modules/culori/src/lch65/definition.js",
+      "node_modules/culori/src/lchuv/convertLchuvToLuv.js",
+      "node_modules/culori/src/lchuv/convertLuvToLchuv.js",
+      "node_modules/culori/src/lchuv/definition.js",
+      "node_modules/culori/src/lrgb/convertLrgbToRgb.js",
+      "node_modules/culori/src/lrgb/convertRgbToLrgb.js",
+      "node_modules/culori/src/lrgb/definition.js",
+      "node_modules/culori/src/luv/convertLuvToXyz50.js",
+      "node_modules/culori/src/luv/convertXyz50ToLuv.js",
+      "node_modules/culori/src/luv/definition.js",
+      "node_modules/culori/src/map.js",
+      "node_modules/culori/src/modes.js",
+      "node_modules/culori/src/nearest.js",
+      "node_modules/culori/src/okhsl/convertOkhslToOklab.js",
+      "node_modules/culori/src/okhsl/convertOklabToOkhsl.js",
+      "node_modules/culori/src/okhsl/helpers.js",
+      "node_modules/culori/src/okhsl/modeOkhsl.js",
+      "node_modules/culori/src/okhsv/convertOkhsvToOklab.js",
+      "node_modules/culori/src/okhsv/convertOklabToOkhsv.js",
+      "node_modules/culori/src/okhsv/modeOkhsv.js",
+      "node_modules/culori/src/oklab/convertLrgbToOklab.js",
+      "node_modules/culori/src/oklab/convertOklabToLrgb.js",
+      "node_modules/culori/src/oklab/convertOklabToRgb.js",
+      "node_modules/culori/src/oklab/convertRgbToOklab.js",
+      "node_modules/culori/src/oklab/definition.js",
+      "node_modules/culori/src/oklab/parseOklab.js",
+      "node_modules/culori/src/oklch/definition.js",
+      "node_modules/culori/src/oklch/parseOklch.js",
+      "node_modules/culori/src/p3/convertP3ToXyz65.js",
+      "node_modules/culori/src/p3/convertXyz65ToP3.js",
+      "node_modules/culori/src/p3/definition.js",
+      "node_modules/culori/src/parse.js",
+      "node_modules/culori/src/prophoto/convertProphotoToXyz50.js",
+      "node_modules/culori/src/prophoto/convertXyz50ToProphoto.js",
+      "node_modules/culori/src/prophoto/definition.js",
+      "node_modules/culori/src/random.js",
+      "node_modules/culori/src/rec2020/convertRec2020ToXyz65.js",
+      "node_modules/culori/src/rec2020/convertXyz65ToRec2020.js",
+      "node_modules/culori/src/rec2020/definition.js",
+      "node_modules/culori/src/rgb/definition.js",
+      "node_modules/culori/src/rgb/parseHex.js",
+      "node_modules/culori/src/rgb/parseNamed.js",
+      "node_modules/culori/src/rgb/parseNumber.js",
+      "node_modules/culori/src/rgb/parseRgb.js",
+      "node_modules/culori/src/rgb/parseRgbLegacy.js",
+      "node_modules/culori/src/rgb/parseTransparent.js",
+      "node_modules/culori/src/round.js",
+      "node_modules/culori/src/samples.js",
+      "node_modules/culori/src/util/hue.js",
+      "node_modules/culori/src/util/normalizeHue.js",
+      "node_modules/culori/src/util/normalizePositions.js",
+      "node_modules/culori/src/util/regex.js",
+      "node_modules/culori/src/wcag.js",
+      "node_modules/culori/src/xyb/constants.js",
+      "node_modules/culori/src/xyb/convertRgbToXyb.js",
+      "node_modules/culori/src/xyb/convertXybToRgb.js",
+      "node_modules/culori/src/xyb/definition.js",
+      "node_modules/culori/src/xyz50/constants.js",
+      "node_modules/culori/src/xyz50/convertRgbToXyz50.js",
+      "node_modules/culori/src/xyz50/convertXyz50ToRgb.js",
+      "node_modules/culori/src/xyz50/definition.js",
+      "node_modules/culori/src/xyz65/constants.js",
+      "node_modules/culori/src/xyz65/convertRgbToXyz65.js",
+      "node_modules/culori/src/xyz65/convertXyz50ToXyz65.js",
+      "node_modules/culori/src/xyz65/convertXyz65ToRgb.js",
+      "node_modules/culori/src/xyz65/convertXyz65ToXyz50.js",
+      "node_modules/culori/src/xyz65/definition.js",
+      "node_modules/culori/src/yiq/convertRgbToYiq.js",
+      "node_modules/culori/src/yiq/convertYiqToRgb.js",
+      "node_modules/culori/src/yiq/definition.js",
+      "node_modules/hammerjs/hammer.js",
+      "node_modules/home-assistant-js-websocket/dist/auth.js",
+      "node_modules/home-assistant-js-websocket/dist/collection.js",
+      "node_modules/home-assistant-js-websocket/dist/commands.js",
+      "node_modules/home-assistant-js-websocket/dist/config.js",
+      "node_modules/home-assistant-js-websocket/dist/connection.js",
+      "node_modules/home-assistant-js-websocket/dist/entities.js",
+      "node_modules/home-assistant-js-websocket/dist/errors.js",
+      "node_modules/home-assistant-js-websocket/dist/index.js",
+      "node_modules/home-assistant-js-websocket/dist/messages.js",
+      "node_modules/home-assistant-js-websocket/dist/services.js",
+      "node_modules/home-assistant-js-websocket/dist/socket.js",
+      "node_modules/home-assistant-js-websocket/dist/store.js",
+      "node_modules/home-assistant-js-websocket/dist/types.js",
+      "node_modules/home-assistant-js-websocket/dist/util.js",
+      "node_modules/intl-messageformat/index.js",
+      "node_modules/js-yaml/dist/js-yaml.mjs",
+      "node_modules/lit-element/lit-element.js",
+      "node_modules/lit-html/directive-helpers.js",
+      "node_modules/lit-html/directive.js",
+      "node_modules/lit-html/directives/class-map.js",
+      "node_modules/lit-html/directives/guard.js",
+      "node_modules/lit-html/directives/if-defined.js",
+      "node_modules/lit-html/directives/keyed.js",
+      "node_modules/lit-html/directives/style-map.js",
+      "node_modules/lit-html/is-server.js",
+      "node_modules/lit-html/lit-html.js",
+      "node_modules/lit/decorators.js",
+      "node_modules/lit/directive.js",
+      "node_modules/lit/directives/class-map.js",
+      "node_modules/lit/directives/guard.js",
+      "node_modules/lit/directives/if-defined.js",
+      "node_modules/lit/directives/keyed.js",
+      "node_modules/lit/directives/style-map.js",
+      "node_modules/lit/index.js",
+      "node_modules/memoize-one/dist/memoize-one.esm.js",
+      "node_modules/object-hash/dist/object_hash.js",
+      "node_modules/sortablejs/modular/sortable.core.esm.js",
+      "node_modules/superstruct/dist/index.mjs"
+    ],
+    "fork": [
+      "node_modules/@formatjs/fast-memoize/index.js",
+      "node_modules/@formatjs/icu-messageformat-parser/index.js",
+      "node_modules/@formatjs/icu-skeleton-parser/index.js",
+      "node_modules/@lit/reactive-element/css-tag.js",
+      "node_modules/@lit/reactive-element/decorators/base.js",
+      "node_modules/@lit/reactive-element/decorators/custom-element.js",
+      "node_modules/@lit/reactive-element/decorators/event-options.js",
+      "node_modules/@lit/reactive-element/decorators/property.js",
+      "node_modules/@lit/reactive-element/decorators/query-all.js",
+      "node_modules/@lit/reactive-element/decorators/query-assigned-elements.js",
+      "node_modules/@lit/reactive-element/decorators/query-assigned-nodes.js",
+      "node_modules/@lit/reactive-element/decorators/query-async.js",
+      "node_modules/@lit/reactive-element/decorators/query.js",
+      "node_modules/@lit/reactive-element/decorators/state.js",
+      "node_modules/@lit/reactive-element/reactive-element.js",
+      "node_modules/color-name/index.js",
+      "node_modules/culori/src/_prepare.js",
+      "node_modules/culori/src/a98/convertA98ToXyz65.js",
+      "node_modules/culori/src/a98/convertXyz65ToA98.js",
+      "node_modules/culori/src/a98/definition.js",
+      "node_modules/culori/src/average.js",
+      "node_modules/culori/src/blend.js",
+      "node_modules/culori/src/clamp.js",
+      "node_modules/culori/src/colors/named.js",
+      "node_modules/culori/src/constants.js",
+      "node_modules/culori/src/converter.js",
+      "node_modules/culori/src/cubehelix/constants.js",
+      "node_modules/culori/src/cubehelix/convertCubehelixToRgb.js",
+      "node_modules/culori/src/cubehelix/convertRgbToCubehelix.js",
+      "node_modules/culori/src/cubehelix/definition.js",
+      "node_modules/culori/src/deficiency.js",
+      "node_modules/culori/src/difference.js",
+      "node_modules/culori/src/dlab/definition.js",
+      "node_modules/culori/src/dlch/constants.js",
+      "node_modules/culori/src/dlch/convertDlchToLab65.js",
+      "node_modules/culori/src/dlch/convertLab65ToDlch.js",
+      "node_modules/culori/src/dlch/definition.js",
+      "node_modules/culori/src/easing/gamma.js",
+      "node_modules/culori/src/easing/inOutSine.js",
+      "node_modules/culori/src/easing/midpoint.js",
+      "node_modules/culori/src/easing/smootherstep.js",
+      "node_modules/culori/src/easing/smoothstep.js",
+      "node_modules/culori/src/filter.js",
+      "node_modules/culori/src/fixup/alpha.js",
+      "node_modules/culori/src/fixup/hue.js",
+      "node_modules/culori/src/formatter.js",
+      "node_modules/culori/src/hdr/constants.js",
+      "node_modules/culori/src/hdr/transfer.js",
+      "node_modules/culori/src/hsi/convertHsiToRgb.js",
+      "node_modules/culori/src/hsi/convertRgbToHsi.js",
+      "node_modules/culori/src/hsi/definition.js",
+      "node_modules/culori/src/hsl/convertHslToRgb.js",
+      "node_modules/culori/src/hsl/convertRgbToHsl.js",
+      "node_modules/culori/src/hsl/definition.js",
+      "node_modules/culori/src/hsl/parseHsl.js",
+      "node_modules/culori/src/hsl/parseHslLegacy.js",
+      "node_modules/culori/src/hsv/convertHsvToRgb.js",
+      "node_modules/culori/src/hsv/convertRgbToHsv.js",
+      "node_modules/culori/src/hsv/definition.js",
+      "node_modules/culori/src/hwb/convertHwbToRgb.js",
+      "node_modules/culori/src/hwb/convertRgbToHwb.js",
+      "node_modules/culori/src/hwb/definition.js",
+      "node_modules/culori/src/hwb/parseHwb.js",
+      "node_modules/culori/src/index.js",
+      "node_modules/culori/src/interpolate/interpolate.js",
+      "node_modules/culori/src/interpolate/lerp.js",
+      "node_modules/culori/src/interpolate/linear.js",
+      "node_modules/culori/src/interpolate/piecewise.js",
+      "node_modules/culori/src/interpolate/splineBasis.js",
+      "node_modules/culori/src/interpolate/splineMonotone.js",
+      "node_modules/culori/src/interpolate/splineNatural.js",
+      "node_modules/culori/src/itp/convertItpToXyz65.js",
+      "node_modules/culori/src/itp/convertXyz65ToItp.js",
+      "node_modules/culori/src/itp/definition.js",
+      "node_modules/culori/src/jab/convertJabToRgb.js",
+      "node_modules/culori/src/jab/convertJabToXyz65.js",
+      "node_modules/culori/src/jab/convertRgbToJab.js",
+      "node_modules/culori/src/jab/convertXyz65ToJab.js",
+      "node_modules/culori/src/jab/definition.js",
+      "node_modules/culori/src/jch/convertJabToJch.js",
+      "node_modules/culori/src/jch/convertJchToJab.js",
+      "node_modules/culori/src/jch/definition.js",
+      "node_modules/culori/src/lab/convertLabToRgb.js",
+      "node_modules/culori/src/lab/convertLabToXyz50.js",
+      "node_modules/culori/src/lab/convertRgbToLab.js",
+      "node_modules/culori/src/lab/convertXyz50ToLab.js",
+      "node_modules/culori/src/lab/definition.js",
+      "node_modules/culori/src/lab/parseLab.js",
+      "node_modules/culori/src/lab65/convertLab65ToRgb.js",
+      "node_modules/culori/src/lab65/convertLab65ToXyz65.js",
+      "node_modules/culori/src/lab65/convertRgbToLab65.js",
+      "node_modules/culori/src/lab65/convertXyz65ToLab65.js",
+      "node_modules/culori/src/lab65/definition.js",
+      "node_modules/culori/src/lch/convertLabToLch.js",
+      "node_modules/culori/src/lch/convertLchToLab.js",
+      "node_modules/culori/src/lch/definition.js",
+      "node_modules/culori/src/lch/parseLch.js",
+      "node_modules/culori/src/lch65/definition.js",
+      "node_modules/culori/src/lchuv/convertLchuvToLuv.js",
+      "node_modules/culori/src/lchuv/convertLuvToLchuv.js",
+      "node_modules/culori/src/lchuv/definition.js",
+      "node_modules/culori/src/lrgb/convertLrgbToRgb.js",
+      "node_modules/culori/src/lrgb/convertRgbToLrgb.js",
+      "node_modules/culori/src/lrgb/definition.js",
+      "node_modules/culori/src/luv/convertLuvToXyz50.js",
+      "node_modules/culori/src/luv/convertXyz50ToLuv.js",
+      "node_modules/culori/src/luv/definition.js",
+      "node_modules/culori/src/map.js",
+      "node_modules/culori/src/modes.js",
+      "node_modules/culori/src/nearest.js",
+      "node_modules/culori/src/okhsl/convertOkhslToOklab.js",
+      "node_modules/culori/src/okhsl/convertOklabToOkhsl.js",
+      "node_modules/culori/src/okhsl/helpers.js",
+      "node_modules/culori/src/okhsl/modeOkhsl.js",
+      "node_modules/culori/src/okhsv/convertOkhsvToOklab.js",
+      "node_modules/culori/src/okhsv/convertOklabToOkhsv.js",
+      "node_modules/culori/src/okhsv/modeOkhsv.js",
+      "node_modules/culori/src/oklab/convertLrgbToOklab.js",
+      "node_modules/culori/src/oklab/convertOklabToLrgb.js",
+      "node_modules/culori/src/oklab/convertOklabToRgb.js",
+      "node_modules/culori/src/oklab/convertRgbToOklab.js",
+      "node_modules/culori/src/oklab/definition.js",
+      "node_modules/culori/src/oklab/parseOklab.js",
+      "node_modules/culori/src/oklch/definition.js",
+      "node_modules/culori/src/oklch/parseOklch.js",
+      "node_modules/culori/src/p3/convertP3ToXyz65.js",
+      "node_modules/culori/src/p3/convertXyz65ToP3.js",
+      "node_modules/culori/src/p3/definition.js",
+      "node_modules/culori/src/parse.js",
+      "node_modules/culori/src/prophoto/convertProphotoToXyz50.js",
+      "node_modules/culori/src/prophoto/convertXyz50ToProphoto.js",
+      "node_modules/culori/src/prophoto/definition.js",
+      "node_modules/culori/src/random.js",
+      "node_modules/culori/src/rec2020/convertRec2020ToXyz65.js",
+      "node_modules/culori/src/rec2020/convertXyz65ToRec2020.js",
+      "node_modules/culori/src/rec2020/definition.js",
+      "node_modules/culori/src/rgb/definition.js",
+      "node_modules/culori/src/rgb/parseHex.js",
+      "node_modules/culori/src/rgb/parseNamed.js",
+      "node_modules/culori/src/rgb/parseNumber.js",
+      "node_modules/culori/src/rgb/parseRgb.js",
+      "node_modules/culori/src/rgb/parseRgbLegacy.js",
+      "node_modules/culori/src/rgb/parseTransparent.js",
+      "node_modules/culori/src/round.js",
+      "node_modules/culori/src/samples.js",
+      "node_modules/culori/src/util/hue.js",
+      "node_modules/culori/src/util/normalizeHue.js",
+      "node_modules/culori/src/util/normalizePositions.js",
+      "node_modules/culori/src/util/regex.js",
+      "node_modules/culori/src/wcag.js",
+      "node_modules/culori/src/xyb/constants.js",
+      "node_modules/culori/src/xyb/convertRgbToXyb.js",
+      "node_modules/culori/src/xyb/convertXybToRgb.js",
+      "node_modules/culori/src/xyb/definition.js",
+      "node_modules/culori/src/xyz50/constants.js",
+      "node_modules/culori/src/xyz50/convertRgbToXyz50.js",
+      "node_modules/culori/src/xyz50/convertXyz50ToRgb.js",
+      "node_modules/culori/src/xyz50/definition.js",
+      "node_modules/culori/src/xyz65/constants.js",
+      "node_modules/culori/src/xyz65/convertRgbToXyz65.js",
+      "node_modules/culori/src/xyz65/convertXyz50ToXyz65.js",
+      "node_modules/culori/src/xyz65/convertXyz65ToRgb.js",
+      "node_modules/culori/src/xyz65/convertXyz65ToXyz50.js",
+      "node_modules/culori/src/xyz65/definition.js",
+      "node_modules/culori/src/yiq/convertRgbToYiq.js",
+      "node_modules/culori/src/yiq/convertYiqToRgb.js",
+      "node_modules/culori/src/yiq/definition.js",
+      "node_modules/hammerjs/hammer.js",
+      "node_modules/home-assistant-js-websocket/dist/auth.js",
+      "node_modules/home-assistant-js-websocket/dist/collection.js",
+      "node_modules/home-assistant-js-websocket/dist/commands.js",
+      "node_modules/home-assistant-js-websocket/dist/config.js",
+      "node_modules/home-assistant-js-websocket/dist/connection.js",
+      "node_modules/home-assistant-js-websocket/dist/entities.js",
+      "node_modules/home-assistant-js-websocket/dist/errors.js",
+      "node_modules/home-assistant-js-websocket/dist/index.js",
+      "node_modules/home-assistant-js-websocket/dist/messages.js",
+      "node_modules/home-assistant-js-websocket/dist/services.js",
+      "node_modules/home-assistant-js-websocket/dist/socket.js",
+      "node_modules/home-assistant-js-websocket/dist/store.js",
+      "node_modules/home-assistant-js-websocket/dist/types.js",
+      "node_modules/home-assistant-js-websocket/dist/util.js",
+      "node_modules/intl-messageformat/index.js",
+      "node_modules/js-yaml/dist/js-yaml.mjs",
+      "node_modules/lit-element/lit-element.js",
+      "node_modules/lit-html/directive-helpers.js",
+      "node_modules/lit-html/directive.js",
+      "node_modules/lit-html/directives/class-map.js",
+      "node_modules/lit-html/directives/guard.js",
+      "node_modules/lit-html/directives/if-defined.js",
+      "node_modules/lit-html/directives/keyed.js",
+      "node_modules/lit-html/directives/style-map.js",
+      "node_modules/lit-html/directives/unsafe-html.js",
+      "node_modules/lit-html/directives/unsafe-svg.js",
+      "node_modules/lit-html/is-server.js",
+      "node_modules/lit-html/lit-html.js",
+      "node_modules/lit/decorators.js",
+      "node_modules/lit/directive.js",
+      "node_modules/lit/directives/class-map.js",
+      "node_modules/lit/directives/guard.js",
+      "node_modules/lit/directives/if-defined.js",
+      "node_modules/lit/directives/keyed.js",
+      "node_modules/lit/directives/style-map.js",
+      "node_modules/lit/directives/unsafe-svg.js",
+      "node_modules/lit/index.js",
+      "node_modules/memoize-one/dist/memoize-one.esm.js",
+      "node_modules/object-hash/dist/object_hash.js",
+      "node_modules/sortablejs/modular/sortable.core.esm.js",
+      "node_modules/superstruct/dist/index.mjs"
+    ]
+  },
+  "buildInputs": {
+    "scripts/build-parity.mjs": "90b5a739ce677c5807042449f08d248b43bc3e4876cd1b6c31341b832d3e785e",
+    "tsconfig.parity.json": "edf34df9bfee1f6b1e6a2f46d04d688d1acbbd80d0bbd6e6dde6f2ea7d7d8358",
+    "package-lock.json": "0732d3d68cdaa45b0e6701ec322ceb35e4a61fd5a949b68a214a927e2ad1db50",
+    "src/skin/styles.ts": "13efad48a7e8e6cbfb25632c360203ac7f10883a7670008d235f8147688bc8b8",
+    "src/skin/motion.ts": "25071e49a8bc1e87b342d5b0071929034aa00d328c21b401839ba9063f6e3775",
+    "src/island/art.ts": "94550dc4600d6439e653fb7e7668c70685b3388c3d4306667e3a23005f3b15c8",
+    "src/island/fonts.ts": "f0cac14db619920a2a41933f59e6dcbf40dfb930072888f4fa2a179689b0e4f8",
+    "src/island/globals.ts": "8fbf01b279ad60a6712f2e18363446cf96f74a6c60a6e2c4752f9a0f6e835aa7",
+    "src/island/index.ts": "825c11d19ac2b413affc2a4941786e34ee2eb0d3b5e34c3b5573a1bc9749b866",
+    "src/island/navbar.ts": "ba9217d6001e2ccec35c2b680f2e64b479c8e78942116536becc432e62f73659",
+    "src/island/splash.ts": "1c23dfc8cc7d953e634c28cc8666536246cf9f835a86659afda33c3f4da27583",
+    "src/island/state-icon.ts": "07598bdf6d510d42819ed79bc81197ae605d0e38f73e6c2cef6fcdc86dfd4b75",
+    "src/fonts/Nunito-OFL.txt": "580df76c95a1ec5ab878ceb25bb3d85c6a076804e9c970c8c6972aea775fdf65",
+    "src/fonts/ResourceHanRounded-LICENSE.md": "826ce32afdadc640a6210231598e3428deb784ccd2cb484064d79a0ea1dd7968",
+    "src/fonts/island-nunito.woff2": "5c3c58d2c133d9e888b9664b0ae35f8715a2983629a9536511d1c3299aaf4bd7",
+    "src/fonts/island-rounded-500.woff2": "212f9393acd9c659f511150691090a07a7921b22eae8876513d1fd994a4d9fcf",
+    "src/fonts/island-rounded-700.woff2": "19a6bcfb2e3c937c6809097124c4e0fa589b6f9a7e96d47bb8cbee37027b8586",
+    "src/fonts/island-rounded-900.woff2": "bfc63d7e6b23ed69de88f0c60b206b57338852941bdfeac37bb35a8a0b5d7f60"
+  },
+  "dependencyLicenses": [
+    {
+      "name": "@formatjs/fast-memoize",
+      "version": "3.1.7",
+      "license": "MIT",
+      "files": [
+        "@formatjs__fast-memoize-LICENSE.md"
+      ]
+    },
+    {
+      "name": "@formatjs/icu-messageformat-parser",
+      "version": "3.5.18",
+      "license": "MIT",
+      "files": [
+        "@formatjs__icu-messageformat-parser-LICENSE.md"
+      ]
+    },
+    {
+      "name": "@formatjs/icu-skeleton-parser",
+      "version": "2.1.11",
+      "license": "MIT",
+      "files": [
+        "@formatjs__icu-skeleton-parser-LICENSE.md"
+      ]
+    },
+    {
+      "name": "@lit/reactive-element",
+      "version": "2.1.2",
+      "license": "BSD-3-Clause",
+      "files": [
+        "@lit__reactive-element-LICENSE"
+      ]
+    },
+    {
+      "name": "color-name",
+      "version": "2.1.1",
+      "license": "MIT",
+      "files": [
+        "color-name-LICENSE"
+      ]
+    },
+    {
+      "name": "culori",
+      "version": "4.0.2",
+      "license": "MIT",
+      "files": [
+        "culori-LICENSE"
+      ]
+    },
+    {
+      "name": "hammerjs",
+      "version": "2.0.8",
+      "license": "MIT",
+      "files": [
+        "hammerjs-LICENSE.md"
+      ]
+    },
+    {
+      "name": "home-assistant-js-websocket",
+      "version": "9.8.1",
+      "license": "Apache-2.0",
+      "files": [
+        "home-assistant-js-websocket-LICENSE.md"
+      ]
+    },
+    {
+      "name": "intl-messageformat",
+      "version": "11.2.15",
+      "license": "BSD-3-Clause",
+      "files": [
+        "intl-messageformat-LICENSE.md"
+      ]
+    },
+    {
+      "name": "js-yaml",
+      "version": "4.3.2",
+      "license": "MIT",
+      "files": [
+        "js-yaml-LICENSE"
+      ]
+    },
+    {
+      "name": "lit",
+      "version": "3.3.3",
+      "license": "BSD-3-Clause",
+      "files": [
+        "lit-LICENSE"
+      ]
+    },
+    {
+      "name": "lit-element",
+      "version": "4.2.2",
+      "license": "BSD-3-Clause",
+      "files": [
+        "lit-element-LICENSE"
+      ]
+    },
+    {
+      "name": "lit-html",
+      "version": "3.3.3",
+      "license": "BSD-3-Clause",
+      "files": [
+        "lit-html-LICENSE"
+      ]
+    },
+    {
+      "name": "memoize-one",
+      "version": "6.0.0",
+      "license": "MIT",
+      "files": [
+        "memoize-one-LICENSE"
+      ]
+    },
+    {
+      "name": "object-hash",
+      "version": "3.0.0",
+      "license": "MIT",
+      "files": [
+        "object-hash-LICENSE"
+      ]
+    },
+    {
+      "name": "sortablejs",
+      "version": "1.15.7",
+      "license": "MIT",
+      "files": [
+        "sortablejs-LICENSE"
+      ]
+    },
+    {
+      "name": "superstruct",
+      "version": "2.0.2",
+      "license": "MIT",
+      "files": [
+        "superstruct-License.md"
+      ]
+    }
+  ]
+}
