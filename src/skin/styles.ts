@@ -164,7 +164,7 @@ const card = css`
       0 14px 22px -10px rgba(91, 65, 40, .32);
     color: var(--island-ink);
     font-family: var(--island-font);
-    transition: background-color .4s ease, box-shadow .4s ease;
+    transition: background-color .35s cubic-bezier(.4, 0, .2, 1), box-shadow .35s cubic-bezier(.4, 0, .2, 1);
   }
   ${unsafeCSS(toneRules)}
   ha-card {
@@ -265,7 +265,7 @@ const surfaces: Record<string, CSSResult> = {
       position: relative;
       font-family: var(--island-font);
       box-shadow: 0 4px 0 color-mix(in srgb, var(--island-accent, #3ec2ae) 50%, var(--island-edge));
-      transition: background-color .25s ease, box-shadow .12s ease;
+      transition: background-color .25s cubic-bezier(.4, 0, .2, 1), box-shadow .15s cubic-bezier(.4, 0, .2, 1);
     }
     .button:not(:disabled):hover { filter: brightness(1.04); }
     .button:not(:disabled):active { box-shadow: 0 1px 0 color-mix(in srgb, var(--island-accent, #3ec2ae) 50%, var(--island-edge)); }
@@ -283,7 +283,7 @@ const surfaces: Record<string, CSSResult> = {
       border-radius: 50%;
       background: var(--island-paper-hi);
       box-shadow: 0 3px 0 color-mix(in srgb, var(--island-accent, #3ec2ae) 50%, var(--island-edge));
-      transition: box-shadow .12s ease;
+      transition: box-shadow .15s cubic-bezier(.4, 0, .2, 1);
     }
     .button:not(:disabled):active { box-shadow: 0 1px 0 var(--island-edge); }
     .button:disabled { box-shadow: none; opacity: .5; }
@@ -304,7 +304,7 @@ const surfaces: Record<string, CSSResult> = {
     }
     .slider .slider-track-active {
       background-image: linear-gradient(to bottom, rgba(255, 255, 255, .38) 0 32%, transparent 32%);
-      transition-timing-function: cubic-bezier(.3, 1.3, .5, 1);
+      transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     }
     .slider .slider-track-indicator {
       top: 6px;

@@ -148,13 +148,13 @@ class IslandNavbarCard extends LitElement {
       border-radius: 26px 26px 0 0;
       background: var(--island-nav-active, #2a9c8b);
       transform: translateY(100%);
-      transition: transform .32s cubic-bezier(.3, 1.4, .5, 1);
+      transition: transform .3s cubic-bezier(.4, 0, .2, 1);
     }
     .active .bump { transform: none; }
     island-state-icon {
       position: relative;
       --island-icon-size: 30px;
-      transition: transform .32s cubic-bezier(.3, 1.6, .5, 1);
+      transition: transform .3s cubic-bezier(.4, 0, .2, 1);
     }
     .active island-state-icon { transform: translateY(-6px) scale(1.4) rotate(-6deg); }
     .label {

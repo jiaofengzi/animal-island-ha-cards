@@ -1,7 +1,7 @@
 name: Release for HACS
 # 每次 main 上 package.json 的版本号变化时，构建 dist/ 并发布 v<版本号>。
-# HACS 从最新发布标签里的 dist/ 目录下载卡片 JS 与字体。发布不附带任何附件：
-# 有附件时 HACS 只下载附件而不解压，字体会缺失，因此 dist/ 只提交到发布用的标签提交上，main 保持干净。
+# HACS 从最新发布标签里的 dist/ 目录下载卡片 JS 与字体，所以 dist/ 只提交到发布用的标签提交上，main 保持干净。
+# 发布不附带任何附件：有附件时 HACS 只下载附件而不解压，字体会缺失。
 on:
   workflow_dispatch:
   push:

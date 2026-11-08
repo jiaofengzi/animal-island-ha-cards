@@ -86,9 +86,9 @@ export class IslandStateIcon extends LitElement {
       border-radius: 34% 38% 36% 40% / 38% 34% 40% 36%;
       overflow: hidden;
       background: var(--tile);
-      transition: background-color .35s ease;
+      transition: background-color .35s cubic-bezier(.4, 0, .2, 1);
     }
-    svg { position: relative; width: var(--island-art-scale, 84%); height: var(--island-art-scale, 84%); overflow: visible; transition: filter .35s ease; }
+    svg { position: relative; width: var(--island-art-scale, 84%); height: var(--island-art-scale, 84%); overflow: visible; transition: filter .35s cubic-bezier(.4, 0, .2, 1); }
     ha-state-icon {
       position: relative;
       color: #fff;
@@ -101,7 +101,7 @@ export class IslandStateIcon extends LitElement {
     :host([data-inactive]) svg { filter: grayscale(.9) opacity(.7); }
     :host([data-inactive]) ha-state-icon { color: var(--island-tile-off-ink, #b3a689); filter: none; }
 
-    .pop { animation: island-pop .5s cubic-bezier(.3, 1.6, .5, 1); }
+    .pop { animation: island-pop .35s cubic-bezier(.4, 0, .2, 1); }
     @keyframes island-pop { 0% { transform: scale(.82); } 55% { transform: scale(1.12); } 100% { transform: scale(1); } }
 
     @media (prefers-reduced-motion: no-preference) {
