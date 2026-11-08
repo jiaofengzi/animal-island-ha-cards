@@ -43,9 +43,22 @@ npm run preview
 
 ## 安装与配置
 
-安装时把 `dist/` 整个目录（含 `fonts/`）复制过去，字体按 JS 文件所在位置加载。
+### 用 HACS 安装（推荐）
 
-使用当前成功 CI 的完整 `dist/` 安装包，复制全部内容到 Home Assistant 的 `config/www/island-ha-cards/`。资源添加 `/local/island-ha-cards/island-ha-cards.js?v=0.2.0-parity.1`，类型为 JavaScript 模块。保留随包的 LICENSE、NOTICE、依赖许可与来源清单。
+1. HACS → 右上角 ⋮ → **自定义存储库**，地址填 `https://github.com/jiaofengzi/animal-island-ha-cards`，类别选 **Dashboard**（旧版 HACS 叫 Lovelace / Plugin）。
+2. 在 HACS 里搜索 **Animal Island HA Cards** → 下载 → 按提示刷新浏览器。HACS 会自动添加仪表盘资源，字体随包一起下载。
+3. 以后有新版本时，HACS 里会出现更新提示，点更新即可。
+
+每次 `package.json` 版本号变化并推到 main，`.github/workflows/release.yml` 会自动构建 `dist/` 并发布 `v<版本号>`。dist 只提交在发布标签上，main 不含构建产物。
+
+### 手动安装
+
+从 [Releases](https://github.com/jiaofengzi/animal-island-ha-cards/releases) 下载 `island-ha-cards.zip`，把里面全部内容（含 `fonts/`）解压到 Home Assistant 的 `config/www/island-ha-cards/`。在“设置 → 仪表盘 → 资源”添加 `/local/island-ha-cards/island-ha-cards.js?v=0.3.0`，类型为 JavaScript 模块。字体按 JS 文件所在位置加载，所以 `fonts/` 必须和 JS 在同一目录。保留随包的 LICENSE、NOTICE、依赖许可与来源清单。
+
+### 示例
+
+- `examples/dashboard.yaml`：完整的一屏式小岛仪表盘（分区视图、手机底部导航、开屏动画），新建仪表盘后在“原始配置编辑器”里粘贴，再把示例实体换成自己的。
+- `examples/cards.yaml` / `examples/cards.json`：每种卡片的单独写法。
 
 配置沿用固定 Mushroom v5.2.3 的字段，只将顶层类型前缀改成 `island-`。例如：
 

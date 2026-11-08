@@ -1,6 +1,6 @@
 {
   "name": "animal-island-ha-cards",
-  "version": "0.2.0-parity.1",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "license": "(Apache-2.0 AND MIT)",

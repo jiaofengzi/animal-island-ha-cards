@@ -1,0 +1,61 @@
+name: Release for HACS
+# 每次 main 上 package.json 的版本号变化时，构建 dist/ 并发布 v<版本号>。
+# HACS 从最新发布的 dist/ 目录下载卡片 JS 与字体，因此 dist/ 只提交到发布用的标签提交上，main 保持干净。
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [package.json]
+permissions:
+  contents: write
+concurrency:
+  group: release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Read version
+        id: v
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+          if git rev-parse -q --verify "refs/tags/v$VERSION" >/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Tag v$VERSION already exists, nothing to release."
+          fi
+      - if: steps.v.outputs.exists != 'true'
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - if: steps.v.outputs.exists != 'true'
+        name: Build install bundle
+        run: |
+          node scripts/build-parity.mjs
+          test -s dist/island-ha-cards.js
+          test -s dist/fonts/island-rounded-500.woff2
+      - if: steps.v.outputs.exists != 'true'
+        name: Commit dist/ on a release-only commit and tag it
+        env:
+          TAG: ${{ steps.v.outputs.tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --detach
+          git add -f dist
+          git commit -m "Release $TAG (built dist/ for HACS)"
+          git tag "$TAG"
+          git push origin "refs/tags/$TAG"
+          (cd dist && zip -qr ../island-ha-cards.zip .)
+      - if: steps.v.outputs.exists != 'true'
+        name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.v.outputs.tag }}
+        run: gh release create "$TAG" island-ha-cards.zip --title "$TAG" --generate-notes
