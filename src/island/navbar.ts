@@ -6,6 +6,7 @@
  *     - { name: 客厅, icon: island:sofa, path: /lovelace/living }
  *   show: mobile        # mobile（窄屏才显示，默认）| always
  * 栏固定在屏幕底部；卡片自身留出同样高度的空白，保证页面最后一张卡不被挡住。
+ * 电脑上 HA 左侧有侧边栏：栏只铺在仪表盘面板的宽度内（跟随侧边栏展开/收起），不盖住侧边栏。
  * 点击后用 HA 自己的导航方式切换视图（history.pushState + location-changed 事件）。
  */
 import { css, html, LitElement, nothing, unsafeCSS } from "lit";
@@ -35,6 +36,23 @@ class IslandNavbarCard extends LitElement {
   private _mq = typeof window !== "undefined" ? window.matchMedia(NARROW) : undefined;
   private _onLocation = () => { this._path = location.pathname + location.search + location.hash; };
   private _onMq = () => { this._narrow = Boolean(this._mq?.matches); };
+  // 仪表盘面板（不含 HA 侧边栏）的左右边界，用来摆放固定定位的栏
+  private _panel?: Element;
+  private _ro?: ResizeObserver;
+  private _place = () => {
+    if (typeof this.style?.setProperty !== "function") return;
+    const r = this._panel?.getBoundingClientRect();
+    this.style.setProperty("--island-nav-left", r ? `${Math.max(0, r.left)}px` : "0px");
+    this.style.setProperty("--island-nav-right", r ? `${Math.max(0, window.innerWidth - r.right)}px` : "0px");
+  };
+  private _findPanel(): Element | undefined {
+    let node: Node | null = this.parentNode ?? null;
+    while (node) {
+      if (node instanceof Element && (node.localName === "ha-panel-lovelace" || node.localName === "hui-root")) return node;
+      node = node.parentNode ?? (node instanceof ShadowRoot ? node.host : null);
+    }
+    return undefined;
+  }
 
   constructor() {
     super();
@@ -56,12 +74,29 @@ class IslandNavbarCard extends LitElement {
     window.addEventListener("location-changed", this._onLocation);
     window.addEventListener("popstate", this._onLocation);
     this._mq?.addEventListener("change", this._onMq);
+    window.addEventListener("resize", this._place);
     this._onLocation();
+    // 连接后才能找到外层面板；等一帧让 HA 把卡片挂进视图
+    const nextFrame = typeof requestAnimationFrame === "function" ? requestAnimationFrame
+      : typeof setTimeout === "function" ? (fn: () => void) => setTimeout(fn, 0) : undefined;
+    nextFrame?.(() => {
+      if (!this.isConnected) return;
+      this._panel = this._findPanel();
+      if (this._panel && typeof ResizeObserver !== "undefined") {
+        this._ro = new ResizeObserver(this._place);
+        this._ro.observe(this._panel);
+      }
+      this._place();
+    });
   }
   disconnectedCallback() {
     window.removeEventListener("location-changed", this._onLocation);
     window.removeEventListener("popstate", this._onLocation);
     this._mq?.removeEventListener("change", this._onMq);
+    window.removeEventListener("resize", this._place);
+    this._ro?.disconnect();
+    this._ro = undefined;
+    this._panel = undefined;
     super.disconnectedCallback();
   }
 
@@ -111,8 +146,8 @@ class IslandNavbarCard extends LitElement {
     .bar {
       position: fixed;
       z-index: 6;
-      left: 0;
-      right: 0;
+      left: var(--island-nav-left, 0px);
+      right: var(--island-nav-right, 0px);
       bottom: 0;
       display: flex;
       align-items: flex-end;
