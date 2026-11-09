@@ -68,6 +68,16 @@ entity: light.your_light
 show_brightness_control: true
 ```
 
+标题卡在 Mushroom 字段之外多两个可选字段（只能在 YAML 里写），对应 Animal Island UI 官方 Title 的三种样式和色板：
+
+```yaml
+type: custom:island-title-card
+title: 卧室
+variant: layer      # ribbon 折纸飘带（默认）/ layer 双层纸 / tab 折角便签
+color: app-blue     # default(绿) app-pink purple app-blue app-yellow(默认) app-orange app-teal
+                    # app-green app-red lime-green yellow-green brown warm-peach-pink
+```
+
 顶栏徽章使用 `custom:island-template-badge`，放在视图的 `badges` 中。Chips Card 使用 `custom:island-chips-card`，内部 `chips: [{type: entity, entity: ...}]` 的子类型名保持原样。
 
 旧概念版的 `island-media-card` 等别名和家庭组合字段不是本轮官方配置接口；升级前按官方对应卡片配置迁移，不要仅更换文件就假定所有旧配置兼容。详见固定版 [Mushroom 文档](https://github.com/piitaya/lovelace-mushroom/tree/v5.2.3/docs)。

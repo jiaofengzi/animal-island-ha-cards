@@ -46,6 +46,22 @@ for (const file of files) {
       output = output.replace('PREFIX_NAME = "mushroom"', 'PREFIX_NAME = "island"');
       transforms.push({ kind: 'factory-prefix', from: 'mushroom', to: 'island' });
     }
+    // 标题卡：新增 variant（ribbon/layer/tab）与 color（官方色板名）两个纯展示字段，
+    // 只作为 data-* 属性挂到 ha-card 上交给皮肤 CSS，不改模板订阅、操作或尺寸逻辑。
+    const replaceOnce = (from, to) => {
+      if (output.split(from).length !== 2) throw new Error('Unexpected upstream text in ' + file.path + ': ' + from);
+      output = output.replace(from, () => to);
+    };
+    if (file.path === 'src/cards/title-card/title-card.ts') {
+      replaceOnce('<ha-card class="header ${alignment}" ?rtl=${rtl}>',
+        '<ha-card class="header ${alignment}" ?rtl=${rtl} data-island-variant=${this._config.variant ?? "ribbon"} data-island-color=${this._config.color ?? "app-yellow"}>');
+      transforms.push({ kind: 'title-presentation-attributes', attributes: ['data-island-variant', 'data-island-color'], config: ['variant', 'color'] });
+    }
+    if (file.path === 'src/cards/title-card/title-card-config.ts') {
+      replaceOnce('  alignment?: string;\n', '  alignment?: string;\n  variant?: string;\n  color?: string;\n');
+      replaceOnce('    alignment: optional(string()),\n', '    alignment: optional(string()),\n    variant: optional(string()),\n    color: optional(string()),\n');
+      transforms.push({ kind: 'title-presentation-config', fields: ['variant', 'color'] });
+    }
     const source = ts.createSourceFile(file.path, output, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
     const edits = [];
     const visit = (node) => {

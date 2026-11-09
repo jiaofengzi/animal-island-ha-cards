@@ -45,7 +45,7 @@ const greeting = {
 const living = {
   ribbon: "#ff9a3c",
   cards: [
-    { type: "custom:island-title-card", title: "客厅" },
+    { type: "custom:island-title-card", title: "客厅", color: "default" },
     { type: "custom:island-light-card", entity: "light.living_lamp", show_brightness_control: true, show_color_temp_control: true, show_color_control: true, use_light_color: true, tap_action: { action: "toggle" } },
     { type: "custom:island-climate-card", entity: "climate.living_ac", show_temperature_control: true, hvac_modes: ["cool", "heat", "dry", "off"] },
     { type: "custom:island-media-player-card", entity: "media_player.living_speaker", use_media_info: true, show_volume_level: true, media_controls: ["on_off", "previous", "play_pause_stop", "next"], volume_controls: ["volume_mute", "volume_set"] },
@@ -56,7 +56,7 @@ const living = {
 const bedroom = {
   ribbon: "#3ec2ae",
   cards: [
-    { type: "custom:island-title-card", title: "卧室" },
+    { type: "custom:island-title-card", title: "卧室", variant: "layer", color: "app-blue" },
     tile({ type: "custom:island-light-card", entity: "light.bedroom_lamp", tap_action: { action: "toggle" } }),
     tile({ type: "custom:island-entity-card", entity: "switch.kettle", tap_action: { action: "toggle" } }),
     tile({ type: "custom:island-entity-card", entity: "sensor.living_humidity" }),
@@ -68,7 +68,7 @@ const bedroom = {
 const chores = {
   ribbon: "#ff8fab",
   cards: [
-    { type: "custom:island-title-card", title: "家务" },
+    { type: "custom:island-title-card", title: "家务", variant: "tab", color: "app-orange" },
     { type: "custom:island-vacuum-card", entity: "vacuum.robot", commands: ["start_pause", "stop", "locate", "return_home"] },
     { type: "custom:island-number-card", entity: "number.feeder", display_mode: "buttons" },
     { type: "custom:island-select-card", entity: "select.washer_mode" },

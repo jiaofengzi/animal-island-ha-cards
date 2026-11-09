@@ -427,6 +427,75 @@ const surfaces: Record<string, CSSResult> = {
         linear-gradient(var(--rb), var(--rb)) right / 1.7em 100% no-repeat;
       clip-path: polygon(0 0, 100% 0, calc(100% - 0.51em) 50%, 100% 100%, 0 100%, 0.51em 50%);
     }
+
+    /* variant: layer 双层纸 —— ::after 是正面纸，::before 是左上错开的底层纸
+       （正面不能画在 h1 自身背景上，否则会被负 z-index 的底层纸盖住） */
+    .header[data-island-variant="layer"] .title {
+      min-height: 2.1em;
+      margin: 0.3em 0 0 0.26em !important;
+      padding: 0 1.55em;
+      text-shadow: 0 0.05em 0.1em rgba(0, 0, 0, 0.12);
+      filter: none;
+      transition: transform 0.2s ease;
+    }
+    .header[data-island-variant="layer"] .title::before {
+      inset: -0.3em 0.65em 0 -0.26em;
+      height: auto;
+      z-index: -2;
+      background: var(--rb);
+      border-radius: 0.35em;
+      clip-path: none;
+    }
+    .header[data-island-variant="layer"] .title::after {
+      inset: 0;
+      border-radius: 0.35em;
+      transform: none;
+      box-shadow: 0 0.1em 0.16em rgba(0, 0, 0, 0.08);
+    }
+
+    /* variant: tab 折角便签 —— 左上斜切角，::after 是右下角的深色折角 */
+    .header[data-island-variant="tab"] .title {
+      min-height: 2em;
+      margin: 0 !important;
+      padding: 0 1.5em 0 1.9em;
+      border-radius: 0.32em;
+      background: linear-gradient(135deg, transparent 0.9em, var(--rf) 0.9em);
+      text-shadow: 0 0.05em 0.1em rgba(0, 0, 0, 0.12);
+      filter: drop-shadow(0 0.1em 0.16em rgba(0, 0, 0, 0.08));
+      transition: transform 0.2s ease;
+    }
+    .header[data-island-variant="tab"] .title::before { content: none; }
+    .header[data-island-variant="tab"] .title::after {
+      inset: auto 0 0 auto;
+      width: 0;
+      height: 0;
+      z-index: auto;
+      border-style: solid;
+      border-width: 0 0 0.9em 0.9em;
+      border-color: transparent transparent var(--rk) transparent;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+      transform: none;
+    }
+    /* 官方 layer/tab 悬停放大；HA 里只给可点击的标题 */
+    .header[data-island-variant="layer"] .actionable:hover .title,
+    .header[data-island-variant="tab"] .actionable:hover .title { transform: scale(1.06); }
+
+    /* color：官方 Title 色板（与 Card 同名），写在卡片配置的 color 字段 */
+    .header[data-island-color="default"] .title { --rf: #27d039; --rb: #20992a; --rk: #115017; --rt: #fff; }
+    .header[data-island-color="app-pink"] .title { --rf: #f8a6b2; --rb: #e06880; --rk: #a03060; --rt: #fff; }
+    .header[data-island-color="purple"] .title { --rf: #b77dee; --rb: #9050d0; --rk: #5a1a9a; --rt: #fff; }
+    .header[data-island-color="app-blue"] .title { --rf: #889df0; --rb: #5068d8; --rk: #2030a0; --rt: #fff; }
+    .header[data-island-color="app-yellow"] .title { --rf: var(--island-title-front, #f7cd67); --rb: var(--island-title-back, #d4a030); --rk: var(--island-title-fold, #8a6010); --rt: var(--island-title-text, #725d42); }
+    .header[data-island-color="app-orange"] .title { --rf: #e59266; --rb: #c06a30; --rk: #7a3a10; --rt: #fff; }
+    .header[data-island-color="app-teal"] .title { --rf: #82d5bb; --rb: #40a880; --rk: #186048; --rt: #fff; }
+    .header[data-island-color="app-green"] .title { --rf: #8ac68a; --rb: #509050; --rk: #205020; --rt: #fff; }
+    .header[data-island-color="app-red"] .title { --rf: #fc736d; --rb: #d43030; --rk: #900010; --rt: #fff; }
+    .header[data-island-color="lime-green"] .title { --rf: #d1da49; --rb: #90a010; --rk: #485800; --rt: #3d5a1a; }
+    .header[data-island-color="yellow-green"] .title { --rf: #ecdf52; --rb: #c0b010; --rk: #706800; --rt: #725d42; }
+    .header[data-island-color="brown"] .title { --rf: #9a835a; --rb: #705830; --rk: #3a2810; --rt: #fff; }
+    .header[data-island-color="warm-peach-pink"] .title { --rf: #e18c6f; --rb: #b85a30; --rk: #6a2a10; --rt: #fff; }
     .subtitle { margin: 4px 14px 0 !important; font-family: var(--island-font); }
     .actionable { border-radius: 12px; }
   `,

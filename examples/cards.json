@@ -79,7 +79,8 @@
   },
   {
     "type": "custom:island-title-card",
-    "title": "客厅"
+    "title": "客厅",
+    "color": "default"
   },
   {
     "type": "custom:island-light-card",
@@ -127,7 +128,9 @@
   },
   {
     "type": "custom:island-title-card",
-    "title": "卧室"
+    "title": "卧室",
+    "variant": "layer",
+    "color": "app-blue"
   },
   {
     "layout": "vertical",
@@ -176,7 +179,9 @@
   },
   {
     "type": "custom:island-title-card",
-    "title": "家务"
+    "title": "家务",
+    "variant": "tab",
+    "color": "app-orange"
   },
   {
     "type": "custom:island-vacuum-card",

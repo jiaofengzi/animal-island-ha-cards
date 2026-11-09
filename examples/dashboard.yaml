@@ -63,6 +63,7 @@ views:
     cards:
     - type: custom:island-title-card
       title: 客厅
+      color: default
     - type: custom:island-light-card
       entity: light.living_lamp
       show_brightness_control: true
@@ -102,6 +103,8 @@ views:
     cards:
     - type: custom:island-title-card
       title: 卧室
+      variant: layer
+      color: app-blue
     - layout: vertical
       fill_container: true
       grid_options:
@@ -139,6 +142,8 @@ views:
     cards:
     - type: custom:island-title-card
       title: 家务
+      variant: tab
+      color: app-orange
     - type: custom:island-vacuum-card
       entity: vacuum.robot
       commands:

@@ -47,6 +47,17 @@ The standalone Title Card paints the official `ribbon` variant (animal-island-ui
 | `ribbonFoldLeft/Right` | `.title::before` background layers 1–2 | `.95em × .45em` dark triangles under the front's bottom corners (`.15em`/`.16em` inset) — the fold crease |
 | `ribbonText` | `.title` | `min-height: 2em`, padding `.11em 1.6em 0`, letter-spacing `.04em` |
 
+The other two official variants are selected with the card config field `variant` (default `ribbon`):
+
+| `variant` | Official | Here | Geometry (em) |
+|---|---|---|---|
+| `layer` 双层纸 | `.layer::before` + `.layerFront` | `::before` back sheet, `::after` front sheet, h1 text | front `min-height: 2.1em`, padding `0 1.55em`, radius `.35em`; back `inset: -.3em .65em 0 -.26em` (peeks out top-left). The front is painted by `::after` rather than the h1 background because a negative-z back sheet would otherwise cover it. |
+| `tab` 折角便签 | `.tab` + `.tab::after` + `.tabText` | h1 background, `::after` corner | `min-height: 2em`, padding `0 1.5em 0 1.9em` (official `.4em` text offset), radius `.32em`, top-left cut `linear-gradient(135deg, transparent .9em, front .9em)`, bottom-right `.9em` dark corner triangle |
+
+Official `layer`/`tab` scale to 1.06 on hover; here that only applies when the title has a tap action (`.actionable`).
+
+The card config field `color` picks any of the 13 official Title palette names: `default` (green), `app-pink`, `purple`, `app-blue`, `app-yellow` (default), `app-orange`, `app-teal`, `app-green`, `app-red`, `lime-green`, `yellow-green`, `brown`, `warm-peach-pink`. Values are copied from `title.module.css`. Both fields are exposed by a build transform that only adds `data-island-variant` / `data-island-color` attributes to the title card's `ha-card` and two optional strings to its config struct (so the visual editor still accepts the config; the fields are YAML-only, not shown in the editor form). Unknown values fall back to the ribbon and yellow.
+
 Palette defaults to official `app-yellow` and is overridable per card (e.g. via card-mod or theme) with `--island-title-front` (`#f7cd67`), `--island-title-back` (`#d4a030`), `--island-title-fold` (`#8a6010`) and `--island-title-text` (`#725d42`). Any official color pair can be used, e.g. default green `#27d039 / #20992a / #115017 / #fff`, `app-blue` `#889df0 / #5068d8 / #2030a0 / #fff`.
 
 The h1 gets `margin: 0 .6em .4em` so the tails and folds stay inside the card; this adds `.4em` below the title. Unlike the official component, `white-space` keeps upstream `pre-wrap`, so long or multiline titles grow the front (`min-height`) while tails and folds stay anchored to the bottom edge. The removed v0.3.2 variable `--island-title-color` (front only) is replaced by the four variables above.
