@@ -393,20 +393,190 @@ export const ART: Record<string, Art> = {
       <path d="M9 30h30a9 9 0 0 1-9 8H18a9 9 0 0 1-9-8z" fill="#e7eff6"/>
       ${face(24, 23, 1)}`,
   },
+  // —— 灯具：和灯泡同一套画法，暖橙底；光线用 .glow，关灯时隐藏 ——
+  ceiling: {
+    tone: "orange",
+    svg: `
+      <g class="glow" stroke="#fff3c4" stroke-width="3" stroke-linecap="round"><path d="M13 35.5l-2.6 4.2M24 37.5v5M35 35.5l2.6 4.2"/></g>
+      <rect x="15" y="6" width="18" height="5" rx="2.5" fill="#c98d55"/>
+      <path d="M6 15h36c0 10-8 18-18 18S6 25 6 15z" fill="#fff3a6"/>
+      <path d="M24 15h18c0 10-8 18-18 18z" fill="#ffe36e"/>
+      <rect x="4.5" y="11.5" width="39" height="5" rx="2.5" fill="#fffaf0"/>
+      <ellipse cx="14.5" cy="21" rx="2" ry="3.2" transform="rotate(-35 14.5 21)" fill="#fff"/>`,
+  },
+  strip: {
+    tone: "orange",
+    svg: `
+      <path d="M6 29c6-10 12-10 18 0s12 10 18 0" fill="none" stroke="#f1e5c8" stroke-width="8" stroke-linecap="round" transform="translate(0 2)"/>
+      <path d="M6 29c6-10 12-10 18 0s12 10 18 0" fill="none" stroke="#fffaf0" stroke-width="8" stroke-linecap="round"/>
+      <g class="glow"><circle cx="9" cy="24.6" r="2.4" fill="#ffe36e"/><circle cx="15" cy="21.6" r="2.4" fill="#ff8fab"/><circle cx="21" cy="24.6" r="2.4" fill="#8fdc8a"/>
+      <circle cx="27" cy="33.4" r="2.4" fill="#ffe36e"/><circle cx="33" cy="36.4" r="2.4" fill="#5cc8e8"/><circle cx="39" cy="33.4" r="2.4" fill="#ff8fab"/></g>
+      <g class="glow" stroke="#fff3c4" stroke-width="2.6" stroke-linecap="round"><path d="M15 12.5v4M9 15.5l1.8 2.6M21 15.5l-1.8 2.6"/></g>`,
+  },
+  spot: {
+    tone: "orange",
+    svg: `
+      <path class="glow" d="M19.5 25.5L9 44h25l-3-20z" fill="#fff3c4"/>
+      <rect x="17" y="4" width="14" height="4.5" rx="2.25" fill="#c98d55"/>
+      <rect x="22.6" y="7.5" width="2.8" height="6" fill="#a5713f"/>
+      <g transform="rotate(-22 24 18)">
+        <rect x="15.5" y="11" width="17" height="14" rx="4.5" fill="#fffaf0"/>
+        <path d="M24 11h4a4.5 4.5 0 0 1 4.5 4.5v5A4.5 4.5 0 0 1 28 25h-4z" fill="#f1e5c8"/>
+        <ellipse cx="24" cy="25" rx="8.5" ry="2.8" fill="#ffe36e"/>
+        <ellipse cx="19.6" cy="15" rx="1.4" ry="2.2" fill="#fff"/>
+      </g>`,
+  },
+  track: {
+    tone: "orange",
+    svg: `
+      <path class="glow" d="M10.5 25L4 44h15l-1-19zM37.5 25L44 44H29l1-19z" fill="#fff3c4"/>
+      <rect x="4" y="6" width="40" height="5.5" rx="2.75" fill="#c98d55"/>
+      <rect x="12.6" y="10" width="2.6" height="5" fill="#a5713f"/><rect x="32.8" y="10" width="2.6" height="5" fill="#a5713f"/>
+      <g transform="rotate(14 14 19)"><rect x="8.5" y="14" width="11" height="11" rx="3.5" fill="#fffaf0"/><path d="M14 14h2a3.5 3.5 0 0 1 3.5 3.5v4A3.5 3.5 0 0 1 16 25h-2z" fill="#f1e5c8"/><ellipse cx="14" cy="25" rx="5.5" ry="1.9" fill="#ffe36e"/></g>
+      <g transform="rotate(-14 34 19)"><rect x="28.5" y="14" width="11" height="11" rx="3.5" fill="#fffaf0"/><path d="M34 14h2a3.5 3.5 0 0 1 3.5 3.5v4A3.5 3.5 0 0 1 36 25h-2z" fill="#f1e5c8"/><ellipse cx="34" cy="25" rx="5.5" ry="1.9" fill="#ffe36e"/></g>`,
+  },
+  pendant: {
+    tone: "orange",
+    svg: `
+      <g class="glow" stroke="#fff3c4" stroke-width="3" stroke-linecap="round"><path d="M14 37.5l-2.6 3.8M24 40v4.5M34 37.5l2.6 3.8"/></g>
+      <rect x="22.8" y="2" width="2.4" height="12" fill="#a5713f"/>
+      <path d="M24 12c-9.5 0-15.5 7-16.5 16h33C39.5 19 33.5 12 24 12z" fill="#ff8fab"/>
+      <path d="M24 12c9.5 0 15.5 7 16.5 16H24z" fill="#f37a99"/>
+      <circle cx="16" cy="22" r="1.5" fill="#ffd0dc"/><circle cx="21" cy="17.5" r="1.5" fill="#ffd0dc"/><circle cx="29" cy="20" r="1.5" fill="#ffd0dc"/>
+      <rect x="6" y="27" width="36" height="3.6" rx="1.8" fill="#fffaf0"/>
+      <circle cx="24" cy="33.6" r="4.4" fill="#ffe36e"/><circle cx="22.6" cy="32.2" r="1.2" fill="#fff"/>`,
+  },
+  downlight: {
+    tone: "orange",
+    svg: `
+      <path class="glow" d="M16.5 15h15l8 28h-31z" fill="#fff3c4"/>
+      <rect x="3.5" y="5" width="41" height="11" rx="5.5" fill="#fffaf0"/>
+      <rect x="3.5" y="11" width="41" height="5" rx="2.5" fill="#f1e5c8"/>
+      <ellipse cx="24" cy="14.5" rx="8.5" ry="3.2" fill="#c98d55"/>
+      <ellipse cx="24" cy="15" rx="6.5" ry="2.3" fill="#ffe36e"/>
+      <circle cx="17" cy="33" r="1.4" fill="#fff"/><circle cx="31" cy="27" r="1.2" fill="#fff"/>`,
+  },
+  floorlamp: {
+    tone: "orange",
+    svg: `
+      <g class="glow" stroke="#fff3c4" stroke-width="3" stroke-linecap="round"><path d="M5 13h3M40 13h3M8 5l2 2M40 5l-2 2"/></g>
+      <path d="M15 5h18l4.5 15h-27z" fill="#fff3a6"/>
+      <path d="M24 5h9l4.5 15H24z" fill="#ffe36e"/>
+      <rect x="10" y="18.5" width="28" height="3" rx="1.5" fill="#fffaf0"/>
+      <rect x="22.8" y="21" width="2.4" height="18" fill="#c98d55"/>
+      <ellipse cx="24" cy="41.5" rx="9" ry="3" fill="#a5713f"/>
+      <ellipse cx="18.5" cy="10" rx="1.5" ry="2.6" transform="rotate(20 18.5 10)" fill="#fff"/>`,
+  },
+  desklamp: {
+    tone: "orange",
+    svg: `
+      <path class="glow" d="M31 22l-7 21h20l-4-23z" fill="#fff3c4"/>
+      <rect x="6" y="38.5" width="20" height="5" rx="2.5" fill="#3f8bd6"/>
+      <path d="M16 39L12 24M12 24L26 13" stroke="#5aa7f0" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+      <circle cx="12" cy="24" r="2.8" fill="#3f8bd6"/>
+      <g transform="rotate(32 30 14)">
+        <path d="M23 9h14l3.5 10h-21z" fill="#5aa7f0"/>
+        <path d="M30 9h7l3.5 10H30z" fill="#3f8bd6"/>
+        <ellipse cx="30" cy="19" rx="10.5" ry="2.6" fill="#ffe36e"/>
+      </g>`,
+  },
+  lamp: {
+    tone: "orange",
+    svg: `
+      <g class="glow" stroke="#fff3c4" stroke-width="3" stroke-linecap="round"><path d="M4.5 25l3.4-1.6M43.5 25l-3.4-1.6"/></g>
+      <path d="M14 7h20l5.5 16h-31z" fill="#ff8fab"/>
+      <path d="M24 7h10l5.5 16H24z" fill="#f37a99"/>
+      <circle cx="17.5" cy="16" r="1.6" fill="#ffd0dc"/><circle cx="24" cy="11.5" r="1.6" fill="#ffd0dc"/><circle cx="30.5" cy="17.5" r="1.6" fill="#ffd0dc"/>
+      <rect x="22.8" y="23" width="2.4" height="4.5" fill="#c98d55"/>
+      <path d="M16.5 32c0-2.6 3.4-4.5 7.5-4.5s7.5 1.9 7.5 4.5c0 6-2.6 9.4-7.5 11.5-4.9-2.1-7.5-5.5-7.5-11.5z" fill="#8fdc8a"/>
+      <path d="M24 27.5c4.1 0 7.5 1.9 7.5 4.5 0 6-2.6 9.4-7.5 11.5z" fill="#6cc96a"/>
+      <ellipse cx="20" cy="32.5" rx="1.3" ry="2.2" fill="#d6f5d3"/>`,
+  },
+  sconce: {
+    tone: "orange",
+    svg: `
+      <g class="glow" stroke="#fff3c4" stroke-width="3" stroke-linecap="round"><path d="M15 3l1.4 3M24 1.5V5M33 3l-1.4 3"/></g>
+      <path d="M12 9h24l-5 13H17z" fill="#fff3a6"/>
+      <path d="M24 9h12l-5 13h-7z" fill="#ffe36e"/>
+      <ellipse cx="24" cy="9" rx="12" ry="2.6" fill="#fffaf0"/>
+      <rect x="22.8" y="21" width="2.4" height="7" fill="#a5713f"/>
+      <rect x="18" y="26" width="12" height="17" rx="4" fill="#c98d55"/>
+      <path d="M24 26h2a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4h-2z" fill="#a5713f"/>
+      <circle cx="22" cy="34.5" r="1.4" fill="#e7b98a"/>`,
+  },
+  lantern: {
+    tone: "orange",
+    svg: `
+      <g class="glow" stroke="#fff3c4" stroke-width="3" stroke-linecap="round"><path d="M6.5 25H10M38 25h3.5M8.6 16.5l2.8 1.6M39.4 16.5l-2.8 1.6"/></g>
+      <rect x="22.6" y="2" width="2.8" height="6" rx="1.4" fill="#a5713f"/>
+      <path d="M13 15l11-8 11 8z" fill="#c98d55"/>
+      <rect x="15" y="14" width="18" height="21" rx="3" fill="#fff3a6"/>
+      <path d="M24 14h6a3 3 0 0 1 3 3v15a3 3 0 0 1-3 3h-6z" fill="#ffe36e"/>
+      <path class="glow" d="M24 18.5c2.4 3 3.6 5 3.6 7a3.6 3.6 0 0 1-7.2 0c0-2 1.2-4 3.6-7z" fill="#ff9a3c"/>
+      <rect x="15" y="14" width="2.4" height="21" fill="#a5713f"/><rect x="30.6" y="14" width="2.4" height="21" fill="#a5713f"/>
+      <rect x="13" y="34" width="22" height="4.5" rx="2.25" fill="#c98d55"/>`,
+  },
+  // —— 影音、家电 ——
+  projector: {
+    tone: "purple",
+    svg: `
+      <path class="glow" d="M35 21l11-9v26l-11-9z" fill="#fff3c4"/>
+      <rect x="4" y="16" width="33" height="18" rx="6" fill="#fffaf0"/>
+      <path d="M4 27h33v1a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6z" fill="#e9dcff"/>
+      <circle cx="28" cy="25" r="6.4" fill="${EYE}"/>
+      <circle cx="28" cy="25" r="3.4" fill="#8a6a48"/>
+      <circle cx="26.6" cy="23.6" r="1.2" fill="#fff"/>
+      <circle cx="11" cy="21.5" r="2" fill="#6cc96a"/>
+      <rect x="8" y="34" width="5" height="4" rx="1.5" fill="#c98d55"/><rect x="28" y="34" width="5" height="4" rx="1.5" fill="#c98d55"/>`,
+  },
+  tv: {
+    tone: "purple",
+    svg: `
+      <rect x="4.5" y="7" width="39" height="26" rx="6" fill="#fffaf0"/>
+      <rect x="8.5" y="11" width="31" height="18" rx="3.5" fill="#5cc8e8"/>
+      <path d="M8.5 23l8-6 7 5 6-4 10 7v1a3.5 3.5 0 0 1-3.5 3.5h-24A3.5 3.5 0 0 1 8.5 26z" fill="#8fdc8a"/>
+      <circle cx="33" cy="15.5" r="2.6" fill="#ffcc3d"/>
+      <rect x="21" y="33" width="6" height="5" fill="#c98d55"/>
+      <rect x="13" y="37.5" width="22" height="4.5" rx="2.25" fill="#a5713f"/>`,
+  },
+  cooker: {
+    tone: "yellow",
+    svg: `
+      <g class="steam" stroke="#fff" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M15 9c-1.6-1.8 1.6-3.2 0-5M33 9c-1.6-1.8 1.6-3.2 0-5"/></g>
+      <path d="M7 24h34v11a8 8 0 0 1-8 8H15a8 8 0 0 1-8-8z" fill="#fffaf0"/>
+      <path d="M24 24h17v11a8 8 0 0 1-8 8h-9z" fill="#f1e5c8"/>
+      <path d="M6 24c0-7 8-11.5 18-11.5S42 17 42 24z" fill="#ff9a3c"/>
+      <path d="M24 12.5c10 0 18 4.5 18 11.5H24z" fill="#f07f2a"/>
+      <rect x="20.5" y="9" width="7" height="5" rx="2.5" fill="#c98d55"/>
+      ${face(24, 31.5, 0.85)}`,
+  },
 };
 
 // ---------- 把 HA 的 mdi 图标名 / 实体状态映射到插画 ----------
 
 const MDI_RULES: [RegExp, string][] = [
-  // 只有“灯泡”类图标画成灯泡插画；灯带、吸顶灯、台灯、射灯等具体灯具保留 HA 原图标（放进同款彩色方块），
-  // 这样一屏灯卡片能靠图标区分，而不是全是同一个灯泡。
-  [/^(lightbulb|light$|light-.*bulb)/, "bulb"],
+  // 具体灯具各有插画（吸顶灯、灯带、射灯……），一屏灯卡片能靠图标区分；其余灯类图标画成灯泡。
+  [/^(ceiling-light|light-flood-down)/, "ceiling"],
+  [/^(led-strip)/, "strip"],
+  [/^(spotlight)/, "spot"],
+  [/^(track-light)/, "track"],
+  [/^(chandelier|ceiling-light-multiple|pendant)/, "pendant"],
+  [/^(light-recessed)/, "downlight"],
+  [/^(floor-lamp)/, "floorlamp"],
+  [/^(desk-lamp)/, "desklamp"],
+  [/^(lamp|table-lamp)$/, "lamp"],
+  [/^(wall-sconce)/, "sconce"],
+  [/^(coach-lamp|outdoor-lamp|lantern|string-lights)/, "lantern"],
+  [/^(projector)/, "projector"],
+  [/^(monitor|television|tv)/, "tv"],
+  [/^(pot-steam|rice-cooker|pot$)/, "cooker"],
+  [/^(lightbulb|light$|light-.*bulb|lamps)/, "bulb"],
   [/^(fan|ceiling-fan)/, "fan"],
   [/^(thermostat|air-conditioner|hvac|snowflake|sun-snowflake|home-thermometer)/, "aircon"],
   [/^(curtains-closed|blinds-closed|window-shutter-closed|roller-shade-closed)/, "curtain-closed"],
   [/^(curtains|blinds|window-shutter|roller-shade|window-open|window)/, "curtain-open"],
   [/^(robot-vacuum)/, "vacuum"],
-  [/^(speaker|cast|radio|television|tv|boombox|cd-player|play-circle)/, "speaker"],
+  [/^(speaker|cast|radio|boombox|cd-player|play-circle)/, "speaker"],
   [/^(music|playlist-music|headphones)/, "note"],
   [/^(lock-open)/, "lock-open"],
   [/^(lock|door-closed-lock|key)/, "lock"],

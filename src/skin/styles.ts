@@ -173,9 +173,10 @@ const card = css`
     transition: background-color .35s cubic-bezier(.4, 0, .2, 1), box-shadow .35s cubic-bezier(.4, 0, .2, 1);
   }
   ${unsafeCSS(toneRules)}
+  /* 状态胶囊（官方 Tag soft）：对称圆角，同色系浅底 + 同色系深字 */
   ha-card {
-    --island-pill-bg: color-mix(in srgb, var(--island-accent) 34%, var(--island-paper));
-    --island-pill-ink: var(--island-ink);
+    --island-pill-bg: color-mix(in srgb, var(--island-accent) 22%, var(--island-paper-hi));
+    --island-pill-ink: color-mix(in srgb, var(--island-accent) 45%, #4a3520);
   }
   ha-card:has(island-state-icon[data-inactive]) {
     --island-tint: 0%;
@@ -346,8 +347,8 @@ const surfaces: Record<string, CSSResult> = {
       max-width: 100%;
       box-sizing: border-box;
       margin-top: 3px;
-      padding: 1px 9px 2px;
-      border-radius: 12px 13px 13px 4px;
+      padding: 1px 10px 2px;
+      border-radius: 999px;
       background: var(--island-pill-bg, color-mix(in srgb, var(--island-accent, #3ec2ae) 34%, var(--island-paper)));
       color: var(--island-pill-ink, var(--island-ink));
       font-family: var(--island-font);
@@ -355,11 +356,13 @@ const surfaces: Record<string, CSSResult> = {
     .multiline_secondary { white-space: pre-wrap; }
   `,
   "src/shared/chip.ts": css`
+    /* 顶部小胶囊（官方 Tag soft）：对称圆角、细描边，不要厚底边 */
     ha-card {
       position: relative;
       background: var(--island-paper);
-      border-radius: var(--island-blob, 999px);
-      box-shadow: 0 4px 0 var(--island-edge), 0 10px 16px -10px rgba(91, 65, 40, .35);
+      border-radius: 999px;
+      border: 1.5px solid var(--island-edge) !important;
+      box-shadow: none;
       font-family: var(--island-font);
     }
     /* Press feedback lives on .content/.avatar through the motion controller. */
@@ -548,10 +551,6 @@ const surfaces: Record<string, CSSResult> = {
     ha-card { background: none; border: none; border-radius: 0; box-shadow: none; }
     ha-card:hover { transform: none; }
     .chip-container { padding: 4px 2px 8px; }
-    .chip-container > *:nth-child(4n + 1) { --island-blob: 46% 54% 50% 44% / 58% 52% 48% 42%; --island-tilt: -2deg; }
-    .chip-container > *:nth-child(4n + 2) { --island-blob: 54% 46% 42% 56% / 48% 58% 42% 52%; --island-tilt: 2deg; }
-    .chip-container > *:nth-child(4n + 3) { --island-blob: 50% 50% 56% 44% / 54% 46% 54% 46%; --island-tilt: -1deg; }
-    .chip-container > *:nth-child(4n + 4) { --island-blob: 44% 56% 48% 52% / 46% 54% 46% 54%; --island-tilt: 1.5deg; }
   `,
   "src/cards/template-card/template-card.ts": css`
     .content { padding-inline: 16px; gap: 14px; }
@@ -576,8 +575,8 @@ const surfaces: Record<string, CSSResult> = {
       max-width: 100%;
       box-sizing: border-box;
       margin-top: 4px;
-      padding: 2px 10px 3px;
-      border-radius: 12px 13px 13px 4px;
+      padding: 1px 10px 2px;
+      border-radius: 999px;
       background: var(--island-pill-bg, color-mix(in srgb, var(--island-accent) 34%, var(--island-paper)));
       color: var(--island-pill-ink, var(--island-ink));
       overflow: hidden;

@@ -102,6 +102,8 @@ export class IslandStateIcon extends LitElement {
     :host([bare]) .tile { background: none; overflow: visible; }
     :host([bare]) svg { width: 100%; height: 100%; }
     :host([data-inactive]) svg { filter: grayscale(.4) opacity(.85); }
+    /* 关着时不画光线、蒸汽，开着才发光 */
+    :host([data-inactive]) .glow, :host([data-inactive]) .steam { opacity: 0; }
     :host([data-inactive]) ha-state-icon { color: color-mix(in srgb, var(--tile) 65%, var(--island-tile-off-ink, #b3a689)); filter: none; }
     :host([data-unavailable]) svg { filter: grayscale(.9) opacity(.6); }
     :host([data-unavailable]) ha-state-icon { color: var(--island-tile-off-ink, #b3a689); }

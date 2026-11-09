@@ -174,7 +174,9 @@ export class ClimateCard
         stateObj,
         "current_temperature"
       );
-      stateDisplay += ` ⸱ ${temperature}`;
+      // 小岛：关机时卡片颜色已说明状态，只显示室温；开机时显示“制冷 ⸱ 26 °C”
+      stateDisplay =
+        stateObj.state === "off" ? temperature : `${stateDisplay} ⸱ ${temperature}`;
     }
     const rtl = computeRTL(this.hass);
 
