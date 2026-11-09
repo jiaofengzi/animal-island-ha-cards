@@ -383,31 +383,49 @@ const surfaces: Record<string, CSSResult> = {
   "src/cards/title-card/title-card.ts": css`
     .header { background: none; border: none; box-shadow: none; padding: var(--title-padding); }
     .header:hover { transform: none; }
-    :host {
-      --island-ribbon: var(--island-title-color, #ffcc3d);
-      --island-ribbon-back: color-mix(in srgb, var(--island-ribbon) 62%, #5b4128);
-    }
+    /* 折纸飘带：按 animal-island-ui 3.0.3 Title(ribbon) 的几何换算，全部用 em，随字号缩放。
+       官方 5 层 = 正面 + 左右燕尾 + 左右折痕；这里只用 h1 的两个伪元素：
+       ::after 画正面，::before 用四层渐变画两条燕尾和两块折痕三角，再用 clip-path 剪出燕尾缺口。 */
     .title {
+      --rf: var(--island-title-front, #f7cd67);
+      --rb: var(--island-title-back, #d4a030);
+      --rk: var(--island-title-fold, #8a6010);
+      --rt: var(--island-title-text, #725d42);
       position: relative;
       isolation: isolate;
-      display: inline-block;
-      margin: 0 12px !important;
-      padding: 3px 20px 5px;
-      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      box-sizing: border-box;
+      min-height: 2em;
+      margin: 0 0.6em 0.4em !important;
+      padding: 0.11em 1.6em 0;
+      color: var(--rt);
       font-family: var(--island-font);
-      text-shadow: 0 2px 0 var(--island-ribbon-back), 0 -1px 0 var(--island-ribbon-back), 1px 0 0 var(--island-ribbon-back), -1px 0 0 var(--island-ribbon-back);
+      letter-spacing: 0.04em;
+      text-shadow: 0 0.04em 0.08em rgba(0, 0, 0, 0.05);
+      filter: drop-shadow(0 0.08em 0.12em rgba(0, 0, 0, 0.05));
     }
-    .title::before, .title::after { content: ""; position: absolute; pointer-events: none; z-index: -1; }
-    .title::before {
-      inset: 8px -14px -7px;
-      background: var(--island-ribbon-back);
-      clip-path: polygon(0 0, 100% 0, calc(100% - 9px) 50%, 100% 100%, 0 100%, 9px 50%);
-    }
+    .title::before, .title::after { content: ""; position: absolute; pointer-events: none; }
     .title::after {
-      inset: 0;
-      border-radius: 10px;
-      background: linear-gradient(180deg, color-mix(in srgb, var(--island-ribbon) 70%, #fff) 0 30%, var(--island-ribbon) 30%);
-      box-shadow: 0 3px 0 color-mix(in srgb, var(--island-ribbon) 80%, #5b4128);
+      inset: 0 0.1em;
+      z-index: -1;
+      background: var(--rf);
+      border-radius: 0.2em;
+      transform: perspective(11.5em) rotateX(3deg);
+      box-shadow: inset 0 -0.06em rgba(0, 0, 0, 0.05);
+    }
+    .title::before {
+      z-index: -2;
+      left: -0.6em;
+      right: -0.6em;
+      bottom: -0.4em;
+      height: 1.7em;
+      background:
+        linear-gradient(to bottom left, var(--rk) 50%, transparent 50%) left 0.75em bottom 0 / 0.95em 0.45em no-repeat,
+        linear-gradient(to bottom right, var(--rk) 50%, transparent 50%) right 0.76em bottom 0 / 0.95em 0.45em no-repeat,
+        linear-gradient(var(--rb), var(--rb)) left / 1.7em 100% no-repeat,
+        linear-gradient(var(--rb), var(--rb)) right / 1.7em 100% no-repeat;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 0.51em) 50%, 100% 100%, 0 100%, 0.51em 50%);
     }
     .subtitle { margin: 4px 14px 0 !important; font-family: var(--island-font); }
     .actionable { border-radius: 12px; }

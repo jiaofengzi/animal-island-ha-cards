@@ -38,7 +38,18 @@ The captured surfaces show exact parchment and the intended saturated blue/purpl
 
 The installed official `Title.d.ts` has three variants: `ribbon`, `layer`, and `tab`; `Title.js` defaults to `ribbon`. Plain bold text is not an official variant. The earlier standalone Title mapping was therefore incomplete (ordinary entity names are not Title components and stay plain).
 
-The standalone Title Card now uses a paint-only swallowtail ribbon, with the official `app-yellow` palette: front `#f7cd67`, back `#d4a030`, text `#725d42` (official fold token `#8a6010` retained for reference). Its two noninteractive pseudo-elements paint behind the original h1; no wrappers, content, template subscriptions, action handlers, padding, width, font size, line height or sizing methods change. Alignment, RTL, subtitle and multiline content continue using upstream semantics. The tails extend 8px horizontally and 5px down within the default 12px horizontal padding and 8px title/subtitle gap. This is a compact HA-compatible visual translation, not a claim that the React Title's multi-span 2em-height geometry is identical. Custom title padding smaller than those defaults may require user spacing adjustment.
+The standalone Title Card paints the official `ribbon` variant (animal-island-ui 3.0.3 `title.module.css`) with only the original h1 and its two noninteractive pseudo-elements; no wrappers, content, template subscriptions or action handlers change. All geometry is in `em`, so it scales with `--title-font-size`:
+
+| Official layer | Here | Geometry (em) |
+|---|---|---|
+| `ribbonFront` | `.title::after` | `inset: 0 .1em`, radius `.2em`, `perspective(11.5em) rotateX(3deg)`, inset shadow `-.06em` |
+| `ribbonBackLeft/Right` | `.title::before` background layers 3–4 | `1.7em` squares, `.6em` outside each edge, `.4em` below; swallowtail notch `.51em` (30%) via `clip-path` |
+| `ribbonFoldLeft/Right` | `.title::before` background layers 1–2 | `.95em × .45em` dark triangles under the front's bottom corners (`.15em`/`.16em` inset) — the fold crease |
+| `ribbonText` | `.title` | `min-height: 2em`, padding `.11em 1.6em 0`, letter-spacing `.04em` |
+
+Palette defaults to official `app-yellow` and is overridable per card (e.g. via card-mod or theme) with `--island-title-front` (`#f7cd67`), `--island-title-back` (`#d4a030`), `--island-title-fold` (`#8a6010`) and `--island-title-text` (`#725d42`). Any official color pair can be used, e.g. default green `#27d039 / #20992a / #115017 / #fff`, `app-blue` `#889df0 / #5068d8 / #2030a0 / #fff`.
+
+The h1 gets `margin: 0 .6em .4em` so the tails and folds stay inside the card; this adds `.4em` below the title. Unlike the official component, `white-space` keeps upstream `pre-wrap`, so long or multiline titles grow the front (`min-height`) while tails and folds stay anchored to the bottom edge. The removed v0.3.2 variable `--island-title-color` (front only) is replaced by the four variables above.
 
 Real-HA CI should verify the title pseudo-element backgrounds/clip-path, unchanged title/header dimensions, actionability, multiline/RTL rendering, and narrow layouts before this change is called visually validated.
 
