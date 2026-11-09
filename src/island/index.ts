@@ -1,4 +1,4 @@
-// 小岛扩展：插画图标、随包字体、开屏动画、底部导航。由 build-parity.mjs 注入到卡片包入口。
+// 小岛扩展：插画图标、随包字体、开屏动画、底部导航。由卡片入口 src/mushroom/mushroom.ts 引入。
 import { ART } from "./art";
 import { installIslandFonts } from "./fonts";
 import { islandWindow } from "./globals";

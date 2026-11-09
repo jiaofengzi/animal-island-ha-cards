@@ -1,27 +1,25 @@
 {
   "name": "animal-island-ha-cards",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "license": "(Apache-2.0 AND MIT)",
   "scripts": {
-    "build": "node scripts/build-parity.mjs",
+    "build": "node scripts/build-cards.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src tests scripts demo playwright.config.ts",
     "test": "node --test tests/core.test.mjs",
     "test:browser": "playwright test",
     "dev": "node scripts/serve.mjs",
-    "preview": "node scripts/build-parity.mjs && node scripts/build-preview.mjs && node scripts/serve.mjs",
+    "preview": "node scripts/build-cards.mjs && node scripts/build-preview.mjs && node scripts/serve.mjs",
     "licenses": "node scripts/licenses.mjs",
-    "check": "npm run build:parity && npm run test:ha",
+    "check": "npm run lint && npm run typecheck && npm test && npm run test:island-ui && npm run build",
     "build:showcase": "node scripts/run-legacy.mjs build:showcase",
     "build:acceptance": "node scripts/run-legacy.mjs build:acceptance",
     "build:legacy": "node scripts/run-legacy.mjs build",
-    "build:parity": "node scripts/build-parity.mjs",
     "check:legacy": "node scripts/run-legacy.mjs check",
-    "test:ha": "playwright test --config tests/ha-parity/playwright.config.ts",
-    "check:static": "npm run build:parity",
-    "test:island-ui": "node --test tests/island-ui/*.test.mjs"
+    "test:island-ui": "node --test tests/island-ui/*.test.mjs",
+    "typecheck:cards": "tsc -p tsconfig.cards.json"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

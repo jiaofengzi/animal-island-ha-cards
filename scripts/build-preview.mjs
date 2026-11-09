@@ -1,4 +1,4 @@
-// 打包本地预览页（preview/），卡片本体仍由 build-parity.mjs 产出到 dist/。
+// 打包本地预览页（preview/），卡片本体仍由 build-cards.mjs 产出到 dist/。
 import path from 'node:path';
 import { build } from 'esbuild';
 

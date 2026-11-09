@@ -1,16 +1,14 @@
 # Animal Island HA Cards
 
-面向 Home Assistant 的动森风格卡片。本轮以 **Mushroom v5.2.3** 为功能基线：保留其 Lit 配置、状态、操作、模板、编辑器及尺寸逻辑，在独立 `island-*` 命名下改造共享视觉层。
+面向 Home Assistant 的动森风格卡片。卡片代码派生自 **Mushroom v5.2.3**，从 v0.4 起由本项目自行维护（`src/mushroom/`）：沿用其 Lit 配置、状态、操作、模板、编辑器及尺寸逻辑，在独立 `island-*` 命名下改造视觉层，并按需修改行为。
 
-[公开逐项验收页](https://jiaofengzi.github.io/animal-island-ha-cards/) · [源码与许可来源](docs/UPSTREAM.md) · [视觉转换边界](docs/SKIN.md) · [真实 HA 验证说明](docs/HA-VALIDATION.md)
+[公开逐项验收页](https://jiaofengzi.github.io/animal-island-ha-cards/) · [源码与许可来源](docs/UPSTREAM.md) · [视觉转换边界](docs/SKIN.md) · [历史：真实 HA 对照验证](docs/HA-VALIDATION.md)
 
-这是独立维护的预览项目，与 Mushroom、Animal Island UI、任天堂或其他游戏厂商无隶属关系。它采用 Animal Island 的设计规范转换到 Lit，**不是直接使用 React 同一组件库**。网页壳可以使用 React；卡片运行时是上游 Lit fork。网页版本与测试状态以页内证据为准。
+这是独立维护的预览项目，与 Mushroom、Animal Island UI、任天堂或其他游戏厂商无隶属关系。它采用 Animal Island 的设计规范转换到 Lit，**不是直接使用 React 同一组件库**。网页壳可以使用 React；卡片运行时是自维护的 Lit fork。网页版本与测试状态以页内证据为准。
 
-## 三个版本的真实 HA 对照
+## 历史对照页
 
-[官方 Mushroom × 此前版本 × 修复后新版](https://jiaofengzi.github.io/animal-island-ha-cards/three-way/) 在同一 Home Assistant 2026.9.0 测试环境里使用相同合成实体和配置，逐项显示 18 种卡片、11 种 Chip 和 1 种 Badge 的真实截图。页面标注每个版本的提交与构建来源、桌面和手机容器尺寸，以及空白组件。它是截图对照，不是连接家庭设备的实时控制面板。
-
-原有公开验收页与旧安装包保持原地址和原内容；新版安装包位于三方对照页的下载链接。
+[官方 Mushroom × 此前版本 × 修复后新版](https://jiaofengzi.github.io/animal-island-ha-cards/three-way/) 是 v0.3 时期在隔离的 Home Assistant 2026.9.0 里用合成实体拍的逐项截图对照。v0.4 起代码改为自行维护，不再以“与官方 Mushroom 行为一致”为验收标准，这套对照与真实 HA 工作流已停用；页面保留原样，作为历史记录。
 
 ## 完整目标范围
 
@@ -53,7 +51,7 @@ npm run preview
 
 ### 手动安装
 
-在 [Releases](https://github.com/jiaofengzi/animal-island-ha-cards/releases) 找到最新版本，切换到该标签，把 `dist/` 目录里的全部内容（含 `fonts/`）复制到 Home Assistant 的 `config/www/island-ha-cards/`。在“设置 → 仪表盘 → 资源”添加 `/local/island-ha-cards/island-ha-cards.js?v=0.3.3`，类型为 JavaScript 模块。字体按 JS 文件所在位置加载，所以 `fonts/` 必须和 JS 在同一目录。保留随包的 LICENSE、NOTICE、依赖许可与来源清单。
+在 [Releases](https://github.com/jiaofengzi/animal-island-ha-cards/releases) 找到最新版本，切换到该标签，把 `dist/` 目录里的全部内容（含 `fonts/`）复制到 Home Assistant 的 `config/www/island-ha-cards/`。在“设置 → 仪表盘 → 资源”添加 `/local/island-ha-cards/island-ha-cards.js?v=0.4.0`，类型为 JavaScript 模块。字体按 JS 文件所在位置加载，所以 `fonts/` 必须和 JS 在同一目录。保留随包的 LICENSE、NOTICE、依赖许可与来源清单。
 
 ### 示例
 
@@ -96,22 +94,23 @@ Node 24。依赖锁定在 `package-lock.json`。
 
 ```sh
 npm ci --ignore-scripts
-npm run check:static
+npm run check      # lint、类型检查、单元测试、构建
+npm run build      # 只构建安装包到 dist/
 ```
 
-构建会逐文件核对 vendored 上游 Git blob SHA，再产出：
-- `_parity/mushroom-original.js`：未经行为修改的官方源码本地构建，不声称与官方发布 bundle 字节相同。
-- `dist/island-ha-cards.js` 与 `_parity/island-ha-cards.js`：独立命名、追加动森视觉的 fork。
-- `dist/transform-manifest.json`：来源哈希、修改类别、注册清单与构建哈希。
+源码分布：
+- `src/mushroom/`：卡片本体（派生自 Mushroom 5.2.3，直接修改）。来源与改动见 [docs/UPSTREAM.md](docs/UPSTREAM.md)。
+- `src/skin/`：皮肤 CSS 与按压动效，按上游文件路径挂到对应组件上。
+- `src/island/`：插画图标、随包字体、开屏动画、底部导航。
 
-两套自有元素可以在同一 HA 页面共存，`ha-*`/`hui-*` 宿主元素不改名。业务逻辑不会重新实现为简化 mock；模板仍通过 HA 的 `render_template` 订阅，动作仍交给宿主 `hass-action` 处理。
+两套自有元素可以和官方 Mushroom 在同一 HA 页面共存，`ha-*`/`hui-*` 宿主元素不改名。模板仍通过 HA 的 `render_template` 订阅，动作仍交给宿主 `hass-action` 处理。
 
-CI 的真实 HA 工作流启动隔离的官方 Home Assistant 2026.9.0 容器，使用合成实体验证并截图，不连接家庭设备。部分硬件域的服务效果无法由合成状态证明。1131条规格清单不代表1131条测试已经通过；实际通过、未运行和仍需真实集成验证的内容分别记载。
+`npm run typecheck:cards` 对卡片源码做类型检查；上游 5.2.3 原本就有 43 处类型错误（缺 hammerjs 类型、HA 选择器类型变化等），尚未清理，所以暂不放进 `check`。
 
 旧23场景源码保留用于历史回归，通过 `npm run check:legacy` 在独立缓存目录执行，不覆盖本轮产物，也不再自动部署旧验收页。
 
 ## 许可证
 
-- Vendored Mushroom v5.2.3 与衍生 fork 保留 **Apache-2.0** 许可、来源和改动标记。
+- `src/mushroom/` 派生自 Mushroom v5.2.3，保留 **Apache-2.0** 许可与来源，改动见 docs/UPSTREAM.md 与 Git 历史。
 - 上游 package.json 标注 ISC，但根 LICENSE 为 Apache-2.0。这里明确记录冲突，不将其解释为任意选择双许可。
-- 本项目原有独立代码仍适用 MIT；各依赖保留其许可。见 `THIRD_PARTY_NOTICES.md`、`vendor/mushroom-v5.2.3/LICENSE` 和安装包 `licenses/`。
+- 本项目原有独立代码仍适用 MIT；各依赖保留其许可。见 `THIRD_PARTY_NOTICES.md`、`src/mushroom/LICENSE` 和安装包 `licenses/`。

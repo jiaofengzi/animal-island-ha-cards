@@ -1,3 +1,5 @@
+> **历史文档**：以下是 v0.3 时期“官方 Mushroom × fork”真实 HA 对照工作流的记录。v0.4 起卡片代码改为自行维护，该工作流与相关脚本已移除，内容仅供参考。
+
 # Real Home Assistant validation
 
 ## Current evidence status

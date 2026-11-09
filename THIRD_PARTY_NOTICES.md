@@ -6,9 +6,9 @@ Copyright Paul Bottein and Mushroom contributors. Source: https://github.com/pii
 
 Pinned Git tree: d8a90ffff1b217fbbf9cb8210ee672be99596231.
 
-Vendored source and license: vendor/mushroom-v5.2.3/. Root LICENSE is Apache-2.0, retained verbatim. Upstream package.json says ISC; this inconsistency is preserved and documented, not silently resolved. No upstream NOTICE file was present in the pinned Git tree.
+Derived source: src/mushroom/ (maintained by this project since v0.4); license: src/mushroom/LICENSE. Root LICENSE is Apache-2.0, retained verbatim. Upstream package.json says ISC; this inconsistency is preserved and documented, not silently resolved. No upstream NOTICE file was present in the pinned Git tree.
 
-The independently named Island fork changes namespace, appends visual CSS, and labels its banner. All generated fork files derive from this source; see docs/UPSTREAM.md and dist/transform-manifest.json. Upstream HA helpers retain their original notices.
+All files under src/mushroom/ are modified versions of this source (namespace, visual skin, motion, presentation fields and further changes recorded in Git history); see docs/UPSTREAM.md. Upstream HA helpers retain their original notices.
 
 ## Original project and visual work
 

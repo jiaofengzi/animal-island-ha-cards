@@ -38,7 +38,7 @@ jobs:
       - if: steps.v.outputs.exists != 'true'
         name: Build install bundle
         run: |
-          node scripts/build-parity.mjs
+          npm run build
           test -s dist/island-ha-cards.js
           test -s dist/fonts/island-rounded-500.woff2
       - if: steps.v.outputs.exists != 'true'
