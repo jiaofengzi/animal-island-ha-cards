@@ -37,7 +37,8 @@ npm run preview
 - **底部导航（手机）**：在每个视图最后放一张 `type: custom:island-navbar-card`，`items` 里写 `{name, icon, path}`。屏幕宽度不超过 870px 时固定在底部，电脑上自动隐藏（`show: always` 可强制显示）。
 - **一屏布局**：电脑只有首页一个视图，四个分区铺开；手机首页只显示“早安”分区（分区的 `visibility` 屏幕条件），客厅/卧室/家务做成 `subview: true` 的子视图，电脑顶栏不会出现页签，手机用底部导航进入。不使用顶部徽章（badges）。写法见 `preview/dashboard.js`。
 - **深色模式**：夜空蓝卡片，颜色只放在图标、卡片底边和状态气泡上，不再混进卡片底色。
-- **主题**：`themes/animal-island.yaml` 负责页面背景、顶栏、侧栏和字体。顶栏底部的波浪花边只在预览页里有，HA 主题做不到。
+- **主题**：`themes/animal-island.yaml` 负责页面背景、顶栏、侧栏和字体。
+- **店顶版头**：使用 Animal Island 主题时，卡片包会在仪表盘顶栏底边画一排半圆花边，单视图仪表盘的标题做成米白药丸（HA 主题本身画不了这种装饰）。别的主题里想要，在主题里加 `island-awning: "on"`；不想要就加 `island-awning: "none"`。
 
 ## 安装与配置
 
@@ -51,7 +52,7 @@ npm run preview
 
 ### 手动安装
 
-在 [Releases](https://github.com/jiaofengzi/animal-island-ha-cards/releases) 找到最新版本，切换到该标签，把 `dist/` 目录里的全部内容（含 `fonts/`）复制到 Home Assistant 的 `config/www/island-ha-cards/`。在“设置 → 仪表盘 → 资源”添加 `/local/island-ha-cards/island-ha-cards.js?v=0.4.2`，类型为 JavaScript 模块。字体按 JS 文件所在位置加载，所以 `fonts/` 必须和 JS 在同一目录。保留随包的 LICENSE、NOTICE、依赖许可与来源清单。
+在 [Releases](https://github.com/jiaofengzi/animal-island-ha-cards/releases) 找到最新版本，切换到该标签，把 `dist/` 目录里的全部内容（含 `fonts/`）复制到 Home Assistant 的 `config/www/island-ha-cards/`。在“设置 → 仪表盘 → 资源”添加 `/local/island-ha-cards/island-ha-cards.js?v=0.4.3`，类型为 JavaScript 模块。字体按 JS 文件所在位置加载，所以 `fonts/` 必须和 JS 在同一目录。保留随包的 LICENSE、NOTICE、依赖许可与来源清单。
 
 ### 示例
 
