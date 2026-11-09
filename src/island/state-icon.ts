@@ -31,6 +31,7 @@ export class IslandStateIcon extends LitElement {
     const inactive = s ? INACTIVE.has(state ?? "") : false;
     const live = !inactive && (!s || LIVE_STATES.has(state ?? ""));
     this.toggleAttribute("data-inactive", inactive);
+    this.toggleAttribute("data-unavailable", state === "unavailable" || state === "unknown");
     this.toggleAttribute("data-live", live);
     this.toggleAttribute("data-art", Boolean(art));
     this.dataset.tone = resolveTone(art, s);
@@ -94,12 +95,16 @@ export class IslandStateIcon extends LitElement {
       color: #fff;
       --mdc-icon-size: .6em;
     }
-    :host([data-inactive]) .tile { background: var(--island-tile-off, #ebe3cd); }
+    /* 关着：保留一点自身的颜色，一眼还能认出是哪类设备；不可用才是彻底的灰 */
+    :host([data-inactive]) .tile { background: color-mix(in srgb, var(--tile) 24%, var(--island-tile-off, #ebe3cd)); }
+    :host([data-unavailable]) .tile { background: var(--island-tile-off, #ebe3cd); }
     /* bare：只画插画，不要底色方块（用在底部导航栏这类有自己底色的地方） */
     :host([bare]) .tile { background: none; overflow: visible; }
     :host([bare]) svg { width: 100%; height: 100%; }
-    :host([data-inactive]) svg { filter: grayscale(.9) opacity(.7); }
-    :host([data-inactive]) ha-state-icon { color: var(--island-tile-off-ink, #b3a689); filter: none; }
+    :host([data-inactive]) svg { filter: grayscale(.4) opacity(.85); }
+    :host([data-inactive]) ha-state-icon { color: color-mix(in srgb, var(--tile) 65%, var(--island-tile-off-ink, #b3a689)); filter: none; }
+    :host([data-unavailable]) svg { filter: grayscale(.9) opacity(.6); }
+    :host([data-unavailable]) ha-state-icon { color: var(--island-tile-off-ink, #b3a689); }
 
     .pop { animation: island-pop .35s cubic-bezier(.4, 0, .2, 1); }
     @keyframes island-pop { 0% { transform: scale(.82); } 55% { transform: scale(1.12); } 100% { transform: scale(1); } }

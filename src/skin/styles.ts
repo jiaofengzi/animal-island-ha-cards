@@ -149,6 +149,12 @@ const toneRules = Object.entries(TONES)
   .map(([name, hex]) => `ha-card:has(island-state-icon[data-tone="${name}"]) { --island-accent: ${hex}; }`)
   .join("\n");
 
+
+/* 开/关类卡片：关着时卡片的颜色已经说明了状态，不再重复显示“关闭”；不可用时仍显示 */
+const hideOffState = css`
+  ha-card:has(island-state-icon[data-inactive]:not([data-unavailable])) { --island-secondary-display: none; }
+`;
+
 const card = css`
   ha-card {
     --island-tint: 26%;
@@ -335,6 +341,7 @@ const surfaces: Record<string, CSSResult> = {
   "src/shared/state-info.ts": css`
     .primary { font-family: var(--island-font); color: var(--island-ink); }
     .secondary {
+      display: var(--island-secondary-display, block);
       align-self: var(--island-pill-align, flex-start);
       max-width: 100%;
       box-sizing: border-box;
@@ -606,6 +613,14 @@ const surfaces: Record<string, CSSResult> = {
   `,
 };
 
+const HIDE_OFF_STATE_CARDS = new Set([
+  "src/cards/light-card/light-card.ts",
+  "src/cards/fan-card/fan-card.ts",
+  "src/cards/entity-card/entity-card.ts",
+  "src/cards/cover-card/cover-card.ts",
+  "src/cards/humidifier-card/humidifier-card.ts",
+]);
+
 export function islandSkin(sourcePath: string): CSSResult {
   const path = sourcePath.replace(/\\/g, "/").replace(/^\.\//, "");
   if (path.includes("-editor") || path.includes("/ha/")) return css``;
@@ -617,6 +632,7 @@ export function islandSkin(sourcePath: string): CSSResult {
     isRoot ? theme.cssText : "",
     isCard ? card.cssText : "",
     surfaces[path]?.cssText || "",
+    HIDE_OFF_STATE_CARDS.has(path) ? hideOffState.cssText : "",
     focus.cssText,
   ].join("\n"));
 }

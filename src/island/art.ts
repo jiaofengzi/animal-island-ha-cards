@@ -398,7 +398,9 @@ export const ART: Record<string, Art> = {
 // ---------- 把 HA 的 mdi 图标名 / 实体状态映射到插画 ----------
 
 const MDI_RULES: [RegExp, string][] = [
-  [/^(lightbulb|ceiling-light|lamp|floor-lamp|desk-lamp|led-strip|light|wall-sconce|chandelier|outdoor-lamp|string-lights)/, "bulb"],
+  // 只有“灯泡”类图标画成灯泡插画；灯带、吸顶灯、台灯、射灯等具体灯具保留 HA 原图标（放进同款彩色方块），
+  // 这样一屏灯卡片能靠图标区分，而不是全是同一个灯泡。
+  [/^(lightbulb|light$|light-.*bulb)/, "bulb"],
   [/^(fan|ceiling-fan)/, "fan"],
   [/^(thermostat|air-conditioner|hvac|snowflake|sun-snowflake|home-thermometer)/, "aircon"],
   [/^(curtains-closed|blinds-closed|window-shutter-closed|roller-shade-closed)/, "curtain-closed"],
