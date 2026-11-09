@@ -34,6 +34,10 @@ const AWNING_CSS = css`
     letter-spacing: 1px;
     box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
   }
+  /* 标题不再撑满后，把右侧按钮推回最右边 */
+  .header .toolbar > .main-title ~ .action-items {
+    margin-inline-start: auto;
+  }
 `.cssText;
 
 interface HassLike { selectedTheme?: { theme?: string } | null; themes?: { theme?: string } }
