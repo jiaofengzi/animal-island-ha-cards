@@ -498,6 +498,9 @@ export function resolveTone(art: string | undefined, stateObj?: StateLike): Tone
   if (stateObj?.entity_id.startsWith("climate.")) return CLIMATE_TONE[stateObj.state] ?? "blue";
   if (stateObj?.entity_id.startsWith("person.") && stateObj.state !== "home") return "blue";
   if (art && ART[art]) return ART[art].tone;
+  // 用了 HA 原图标（没有插画）时，颜色仍跟着设备类型走：灯是暖橙、窗帘是绿……
+  const byState = fromState(stateObj);
+  if (byState && ART[byState]) return ART[byState].tone;
   if (stateObj) {
     const domain = stateObj.entity_id.split(".")[0];
     const byDomain: Record<string, Tone> = { sensor: "green", number: "orange", input_number: "orange", select: "blue", input_select: "blue", scene: "purple", script: "purple", automation: "teal", button: "pink", binary_sensor: "teal" };
