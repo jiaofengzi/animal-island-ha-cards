@@ -48,7 +48,9 @@ class IslandNavbarCard extends LitElement {
   private _findPanel(): Element | undefined {
     let node: Node | null = this.parentNode ?? null;
     while (node) {
-      if (node instanceof Element && (node.localName === "ha-panel-lovelace" || node.localName === "hui-root")) return node;
+      // hui-view 与整个仪表盘面板同宽同位，而且侧边栏收起/展开时它的 ResizeObserver 会触发
+      // （外层的 hui-root、ha-panel-lovelace 尺寸变了却不触发）
+      if (node instanceof Element && ["hui-view", "hui-root", "ha-panel-lovelace"].includes(node.localName)) return node;
       node = node.parentNode ?? (node instanceof ShadowRoot ? node.host : null);
     }
     return undefined;
