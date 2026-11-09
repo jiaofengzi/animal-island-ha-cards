@@ -112,10 +112,12 @@
       },
       "title": {
         "alignment": "Alignment",
+        "color": "Title color",
         "subtitle": "Subtitle",
         "subtitle_tap_action": "Subtitle tap action",
         "title": "Title",
-        "title_tap_action": "Title tap action"
+        "title_tap_action": "Title tap action",
+        "variant": "Title style"
       },
       "update": {
         "show_buttons_control": "Control buttons?"
@@ -205,6 +207,30 @@
           "default": "Default layout",
           "horizontal": "Horizontal layout",
           "vertical": "Vertical layout"
+        }
+      },
+      "title_color_picker": {
+        "values": {
+          "default": "Green",
+          "app-pink": "Pink",
+          "purple": "Purple",
+          "app-blue": "Blue",
+          "app-yellow": "Yellow (default)",
+          "app-orange": "Orange",
+          "app-teal": "Teal",
+          "app-green": "Leaf green",
+          "app-red": "Red",
+          "lime-green": "Lime",
+          "yellow-green": "Yellow-green",
+          "brown": "Brown",
+          "warm-peach-pink": "Peach"
+        }
+      },
+      "title_variant_picker": {
+        "values": {
+          "ribbon": "Ribbon (default)",
+          "layer": "Layered paper",
+          "tab": "Folded tab"
         }
       }
     }

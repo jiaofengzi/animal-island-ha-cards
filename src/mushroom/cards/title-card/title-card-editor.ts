@@ -10,13 +10,20 @@ import { HaFormSchema } from "../../utils/form/ha-form";
 import { UiAction } from "../../utils/form/ha-selector";
 import { loadHaComponents } from "../../utils/loader";
 import { TITLE_CARD_EDITOR_NAME } from "./const";
-import { TitleCardConfig, titleCardConfigStruct } from "./title-card-config";
+import {
+  TITLE_COLORS,
+  TITLE_VARIANTS,
+  TitleCardConfig,
+  titleCardConfigStruct,
+} from "./title-card-config";
 
 const actions: UiAction[] = ["navigate", "url", "perform-action", "none"];
 const TITLE_LABELS = [
   "title",
   "subtitle",
   "alignment",
+  "variant",
+  "color",
   "title_tap_action",
   "subtitle_tap_action",
 ];
@@ -38,6 +45,38 @@ const computeSchema = memoizeOne((localize: LocalizeFunc): HaFormSchema[] => [
         mode: "dropdown",
       },
     },
+  },
+  {
+    type: "grid",
+    name: "",
+    schema: [
+      {
+        name: "variant",
+        selector: {
+          select: {
+            options: TITLE_VARIANTS.map((value) => ({
+              value,
+              label: localize(
+                `editor.form.title_variant_picker.values.${value}`
+              ),
+            })),
+            mode: "dropdown" as const,
+          },
+        },
+      },
+      {
+        name: "color",
+        selector: {
+          select: {
+            options: TITLE_COLORS.map((value) => ({
+              value,
+              label: localize(`editor.form.title_color_picker.values.${value}`),
+            })),
+            mode: "dropdown" as const,
+          },
+        },
+      },
+    ],
   },
   {
     name: "title_tap_action",

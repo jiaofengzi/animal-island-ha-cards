@@ -92,10 +92,12 @@
         "secondary": "次要信息"
       },
       "title": {
+        "color": "标题颜色",
         "subtitle": "子标题",
         "subtitle_tap_action": "子标题点击动作",
         "title": "标题",
-        "title_tap_action": "标题点击动作"
+        "title_tap_action": "标题点击动作",
+        "variant": "标题样式"
       },
       "update": {
         "show_buttons_control": "控制按钮?"
@@ -177,6 +179,30 @@
           "default": "默认布局",
           "horizontal": "水平布局",
           "vertical": "垂直布局"
+        }
+      },
+      "title_color_picker": {
+        "values": {
+          "default": "绿色",
+          "app-pink": "粉色",
+          "purple": "紫色",
+          "app-blue": "蓝色",
+          "app-yellow": "黄色（默认）",
+          "app-orange": "橙色",
+          "app-teal": "青绿",
+          "app-green": "叶绿",
+          "app-red": "红色",
+          "lime-green": "青柠",
+          "yellow-green": "黄绿",
+          "brown": "棕色",
+          "warm-peach-pink": "蜜桃"
+        }
+      },
+      "title_variant_picker": {
+        "values": {
+          "ribbon": "折纸飘带（默认）",
+          "layer": "双层纸",
+          "tab": "折角便签"
         }
       }
     }

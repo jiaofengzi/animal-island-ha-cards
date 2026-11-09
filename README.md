@@ -66,7 +66,7 @@ entity: light.your_light
 show_brightness_control: true
 ```
 
-标题卡在 Mushroom 字段之外多两个可选字段（只能在 YAML 里写），对应 Animal Island UI 官方 Title 的三种样式和色板：
+标题卡在 Mushroom 字段之外多两个可选字段，对应 Animal Island UI 官方 Title 的三种样式和色板。可视化编辑器里是「标题样式」「标题颜色」两个下拉框，YAML 写法：
 
 ```yaml
 type: custom:island-title-card

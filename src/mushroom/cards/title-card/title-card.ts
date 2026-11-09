@@ -24,7 +24,11 @@ import { CacheManager } from "../../utils/cache-manager";
 import { cardStyle } from "../../utils/card-styles";
 import { registerCustomCard } from "../../utils/custom-cards";
 import { TITLE_CARD_EDITOR_NAME, TITLE_CARD_NAME } from "./const";
-import { TitleCardConfig } from "./title-card-config";
+import {
+  DEFAULT_TITLE_COLOR,
+  DEFAULT_TITLE_VARIANT,
+  TitleCardConfig,
+} from "./title-card-config";
 
 const templateCache = new CacheManager<TemplateResults>(1000);
 
@@ -171,7 +175,12 @@ export class TitleCard extends MushroomBaseElement implements LovelaceCard {
     const rtl = computeRTL(this.hass);
 
     return html`
-      <ha-card class="header ${alignment}" ?rtl=${rtl} data-island-variant=${this._config.variant ?? "ribbon"} data-island-color=${this._config.color ?? "app-yellow"}>
+      <ha-card
+        class="header ${alignment}"
+        ?rtl=${rtl}
+        data-island-variant=${this._config.variant ?? DEFAULT_TITLE_VARIANT}
+        data-island-color=${this._config.color ?? DEFAULT_TITLE_COLOR}
+      >
         ${title
           ? html`
               <div
