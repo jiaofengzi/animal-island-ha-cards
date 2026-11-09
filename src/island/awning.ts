@@ -22,7 +22,8 @@ const AWNING_CSS = css`
     pointer-events: none;
     background: radial-gradient(circle at 12px 0, var(--app-header-background-color) 11.5px, transparent 12px) 0 0 / 24px 12px repeat-x;
   }
-  .main-title {
+  /* HA 自己的规则在 adoptedStyleSheets 里、排在后面，同优先级会盖过这里，所以选择器写具体一点 */
+  .header .toolbar > .main-title {
     flex: 0 1 auto;
     margin: 0 8px;
     padding: 4px 16px 5px 12px;
