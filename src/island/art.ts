@@ -443,7 +443,7 @@ const ALARM: Record<string, string> = { disarmed: "shield-off", armed_home: "shi
 const CLIMATE_TONE: Record<string, Tone> = { cool: "blue", heat: "orange", heat_cool: "green", auto: "green", dry: "teal", fan_only: "teal", off: "grey" };
 const WEATHER: Record<string, string> = { sunny: "sun", "clear-night": "shield-night", partlycloudy: "cloud", cloudy: "cloud", fog: "cloud", rainy: "rain", pouring: "rain", "lightning-rainy": "rain", snowy: "cloud", "snowy-rainy": "rain", windy: "cloud" };
 
-export const INACTIVE = new Set(["off", "unavailable", "unknown", "standby", "idle", "docked", "none"]);
+export const INACTIVE = new Set(["off", "closed", "unavailable", "unknown", "standby", "idle", "docked", "none"]);
 
 function fromIcon(icon?: string): string | undefined {
   // icon: island:cat 这种写法直接指定插画
