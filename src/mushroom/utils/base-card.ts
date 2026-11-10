@@ -290,7 +290,8 @@ export class MushroomBaseCard<
     stateObj: HassEntity,
     appearance: Appearance,
     name: string,
-    state?: string
+    state?: string,
+    level?: number
   ): TemplateResult | null {
     const defaultState = this.hass.formatEntityState(stateObj);
 
@@ -317,6 +318,7 @@ export class MushroomBaseCard<
         slot="info"
         .primary=${primary}
         .secondary=${secondary}
+        .level=${appearance.secondary_info === "state" ? level : undefined}
       ></island-state-info>
     `;
   }

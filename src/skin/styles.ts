@@ -354,6 +354,28 @@ const surfaces: Record<string, CSSResult> = {
       font-family: var(--island-font);
     }
     .multiline_secondary { white-space: pre-wrap; }
+    /* 亮度/转速：迷你进度条（官方 Progress：波点轨道 + 同色填充 + 顶部高光） */
+    .level {
+      align-self: var(--island-pill-align, flex-start);
+      display: block;
+      width: min(120px, 86%);
+      height: 9px;
+      margin-top: 6px;
+      box-sizing: border-box;
+      border-radius: 999px;
+      border: 1.5px solid color-mix(in srgb, var(--island-accent, #3ec2ae) 35%, #e2d6bd);
+      background: radial-gradient(circle, rgba(196, 184, 158, .35) 1px, transparent 1.2px) 0 0 / 6px 6px, #f8f8f0;
+      overflow: hidden;
+    }
+    .fill {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, color-mix(in srgb, var(--island-accent, #3ec2ae) 65%, #fff), var(--island-accent, #3ec2ae));
+      box-shadow: inset 0 2px 0 rgba(255, 255, 255, .45);
+      transition: width .3s cubic-bezier(.4, 0, .2, 1);
+    }
+    :host-context([dark-mode]) .level { background: var(--island-well); border-color: color-mix(in srgb, var(--island-accent) 45%, transparent); }
   `,
   "src/shared/chip.ts": css`
     /* 顶部小胶囊（官方 Tag soft）：对称圆角、细描边，不要厚底边 */

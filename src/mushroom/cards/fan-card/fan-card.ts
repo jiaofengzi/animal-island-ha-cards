@@ -175,7 +175,7 @@ export class FanCard
               ? this.renderPicture(picture)
               : this.renderIcon(stateObj, icon)}
             ${this.renderBadge(stateObj)}
-            ${this.renderStateInfo(stateObj, appearance, name, stateDisplay)};
+            ${this.renderStateInfo(stateObj, appearance, name, stateDisplay, this.percentage != null && stateObj.state === "on" ? this.percentage : undefined)};
           </island-state-item>
           ${displayControls
             ? html`

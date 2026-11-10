@@ -17,11 +17,25 @@ export class StateItem extends LitElement {
 
   @property({ type: Boolean }) public multiline_secondary?: boolean = false;
 
+  /** 小岛：0–100 的档位（灯亮度、风扇转速）。给了就用迷你进度条代替副标题文字。 */
+  @property({ attribute: false }) public level?: number;
+
   protected render(): TemplateResult {
     return html`
       <div class="container">
         <span class="primary">${this.primary ?? ""}</span>
-        ${this.secondary
+        ${this.level != null
+          ? html`<span
+              class="level"
+              role="meter"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow=${this.level}
+              aria-label=${typeof this.secondary === "string" ? this.secondary : `${this.level}%`}
+              title=${typeof this.secondary === "string" ? this.secondary : `${this.level}%`}
+              ><span class="fill" style="width:${Math.max(0, Math.min(100, this.level))}%"></span
+            ></span>`
+          : this.secondary
           ? html`<span
               class="secondary${this.multiline_secondary
                 ? ` multiline_secondary`

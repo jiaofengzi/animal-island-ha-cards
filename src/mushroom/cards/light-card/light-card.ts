@@ -228,7 +228,7 @@ export class LightCard
               ? this.renderPicture(picture)
               : this.renderIcon(stateObj, icon)}
             ${this.renderBadge(stateObj)}
-            ${this.renderStateInfo(stateObj, appearance, name, stateDisplay)};
+            ${this.renderStateInfo(stateObj, appearance, name, stateDisplay, this.brightness != null ? Math.max(1, Math.round((this.brightness * 100) / 255)) : undefined)};
           </island-state-item>
           ${isControlVisible
             ? html`
