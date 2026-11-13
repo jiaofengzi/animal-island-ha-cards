@@ -18,6 +18,7 @@
  *     entity: media_player.tou_ying
  *     name: SHIELD
  *     remote: remote.tou_ying                # 有它才显示“主页”键
+ *     apps: { com.example.app: 某应用 }       # 补充应用包名 → 中文名（可选，常见的已内置）
  * 按键写 `script:` 等同于 perform_action: script.turn_on；也可写完整的 `action:`。
  */
 import { css, html, LitElement, nothing, unsafeCSS } from "lit";
@@ -27,7 +28,7 @@ import { registerCustomCard } from "./globals";
 interface ActionConfig { perform_action: string; target?: Record<string, unknown>; data?: Record<string, unknown> }
 interface ButtonConfig { label?: string; icon?: string; script?: string; action?: ActionConfig; accent?: boolean }
 interface GroupConfig { title?: string; columns?: number; buttons: ButtonConfig[] }
-interface MediaConfig { entity: string; name?: string; remote?: string }
+interface MediaConfig { entity: string; name?: string; remote?: string; apps?: Record<string, string> }
 interface RemoteConfig { name?: string; icon?: string; power?: ButtonConfig[]; groups?: GroupConfig[]; media?: MediaConfig }
 interface StateObj { entity_id: string; state: string; attributes: Record<string, unknown> }
 interface HassLike {
@@ -50,6 +51,32 @@ function checkButton(b: ButtonConfig, where: string) {
 }
 
 const PLAYING = new Set(["playing", "paused", "buffering"]);
+
+/** Android TV 只报应用包名，常见的换成中文名；认不出的包名不显示，免得出现一长串英文。 */
+const APP_NAMES: Record<string, string> = {
+  "com.google.android.tvlauncher": "主屏幕",
+  "com.google.android.apps.tv.launcherx": "主屏幕",
+  "com.nvidia.shield.nvcustomize": "主屏幕",
+  "com.xiaodianshi.tv.yst": "哔哩哔哩",
+  "com.ktcp.video": "云视听极光",
+  "com.gitvdemo.video": "银河奇异果",
+  "com.cibn.tv": "CIBN 酷喵",
+  "com.netflix.ninja": "Netflix",
+  "com.google.android.youtube.tv": "YouTube",
+  "com.disney.disneyplus": "Disney+",
+  "com.plexapp.android": "Plex",
+  "org.jellyfin.androidtv": "Jellyfin",
+  "org.xbmc.kodi": "Kodi",
+  "com.nvidia.geforcenow": "GeForce NOW",
+  "com.android.tv.settings": "设置",
+};
+
+function appLabel(raw: string | undefined, extra?: Record<string, string>): string | undefined {
+  if (!raw) return undefined;
+  const known = extra?.[raw] ?? APP_NAMES[raw];
+  if (known) return known;
+  return /^[a-z0-9_]+(\.[a-z0-9_]+)+$/i.test(raw) ? undefined : raw;
+}
 
 class IslandRemoteCard extends LitElement {
   static properties = { _config: { state: true }, _media: { state: true }, _flash: { state: true } };
@@ -119,8 +146,10 @@ class IslandRemoteCard extends LitElement {
     if (!m) return nothing;
     const s = this._media;
     const on = Boolean(s && s.state !== "off" && s.state !== "unavailable" && s.state !== "unknown");
-    const app = (s?.attributes?.app_name as string | undefined) || (s?.attributes?.media_title as string | undefined);
-    const status = !s || s.state === "unavailable" ? "离线" : !on ? "" : app ? `正在播：${app}` : "";
+    const app = appLabel((s?.attributes?.app_name as string | undefined) ?? (s?.attributes?.app_id as string | undefined), m.apps);
+    const title = s?.attributes?.media_title as string | undefined;
+    const showing = app && app !== "主屏幕" ? (title ? `${app} · ${title}` : app) : app;
+    const status = !s || s.state === "unavailable" ? "离线" : !on ? "" : showing ? (app === "主屏幕" ? showing : `正在播：${showing}`) : "";
     const ent = { entity_id: m.entity };
     const playing = s?.state === "playing";
     const item = (key: string, icon: string, label: string, action: ActionConfig, cls = "") =>
@@ -153,7 +182,7 @@ class IslandRemoteCard extends LitElement {
         ${(c.groups ?? []).map((g, gi) => html`
           <div class="group">
             ${g.title ? html`<div class="title">${g.title}</div>` : nothing}
-            <div class="grid" style="--cols:${g.columns ?? Math.min(g.buttons.length, 4)}">
+            <div class="grid ${(g.columns ?? Math.min(g.buttons.length, 4)) >= 4 ? "compact" : ""}" style="--cols:${g.columns ?? Math.min(g.buttons.length, 4)}">
               ${g.buttons.map((b, i) => this._button(b, `g${gi}-${i}`))}
             </div>
           </div>`)}
@@ -181,6 +210,8 @@ class IslandRemoteCard extends LitElement {
     .title { margin: 0 4px 8px; font-size: 12.5px; font-weight: 800; color: var(--ink-soft); }
     .status { font-weight: 700; }
     .grid { display: grid; grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr)); gap: 8px; }
+    /* 一排四个以上时图标在上、文字在下，窄屏也放得下 */
+    .grid.compact .btn { flex-direction: column; gap: 2px; min-height: 56px; padding: 6px 4px; font-size: 12px; border-radius: 16px; }
     .media { display: flex; gap: 8px; }
     .tip { flex: 1; display: flex; }
     .tip .btn { flex: 1; }

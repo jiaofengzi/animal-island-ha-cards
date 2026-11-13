@@ -54,7 +54,7 @@ npm run preview
 
 ### 手动安装
 
-在 [Releases](https://github.com/jiaofengzi/animal-island-ha-cards/releases) 找到最新版本，切换到该标签，把 `dist/` 目录里的全部内容（含 `fonts/`）复制到 Home Assistant 的 `config/www/island-ha-cards/`。在“设置 → 仪表盘 → 资源”添加 `/local/island-ha-cards/island-ha-cards.js?v=0.6.0`，类型为 JavaScript 模块。字体按 JS 文件所在位置加载，所以 `fonts/` 必须和 JS 在同一目录。保留随包的 LICENSE、NOTICE、依赖许可与来源清单。
+在 [Releases](https://github.com/jiaofengzi/animal-island-ha-cards/releases) 找到最新版本，切换到该标签，把 `dist/` 目录里的全部内容（含 `fonts/`）复制到 Home Assistant 的 `config/www/island-ha-cards/`。在“设置 → 仪表盘 → 资源”添加 `/local/island-ha-cards/island-ha-cards.js?v=0.6.1`，类型为 JavaScript 模块。字体按 JS 文件所在位置加载，所以 `fonts/` 必须和 JS 在同一目录。保留随包的 LICENSE、NOTICE、依赖许可与来源清单。
 
 ### 示例
 
