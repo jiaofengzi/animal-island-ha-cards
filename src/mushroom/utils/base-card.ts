@@ -313,11 +313,18 @@ export class MushroomBaseCard<
       this.hass
     );
 
+    // 开/关本身由卡片颜色表达，状态行只剩“开启/关闭”时就不再显示
+    const plainOnOff =
+      appearance.secondary_info === "state" &&
+      level == null &&
+      displayState === defaultState &&
+      (stateObj.state === "on" || stateObj.state === "off");
+
     return html`
       <island-state-info
         slot="info"
         .primary=${primary}
-        .secondary=${secondary}
+        .secondary=${plainOnOff ? undefined : secondary}
         .level=${appearance.secondary_info === "state" ? level : undefined}
       ></island-state-info>
     `;

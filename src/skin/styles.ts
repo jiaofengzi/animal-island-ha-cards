@@ -592,15 +592,12 @@ const surfaces: Record<string, CSSResult> = {
       --tile-info-secondary-font-weight: 700;
       --tile-info-secondary-color: var(--island-ink);
     }
+    /* 模板卡的副标题是自由文字（常常较长），直接写在波点底上，不加胶囊底色 */
     span[slot="secondary"] {
       display: inline-block;
       max-width: 100%;
-      box-sizing: border-box;
-      margin-top: 4px;
-      padding: 1px 10px 2px;
-      border-radius: 999px;
-      background: var(--island-pill-bg, color-mix(in srgb, var(--island-accent) 34%, var(--island-paper)));
-      color: var(--island-pill-ink, var(--island-ink));
+      margin-top: 2px;
+      color: var(--island-ink-soft, var(--island-ink));
       overflow: hidden;
       text-overflow: ellipsis;
       vertical-align: top;
