@@ -39,6 +39,7 @@ npm run preview
 - **深色模式**：夜空蓝卡片，颜色只放在图标、卡片底边和状态气泡上，不再混进卡片底色。
 - **输入框卡片**：`type: custom:island-input-card`，带发送按钮和常用语胶囊，先把文字写进 `input_text`，再执行 `action`（例如让音箱播报）。写法见 `src/island/input-card.ts` 开头的注释。
 - **遥控器卡片**：`type: custom:island-remote-card`，把红外遥控这类只能发指令、拿不到状态的按键收进一张整卡（标题旁的电源键 + 分组按键），按下后短暂变色表示已发出；可在底部附一台有状态播放器的播放控制；分组也可以是十字键（`dpad`），拼成一整页手机遥控器。写法见 `src/island/remote-card.ts` 开头的注释。
+- **影音遥控器卡片**：`type: custom:island-av-card`，放进 panel 视图独占一屏的手机遥控器：顶部是投影仪、回音壁电源和线路切换，中间是满宽十字键圆盘（四角放返回、主页、菜单、电视盒子开关），下面是应用快捷入口和音量条。写法见 `src/island/av-card.ts` 开头的注释。
 - **主题**：`themes/animal-island.yaml` 负责页面背景、顶栏、侧栏和字体。
 - **店顶版头**：使用 Animal Island 主题时，卡片包会在仪表盘顶栏底边画一排半圆花边，单视图仪表盘的标题做成米白药丸（HA 主题本身画不了这种装饰）。别的主题里想要，在主题里加 `island-awning: "on"`；不想要就加 `island-awning: "none"`。
 
@@ -54,7 +55,7 @@ npm run preview
 
 ### 手动安装
 
-在 [Releases](https://github.com/jiaofengzi/animal-island-ha-cards/releases) 找到最新版本，切换到该标签，把 `dist/` 目录里的全部内容（含 `fonts/`）复制到 Home Assistant 的 `config/www/island-ha-cards/`。在“设置 → 仪表盘 → 资源”添加 `/local/island-ha-cards/island-ha-cards.js?v=0.7.0`，类型为 JavaScript 模块。字体按 JS 文件所在位置加载，所以 `fonts/` 必须和 JS 在同一目录。保留随包的 LICENSE、NOTICE、依赖许可与来源清单。
+在 [Releases](https://github.com/jiaofengzi/animal-island-ha-cards/releases) 找到最新版本，切换到该标签，把 `dist/` 目录里的全部内容（含 `fonts/`）复制到 Home Assistant 的 `config/www/island-ha-cards/`。在“设置 → 仪表盘 → 资源”添加 `/local/island-ha-cards/island-ha-cards.js?v=0.8.0`，类型为 JavaScript 模块。字体按 JS 文件所在位置加载，所以 `fonts/` 必须和 JS 在同一目录。保留随包的 LICENSE、NOTICE、依赖许可与来源清单。
 
 ### 示例
 
