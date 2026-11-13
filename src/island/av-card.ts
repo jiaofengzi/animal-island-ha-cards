@@ -29,7 +29,7 @@ import { css, html, LitElement, nothing, svg, unsafeCSS } from "lit";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import {
   mdiArrowULeftTop, mdiChevronDown, mdiChevronLeft, mdiChevronRight, mdiChevronUp, mdiCog, mdiHome,
-  mdiNintendoSwitch, mdiPlayPause, mdiPower, mdiTelevision, mdiVolumeMinus, mdiVolumeOff, mdiVolumePlus,
+  mdiPlayPause, mdiPower, mdiVolumeMinus, mdiVolumeOff, mdiVolumePlus,
 } from "@mdi/js";
 import { ART, TONES, type Tone } from "./art";
 import { ISLAND_FONT_STACK } from "./fonts";
@@ -154,8 +154,8 @@ class IslandAvCard extends LitElement {
         : nothing}
       ${c.console
         ? html`<span class="group" role="tablist" aria-label="回音壁线路">
-            <button role="tab" class="gbtn ${this._page === "tv" ? "on" : ""}" aria-selected=${this._page === "tv"} aria-label="电视盒子" @click=${() => this._pick("tv")}>${icon(mdiTelevision, 22)}</button>
-            <button role="tab" class="gbtn ${this._page === "console" ? "on" : ""}" aria-selected=${this._page === "console"} aria-label="游戏机" @click=${() => this._pick("console")}>${icon(mdiNintendoSwitch, 22)}</button>
+            <button role="tab" class="gbtn ${this._page === "tv" ? "on" : ""}" aria-selected=${this._page === "tv"} aria-label="电视盒子" @click=${() => this._pick("tv")}>${art("tv", 32)}</button>
+            <button role="tab" class="gbtn ${this._page === "console" ? "on" : ""}" aria-selected=${this._page === "console"} aria-label="游戏机" @click=${() => this._pick("console")}>${art("gamepad", 32)}</button>
           </span>`
         : nothing}
     </div>`;
@@ -193,8 +193,8 @@ class IslandAvCard extends LitElement {
       </div>
       ${apps.length
         ? html`<div class="apps" style="--n:${Math.min(apps.length, 5)}">
-            ${apps.map((a, i) => html`<button class="app ${this._activity === a.package ? "on" : ""} ${this._fx(`app${i}`)}" @click=${() => this._launch(`app${i}`, a.package)}>
-              ${art(a.art, 60, a.tone, true)}<span>${a.name}</span></button>`)}
+            ${apps.map((a, i) => html`<button class="app ${this._activity === a.package ? "on" : ""} ${this._fx(`app${i}`)}" aria-label=${a.name} title=${a.name} @click=${() => this._launch(`app${i}`, a.package)}>
+              ${art(a.art, 60, a.tone, true)}</button>`)}
           </div>`
         : nothing}`;
   }
@@ -237,7 +237,7 @@ class IslandAvCard extends LitElement {
       width: 100%; max-width: 460px; margin: 0 auto;
       height: var(--island-av-height, calc(100dvh - var(--header-height, 56px) - 64px - env(safe-area-inset-bottom, 0px)));
       min-height: 560px;
-      padding: 12px 16px 14px;
+      padding: 20px 16px 22px;
     }
     button { font-family: inherit; color: inherit; cursor: pointer; border: none; background: none; padding: 0; margin: 0; -webkit-tap-highlight-color: transparent; }
     button:focus-visible { outline: 3px solid #ffcc3d; outline-offset: 2px; }
@@ -248,10 +248,14 @@ class IslandAvCard extends LitElement {
     /* 顶部三组开关：同一种胶囊（米白底 + 细描边），左侧插画标明是哪台设备 */
     .strip { display: flex; align-items: center; justify-content: space-between; gap: 6px; flex: none; }
     .group { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border-radius: 999px; background: var(--paper); border: 2px solid var(--line-soft); }
-    .group .art { margin-right: 2px; }
+    /* 胶囊里的色块统一成同样大小的圆：设备插画、线路切换都是圆 */
+    .group .art { border-radius: 50%; }
+    .group > .art { margin-right: 2px; }
     .gbtn { width: 40px; height: 32px; border-radius: 999px; display: grid; place-items: center; transition: background .25s var(--ease), color .25s var(--ease); }
     .gbtn:active { background: color-mix(in srgb, var(--mint) 18%, transparent); }
-    .gbtn.on { background: var(--mint-deep); color: #fff9e3; }
+    .gbtn[role="tab"] { width: 36px; height: 32px; }
+    .gbtn[role="tab"] .art { filter: grayscale(1) opacity(.45); transition: filter .25s var(--ease); }
+    .gbtn[role="tab"].on .art { filter: none; }
     .gbtn.fx-ok { background: color-mix(in srgb, #6cc96a 30%, transparent); }
     .gbtn.fx-err { background: color-mix(in srgb, #f4695a 30%, transparent); }
 
@@ -265,15 +269,15 @@ class IslandAvCard extends LitElement {
 
     .deck { flex: 1; min-height: 0; display: grid; place-items: center; container-type: size; }
     /* 圆盘外接的正方形：圆盘四角空出来的地方放功能键，紧贴圆盘 */
-    .ring { position: relative; width: min(100cqw, 100cqh, 330px); aspect-ratio: 1; display: grid; place-items: center; }
+    .ring { position: relative; width: min(100cqw, 100cqh, 340px); aspect-ratio: 1; display: grid; place-items: center; }
     .pad {
-      position: relative; width: 100%; aspect-ratio: 1; border-radius: 50%; background: var(--parch);
+      position: relative; width: 82%; aspect-ratio: 1; border-radius: 50%; background: var(--parch);
       display: grid; grid-template: 1fr 1.25fr 1fr / 1fr 1.25fr 1fr; place-items: center;
     }
     .pad::before { content: ""; position: absolute; inset: 14px; border-radius: 50%; border: 2px dashed color-mix(in srgb, var(--ink) 15%, transparent); pointer-events: none; }
     .dir { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; transition: background .15s var(--ease); }
     .dir:active, .dir.fx-ok { background: color-mix(in srgb, var(--mint) 18%, transparent); }
-    .ok { width: clamp(84px, 34cqmin, 112px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: var(--paper); border: 2px solid var(--paper); box-shadow: 0 6px 0 var(--press); transition: transform .15s var(--ease), box-shadow .15s var(--ease); }
+    .ok { width: clamp(80px, 29cqmin, 100px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: var(--paper); border: 2px solid var(--paper); box-shadow: 0 6px 0 var(--press); transition: transform .15s var(--ease), box-shadow .15s var(--ease); }
     .ok:active { transform: translateY(5px); box-shadow: 0 1px 0 var(--press); }
     .ok.asleep { color: var(--ink-soft); }
 
