@@ -1,0 +1,146 @@
+[
+  {
+    "name": "@formatjs/fast-memoize",
+    "version": "3.1.7",
+    "license": "MIT",
+    "files": [
+      "@formatjs__fast-memoize-LICENSE.md"
+    ]
+  },
+  {
+    "name": "@formatjs/icu-messageformat-parser",
+    "version": "3.5.18",
+    "license": "MIT",
+    "files": [
+      "@formatjs__icu-messageformat-parser-LICENSE.md"
+    ]
+  },
+  {
+    "name": "@formatjs/icu-skeleton-parser",
+    "version": "2.1.11",
+    "license": "MIT",
+    "files": [
+      "@formatjs__icu-skeleton-parser-LICENSE.md"
+    ]
+  },
+  {
+    "name": "@lit/reactive-element",
+    "version": "2.1.2",
+    "license": "BSD-3-Clause",
+    "files": [
+      "@lit__reactive-element-LICENSE"
+    ]
+  },
+  {
+    "name": "@mdi/js",
+    "version": "7.4.47",
+    "license": "Apache-2.0",
+    "files": [
+      "@mdi__js-LICENSE"
+    ]
+  },
+  {
+    "name": "color-name",
+    "version": "2.1.1",
+    "license": "MIT",
+    "files": [
+      "color-name-LICENSE"
+    ]
+  },
+  {
+    "name": "culori",
+    "version": "4.0.2",
+    "license": "MIT",
+    "files": [
+      "culori-LICENSE"
+    ]
+  },
+  {
+    "name": "hammerjs",
+    "version": "2.0.8",
+    "license": "MIT",
+    "files": [
+      "hammerjs-LICENSE.md"
+    ]
+  },
+  {
+    "name": "home-assistant-js-websocket",
+    "version": "9.8.1",
+    "license": "Apache-2.0",
+    "files": [
+      "home-assistant-js-websocket-LICENSE.md"
+    ]
+  },
+  {
+    "name": "intl-messageformat",
+    "version": "11.2.15",
+    "license": "BSD-3-Clause",
+    "files": [
+      "intl-messageformat-LICENSE.md"
+    ]
+  },
+  {
+    "name": "js-yaml",
+    "version": "4.3.2",
+    "license": "MIT",
+    "files": [
+      "js-yaml-LICENSE"
+    ]
+  },
+  {
+    "name": "lit",
+    "version": "3.3.3",
+    "license": "BSD-3-Clause",
+    "files": [
+      "lit-LICENSE"
+    ]
+  },
+  {
+    "name": "lit-element",
+    "version": "4.2.2",
+    "license": "BSD-3-Clause",
+    "files": [
+      "lit-element-LICENSE"
+    ]
+  },
+  {
+    "name": "lit-html",
+    "version": "3.3.3",
+    "license": "BSD-3-Clause",
+    "files": [
+      "lit-html-LICENSE"
+    ]
+  },
+  {
+    "name": "memoize-one",
+    "version": "6.0.0",
+    "license": "MIT",
+    "files": [
+      "memoize-one-LICENSE"
+    ]
+  },
+  {
+    "name": "object-hash",
+    "version": "3.0.0",
+    "license": "MIT",
+    "files": [
+      "object-hash-LICENSE"
+    ]
+  },
+  {
+    "name": "sortablejs",
+    "version": "1.15.7",
+    "license": "MIT",
+    "files": [
+      "sortablejs-LICENSE"
+    ]
+  },
+  {
+    "name": "superstruct",
+    "version": "2.0.2",
+    "license": "MIT",
+    "files": [
+      "superstruct-License.md"
+    ]
+  }
+]
