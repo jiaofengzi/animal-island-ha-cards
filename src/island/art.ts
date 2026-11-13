@@ -539,6 +539,81 @@ export const ART: Record<string, Art> = {
       <rect x="21" y="33" width="6" height="5" fill="#c98d55"/>
       <rect x="13" y="37.5" width="22" height="4.5" rx="2.25" fill="#a5713f"/>`,
   },
+  gamepad: {
+    tone: "teal",
+    svg: `
+      <g transform="rotate(-9 9 24)">
+        <path d="M14.5 10.5h-4A7.5 7.5 0 0 0 3 18v12a7.5 7.5 0 0 0 7.5 7.5h4z" fill="#5cc8e8"/>
+        <path d="M14.5 31h-4A7.5 7.5 0 0 1 3 26v4a7.5 7.5 0 0 0 7.5 7.5h4z" fill="#3fa9cc"/>
+        <circle cx="9" cy="18" r="2.9" fill="#2f6f86"/><circle cx="9" cy="29" r="1.4" fill="#fffaf0"/>
+      </g>
+      <g transform="rotate(9 39 24)">
+        <path d="M33.5 10.5h4A7.5 7.5 0 0 1 45 18v12a7.5 7.5 0 0 1-7.5 7.5h-4z" fill="#f4695a"/>
+        <path d="M33.5 31h4A7.5 7.5 0 0 0 45 26v4a7.5 7.5 0 0 1-7.5 7.5h-4z" fill="#d9503f"/>
+        <circle cx="39" cy="29" r="2.9" fill="#8f2f25"/>
+        <g fill="#fffaf0"><circle cx="39" cy="15.6" r="1.2"/><circle cx="39" cy="20.4" r="1.2"/><circle cx="36.6" cy="18" r="1.2"/><circle cx="41.4" cy="18" r="1.2"/></g>
+      </g>
+      <rect x="13" y="10.5" width="22" height="27" rx="3" fill="#3b2a1e"/>
+      <rect x="15.4" y="13.2" width="17.2" height="21.6" rx="1.8" fill="#8fdcf0"/>
+      <circle cx="19.5" cy="17.5" r="2" fill="#ffcc3d"/>
+      <ellipse cx="24.5" cy="33" rx="8.5" ry="3.6" fill="#ffe08a"/>
+      <rect x="25" y="22.5" width="1.6" height="10" rx=".8" fill="#a5713f"/>
+      <path d="M25.8 23c-2.6-2.6-5.8-2-7.2.2 2.6-.8 4.8-.4 7.2-.2zM25.8 23c2.6-2.6 5.8-2 7.2.2-2.6-.8-4.8-.4-7.2-.2zM25.8 23c-.6-2.8.4-5 2.6-5.8-1.2 1.8-1.6 3.6-2.6 5.8z" fill="#6cc96a"/>`,
+  },
+  tvface: {
+    tone: "sky",
+    svg: `
+      <rect x="11.5" y="2.5" width="3.2" height="11" rx="1.6" transform="rotate(-32 13.1 8)" fill="#6b4a2b"/>
+      <rect x="33.3" y="2.5" width="3.2" height="11" rx="1.6" transform="rotate(32 34.9 8)" fill="#6b4a2b"/>
+      <rect x="4.5" y="11" width="39" height="29" rx="9.5" fill="#fffaf0"/>
+      <path d="M34 11a9.5 9.5 0 0 1 9.5 9.5v10A9.5 9.5 0 0 1 34 40z" fill="#f1e5c8"/>
+      <rect x="9.5" y="16" width="29" height="19" rx="5.5" fill="#2f6f86"/>
+      <rect x="14.6" y="21.4" width="7" height="2.8" rx="1.4" transform="rotate(22 18.1 22.8)" fill="#fffaf0"/>
+      <rect x="26.4" y="21.4" width="7" height="2.8" rx="1.4" transform="rotate(-22 29.9 22.8)" fill="#fffaf0"/>
+      <path d="M20.2 28.4c.9 1.4 2.2 1.4 3.8 0 1.6 1.4 2.9 1.4 3.8 0" stroke="#fffaf0" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      <rect x="13" y="39" width="5.5" height="4" rx="1.6" fill="#c98d55"/><rect x="29.5" y="39" width="5.5" height="4" rx="1.6" fill="#c98d55"/>`,
+  },
+  vinyl: {
+    tone: "red",
+    svg: `
+      <g class="spin">
+        <circle cx="24" cy="24" r="19" fill="#3b2a1e"/>
+        <circle cx="24" cy="24" r="15" fill="#4f3a2a"/><circle cx="24" cy="24" r="13.4" fill="#3b2a1e"/>
+        <circle cx="24" cy="24" r="10" fill="#4f3a2a"/><circle cx="24" cy="24" r="8.6" fill="#fffaf0"/>
+        <path d="M21.6 20.4l5-1.4v7.6a2.4 2.4 0 1 1-1.6-2.26V21.7l-3.4 1z" fill="#f4695a"/>
+        <circle cx="24" cy="24" r="1.1" fill="#3b2a1e"/>
+      </g>
+      <path d="M10.4 15.6a16 16 0 0 1 7.4-7.2l1 1.8a14 14 0 0 0-6.6 6.4z" fill="#fff" opacity=".35"/>`,
+  },
+  clapper: {
+    tone: "yellow",
+    svg: `
+      <g transform="rotate(-13 8 18)">
+        <rect x="6" y="11" width="35" height="7.5" rx="2.2" fill="#fffaf0"/>
+        <path d="M11 11h5.4l-4.6 7.5H6.4zM22 11h5.4l-4.6 7.5h-5.4zM33 11h5.4l-4.6 7.5h-5.4z" fill="#3b2a1e"/>
+      </g>
+      <rect x="6" y="19" width="35" height="23" rx="4" fill="#3b2a1e"/>
+      <rect x="6" y="19" width="35" height="6" fill="#fffaf0"/>
+      <path d="M11 19h5.4l-3.6 6H7.4zM22 19h5.4l-3.6 6h-5.4zM33 19h5.4l-3.6 6h-5.4z" fill="#3b2a1e"/>
+      <path d="M19.5 28.5h4.6l6 5.5-6 5.5h-4.6l6-5.5z" fill="#ff9a3c"/>
+      <circle cx="9" cy="17.5" r="1.6" fill="#c4bba6"/>`,
+  },
+  jellyfish: {
+    tone: "blue",
+    svg: `
+      <g class="bob">
+        <path d="M14.2 26c-1.6 3 1.8 4.6.2 7.6s1.8 4.6.4 7" stroke="#e7d6ff" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M21 26c-1.4 3 1.6 4.4.2 7.2" stroke="#f6c9e0" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M27.4 26c-1.4 3 1.6 4.6.2 7.6s1.6 4.6.4 7.4" stroke="#e7d6ff" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M34 26c-1.4 3 1.6 4.4.2 7.4" stroke="#f6c9e0" stroke-width="3" stroke-linecap="round" fill="none"/>
+      </g>
+      <path d="M8.5 25.5C8.5 14.6 15.5 7 24.5 7S40.5 14.6 40.5 25.5c0 1.8-1.4 2.8-3.2 2.8H11.7c-1.8 0-3.2-1-3.2-2.8z" fill="#c9a6ff"/>
+      <path d="M30.5 8.4c6 2.6 10 9 10 17.1 0 1.8-1.4 2.8-3.2 2.8h-3.8c.8-7.6-.4-14.6-3-19.9z" fill="#a983f0"/>
+      <path d="M8.5 25.5c0 1.8 1.4 2.8 3.2 2.8h25.6c1.8 0 3.2-1 3.2-2.8v-1.2H8.5z" fill="#f6c9e0"/>
+      <ellipse cx="16" cy="13.5" rx="2.4" ry="3.4" transform="rotate(25 16 13.5)" fill="#fff" opacity=".75"/>
+      <circle cx="38" cy="8" r="2" fill="#fff" opacity=".7"/><circle cx="42" cy="13" r="1.2" fill="#fff" opacity=".7"/>
+      ${face(24.5, 19.5, 0.72)}`,
+  },
   cooker: {
     tone: "yellow",
     svg: `
