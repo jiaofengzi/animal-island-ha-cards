@@ -14,11 +14,14 @@
  *         - label: Switch
  *           icon: mdi:nintendo-switch
  *           action: { perform_action: remote.send_command, target: { entity_id: remote.x }, data: { command: HDMI1 } }
+ *     - title: 方向
+ *       dpad: { remote: remote.tou_ying }    # 十字键 + 确认；默认发 DPAD_UP/DOWN/LEFT/RIGHT/CENTER，可逐个改
  *   media:                                  # 有状态的播放器（可选）
  *     entity: media_player.tou_ying
  *     name: SHIELD
  *     remote: remote.tou_ying                # 有它才显示“主页”键
  *     apps: { com.example.app: 某应用 }       # 补充应用包名 → 中文名（可选，常见的已内置）
+ *     position: top                          # 播放控制放在分组上方（默认在最下面）
  * 按键写 `script:` 等同于 perform_action: script.turn_on；也可写完整的 `action:`。
  */
 import { css, html, LitElement, nothing, unsafeCSS } from "lit";
@@ -27,8 +30,9 @@ import { registerCustomCard } from "./globals";
 
 interface ActionConfig { perform_action: string; target?: Record<string, unknown>; data?: Record<string, unknown> }
 interface ButtonConfig { label?: string; icon?: string; script?: string; action?: ActionConfig; accent?: boolean }
-interface GroupConfig { title?: string; columns?: number; buttons: ButtonConfig[] }
-interface MediaConfig { entity: string; name?: string; remote?: string; apps?: Record<string, string> }
+interface DpadConfig { remote: string; up?: string; down?: string; left?: string; right?: string; ok?: string }
+interface GroupConfig { title?: string; columns?: number; buttons?: ButtonConfig[]; dpad?: DpadConfig }
+interface MediaConfig { entity: string; name?: string; remote?: string; apps?: Record<string, string>; position?: "top" | "bottom" }
 interface RemoteConfig { name?: string; icon?: string; power?: ButtonConfig[]; groups?: GroupConfig[]; media?: MediaConfig }
 interface StateObj { entity_id: string; state: string; attributes: Record<string, unknown> }
 interface HassLike {
@@ -104,7 +108,11 @@ class IslandRemoteCard extends LitElement {
     if (!config) throw new Error("island-remote-card 需要配置");
     config.power?.forEach((b, i) => checkButton(b, `power[${i}]`));
     config.groups?.forEach((g, gi) => {
-      if (!Array.isArray(g?.buttons) || !g.buttons.length) throw new Error(`groups[${gi}] 需要 buttons`);
+      if (g?.dpad) {
+        if (!g.dpad.remote?.startsWith("remote.")) throw new Error(`groups[${gi}].dpad.remote 必须是 remote 实体`);
+        return;
+      }
+      if (!Array.isArray(g?.buttons) || !g.buttons.length) throw new Error(`groups[${gi}] 需要 buttons 或 dpad`);
       g.buttons.forEach((b, i) => checkButton(b, `groups[${gi}].buttons[${i}]`));
     });
     if (config.media && !config.media.entity?.startsWith("media_player.")) throw new Error("media.entity 必须是 media_player 实体");
@@ -141,6 +149,32 @@ class IslandRemoteCard extends LitElement {
     >${b.icon ? html`<ha-icon .icon=${b.icon}></ha-icon>` : nothing}${b.label && showLabel ? html`<span>${b.label}</span>` : nothing}</button>`;
   }
 
+  private _renderDpad(d: DpadConfig, gi: number) {
+    const send = (command: string): ActionConfig => ({ perform_action: "remote.send_command", target: { entity_id: d.remote }, data: { command } });
+    const key = (dir: string, icon: string, label: string, command: string) =>
+      this._button({ icon, label, action: send(command) }, `g${gi}-${dir}`, `pad ${dir}`, false);
+    return html`<div class="dpad">
+      ${key("up", "mdi:chevron-up", "上", d.up ?? "DPAD_UP")}
+      ${key("left", "mdi:chevron-left", "左", d.left ?? "DPAD_LEFT")}
+      ${this._button({ label: "OK", action: send(d.ok ?? "DPAD_CENTER") }, `g${gi}-ok`, "pad center")}
+      ${key("right", "mdi:chevron-right", "右", d.right ?? "DPAD_RIGHT")}
+      ${key("down", "mdi:chevron-down", "下", d.down ?? "DPAD_DOWN")}
+    </div>`;
+  }
+
+  private _renderGroup(g: GroupConfig, gi: number) {
+    const cols = g.columns ?? Math.min(g.buttons?.length ?? 1, 4);
+    return html`
+      <div class="group">
+        ${g.title ? html`<div class="title">${g.title}</div>` : nothing}
+        ${g.dpad
+          ? this._renderDpad(g.dpad, gi)
+          : html`<div class="grid ${cols >= 4 ? "compact" : ""}" style="--cols:${cols}">
+              ${(g.buttons ?? []).map((b, i) => this._button(b, `g${gi}-${i}`))}
+            </div>`}
+      </div>`;
+  }
+
   private _renderMedia() {
     const m = this._config.media;
     if (!m) return nothing;
@@ -172,21 +206,20 @@ class IslandRemoteCard extends LitElement {
 
   protected render() {
     const c = this._config;
+    const top = c.media?.position === "top";
+    const hasHead = Boolean(c.icon || c.name || c.power?.length);
     return html`
-      <ha-card>
-        <div class="head">
-          ${c.icon ? html`<island-state-icon class="logo" .icon=${c.icon}></island-state-icon>` : nothing}
-          <div class="name">${c.name ?? ""}</div>
-          ${c.power?.length ? html`<div class="power">${c.power.map((b, i) => this._button(b, `p${i}`, "pill"))}</div>` : nothing}
-        </div>
-        ${(c.groups ?? []).map((g, gi) => html`
-          <div class="group">
-            ${g.title ? html`<div class="title">${g.title}</div>` : nothing}
-            <div class="grid ${(g.columns ?? Math.min(g.buttons.length, 4)) >= 4 ? "compact" : ""}" style="--cols:${g.columns ?? Math.min(g.buttons.length, 4)}">
-              ${g.buttons.map((b, i) => this._button(b, `g${gi}-${i}`))}
-            </div>
-          </div>`)}
-        ${this._renderMedia()}
+      <ha-card class=${hasHead ? "" : "headless"}>
+        ${hasHead
+          ? html`<div class="head">
+              ${c.icon ? html`<island-state-icon class="logo" .icon=${c.icon}></island-state-icon>` : nothing}
+              <div class="name">${c.name ?? ""}</div>
+              ${c.power?.length ? html`<div class="power">${c.power.map((b, i) => this._button(b, `p${i}`, "pill"))}</div>` : nothing}
+            </div>`
+          : nothing}
+        ${top ? this._renderMedia() : nothing}
+        ${(c.groups ?? []).map((g, gi) => this._renderGroup(g, gi))}
+        ${top ? nothing : this._renderMedia()}
       </ha-card>`;
   }
 
@@ -213,6 +246,38 @@ class IslandRemoteCard extends LitElement {
     /* 一排四个以上时图标在上、文字在下，窄屏也放得下 */
     .grid.compact .btn { flex-direction: column; gap: 2px; min-height: 56px; padding: 6px 4px; font-size: 12px; border-radius: 16px; }
     .media { display: flex; gap: 8px; }
+    ha-card.headless > .group:first-child { margin-top: 0; }
+    /* 十字键：圆盘上四个方向 + 中间确认 */
+    .dpad {
+      position: relative;
+      width: min(240px, 78%);
+      aspect-ratio: 1;
+      margin: 4px auto 2px;
+      border-radius: 50%;
+      background: var(--well);
+      box-shadow: 0 5px 0 var(--edge), inset 0 0 0 6px color-mix(in srgb, var(--paper) 55%, transparent);
+      display: grid;
+      grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    }
+    .btn.pad { min-height: 0; padding: 0; border-radius: 50%; background: transparent; box-shadow: none; color: var(--ink); }
+    .btn.pad ha-icon { --mdc-icon-size: 34px; }
+    .btn.pad:active { transform: scale(.9); background: color-mix(in srgb, var(--accent) 22%, transparent); }
+    .pad.up { grid-area: 1 / 2; }
+    .pad.left { grid-area: 2 / 1; }
+    .pad.center { grid-area: 2 / 2; }
+    .pad.right { grid-area: 2 / 3; }
+    .pad.down { grid-area: 3 / 2; }
+    .btn.pad.center {
+      margin: 6%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 18px;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 0 var(--accent-edge);
+    }
+    .btn.pad.center:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--accent-edge); background: var(--accent); }
+    .btn.pad.center.ok { background: #6cc96a; box-shadow: 0 4px 0 #4f9e4d; }
+    .btn.pad.center.err { background: #f4695a; box-shadow: 0 4px 0 #c94a3d; }
     .tip { flex: 1; display: flex; }
     .tip .btn { flex: 1; }
     button { font-family: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
