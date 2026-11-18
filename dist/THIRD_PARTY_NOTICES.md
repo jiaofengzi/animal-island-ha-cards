@@ -1,0 +1,38 @@
+# Third-party notices
+
+## Mushroom 5.2.3
+
+Copyright Paul Bottein and Mushroom contributors. Source: https://github.com/piitaya/lovelace-mushroom
+
+Pinned Git tree: d8a90ffff1b217fbbf9cb8210ee672be99596231.
+
+Derived source: src/mushroom/ (maintained by this project since v0.4); license: src/mushroom/LICENSE. Root LICENSE is Apache-2.0, retained verbatim. Upstream package.json says ISC; this inconsistency is preserved and documented, not silently resolved. No upstream NOTICE file was present in the pinned Git tree.
+
+All files under src/mushroom/ are modified versions of this source (namespace, visual skin, motion, presentation fields and further changes recorded in Git history); see docs/UPSTREAM.md. Upstream HA helpers retain their original notices.
+
+## Original project and visual work
+
+The root MIT LICENSE remains in place for original project work. It does not replace upstream licenses. The Animal Island design tokens and styling are based on the MIT-licensed animal-island-ui design system: https://github.com/guokaigdg/animal-island-ui. No Nintendo assets or affiliation are claimed.
+
+## Bundled dependencies
+
+Dependency versions and license metadata are retained in package-lock.json and installed package manifests. esbuild retains legal comments in emitted bundles. Lit, @mdi/js, color-name, culori, hammerjs, home-assistant-js-websocket, intl-messageformat, js-yaml, memoize-one, object-hash, sortablejs and superstruct are upstream runtime dependencies. See package-lock.json for exact resolved versions.
+
+## React preview shell and legacy concept implementation
+
+The comparison website and the superseded 23-case concept implementation bundle animal-island-ui 3.0.0 React components from https://github.com/guokaigdg/animal-island-ui (MIT; copyright 2026 guokaigdg), Naive Icons 1.14.0, React 18.3.1, React DOM 18.3.1, Scheduler, classnames and production dependencies under their licenses. The actual current HA fork is Lit, not React. Full original notices remain in licenses/.
+
+Only visual design tokens/styles are translated into the Lit fork. HA-hosted user/entity icons retain HA semantics; the Island illustrated icons in src/island/art.ts are original drawings made for this project and replace only icons they recognise.
+
+## Bundled fonts (since the Island UI redesign)
+
+The card bundle now ships subsetted WOFF2 fonts in dist/fonts/, loaded by a same-origin @font-face rule (no CDN):
+
+- Resource Han Rounded CN, weights Medium/Bold/Heavy, subset to GB2312 + ASCII. Copyright © 2018—2022 Cyano Hao; portions © 2014-2021 Adobe, with Reserved Font Name 'Source'. SIL Open Font License 1.1. Source: https://github.com/CyanoHao/Resource-Han-Rounded (release v0.990). License: src/fonts/ResourceHanRounded-LICENSE.md.
+- Nunito (variable), subset to Basic Latin + Latin-1. Copyright 2014 The Nunito Project Authors. SIL Open Font License 1.1. Source: https://github.com/google/fonts/tree/main/ofl/nunito. License: src/fonts/Nunito-OFL.txt.
+
+Subsets are produced by scripts/fonts/subset.py (fontTools); glyph outlines are not altered. Both license files are copied into dist/fonts/ next to the font files.
+
+The comparison preview may include unmodified official Mushroom v5.2.3 screenshot assets under Apache-2.0; fixed URLs/blob SHAs are recorded in demo/reference/image-sources.json, and its license is retained in demo/reference/LICENSE. Runtime comparison screenshots, when present, are generated in an isolated Home Assistant instance with synthetic entities. The current production HA bundle does contain modified Mushroom code; screenshots are preview assets, not runtime card dependencies.
+
+This project has no affiliation with Mushroom, Animal Island UI, Nintendo or any game publisher.
