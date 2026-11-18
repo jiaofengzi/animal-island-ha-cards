@@ -65,8 +65,12 @@ export function getIslandLightColor(entity: LightEntity): number[] | undefined {
   if (mode === "color_temp" || mode === "white") {
     const k = a.color_temp_kelvin as number | undefined;
     if (k == null) return mode === "white" ? [255, 214, 110] : undefined;
+    // 按这盏灯自己能调的范围算：最暖一端琥珀、最冷一端白，中间约 40% 处是奶黄
+    const lo = (a.min_color_temp_kelvin as number | undefined) ?? 2700;
+    const hi = (a.max_color_temp_kelvin as number | undefined) ?? 6500;
+    const t = hi > lo ? (k - lo) / (hi - lo) : 0.5;
     const warm = [255, 170, 80], mid = [255, 214, 110], cool = [214, 220, 228];
-    return k <= 4000 ? lerp(warm, mid, (k - 2700) / 1300) : lerp(mid, cool, (k - 4000) / 2500);
+    return t <= 0.4 ? lerp(warm, mid, t / 0.4) : lerp(mid, cool, (t - 0.4) / 0.6);
   }
   const rgb = a.rgb_color as number[] | undefined;
   if (!rgb || !mode || mode === "brightness" || mode === "onoff") return undefined;
