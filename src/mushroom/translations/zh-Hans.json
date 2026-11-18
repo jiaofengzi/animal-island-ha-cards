@@ -14,7 +14,8 @@
       "cover": {
         "show_buttons_control": "按钮控制?",
         "show_position_control": "位置控制?",
-        "show_tilt_position_control": "角度控制?"
+        "show_tilt_position_control": "角度控制?",
+        "end_margin": "两端余量（离全关 / 全开多少 % 以内算关 / 开）"
       },
       "empty": {
         "no_config_options": "这个卡片没有可配置的选项。"

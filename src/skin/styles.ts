@@ -635,7 +635,6 @@ const HIDE_OFF_STATE_CARDS = new Set([
   "src/cards/light-card/light-card.ts",
   "src/cards/fan-card/fan-card.ts",
   "src/cards/entity-card/entity-card.ts",
-  "src/cards/cover-card/cover-card.ts",
   "src/cards/humidifier-card/humidifier-card.ts",
   "src/cards/media-player-card/media-player-card.ts",
 ]);

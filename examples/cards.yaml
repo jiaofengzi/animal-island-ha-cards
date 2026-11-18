@@ -81,6 +81,7 @@
   - volume_set
 - type: custom:island-cover-card
   entity: cover.living_curtain
+  end_margin: 5
   show_buttons_control: true
   show_position_control: true
 - type: custom:island-title-card

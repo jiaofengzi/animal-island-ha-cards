@@ -22,7 +22,8 @@
       "cover": {
         "show_buttons_control": "Control buttons?",
         "show_position_control": "Position control?",
-        "show_tilt_position_control": "Tilt control?"
+        "show_tilt_position_control": "Tilt control?",
+        "end_margin": "End margin (within this % of fully closed / open counts as closed / open)"
       },
       "empty": {
         "no_config_options": "This card has no config options."

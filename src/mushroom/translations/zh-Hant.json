@@ -14,7 +14,8 @@
       "cover": {
         "show_buttons_control": "按鈕控制?",
         "show_position_control": "位置控制?",
-        "show_tilt_position_control": "角度控制?"
+        "show_tilt_position_control": "角度控制?",
+        "end_margin": "兩端餘量（離全關 / 全開多少 % 以內算關 / 開）"
       },
       "fan": {
         "show_oscillate_control": "擺頭控制?",

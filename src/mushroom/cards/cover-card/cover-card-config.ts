@@ -1,4 +1,4 @@
-import { assign, boolean, object, optional } from "superstruct";
+import { assign, boolean, number, object, optional } from "superstruct";
 import {
   actionsSharedConfigStruct,
   ActionsSharedConfig,
@@ -21,6 +21,8 @@ export type CoverCardConfig = LovelaceCardConfig &
     show_buttons_control?: false;
     show_position_control?: false;
     show_tilt_position_control?: false;
+    /** 离两端多少 % 以内算关 / 开，默认 5 */
+    end_margin?: number;
   };
 
 export const coverCardConfigStruct = assign(
@@ -34,5 +36,6 @@ export const coverCardConfigStruct = assign(
     show_buttons_control: optional(boolean()),
     show_position_control: optional(boolean()),
     show_tilt_position_control: optional(boolean()),
+    end_margin: optional(number()),
   })
 );

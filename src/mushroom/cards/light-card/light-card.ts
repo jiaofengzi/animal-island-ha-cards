@@ -18,6 +18,7 @@ import {
   hasAction,
   HomeAssistant,
   isActive,
+  isAvailable,
   LightEntity,
   LovelaceCard,
   LovelaceCardEditor,
@@ -46,6 +47,7 @@ import "./controls/light-color-control";
 import "./controls/light-color-temp-control";
 import { LightCardConfig } from "./light-card-config";
 import {
+  getIslandLightColor,
   getRGBColor,
   improveColorContrast,
   supportsBrightnessControl,
@@ -205,6 +207,25 @@ export class LightCard
     }
 
     const rtl = computeRTL(this.hass);
+    const active = isActive(stateObj);
+    const level =
+      this.brightness != null
+        ? Math.max(1, Math.round((this.brightness * 100) / 255))
+        : undefined;
+    // 默认布局（名字 + 状态）时，亮度只在名字后面跟一个淡淡的数字，不再画亮度条
+    const inline =
+      isAvailable(stateObj) &&
+      appearance.primary_info === "name" &&
+      appearance.secondary_info === "state";
+    // 开着时卡片淡淡染上灯现在的颜色（色温或彩光）
+    const lightColor = active ? getIslandLightColor(stateObj) : undefined;
+    const tintStyle = lightColor
+      ? {
+          "--island-accent": `rgb(${lightColor.join(",")})`,
+          "--island-tint": "20%",
+          "--island-edge-mix": "40%",
+        }
+      : {};
 
     const isControlVisible =
       (!this._config.collapsible_controls || isActive(stateObj)) &&
@@ -213,6 +234,7 @@ export class LightCard
     return html`
       <ha-card
         class=${classMap({ "fill-container": appearance.fill_container })}
+        style=${styleMap(tintStyle)}
       >
         <island-card .appearance=${appearance} ?rtl=${rtl}>
           <island-state-item
@@ -226,9 +248,11 @@ export class LightCard
           >
             ${picture
               ? this.renderPicture(picture)
-              : this.renderIcon(stateObj, icon)}
+              : this.renderIcon(stateObj, icon, active ? level : undefined)}
             ${this.renderBadge(stateObj)}
-            ${this.renderStateInfo(stateObj, appearance, name, stateDisplay, this.brightness != null ? Math.max(1, Math.round((this.brightness * 100) / 255)) : undefined)};
+            ${inline
+              ? this.renderInlineInfo(name, active && level != null ? `${level}%` : undefined)
+              : this.renderStateInfo(stateObj, appearance, name, stateDisplay, level)}
           </island-state-item>
           ${isControlVisible
             ? html`
@@ -243,19 +267,28 @@ export class LightCard
     `;
   }
 
-  protected renderIcon(stateObj: LightEntity, icon?: string): TemplateResult {
+  protected renderIcon(
+    stateObj: LightEntity,
+    icon?: string,
+    fill?: number
+  ): TemplateResult {
     const lightRgbColor = getRGBColor(stateObj);
+    const islandColor = getIslandLightColor(stateObj);
     const active = isActive(stateObj);
     const iconStyle = {};
     const iconColor = this._config?.icon_color;
-    if (lightRgbColor && this._config?.use_light_color) {
-      const color = improveColorContrast(lightRgbColor).join(",");
-      iconStyle["--icon-color"] = `rgb(${color})`;
-      iconStyle["--shape-color"] = `rgba(${color}, 0.25)`;
-    } else if (iconColor) {
+    if (iconColor) {
+      // 配置里指定了图标颜色就用它
       const iconRgbColor = computeRgbColor(iconColor);
       iconStyle["--icon-color"] = `rgb(${iconRgbColor})`;
       iconStyle["--shape-color"] = `rgba(${iconRgbColor}, 0.2)`;
+    } else if (active && islandColor) {
+      // 水位的颜色 = 灯现在的颜色，稍微柔和一点
+      iconStyle["--icon-color"] = `color-mix(in srgb, rgb(${islandColor.join(",")}) 82%, #fff)`;
+    } else if (lightRgbColor && this._config?.use_light_color) {
+      const color = improveColorContrast(lightRgbColor).join(",");
+      iconStyle["--icon-color"] = `rgb(${color})`;
+      iconStyle["--shape-color"] = `rgba(${color}, 0.25)`;
     }
     return html`
       <island-shape-icon
@@ -267,6 +300,7 @@ export class LightCard
           .hass=${this.hass}
           .stateObj=${stateObj}
           .icon=${icon}
+          .fill=${fill}
         ></island-state-icon>
       </island-shape-icon>
     `;

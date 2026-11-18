@@ -101,6 +101,18 @@ export const ART: Record<string, Art> = {
       <rect x="4.5" y="5.5" width="39" height="4.4" rx="2.2" fill="#c98d55"/>
       <circle cx="5.5" cy="7.7" r="2.8" fill="#a5713f"/><circle cx="42.5" cy="7.7" r="2.8" fill="#a5713f"/>`,
   },
+  "curtain-half": {
+    tone: "green",
+    svg: `
+      <rect x="8.5" y="8" width="31" height="33" rx="4.5" fill="#c4ecff"/>
+      <circle cx="24" cy="18.5" r="4.2" fill="#ffcc3d"/>
+      <path d="M8.5 34.5c5-5.5 9.5-5.5 13.5-2.4 4.4 3.3 9.4 2.4 17.5-2.6V36.5a4.5 4.5 0 0 1-4.5 4.5H13a4.5 4.5 0 0 1-4.5-4.5z" fill="#8fdc8a"/>
+      <path d="M8.5 8h12v33H13a4.5 4.5 0 0 1-4.5-4.5z" fill="#ff8fab"/>
+      <path d="M39.5 8h-12v33H35a4.5 4.5 0 0 0 4.5-4.5z" fill="#ff8fab"/>
+      <path d="M11.5 8h3v33h-3zM17 8h2.4v33H17zM36.5 8h-3v33h3zM31 8h-2.4v33H31z" fill="#ffb3c4"/>
+      <rect x="4.5" y="5.5" width="39" height="4.4" rx="2.2" fill="#c98d55"/>
+      <circle cx="5.5" cy="7.7" r="2.8" fill="#a5713f"/><circle cx="42.5" cy="7.7" r="2.8" fill="#a5713f"/>`,
+  },
   "curtain-closed": {
     tone: "green",
     svg: `
@@ -706,7 +718,13 @@ function fromState(s?: StateLike): string | undefined {
     case "light": return "bulb";
     case "switch": case "input_boolean": return "plug";
     case "climate": case "water_heater": return "aircon";
-    case "cover": return s.state === "closed" || s.attributes.current_position === 0 ? "curtain-closed" : "curtain-open";
+    case "cover": {
+      const p = s.attributes.current_position;
+      if (s.state === "closed" || p === 0) return "curtain-closed";
+      // 停在中间（不在开合途中）时画半开的帘子；正在动时仍用拉开的帘子
+      if (typeof p === "number" && p > 0 && p < 100 && s.state === "open") return "curtain-half";
+      return "curtain-open";
+    }
     case "fan": return "fan";
     case "humidifier": return "humidifier";
     case "media_player": return "speaker";

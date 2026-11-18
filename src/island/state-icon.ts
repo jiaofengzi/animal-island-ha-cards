@@ -15,6 +15,7 @@ export class IslandStateIcon extends LitElement {
     stateObj: { attribute: false },
     icon: {},
     stateValue: { attribute: false },
+    fill: { attribute: false },
   };
 
   /** 原样转交给 HA 的 ha-state-icon，本组件不读取它。 */
@@ -22,6 +23,8 @@ export class IslandStateIcon extends LitElement {
   declare stateObj?: StateLike;
   declare icon?: string;
   declare stateValue?: string;
+  /** 0–100：方块底色像水位一样只涨到这个高度（窗帘开了一部分），不给就整块上色。 */
+  declare fill?: number;
   private _wasInactive?: boolean;
 
   protected willUpdate(): void {
@@ -35,6 +38,7 @@ export class IslandStateIcon extends LitElement {
     this.toggleAttribute("data-live", live);
     this.toggleAttribute("data-art", Boolean(art));
     this.dataset.tone = resolveTone(art, s);
+    this.toggleAttribute("data-fill", this.fill != null && !inactive);
   }
 
   protected updated(changed: PropertyValues): void {
@@ -60,6 +64,7 @@ export class IslandStateIcon extends LitElement {
     const art = resolveArt(this.icon, this.stateObj);
     const svg = art ? ART[art]?.svg : undefined;
     return html`<div class="tile" style="--tile:${this._tileColor()}" @animationend=${(e: AnimationEvent) => e.animationName === "island-pop" && (e.currentTarget as HTMLElement).classList.remove("pop")}>
+      ${this.fill != null ? html`<span class="water" style="height:${Math.max(0, Math.min(100, this.fill))}%"></span>` : null}
       ${svg
         ? html`<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">${unsafeSVG(svg)}</svg>`
         : html`<ha-state-icon .hass=${this.hass} .stateObj=${this.stateObj} .icon=${this.icon} .stateValue=${this.stateValue}></ha-state-icon>`}
@@ -97,6 +102,15 @@ export class IslandStateIcon extends LitElement {
     }
     /* 关着：保留一点自身的颜色，一眼还能认出是哪类设备；不可用才是彻底的灰 */
     :host([data-inactive]) .tile { background: color-mix(in srgb, var(--tile) 24%, var(--island-tile-off, #ebe3cd)); }
+    /* 水位：方块底是关着的米灰，主题色从下往上涨到 fill%，顶上一道浅色水面 */
+    .water { display: none; }
+    :host([data-fill]) .tile { background: color-mix(in srgb, var(--tile) 24%, var(--island-tile-off, #ebe3cd)); }
+    :host([data-fill]) .water {
+      display: block; position: absolute; left: 0; right: 0; bottom: 0;
+      background: var(--tile);
+      box-shadow: 0 -2px 0 color-mix(in srgb, var(--tile) 55%, #fff);
+      transition: height .4s cubic-bezier(.4, 0, .2, 1);
+    }
     :host([data-unavailable]) .tile { background: var(--island-tile-off, #ebe3cd); }
     /* bare：只画插画，不要底色方块（用在底部导航栏这类有自己底色的地方） */
     :host([bare]) .tile { background: none; overflow: visible; }

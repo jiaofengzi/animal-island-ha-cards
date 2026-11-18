@@ -18,6 +18,7 @@ const COVER_LABELS = [
   "show_buttons_control",
   "show_position_control",
   "show_tilt_position_control",
+  "end_margin",
 ];
 
 const computeSchema = memoizeOne(
@@ -38,6 +39,11 @@ const computeSchema = memoizeOne(
         { name: "show_tilt_position_control", selector: { boolean: {} } },
         { name: "show_buttons_control", selector: { boolean: {} } },
       ],
+    },
+    {
+      name: "end_margin",
+      default: 5,
+      selector: { number: { min: 0, max: 20, step: 1, mode: "slider" as const, unit_of_measurement: "%" } },
     },
     ...computeActionsFormSchema(),
   ]

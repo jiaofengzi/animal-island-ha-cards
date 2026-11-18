@@ -8,7 +8,7 @@
 |---|---|---|---|
 |日常调节 control|灯、灯组、新风风机、通用实体、数值、选项|`island-control-card`；light / fan / entity / number / select|状态与日常调节；光色、风向等低频项展开|
 |温控 climate|空调|`island-climate-card`|目标与实际温度分开，模式/高级功能展开|
-|开合 cover|窗帘|`island-cover-card`|开度与方向，移动时停止优先；叶片展开|
+|开合 cover|窗帘|`island-cover-card`|开度与方向，移动时停止优先；叶片展开。离两端 `end_margin`%（默认 5）以内显示“关着 / 开着”，轻点也按它判断开或关|
 |影音 media|播放器、电视、音箱|`island-media-card`|内容与播放运输控制；电源、随机、循环等次级|
 |任务 task|扫地、洗衣干衣、3D 打印|`island-task-card`；vacuum / laundry / printer|当前阶段、真实进度、剩余时间；具体集成动作仍需配置|
 |观察与维护 monitor|冰箱、净水、耗材、系统健康、餐盘记录|`island-monitor-card`；fridge / water / consumable / health / meal|关键读数或最近记录；异常只由实际值或明确配置表达|

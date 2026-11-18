@@ -286,6 +286,17 @@ export class MushroomBaseCard<
       : nothing;
   }
 
+  /** 名字后面跟一个淡淡的数字（窗帘开合、灯亮度），开 / 关交给卡片底色和图标。 */
+  protected renderInlineInfo(name: string, number?: string): TemplateResult {
+    const primary = html`${name}${number
+      ? html`<span
+          style="margin-inline-start:5px;font-size:.84em;font-weight:700;color:color-mix(in srgb, var(--island-accent, #6cc96a) 45%, var(--island-ink, #5b4128))"
+          >${number}</span
+        >`
+      : nothing}`;
+    return html`<island-state-info slot="info" .primary=${primary}></island-state-info>`;
+  }
+
   protected renderStateInfo(
     stateObj: HassEntity,
     appearance: Appearance,
